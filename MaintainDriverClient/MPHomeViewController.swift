@@ -13,22 +13,35 @@ class MPHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.red
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        let btn = UIButton()
+        btn.addTarget(self, action: #selector(MPHomeViewController.btnClick), for: .touchUpInside)
+        btn.setTitle("clike me", for: .normal)
+        btn.setTitleColor(UIColor.black, for: .normal)
+        btn.frame = CGRect.init(x: 100, y: 100, width: 100, height: 50)
+        view.addSubview(btn)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "person"), style: .plain, target: self, action: #selector(MPHomeViewController.meAction))
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        slideMenuController()?.leftPanGesture?.isEnabled = true
     }
-    */
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        slideMenuController()?.leftPanGesture?.isEnabled = false
+    }
+    
+    @objc fileprivate func btnClick() {
+        let vc = UIViewController()
+        vc.title = "test"
+        vc.view.backgroundColor = UIColor.white
+        navigationController?.pushViewController(vc, animated: true)
+    }
 
+    @objc fileprivate func meAction() {
+        slideMenuController()?.openLeft()
+    }
+    
+    
 }
