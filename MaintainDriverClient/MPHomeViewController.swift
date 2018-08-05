@@ -12,7 +12,7 @@ class MPHomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.white
         let btn = UIButton()
         btn.addTarget(self, action: #selector(MPHomeViewController.btnClick), for: .touchUpInside)
         btn.setTitle("clike me", for: .normal)

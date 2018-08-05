@@ -22,11 +22,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SlideMenuOptions.leftViewWidth = MPUtils.screenW * 0.6
         SlideMenuOptions.contentViewScale = 1
         SlideMenuOptions.animationDuration = 0.25
+        SlideMenuOptions.contentViewOpacity = 0.2
         let slideVC = SlideMenuController(mainViewController: nav, leftMenuViewController: leftVC)
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = slideVC
         self.window?.makeKeyAndVisible()
+        setupNormalUIStyle()
         return true
+    }
+    
+    /// 设置通用的UI样式
+    fileprivate func setupNormalUIStyle() {
+        UITableViewCell.appearance().selectionStyle = .none
+        if #available(iOS 11, *) {
+            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
+            UITableView.appearance().estimatedRowHeight = 0
+            UITableView.appearance().estimatedSectionHeaderHeight = 0
+            UITableView.appearance().estimatedSectionFooterHeight = 0
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
