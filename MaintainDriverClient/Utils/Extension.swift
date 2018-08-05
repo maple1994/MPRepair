@@ -49,7 +49,7 @@ extension UIColor {
 
 
 extension UILabel {
-    convenience init(font: UIFont, text: String, textColor: UIColor) {
+    convenience init(font: UIFont, text: String?, textColor: UIColor) {
         self.init(frame: CGRect.zero)
         self.font = font
         self.text = text

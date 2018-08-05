@@ -69,7 +69,8 @@ class MPAccountViewController: UIViewController {
     }
     
     @objc fileprivate func tiXian() {
-        
+        let vc = MPTiXianViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     
