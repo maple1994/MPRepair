@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
+		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
+		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
+		F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633212116DA650075548A /* MPHomeViewController.swift */; };
+		F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633252116DACA0075548A /* MPLoginViewController.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
@@ -18,10 +23,6 @@
 		F5D7208C2112D65100585A19 /* SlideMenuControllerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5D7208D2112D65200585A19 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720882112D65100585A19 /* SnapKit.framework */; };
 		F5D7208E2112D65200585A19 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720882112D65100585A19 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5D720912112D77200585A19 /* MPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720902112D77200585A19 /* MPHomeViewController.swift */; };
-		F5D720932112D79000585A19 /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720922112D79000585A19 /* MPLeftMenuViewController.swift */; };
-		F5D720952112D7AC00585A19 /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720942112D7AC00585A19 /* MPNavigationController.swift */; };
-		F5D720972112D9F700585A19 /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720962112D9F700585A19 /* MPUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
+		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
+		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
+		F5A633212116DA650075548A /* MPHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPHomeViewController.swift; sourceTree = "<group>"; };
+		F5A633252116DACA0075548A /* MPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginViewController.swift; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -72,10 +78,6 @@
 		F5D720862112D65100585A19 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
 		F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
 		F5D720882112D65100585A19 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
-		F5D720902112D77200585A19 /* MPHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHomeViewController.swift; sourceTree = "<group>"; };
-		F5D720922112D79000585A19 /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
-		F5D720942112D7AC00585A19 /* MPNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
-		F5D720962112D9F700585A19 /* MPUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5A633192116DA530075548A /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6331A2116DA530075548A /* MPUtils.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F5A6331C2116DA5A0075548A /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5A6331D2116DA5F0075548A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5A6331E2116DA650075548A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6331F2116DA650075548A /* MPNavigationController.swift */,
+				F5A633202116DA650075548A /* MPLeftMenuViewController.swift */,
+				F5A633212116DA650075548A /* MPHomeViewController.swift */,
+				F5A633252116DACA0075548A /* MPLoginViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		F5D7204C2112AC5500585A19 = {
 			isa = PBXGroup;
 			children = (
@@ -132,14 +167,14 @@
 		F5D720572112AC5500585A19 /* MaintainDriverClient */ = {
 			isa = PBXGroup;
 			children = (
+				F5A6331E2116DA650075548A /* Controller */,
+				F5A6331D2116DA5F0075548A /* Model */,
+				F5A6331C2116DA5A0075548A /* View */,
+				F5A633192116DA530075548A /* Utils */,
 				F5D720582112AC5500585A19 /* AppDelegate.swift */,
 				F5D7205F2112AC5800585A19 /* Assets.xcassets */,
 				F5D720612112AC5800585A19 /* LaunchScreen.storyboard */,
 				F5D720642112AC5800585A19 /* Info.plist */,
-				F5D720902112D77200585A19 /* MPHomeViewController.swift */,
-				F5D720922112D79000585A19 /* MPLeftMenuViewController.swift */,
-				F5D720942112D7AC00585A19 /* MPNavigationController.swift */,
-				F5D720962112D9F700585A19 /* MPUtils.swift */,
 			);
 			path = MaintainDriverClient;
 			sourceTree = "<group>";
@@ -294,11 +329,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5D720952112D7AC00585A19 /* MPNavigationController.swift in Sources */,
-				F5D720972112D9F700585A19 /* MPUtils.swift in Sources */,
+				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
+				F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */,
+				F5A633222116DA650075548A /* MPNavigationController.swift in Sources */,
+				F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */,
+				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
-				F5D720932112D79000585A19 /* MPLeftMenuViewController.swift in Sources */,
-				F5D720912112D77200585A19 /* MPHomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -20,6 +20,7 @@ class MPLeftMenuViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.white
         tableView = UITableView()
+        tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.rowHeight = 44
