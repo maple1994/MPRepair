@@ -16,6 +16,12 @@
 		F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */; };
 		F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332D2116E3150075548A /* MPInputTextFiled.swift */; };
 		F5A633302116F5D60075548A /* MPOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332F2116F5D60075548A /* MPOrderViewController.swift */; };
+		F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633312116FB070075548A /* MPOrderTableViewCell.swift */; };
+		F5A633342116FB070075548A /* MPOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A633322116FB070075548A /* MPOrderTableViewCell.xib */; };
+		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
+		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
+		F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */; };
+		F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
@@ -72,6 +78,17 @@
 		F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPSendCodeButton.swift; sourceTree = "<group>"; };
 		F5A6332D2116E3150075548A /* MPInputTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPInputTextFiled.swift; sourceTree = "<group>"; };
 		F5A6332F2116F5D60075548A /* MPOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderViewController.swift; sourceTree = "<group>"; };
+		F5A633312116FB070075548A /* MPOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderTableViewCell.swift; sourceTree = "<group>"; };
+		F5A633322116FB070075548A /* MPOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPOrderTableViewCell.xib; sourceTree = "<group>"; };
+		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
+		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
+		F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
+		F5A6333B211700BA0075548A /* UITableView+FDIndexPathHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDIndexPathHeightCache.h"; sourceTree = "<group>"; };
+		F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDKeyedHeightCache.m"; sourceTree = "<group>"; };
+		F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCellDebug.m"; sourceTree = "<group>"; };
+		F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDIndexPathHeightCache.m"; sourceTree = "<group>"; };
+		F5A6333F211700BA0075548A /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
+		F5A63347211701030075548A /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -130,6 +147,8 @@
 				F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */,
 				F5A633272116DDBA0075548A /* MPLeftIconView.swift */,
 				F5A6332D2116E3150075548A /* MPInputTextFiled.swift */,
+				F5A633312116FB070075548A /* MPOrderTableViewCell.swift */,
+				F5A633322116FB070075548A /* MPOrderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -153,9 +172,33 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
+		F5A633352116FD3B0075548A /* Frameword */ = {
+			isa = PBXGroup;
+			children = (
+				F5A63336211700BA0075548A /* FDTemplateLayoutcell */,
+			);
+			path = Frameword;
+			sourceTree = "<group>";
+		};
+		F5A63336211700BA0075548A /* FDTemplateLayoutcell */ = {
+			isa = PBXGroup;
+			children = (
+				F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */,
+				F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */,
+				F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */,
+				F5A6333B211700BA0075548A /* UITableView+FDIndexPathHeightCache.h */,
+				F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */,
+				F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */,
+				F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */,
+				F5A6333F211700BA0075548A /* UITableView+FDTemplateLayoutCell.h */,
+			);
+			path = FDTemplateLayoutcell;
+			sourceTree = "<group>";
+		};
 		F5D7204C2112AC5500585A19 = {
 			isa = PBXGroup;
 			children = (
+				F5A63347211701030075548A /* Header.h */,
 				F5D720862112D65100585A19 /* Alamofire.framework */,
 				F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */,
 				F5D720882112D65100585A19 /* SnapKit.framework */,
@@ -183,6 +226,7 @@
 				F5A6331D2116DA5F0075548A /* Model */,
 				F5A6331C2116DA5A0075548A /* View */,
 				F5A633192116DA530075548A /* Utils */,
+				F5A633352116FD3B0075548A /* Frameword */,
 				F5D720582112AC5500585A19 /* AppDelegate.swift */,
 				F5D7205F2112AC5800585A19 /* Assets.xcassets */,
 				F5D720612112AC5800585A19 /* LaunchScreen.storyboard */,
@@ -315,6 +359,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5A633342116FB070075548A /* MPOrderTableViewCell.xib in Resources */,
 				F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
 			);
@@ -342,6 +387,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
+				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
+				F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */,
+				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */,
 				F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */,
 				F5A633222116DA650075548A /* MPNavigationController.swift in Sources */,
@@ -349,6 +397,8 @@
 				F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
+				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
+				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */,
 				F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */,
 			);
@@ -528,6 +578,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -550,6 +601,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
