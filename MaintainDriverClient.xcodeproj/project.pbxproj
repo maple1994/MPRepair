@@ -12,6 +12,9 @@
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
 		F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633212116DA650075548A /* MPHomeViewController.swift */; };
 		F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633252116DACA0075548A /* MPLoginViewController.swift */; };
+		F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633272116DDBA0075548A /* MPLeftIconView.swift */; };
+		F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */; };
+		F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332D2116E3150075548A /* MPInputTextFiled.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
@@ -64,6 +67,9 @@
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
 		F5A633212116DA650075548A /* MPHomeViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPHomeViewController.swift; sourceTree = "<group>"; };
 		F5A633252116DACA0075548A /* MPLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginViewController.swift; sourceTree = "<group>"; };
+		F5A633272116DDBA0075548A /* MPLeftIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeftIconView.swift; sourceTree = "<group>"; };
+		F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPSendCodeButton.swift; sourceTree = "<group>"; };
+		F5A6332D2116E3150075548A /* MPInputTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPInputTextFiled.swift; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -119,6 +125,9 @@
 		F5A6331C2116DA5A0075548A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5A6332B2116DEF90075548A /* MPSendCodeButton.swift */,
+				F5A633272116DDBA0075548A /* MPLeftIconView.swift */,
+				F5A6332D2116E3150075548A /* MPInputTextFiled.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -330,11 +339,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
+				F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */,
 				F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */,
 				F5A633222116DA650075548A /* MPNavigationController.swift in Sources */,
 				F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
+				F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */,
+				F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

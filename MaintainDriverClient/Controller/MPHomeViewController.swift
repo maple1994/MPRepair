@@ -42,6 +42,25 @@ class MPHomeViewController: UIViewController {
     @objc fileprivate func meAction() {
         slideMenuController()?.openLeft()
     }
-    
-    
+}
+
+// MARK: - MPLeftMenuViewControllerDelegate
+extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
+    /// 登录
+    func menuViewDidSelectLogin() {
+        let vc = MPLoginViewController()
+        present(vc, animated: true, completion: nil)
+    }
+    /// 订单
+    func menuViewDidSelectOrder() {
+        // TODO: 订单
+    }
+    /// 账户
+    func menuViewDidSelectAccount() {
+        // TODO: 账户
+    }
+    /// 设置
+    func menuViewDidSelectSetting() {
+        // TODO: 设置
+    }
 }

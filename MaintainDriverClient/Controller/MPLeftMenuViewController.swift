@@ -9,8 +9,20 @@
 import UIKit
 import SnapKit
 
-class MPLeftMenuViewController: UIViewController {
+protocol MPLeftMenuViewControllerDelegate: class {
+    /// 登录
+    func menuViewDidSelectLogin()
+    /// 订单
+    func menuViewDidSelectOrder()
+    /// 账户
+    func menuViewDidSelectAccount()
+    /// 设置
+    func menuViewDidSelectSetting()
+}
 
+class MPLeftMenuViewController: UIViewController {
+    weak var delegate: MPLeftMenuViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -59,7 +71,7 @@ class MPLeftMenuViewController: UIViewController {
     }
     
     @objc fileprivate func userIconClick() {
-        
+        delegate?.menuViewDidSelectLogin()
     }
 
     // MARK: - UIView
@@ -96,14 +108,13 @@ extension MPLeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // TODO: 事件处理
         switch indexPath.row {
         case 0:
-            print("订单")
+            delegate?.menuViewDidSelectOrder()
         case 1:
-            print("账户")
+            delegate?.menuViewDidSelectAccount()
         case 2:
-            print("设置")
+            delegate?.menuViewDidSelectSetting()
         default:
             break
         }
