@@ -32,7 +32,7 @@ class MPTiXianViewController: UIViewController {
         confirmButton.setTitle("确认提现", for: .normal)
         confirmButton.setupCorner(5)
         confirmButton.backgroundColor = UIColor.navBlue
-        confirmButton.titleLabel.font = UIFont.systemFont(ofSize: 18)
+        confirmButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         
         view.addSubview(tableView)
         view.addSubview(confirmButton)
