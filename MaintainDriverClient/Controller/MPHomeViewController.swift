@@ -32,6 +32,7 @@ class MPHomeViewController: UIViewController {
         slideMenuController()?.leftPanGesture?.isEnabled = false
     }
     
+    
     @objc fileprivate func btnClick() {
         let vc = UIViewController()
         vc.title = "test"
@@ -53,14 +54,18 @@ extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
     }
     /// 订单
     func menuViewDidSelectOrder() {
-        // TODO: 订单
+        slideMenuController()?.closeLeft()
+        let vc = MPOrderViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 账户
     func menuViewDidSelectAccount() {
         // TODO: 账户
+        slideMenuController()?.closeLeft()
     }
     /// 设置
     func menuViewDidSelectSetting() {
         // TODO: 设置
+        slideMenuController()?.closeLeft()
     }
 }

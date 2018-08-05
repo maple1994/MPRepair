@@ -19,7 +19,9 @@ class MPNavigationController: UINavigationController {
         navigationBar.isTranslucent = false
         navigationBar.tintColor = UIColor.white
         interactivePopGestureRecognizer?.delegate = self
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]
     }
+    
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if self.viewControllers.count > 0 {
