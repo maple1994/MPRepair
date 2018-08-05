@@ -12,6 +12,12 @@ import UIKit
 class MPUtils {
     static let screenH: CGFloat = UIScreen.main.bounds.height
     static let screenW: CGFloat = UIScreen.main.bounds.width
+    
+    class func createLine(_ lineColor: UIColor = UIColor.colorWithHexString("#E0E0E0")) -> UIView {
+        let line = UIView()
+        line.backgroundColor = lineColor
+        return line
+    }
 }
 
 /// 扩展

@@ -17,7 +17,6 @@
 		F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332D2116E3150075548A /* MPInputTextFiled.swift */; };
 		F5A633302116F5D60075548A /* MPOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6332F2116F5D60075548A /* MPOrderViewController.swift */; };
 		F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633312116FB070075548A /* MPOrderTableViewCell.swift */; };
-		F5A633342116FB070075548A /* MPOrderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F5A633322116FB070075548A /* MPOrderTableViewCell.xib */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
 		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
 		F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */; };
@@ -79,7 +78,6 @@
 		F5A6332D2116E3150075548A /* MPInputTextFiled.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPInputTextFiled.swift; sourceTree = "<group>"; };
 		F5A6332F2116F5D60075548A /* MPOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderViewController.swift; sourceTree = "<group>"; };
 		F5A633312116FB070075548A /* MPOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderTableViewCell.swift; sourceTree = "<group>"; };
-		F5A633322116FB070075548A /* MPOrderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MPOrderTableViewCell.xib; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
 		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
 		F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITableView+FDTemplateLayoutCell.m"; sourceTree = "<group>"; };
@@ -148,7 +146,6 @@
 				F5A633272116DDBA0075548A /* MPLeftIconView.swift */,
 				F5A6332D2116E3150075548A /* MPInputTextFiled.swift */,
 				F5A633312116FB070075548A /* MPOrderTableViewCell.swift */,
-				F5A633322116FB070075548A /* MPOrderTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -359,7 +356,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5A633342116FB070075548A /* MPOrderTableViewCell.xib in Resources */,
 				F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
 			);
