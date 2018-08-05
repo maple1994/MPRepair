@@ -25,7 +25,7 @@ class MPOrderViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
-        tableView.backgroundColor = UIColor.colorWithHexString("#f5f5f5")
+        tableView.backgroundColor = UIColor.viewBgColor
         tableView.register(MPOrderTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -39,7 +39,7 @@ class MPOrderViewController: UIViewController {
 extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

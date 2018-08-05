@@ -24,8 +24,8 @@ class MPOrderTableViewCell: UITableViewCell {
     }
     fileprivate let smallFont = UIFont.systemFont(ofSize: 15)
     fileprivate let bigFont = UIFont.systemFont(ofSize: 17)
-    fileprivate let uncompleteColor = UIColor.colorWithHexString("#E98F5A")
-    fileprivate let completedColor = UIColor.colorWithHexString("#94F94D")
+    fileprivate let uncompleteColor = UIColor.mpOrange
+    fileprivate let completedColor = UIColor.mpGreen
     /// 左右间距
     fileprivate let hMargin: CGFloat = 15
     /// 上下间距
@@ -41,21 +41,21 @@ class MPOrderTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        let orderTitleLabel = createLabel(font: smallFont, text: "订单编号：", textColor: UIColor.lightGray)
-        orderIDLabel = createLabel(font: smallFont, text: "20180729123124", textColor: UIColor.lightGray)
-        statusLabel = createLabel(font: smallFont, text: "未完成", textColor: uncompleteColor)
+        let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.lightGray)
+        orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.lightGray)
+        statusLabel = UILabel(font: smallFont, text: "未完成", textColor: uncompleteColor)
         let line1 = MPUtils.createLine()
-        let carTitleLabel = createLabel(font: smallFont, text: "车型：", textColor: UIColor.darkGray)
-        carNameLabel = createLabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.darkGray)
-        let JJCDTitleLabel = createLabel(font: bigFont, text: "交接车点：", textColor: UIColor.black)
-        JJCDLabel = createLabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.black)
-        let NJDDTitleLabel = createLabel(font: bigFont, text: "年检车点：", textColor: UIColor.black)
-        NJDDLabel = createLabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.black)
+        let carTitleLabel = UILabel(font: smallFont, text: "车型：", textColor: UIColor.darkGray)
+        carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.darkGray)
+        let JJCDTitleLabel = UILabel(font: bigFont, text: "交接车点：", textColor: UIColor.black)
+        JJCDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.black)
+        let NJDDTitleLabel = UILabel(font: bigFont, text: "年检车点：", textColor: UIColor.black)
+        NJDDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.black)
         let line2 = MPUtils.createLine()
-        let timeTitleLabel = createLabel(font: smallFont, text: "预约时间：", textColor: UIColor.darkGray)
-        timeLabel = createLabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.darkGray)
-        let moneyTitleLabel = createLabel(font: smallFont, text: "服务收费：", textColor: UIColor.darkGray)
-        moneyLabel = createLabel(font: smallFont, text: "¥150.00", textColor: UIColor.red)
+        let timeTitleLabel = UILabel(font: smallFont, text: "预约时间：", textColor: UIColor.darkGray)
+        timeLabel = UILabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.darkGray)
+        let moneyTitleLabel = UILabel(font: smallFont, text: "服务收费：", textColor: UIColor.darkGray)
+        moneyLabel = UILabel(font: smallFont, text: "¥150.00", textColor: UIColor.red)
         
         contentView.addSubview(orderTitleLabel)
         contentView.addSubview(orderIDLabel)
@@ -138,22 +138,13 @@ class MPOrderTableViewCell: UITableViewCell {
             make.top.equalTo(moneyTitleLabel)
         }
         // 设置灰块
-        blockView = MPUtils.createLine(UIColor.colorWithHexString("#f5f5f5"))
+        blockView = MPUtils.createLine(UIColor.viewBgColor)
         contentView.addSubview(blockView)
         blockView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(10)
             make.top.equalTo(moneyTitleLabel.snp.bottom).offset(vMargin)
         }
-    }
-    
-    fileprivate func createLabel(font: UIFont, text: String, textColor: UIColor) -> UILabel {
-        let label = UILabel()
-        label.text = text
-        label.font = font
-        label.textColor = textColor
-        label.numberOfLines = 0
-        return label
     }
     
     // MARK: - View

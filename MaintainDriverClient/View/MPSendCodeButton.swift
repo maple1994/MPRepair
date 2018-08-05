@@ -38,10 +38,8 @@ class MPSendCodeButton: UIButton {
         backgroundColor = .clear
         adjustsImageWhenHighlighted = false
         setTitleColor(UIColor.navBlue, for: .normal)
-        layer.borderWidth = 1
-        layer.borderColor = UIColor.navBlue.cgColor
-        layer.cornerRadius = 5
-        layer.masksToBounds = true
+        setupCorner(5)
+        setupBorder(borderColor: UIColor.navBlue)
         addTarget(self, action: #selector(MPSendCodeButton.getCode), for: .touchUpInside)
     }
     

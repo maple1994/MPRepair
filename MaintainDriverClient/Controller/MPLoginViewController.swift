@@ -48,8 +48,7 @@ class MPLoginViewController: UIViewController {
         loginButton.adjustsImageWhenHighlighted = false
         loginButton.addTarget(self, action: #selector(MPLoginViewController.login), for: .touchUpInside)
         loginButton.backgroundColor = UIColor.navBlue
-        loginButton.layer.cornerRadius = 5
-        loginButton.layer.masksToBounds = true
+        loginButton.setupCorner(5)
         
         contentView.addSubview(logoView)
         contentView.addSubview(phoneTextField)

@@ -60,8 +60,9 @@ extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
     }
     /// 账户
     func menuViewDidSelectAccount() {
-        // TODO: 账户
         slideMenuController()?.closeLeft()
+        let vc = MPAccountViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     /// 设置
     func menuViewDidSelectSetting() {
