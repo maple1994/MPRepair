@@ -10,10 +10,16 @@ import UIKit
 
 /// 提示新订单View
 class MPNewOrderTipsView: UIView {
-    class func show() {
+    class func show(title: String, subTitle: String) {
         let view = MPNewOrderTipsView()
         view.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: MPUtils.screenH)
+        view.set(title: title, subTitle: subTitle)
         UIApplication.shared.keyWindow?.addSubview(view)
+    }
+    
+    func set(title: String, subTitle: String) {
+        titleLabel.text = title
+        subTitleLabel.text = subTitle
     }
     
     init() {
@@ -32,8 +38,8 @@ class MPNewOrderTipsView: UIView {
         visualView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        let titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "您有新的订单！", textColor: UIColor.navBlue)
-        let subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "请及时处理！", textColor: UIColor.darkGray)
+        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "您有新的订单！", textColor: UIColor.navBlue)
+        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "请及时处理！", textColor: UIColor.darkGray)
         dismissButton = UIButton()
         dismissButton.setTitle("X", for: .normal)
         dismissButton.setTitleColor(UIColor.black, for: .normal)
@@ -92,6 +98,8 @@ class MPNewOrderTipsView: UIView {
         removeFromSuperview()
     }
     
+    fileprivate var titleLabel: UILabel!
+    fileprivate var subTitleLabel: UILabel!
     fileprivate var dismissButton: UIButton!
     fileprivate var confirmButton: UIButton!
     fileprivate var contentView: UIView!

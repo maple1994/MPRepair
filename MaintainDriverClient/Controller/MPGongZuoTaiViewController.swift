@@ -62,10 +62,11 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func stealAction() {
+        MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!")
     }
     
     @objc fileprivate func listenAction() {
-        MPNewOrderTipsView.show()
+        MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!")
     }
     
     fileprivate var tableView: UITableView!
