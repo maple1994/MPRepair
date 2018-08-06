@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */; };
+		F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -72,6 +74,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPGongZuoTaiViewController.swift; sourceTree = "<group>"; };
+		F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYiJieDanViewController.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -177,6 +181,8 @@
 				F5A6332F2116F5D60075548A /* MPOrderViewController.swift */,
 				F5A63348211724300075548A /* MPAccountViewController.swift */,
 				F5A6334E211732380075548A /* MPTiXianViewController.swift */,
+				F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */,
+				F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -395,6 +401,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
+				F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */,
 				F5A63349211724300075548A /* MPAccountViewController.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */,
@@ -410,6 +417,7 @@
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
+				F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */,
 				F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */,

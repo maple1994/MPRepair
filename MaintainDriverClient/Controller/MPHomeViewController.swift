@@ -12,14 +12,7 @@ class MPHomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        let btn = UIButton()
-        btn.addTarget(self, action: #selector(MPHomeViewController.btnClick), for: .touchUpInside)
-        btn.setTitle("clike me", for: .normal)
-        btn.setTitleColor(UIColor.black, for: .normal)
-        btn.frame = CGRect.init(x: 100, y: 100, width: 100, height: 50)
-        view.addSubview(btn)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "person"), style: .plain, target: self, action: #selector(MPHomeViewController.meAction))
+        setupUI()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,16 +25,72 @@ class MPHomeViewController: UIViewController {
         slideMenuController()?.leftPanGesture?.isEnabled = false
     }
     
-    
-    @objc fileprivate func btnClick() {
-        let vc = UIViewController()
-        vc.title = "test"
-        vc.view.backgroundColor = UIColor.white
-        navigationController?.pushViewController(vc, animated: true)
+    fileprivate func setupUI() {
+        view.backgroundColor = UIColor.white
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "person"), style: .plain, target: self, action: #selector(MPHomeViewController.meAction))
+        navigationItem.titleView = segCtr
+        segCtr.selectedSegmentIndex = 0
+        
+        scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isPagingEnabled = true
+        scrollView.delegate = self
+        view.addSubview(scrollView)
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        gongZuoTaiVC = MPGongZuoTaiViewController()
+        yiJieDanVC = MPYiJieDanViewController()
+        addChildViewController(gongZuoTaiVC)
+        addChildViewController(yiJieDanVC)
+        scrollView.addSubview(gongZuoTaiVC.view)
+        scrollView.addSubview(yiJieDanVC.view)
+        gongZuoTaiVC.view.snp.makeConstraints { (make) in
+            make.top.leading.bottom.equalToSuperview()
+            make.width.height.equalTo(view)
+        }
+        yiJieDanVC.view.snp.makeConstraints { (make) in
+            make.top.trailing.bottom.equalToSuperview()
+            make.leading.equalTo(gongZuoTaiVC.view.snp.trailing)
+            make.width.height.equalTo(view)
+        }
     }
 
+    // MARK: - Action
     @objc fileprivate func meAction() {
         slideMenuController()?.openLeft()
+    }
+    
+    @objc fileprivate func segChange() {
+        let offsetX: CGFloat = CGFloat(segCtr.selectedSegmentIndex) * MPUtils.screenW
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+    }
+    
+    // MARK: - View
+    fileprivate var scrollView: UIScrollView!
+    fileprivate var gongZuoTaiVC: MPGongZuoTaiViewController!
+    fileprivate var yiJieDanVC: MPYiJieDanViewController!
+    fileprivate lazy var segCtr: UISegmentedControl = {
+        let dic: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)
+        ]
+        let ctr = UISegmentedControl(items: ["工作台", "已接单"])
+        ctr.setTitleTextAttributes(dic, for: .normal)
+        ctr.setTitleTextAttributes(dic, for: .selected)
+        ctr.addTarget(self, action: #selector(MPHomeViewController.segChange), for: .valueChanged)
+        return ctr
+    }()
+}
+
+// MARK: - UIScrollViewDelegate
+extension MPHomeViewController: UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let index: Int = Int(scrollView.contentOffset.x / view.frame.width)
+        segCtr.selectedSegmentIndex = index
+    }
+    
+    func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        scrollViewDidEndDecelerating(scrollView)
     }
 }
 
