@@ -29,7 +29,8 @@ class MPYearCheckViewController: UIViewController {
     }
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
-    fileprivate lazy var quCheVC: MPQuCheViewController1 = MPQuCheViewController1()
+    fileprivate lazy var quCheVC1: MPQuCheViewController1 = MPQuCheViewController1()
+    fileprivate lazy var quCheVC2: MPQuCheViewController2 = MPQuCheViewController2()
 }
 
 // MARK: - MPYearCheckTitleViewDelegate
@@ -40,7 +41,8 @@ extension MPYearCheckViewController: MPYearCheckTitleViewDelegate {
             navigationItem.title = "查看信息"
         case 1:
             navigationItem.title = "上门取车"
-            show(vc: quCheVC)
+//            show(vc: quCheVC1)
+            show(vc: quCheVC2)
         case 2:
             navigationItem.title = "开始年检"
         case 3:

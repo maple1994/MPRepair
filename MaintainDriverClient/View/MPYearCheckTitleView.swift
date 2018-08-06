@@ -107,6 +107,11 @@ class MPYearCheckItemView: UIControl {
     
     fileprivate var normalIcon: UIImage?
     fileprivate var selectedIcon: UIImage?
+    var font: UIFont? {
+        didSet {
+            titleLabel.font = font
+        }
+    }
     
     override var isSelected: Bool {
         didSet {
