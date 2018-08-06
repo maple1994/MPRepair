@@ -62,11 +62,10 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func stealAction() {
-    
     }
     
     @objc fileprivate func listenAction() {
-        
+        MPNewOrderTipsView.show()
     }
     
     fileprivate var tableView: UITableView!
