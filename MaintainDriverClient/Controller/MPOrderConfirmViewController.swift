@@ -31,24 +31,8 @@ class MPOrderConfirmViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.viewBgColor
-        
-        confrimButton = UIButton()
-        confrimButton.setTitle("确认取车", for: .normal)
-        confrimButton.backgroundColor = UIColor.navBlue
-        confrimButton.setTitleColor(UIColor.white, for: .normal)
-        confrimButton.addTarget(self, action: #selector(MPOrderConfirmViewController.confirm), for: .touchUpInside)
-        confrimButton.setupCorner(5)
         view.addSubview(tableView)
-        
-        let tbFooterView = UIView()
-        tbFooterView.addSubview(confrimButton)
-        confrimButton.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            make.width.equalTo(150)
-            make.height.equalTo(40)
-        }
-        tbFooterView.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 150)
-        tableView.tableFooterView = tbFooterView
+        tableView.tableFooterView = MPFooterConfirmView(title: "确认取车", target: self, action: #selector(MPOrderConfirmViewController.confirm))
         
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

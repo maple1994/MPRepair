@@ -13,6 +13,9 @@
 		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
 		F50D4DE321182B2A006C50C7 /* MPOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */; };
 		F50D4DE521182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */; };
+		F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */; };
+		F50D4DEA21183EEE006C50C7 /* MPYearCheckTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE921183EEE006C50C7 /* MPYearCheckTitleView.swift */; };
+		F50D4DEC211851B0006C50C7 /* MPFooterConfirmView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEB211851B0006C50C7 /* MPFooterConfirmView.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -85,6 +88,9 @@
 		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 		F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderConfirmViewController.swift; sourceTree = "<group>"; };
 		F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderConfrimTableViewCell.swift; sourceTree = "<group>"; };
+		F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckViewController.swift; sourceTree = "<group>"; };
+		F50D4DE921183EEE006C50C7 /* MPYearCheckTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckTitleView.swift; sourceTree = "<group>"; };
+		F50D4DEB211851B0006C50C7 /* MPFooterConfirmView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFooterConfirmView.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +167,14 @@
 			path = LBBlurredImage;
 			sourceTree = "<group>";
 		};
+		F50D4DE621183E2E006C50C7 /* YearCheck */ = {
+			isa = PBXGroup;
+			children = (
+				F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */,
+			);
+			path = YearCheck;
+			sourceTree = "<group>";
+		};
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +194,8 @@
 				F5A6334C211729BB0075548A /* MPMingXiTableViewCell.swift */,
 				F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */,
 				F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */,
+				F50D4DE921183EEE006C50C7 /* MPYearCheckTitleView.swift */,
+				F50D4DEB211851B0006C50C7 /* MPFooterConfirmView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -194,6 +210,7 @@
 		F5A6331E2116DA650075548A /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				F50D4DE621183E2E006C50C7 /* YearCheck */,
 				F5A6331F2116DA650075548A /* MPNavigationController.swift */,
 				F5A633202116DA650075548A /* MPLeftMenuViewController.swift */,
 				F5A633212116DA650075548A /* MPHomeViewController.swift */,
@@ -429,10 +446,12 @@
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */,
 				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
+				F50D4DEA21183EEE006C50C7 /* MPYearCheckTitleView.swift in Sources */,
 				F5A6334F211732380075548A /* MPTiXianViewController.swift in Sources */,
 				F50D4DDD2117F3F2006C50C7 /* MPNewOrderTipsView.swift in Sources */,
 				F5A6332E2116E3150075548A /* MPInputTextFiled.swift in Sources */,
 				F5A633262116DACA0075548A /* MPLoginViewController.swift in Sources */,
+				F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */,
 				F5A633222116DA650075548A /* MPNavigationController.swift in Sources */,
 				F5A6334D211729BB0075548A /* MPMingXiTableViewCell.swift in Sources */,
 				F5A633302116F5D60075548A /* MPOrderViewController.swift in Sources */,
@@ -445,6 +464,7 @@
 				F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */,
 				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
+				F50D4DEC211851B0006C50C7 /* MPFooterConfirmView.swift in Sources */,
 				F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */,
 				F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */,
 			);
