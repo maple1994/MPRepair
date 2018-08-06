@@ -54,6 +54,10 @@ class MPHomeViewController: UIViewController {
             make.leading.equalTo(gongZuoTaiVC.view.snp.trailing)
             make.width.height.equalTo(view)
         }
+        // 解决侧滑和scrollView的手势冲突
+        if let leftPan = slideMenuController()?.leftPanGesture {        
+            scrollView.panGestureRecognizer.require(toFail: leftPan)
+        }
     }
 
     // MARK: - Action
