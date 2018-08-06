@@ -11,6 +11,8 @@
 		F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */; };
 		F50D4DDD2117F3F2006C50C7 /* MPNewOrderTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */; };
 		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
+		F50D4DE321182B2A006C50C7 /* MPOrderConfirmViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */; };
+		F50D4DE521182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -81,6 +83,8 @@
 		F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNewOrderTipsView.swift; sourceTree = "<group>"; };
 		F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
+		F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderConfirmViewController.swift; sourceTree = "<group>"; };
+		F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderConfrimTableViewCell.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 				F5A633312116FB070075548A /* MPOrderTableViewCell.swift */,
 				F5A6334C211729BB0075548A /* MPMingXiTableViewCell.swift */,
 				F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */,
+				F50D4DE421182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -198,6 +203,7 @@
 				F5A6334E211732380075548A /* MPTiXianViewController.swift */,
 				F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */,
 				F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */,
+				F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -417,6 +423,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
+				F50D4DE521182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */,
 				F5A63349211724300075548A /* MPAccountViewController.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
@@ -431,6 +438,7 @@
 				F5A633302116F5D60075548A /* MPOrderViewController.swift in Sources */,
 				F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
+				F50D4DE321182B2A006C50C7 /* MPOrderConfirmViewController.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,

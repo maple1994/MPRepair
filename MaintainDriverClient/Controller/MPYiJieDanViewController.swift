@@ -56,4 +56,9 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return h
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = MPOrderConfirmViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }
