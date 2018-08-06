@@ -35,9 +35,10 @@ class MPLeftMenuViewController: UIViewController {
         tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
-        tableView.rowHeight = 44
+        tableView.rowHeight = 54
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.scrollsToTop = false
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
