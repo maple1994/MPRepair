@@ -6,3 +6,4 @@
 //  Copyright © 2018年 Maple. All rights reserved.
 //
 #import "UITableView+FDTemplateLayoutCell.h"
+#import "UIImageView+LBBlurredImage.h"

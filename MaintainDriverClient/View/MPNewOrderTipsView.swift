@@ -11,10 +11,26 @@ import UIKit
 /// 提示新订单View
 class MPNewOrderTipsView: UIView {
     class func show(title: String, subTitle: String) {
+        UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, UIScreen.main.scale)
+        UIApplication.shared.keyWindow?.drawHierarchy(in: UIScreen.main.bounds, afterScreenUpdates: false)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
         let view = MPNewOrderTipsView()
         view.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: MPUtils.screenH)
+        view.bgImage = image
         view.set(title: title, subTitle: subTitle)
         UIApplication.shared.keyWindow?.addSubview(view)
+    }
+    
+    /// 设置毛玻璃背景图
+    var bgImage: UIImage? {
+        didSet {
+            if let img = bgImage {
+                bgImageView.setImageToBlur(img, blurRadius: 10) { (_) in
+                }
+            }
+        }
     }
     
     func set(title: String, subTitle: String) {
@@ -32,10 +48,9 @@ class MPNewOrderTipsView: UIView {
     }
     
     fileprivate func setupUI() {
-        let effect = UIBlurEffect.init(style: .light)
-        let visualView = UIVisualEffectView(effect: effect)
-        addSubview(visualView)
-        visualView.snp.makeConstraints { (make) in
+        bgImageView = UIImageView()
+        addSubview(bgImageView)
+        bgImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
         titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "您有新的订单！", textColor: UIColor.navBlue)
@@ -103,6 +118,7 @@ class MPNewOrderTipsView: UIView {
     fileprivate var dismissButton: UIButton!
     fileprivate var confirmButton: UIButton!
     fileprivate var contentView: UIView!
+    fileprivate var bgImageView: UIImageView!
 }
 
 

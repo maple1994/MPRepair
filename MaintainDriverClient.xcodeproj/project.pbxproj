@@ -10,6 +10,7 @@
 		F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */; };
 		F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */; };
 		F50D4DDD2117F3F2006C50C7 /* MPNewOrderTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */; };
+		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -78,6 +79,8 @@
 		F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPGongZuoTaiViewController.swift; sourceTree = "<group>"; };
 		F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYiJieDanViewController.swift; sourceTree = "<group>"; };
 		F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNewOrderTipsView.swift; sourceTree = "<group>"; };
+		F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
+		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -145,6 +148,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F50D4DDE211823F5006C50C7 /* LBBlurredImage */ = {
+			isa = PBXGroup;
+			children = (
+				F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */,
+				F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */,
+			);
+			path = LBBlurredImage;
+			sourceTree = "<group>";
+		};
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -193,6 +205,7 @@
 		F5A633352116FD3B0075548A /* Frameword */ = {
 			isa = PBXGroup;
 			children = (
+				F50D4DDE211823F5006C50C7 /* LBBlurredImage */,
 				F5A63336211700BA0075548A /* FDTemplateLayoutcell */,
 			);
 			path = Frameword;
@@ -422,6 +435,7 @@
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
 				F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */,
+				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5A633282116DDBA0075548A /* MPLeftIconView.swift in Sources */,
 				F5A6332C2116DEF90075548A /* MPSendCodeButton.swift in Sources */,
