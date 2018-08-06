@@ -52,8 +52,9 @@ extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: CellID) { (cell) in
+        let h = tableView.fd_heightForCell(withIdentifier: CellID) { (cell) in
             
         }
+        return h
     }
 }

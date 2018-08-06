@@ -143,7 +143,7 @@ class MPOrderTableViewCell: UITableViewCell {
         blockView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(10)
-            make.top.equalTo(moneyTitleLabel.snp.bottom).offset(vMargin)
+            make.top.greaterThanOrEqualTo(moneyTitleLabel.snp.bottom).offset(vMargin).priority(.low)
         }
     }
     

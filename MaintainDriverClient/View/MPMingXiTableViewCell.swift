@@ -56,7 +56,7 @@ class MPMingXiTableViewCell: UITableViewCell {
         }
         startAddressLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(timeLabel)
-            make.top.equalTo(timeLabel.snp.bottom).offset(15)
+            make.top.equalTo(timeLabel.snp.bottom).offset(15).priority(.high)
             make.trailing.equalTo(moneyLabel.snp.leading).offset(-5)
         }
         iconImageView2.snp.makeConstraints { (make) in
