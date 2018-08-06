@@ -29,7 +29,7 @@ class MPYearCheckViewController: UIViewController {
     }
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
-
+    fileprivate lazy var quCheVC: MPQuCheViewController1 = MPQuCheViewController1()
 }
 
 // MARK: - MPYearCheckTitleViewDelegate
@@ -40,12 +40,24 @@ extension MPYearCheckViewController: MPYearCheckTitleViewDelegate {
             navigationItem.title = "查看信息"
         case 1:
             navigationItem.title = "上门取车"
+            show(vc: quCheVC)
         case 2:
             navigationItem.title = "开始年检"
         case 3:
             navigationItem.title = "检完还车"
         default:
             break
+        }
+    }
+    
+    func show(vc: UIViewController) {
+        if !childViewControllers.contains(vc) {
+            addChildViewController(vc)
+        }
+        view.addSubview(vc.view)
+        vc.view.snp.makeConstraints { (make) in
+            make.top.equalTo(yearCheckTitileView.snp.bottom)
+            make.leading.trailing.bottom.equalToSuperview()
         }
     }
 }
