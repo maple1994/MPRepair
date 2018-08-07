@@ -62,7 +62,9 @@ class MPHomeViewController: UIViewController {
 
     // MARK: - Action
     @objc fileprivate func meAction() {
-        slideMenuController()?.openLeft()
+//        slideMenuController()?.openLeft()
+        let vc = MPStartYearCheckViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @objc fileprivate func segChange() {

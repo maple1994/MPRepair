@@ -57,6 +57,16 @@ extension UILabel {
     }
 }
 
+extension String {
+    /// 自动算出字体空间大小
+    func size(_ font:UIFont, width:CGFloat) -> CGSize {
+        let size = CGSize(width: width, height: CGFloat(MAXFLOAT))
+        let str = NSString(format: "%@", self)
+        let dic = [NSAttributedStringKey.font:font]
+        return str.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic, context: nil).size
+    }
+}
+
 extension UIView {
     func setupCorner(_ radius: CGFloat) {
         layer.cornerRadius = radius

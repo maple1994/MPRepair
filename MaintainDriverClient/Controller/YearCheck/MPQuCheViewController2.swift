@@ -21,7 +21,6 @@ class MPQuCheViewController2: UIViewController {
     }
     
     fileprivate func setupUI() {
-        navigationItem.title = "上门取车"
         yearCheckTitileView = MPYearCheckTitleView()
         yearCheckTitileView.selectedIndex = 1
         view.addSubview(yearCheckTitileView)
@@ -82,7 +81,8 @@ class MPQuCheViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        print("确认取车")
+        let vc = MPStartYearCheckViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!
