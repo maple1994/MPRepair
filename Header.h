@@ -7,3 +7,4 @@
 //
 #import "UITableView+FDTemplateLayoutCell.h"
 #import "UIImageView+LBBlurredImage.h"
+#import <MAMapKit/MAMapKit.h>
