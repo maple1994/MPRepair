@@ -17,9 +17,19 @@ class MPQuCheViewController2: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNav()
     }
     
     fileprivate func setupUI() {
+        navigationItem.title = "上门取车"
+        yearCheckTitileView = MPYearCheckTitleView()
+        yearCheckTitileView.selectedIndex = 1
+        view.addSubview(yearCheckTitileView)
+        yearCheckTitileView.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(110)
+        }
+        
         tableView = UITableView()
         tableView.backgroundColor = UIColor.viewBgColor
         tableView.register(MPQuCheCCell.classForCoder(), forCellReuseIdentifier: CellID)
@@ -30,7 +40,8 @@ class MPQuCheViewController2: UIViewController {
         tableView.tableFooterView = MPFooterConfirmView(title: "确认取车", target: self, action: #selector(MPQuCheViewController2.confirm))
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.leading.bottom.trailing.equalToSuperview()
+            make.top.equalTo(yearCheckTitileView.snp.bottom)
         }
         let tbHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 300))
         mapView = MAMapView()
@@ -57,11 +68,25 @@ class MPQuCheViewController2: UIViewController {
         mapView?.setZoomLevel(12, animated: true)
     }
     
+    fileprivate func setupNav() {
+        navigationItem.title = "上门取车"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPQuCheViewController2.cancelOrder))
+        let dic: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)
+        ]
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
+    }
+    
+    @objc fileprivate func cancelOrder() {
+        print("取消订单")
+    }
+    
     @objc fileprivate func confirm() {
         print("确认取车")
     }
     
     fileprivate var tableView: UITableView!
+    fileprivate var yearCheckTitileView: MPYearCheckTitleView!
 }
 
 extension MPQuCheViewController2: MAMapViewDelegate {

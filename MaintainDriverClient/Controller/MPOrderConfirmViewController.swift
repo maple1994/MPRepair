@@ -45,7 +45,8 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        print("确认取车")
+        let vc = MPQuCheViewController1()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!

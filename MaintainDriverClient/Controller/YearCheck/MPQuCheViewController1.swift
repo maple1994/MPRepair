@@ -14,24 +14,48 @@ class MPQuCheViewController1: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupNav()
     }
     
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.viewBgColor
+        yearCheckTitileView = MPYearCheckTitleView()
+        yearCheckTitileView.selectedIndex = 1
+        view.addSubview(yearCheckTitileView)
+        yearCheckTitileView.snp.makeConstraints { (make) in
+            make.leading.trailing.top.equalToSuperview()
+            make.height.equalTo(110)
+        }
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.rowHeight = 135
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(yearCheckTitileView.snp.bottom)
         }
         tableView.tableFooterView = MPFooterConfirmView(title: "确认取车", target: self, action: #selector(MPQuCheViewController1.confirm))
     }
     
+    fileprivate func setupNav() {
+        navigationItem.title = "上门取车"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPQuCheViewController1.cancelOrder))
+        let dic: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)
+        ]
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
+    }
+    
+    @objc fileprivate func cancelOrder() {
+        print("取消订单")
+    }
+    
     @objc fileprivate func confirm() {
-        print("确认取车")
+        let vc = MPQuCheViewController2()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!
@@ -52,6 +76,8 @@ class MPQuCheViewController1: UIViewController {
         })
         return view
     }()
+    
+    fileprivate var yearCheckTitileView: MPYearCheckTitleView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView()
 }
 

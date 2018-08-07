@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 /// 提示新订单View
 class MPNewOrderTipsView: UIView {
@@ -111,6 +112,9 @@ class MPNewOrderTipsView: UIView {
     
     @objc fileprivate func confirm() {
         removeFromSuperview()
+        let vc = MPOrderConfirmViewController()
+        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)
+        nav?.pushViewController(vc, animated: true)
     }
     
     fileprivate var titleLabel: UILabel!
