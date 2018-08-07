@@ -11,13 +11,13 @@ import UIKit
 /// 扩展
 extension UIColor {
     /// 导航栏的蓝色
-    static let navBlue: UIColor = UIColor.colorWithHexString("#4AB0F9")
+    static let navBlue: UIColor = UIColor.colorWithHexString("#3cadff")
     /// view背景灰
     static let viewBgColor: UIColor = UIColor.colorWithHexString("#f5f5f5")
     /// 橙色
-    static let mpOrange: UIColor = UIColor.colorWithHexString("#E98F5A")
+    static let mpOrange: UIColor = UIColor.colorWithHexString("#ff8a4e")
     /// 绿色
-    static let mpGreen: UIColor = UIColor.colorWithHexString("#94F94D")
+    static let mpGreen: UIColor = UIColor.colorWithHexString("#5fff54")
     
     /// 返回16进制颜色
     ///

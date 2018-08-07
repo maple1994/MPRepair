@@ -105,8 +105,8 @@ class MPQuCheCCell: UITableViewCell {
         let addressTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "交接地点：", textColor: UIColor.black)
         addressLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "兴南大道33号月雅苑门口", textColor: UIColor.black)
         addressLabel.numberOfLines = 0
-        let timeTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "交接时间：", textColor: UIColor.black)
-        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "2018-07-29 下午", textColor: UIColor.black)
+        let timeTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "交接时间：", textColor: UIColor.colorWithHexString("616161"))
+        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "2018-07-29 下午", textColor: UIColor.colorWithHexString("616161"))
         contactButton = MPYearCheckItemView(icon: #imageLiteral(resourceName: "phone"), selectedIcon: nil, title: "联系他")
         contactButton.font = UIFont.systemFont(ofSize: 13)
         contactButton.addTarget(self, action: #selector(MPQuCheCCell.contact), for: .touchUpInside)
