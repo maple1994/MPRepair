@@ -1,4 +1,0 @@
-github "SnapKit/SnapKit" ~> 4.0.0
-github "Alamofire/Alamofire" ~> 4.7
-github "dekatotoro/SlideMenuControllerSwift"
-github "CoderMJLee/MJRefresh"

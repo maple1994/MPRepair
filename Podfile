@@ -1,0 +1,27 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'MaintainDriverClient' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+pod 'SnapKit', '~> 4.0.0'
+pod 'Alamofire', '~> 4.7'
+pod 'SlideMenuControllerSwift'
+pod 'MJRefresh'
+pod 'AMap2DMap'
+pod 'AMapSearch'
+pod 'AMapLocation'
+
+  # Pods for MaintainDriverClient
+
+  target 'MaintainDriverClientTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'MaintainDriverClientUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

@@ -3,10 +3,13 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2002E9C19EE3A6BA05A2AFF1 /* Pods_MaintainDriverClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */; };
+		295D3709D0AC2D2874E51AC7 /* Pods_MaintainDriverClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */; };
+		ADC8A0301EB8B7BA103F2CCE /* Pods_MaintainDriverClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */; };
 		F50D4DD92117EDEB006C50C7 /* MPGongZuoTaiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */; };
 		F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */; };
 		F50D4DDD2117F3F2006C50C7 /* MPNewOrderTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */; };
@@ -20,11 +23,6 @@
 		F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */; };
 		F50D4DF2211859AA006C50C7 /* MPHorizonScrollPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DF1211859AA006C50C7 /* MPHorizonScrollPhotoView.swift */; };
 		F513CF8C21188CA3002277EC /* MPTwoPhotoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F513CF8B21188CA3002277EC /* MPTwoPhotoTableViewCell.swift */; };
-		F513CF8F21189B3E002277EC /* MAMapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F513CF8E21189B3E002277EC /* MAMapKit.framework */; };
-		F513CF9221189BBB002277EC /* AMapFoundationKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F513CF9021189BBB002277EC /* AMapFoundationKit.framework */; };
-		F513CF9321189BBB002277EC /* AMapSearchKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F513CF9121189BBB002277EC /* AMapSearchKit.framework */; };
-		F52A58002119258E0054B90D /* MJRefresh.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F52A57FF2119258E0054B90D /* MJRefresh.framework */; };
-		F52A58012119258E0054B90D /* MJRefresh.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F52A57FF2119258E0054B90D /* MJRefresh.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -48,12 +46,6 @@
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
 		F5D7206E2112AC5900585A19 /* MaintainDriverClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7206D2112AC5900585A19 /* MaintainDriverClientTests.swift */; };
 		F5D720792112AC5900585A19 /* MaintainDriverClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720782112AC5900585A19 /* MaintainDriverClientUITests.swift */; };
-		F5D720892112D65100585A19 /* Alamofire.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720862112D65100585A19 /* Alamofire.framework */; };
-		F5D7208A2112D65100585A19 /* Alamofire.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720862112D65100585A19 /* Alamofire.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5D7208B2112D65100585A19 /* SlideMenuControllerSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */; };
-		F5D7208C2112D65100585A19 /* SlideMenuControllerSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		F5D7208D2112D65200585A19 /* SnapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720882112D65100585A19 /* SnapKit.framework */; };
-		F5D7208E2112D65200585A19 /* SnapKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = F5D720882112D65100585A19 /* SnapKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,10 +72,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				F5D7208E2112D65200585A19 /* SnapKit.framework in Embed Frameworks */,
-				F52A58012119258E0054B90D /* MJRefresh.framework in Embed Frameworks */,
-				F5D7208A2112D65100585A19 /* Alamofire.framework in Embed Frameworks */,
-				F5D7208C2112D65100585A19 /* SlideMenuControllerSwift.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -91,6 +79,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		02B61D9DEE07324DDA6735D9 /* Pods-MaintainDriverClient.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClient.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient.debug.xcconfig"; sourceTree = "<group>"; };
+		349F6EAAC56BB8097E0EA41A /* Pods-MaintainDriverClientUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientUITests/Pods-MaintainDriverClientUITests.release.xcconfig"; sourceTree = "<group>"; };
+		4371321C7CF3066700812709 /* Pods-MaintainDriverClient.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClient.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient.release.xcconfig"; sourceTree = "<group>"; };
+		615ED3CECC955D2A9BE97547 /* Pods-MaintainDriverClientUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientUITests/Pods-MaintainDriverClientUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6DE9282462F89B078825D579 /* Pods-MaintainDriverClientTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests.debug.xcconfig"; sourceTree = "<group>"; };
+		840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		933E4E24AB834923AD3EAF95 /* Pods-MaintainDriverClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPGongZuoTaiViewController.swift; sourceTree = "<group>"; };
 		F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYiJieDanViewController.swift; sourceTree = "<group>"; };
 		F50D4DDC2117F3F2006C50C7 /* MPNewOrderTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNewOrderTipsView.swift; sourceTree = "<group>"; };
@@ -105,10 +101,6 @@
 		F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController2.swift; sourceTree = "<group>"; };
 		F50D4DF1211859AA006C50C7 /* MPHorizonScrollPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPHorizonScrollPhotoView.swift; sourceTree = "<group>"; };
 		F513CF8B21188CA3002277EC /* MPTwoPhotoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTwoPhotoTableViewCell.swift; sourceTree = "<group>"; };
-		F513CF8E21189B3E002277EC /* MAMapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MAMapKit.framework; sourceTree = "<group>"; };
-		F513CF9021189BBB002277EC /* AMapFoundationKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapFoundationKit.framework; sourceTree = "<group>"; };
-		F513CF9121189BBB002277EC /* AMapSearchKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AMapSearchKit.framework; sourceTree = "<group>"; };
-		F52A57FF2119258E0054B90D /* MJRefresh.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MJRefresh.framework; path = Carthage/Build/iOS/MJRefresh.framework; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -143,9 +135,7 @@
 		F5D720742112AC5900585A19 /* MaintainDriverClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaintainDriverClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720782112AC5900585A19 /* MaintainDriverClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintainDriverClientUITests.swift; sourceTree = "<group>"; };
 		F5D7207A2112AC5900585A19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F5D720862112D65100585A19 /* Alamofire.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Alamofire.framework; path = Carthage/Build/iOS/Alamofire.framework; sourceTree = "<group>"; };
-		F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SlideMenuControllerSwift.framework; path = Carthage/Build/iOS/SlideMenuControllerSwift.framework; sourceTree = "<group>"; };
-		F5D720882112D65100585A19 /* SnapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SnapKit.framework; path = Carthage/Build/iOS/SnapKit.framework; sourceTree = "<group>"; };
+		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,13 +143,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F52A58002119258E0054B90D /* MJRefresh.framework in Frameworks */,
-				F5D7208D2112D65200585A19 /* SnapKit.framework in Frameworks */,
-				F5D720892112D65100585A19 /* Alamofire.framework in Frameworks */,
-				F513CF9321189BBB002277EC /* AMapSearchKit.framework in Frameworks */,
-				F513CF8F21189B3E002277EC /* MAMapKit.framework in Frameworks */,
-				F5D7208B2112D65100585A19 /* SlideMenuControllerSwift.framework in Frameworks */,
-				F513CF9221189BBB002277EC /* AMapFoundationKit.framework in Frameworks */,
+				ADC8A0301EB8B7BA103F2CCE /* Pods_MaintainDriverClient.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -167,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				295D3709D0AC2D2874E51AC7 /* Pods_MaintainDriverClientTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -174,12 +159,36 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2002E9C19EE3A6BA05A2AFF1 /* Pods_MaintainDriverClientUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4CC3CD47C439E3F5E213946B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */,
+				840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */,
+				F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C5098A43DD540D601395F722 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				02B61D9DEE07324DDA6735D9 /* Pods-MaintainDriverClient.debug.xcconfig */,
+				4371321C7CF3066700812709 /* Pods-MaintainDriverClient.release.xcconfig */,
+				6DE9282462F89B078825D579 /* Pods-MaintainDriverClientTests.debug.xcconfig */,
+				933E4E24AB834923AD3EAF95 /* Pods-MaintainDriverClientTests.release.xcconfig */,
+				615ED3CECC955D2A9BE97547 /* Pods-MaintainDriverClientUITests.debug.xcconfig */,
+				349F6EAAC56BB8097E0EA41A /* Pods-MaintainDriverClientUITests.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		F50D4DDE211823F5006C50C7 /* LBBlurredImage */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,16 +206,6 @@
 				F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */,
 			);
 			path = YearCheck;
-			sourceTree = "<group>";
-		};
-		F513CF8D21189B3E002277EC /* GaoDeMap */ = {
-			isa = PBXGroup;
-			children = (
-				F513CF9021189BBB002277EC /* AMapFoundationKit.framework */,
-				F513CF9121189BBB002277EC /* AMapSearchKit.framework */,
-				F513CF8E21189B3E002277EC /* MAMapKit.framework */,
-			);
-			path = GaoDeMap;
 			sourceTree = "<group>";
 		};
 		F5A633192116DA530075548A /* Utils */ = {
@@ -264,7 +263,6 @@
 		F5A633352116FD3B0075548A /* Frameword */ = {
 			isa = PBXGroup;
 			children = (
-				F513CF8D21189B3E002277EC /* GaoDeMap */,
 				F50D4DDE211823F5006C50C7 /* LBBlurredImage */,
 				F5A63336211700BA0075548A /* FDTemplateLayoutcell */,
 			);
@@ -289,15 +287,13 @@
 		F5D7204C2112AC5500585A19 = {
 			isa = PBXGroup;
 			children = (
-				F52A57FF2119258E0054B90D /* MJRefresh.framework */,
 				F5A63347211701030075548A /* Header.h */,
-				F5D720862112D65100585A19 /* Alamofire.framework */,
-				F5D720872112D65100585A19 /* SlideMenuControllerSwift.framework */,
-				F5D720882112D65100585A19 /* SnapKit.framework */,
 				F5D720572112AC5500585A19 /* MaintainDriverClient */,
 				F5D7206C2112AC5900585A19 /* MaintainDriverClientTests */,
 				F5D720772112AC5900585A19 /* MaintainDriverClientUITests */,
 				F5D720562112AC5500585A19 /* Products */,
+				C5098A43DD540D601395F722 /* Pods */,
+				4CC3CD47C439E3F5E213946B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -352,10 +348,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5D7207D2112AC5900585A19 /* Build configuration list for PBXNativeTarget "MaintainDriverClient" */;
 			buildPhases = (
+				346888A013E7C1B0C2B16EBC /* [CP] Check Pods Manifest.lock */,
 				F5D720512112AC5500585A19 /* Sources */,
 				F5D720522112AC5500585A19 /* Frameworks */,
 				F5D720532112AC5500585A19 /* Resources */,
 				F5D7208F2112D65200585A19 /* Embed Frameworks */,
+				5684B4F2BA0E326D795C28FA /* [CP] Embed Pods Frameworks */,
+				1D7CC030E295B6428C82CDE5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -370,9 +369,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5D720802112AC5900585A19 /* Build configuration list for PBXNativeTarget "MaintainDriverClientTests" */;
 			buildPhases = (
+				982F15EE1FB5B55D3B9B9181 /* [CP] Check Pods Manifest.lock */,
 				F5D720652112AC5900585A19 /* Sources */,
 				F5D720662112AC5900585A19 /* Frameworks */,
 				F5D720672112AC5900585A19 /* Resources */,
+				6E5BAF7164CACEE2E55C05DA /* [CP] Embed Pods Frameworks */,
+				A4E0BE4D801C340ED93486AF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -388,9 +390,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F5D720832112AC5900585A19 /* Build configuration list for PBXNativeTarget "MaintainDriverClientUITests" */;
 			buildPhases = (
+				F71DA23371F120AF30894D6C /* [CP] Check Pods Manifest.lock */,
 				F5D720702112AC5900585A19 /* Sources */,
 				F5D720712112AC5900585A19 /* Frameworks */,
 				F5D720722112AC5900585A19 /* Resources */,
+				AB4F94153041DAE3C5A5E95D /* [CP] Embed Pods Frameworks */,
+				EFCA104955390786D93BE75B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -415,19 +420,22 @@
 				TargetAttributes = {
 					F5D720542112AC5500585A19 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 					};
 					F5D720682112AC5900585A19 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = F5D720542112AC5500585A19;
 					};
 					F5D720732112AC5900585A19 = {
 						CreatedOnToolsVersion = 9.4.1;
+						ProvisioningStyle = Automatic;
 						TestTargetID = F5D720542112AC5500585A19;
 					};
 				};
 			};
 			buildConfigurationList = F5D720502112AC5500585A19 /* Build configuration list for PBXProject "MaintainDriverClient" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -471,6 +479,144 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1D7CC030E295B6428C82CDE5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		346888A013E7C1B0C2B16EBC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		5684B4F2BA0E326D795C28FA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		6E5BAF7164CACEE2E55C05DA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		982F15EE1FB5B55D3B9B9181 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A4E0BE4D801C340ED93486AF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		AB4F94153041DAE3C5A5E95D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClientUITests/Pods-MaintainDriverClientUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFCA104955390786D93BE75B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClientUITests/Pods-MaintainDriverClientUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F71DA23371F120AF30894D6C /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		F5D720512112AC5500585A19 /* Sources */ = {
@@ -663,14 +809,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
 		F5D7207E2112AC5900585A19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02B61D9DEE07324DDA6735D9 /* Pods-MaintainDriverClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -681,10 +827,7 @@
 					"$(PROJECT_DIR)/MaintainDriverClient/Frameword/GaoDeMap",
 				);
 				INFOPLIST_FILE = MaintainDriverClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
@@ -695,6 +838,7 @@
 		};
 		F5D7207F2112AC5900585A19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4371321C7CF3066700812709 /* Pods-MaintainDriverClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -705,10 +849,7 @@
 					"$(PROJECT_DIR)/MaintainDriverClient/Frameword/GaoDeMap",
 				);
 				INFOPLIST_FILE = MaintainDriverClient/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = Header.h;
@@ -719,17 +860,14 @@
 		};
 		F5D720812112AC5900585A19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6DE9282462F89B078825D579 /* Pods-MaintainDriverClientTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				INFOPLIST_FILE = MaintainDriverClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClientTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -740,17 +878,14 @@
 		};
 		F5D720822112AC5900585A19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 933E4E24AB834923AD3EAF95 /* Pods-MaintainDriverClientTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				INFOPLIST_FILE = MaintainDriverClientTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClientTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -761,16 +896,13 @@
 		};
 		F5D720842112AC5900585A19 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 615ED3CECC955D2A9BE97547 /* Pods-MaintainDriverClientUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				INFOPLIST_FILE = MaintainDriverClientUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClientUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -781,16 +913,13 @@
 		};
 		F5D720852112AC5900585A19 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 349F6EAAC56BB8097E0EA41A /* Pods-MaintainDriverClientUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				INFOPLIST_FILE = MaintainDriverClientUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mayi.MaintainDriverClient.MaintainDriverClientUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
