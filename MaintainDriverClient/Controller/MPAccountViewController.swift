@@ -22,12 +22,12 @@ class MPAccountViewController: UIViewController {
         view.backgroundColor = UIColor.viewBgColor
         navigationItem.title = "我的账户"
         tableView = UITableView()
+        tableView.register(MPMingXiTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         tableView.backgroundColor = UIColor.viewBgColor
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         view.addSubview(tableView)
-        tableView.register(MPMingXiTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white

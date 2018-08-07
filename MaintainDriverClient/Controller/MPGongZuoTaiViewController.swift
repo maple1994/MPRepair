@@ -21,11 +21,11 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.white
         tableView = UITableView()
+        tableView.register(MPOrderTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.viewBgColor
-        tableView.register(MPOrderTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

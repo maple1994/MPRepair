@@ -26,6 +26,7 @@ class MPOrderConfirmViewController: UIViewController {
         ]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
+        tableView.register(MPOrderConfrimTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -37,7 +38,6 @@ class MPOrderConfirmViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        tableView.register(MPOrderConfrimTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
     }
     
     @objc fileprivate func cancelOrder() {

@@ -32,11 +32,12 @@ class MPHorizonScrollPhotoView: UIView {
         flow.minimumInteritemSpacing = vSpace
         flow.minimumLineSpacing = hSpcace
         collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: flow)
+        collectionView.register(MPHorizonScrollPhotoItemCell.classForCoder(), forCellWithReuseIdentifier: CellID)
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.backgroundColor = UIColor.white
-        collectionView.register(MPHorizonScrollPhotoItemCell.classForCoder(), forCellWithReuseIdentifier: CellID)
+        
         addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
