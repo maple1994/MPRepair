@@ -92,6 +92,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var tableView2: UITableView!
     fileprivate var tableView3: UITableView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView()
+    fileprivate lazy var feekbackView = MPFeedbackView()
 }
 
 extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSource {
@@ -134,7 +135,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
                  return MPTitleSectionHeaderView(title: "外观", reuseIdentifier: nil)
             }
         }else {
-            return nil
+            return feekbackView
         }
         
     }
@@ -145,7 +146,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         }else if tableView == tableView2 {
             return 50
         }else {
-            return 0
+            return 250
         }
     }
     
