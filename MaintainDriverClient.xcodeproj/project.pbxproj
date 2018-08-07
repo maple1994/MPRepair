@@ -26,6 +26,7 @@
 		F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */; };
 		F52A5814211974E20054B90D /* MPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5813211974E20054B90D /* MPTitleView.swift */; };
 		F52A581621198C9C0054B90D /* MPFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A581521198C9C0054B90D /* MPFeedbackView.swift */; };
+		F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -107,6 +108,7 @@
 		F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController.swift; sourceTree = "<group>"; };
 		F52A5813211974E20054B90D /* MPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTitleView.swift; sourceTree = "<group>"; };
 		F52A581521198C9C0054B90D /* MPFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFeedbackView.swift; sourceTree = "<group>"; };
+		F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController2.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -211,6 +213,7 @@
 				F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */,
 				F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */,
 				F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */,
+				F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */,
 			);
 			path = YearCheck;
 			sourceTree = "<group>";
@@ -635,6 +638,7 @@
 				F5A633242116DA650075548A /* MPHomeViewController.swift in Sources */,
 				F50D4DE521182DCE006C50C7 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */,
+				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
 				F5A63349211724300075548A /* MPAccountViewController.swift in Sources */,
 				F52A5814211974E20054B90D /* MPTitleView.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,

@@ -81,7 +81,7 @@ class MPQuCheViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPStartYearCheckViewController()
+        let vc = MPStartYearCheckViewController2()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -114,6 +114,11 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
 
 // MARK: -
 class MPQuCheCCell: UITableViewCell {
+    func hiddenRightView() {
+        line.isHidden = true
+        contactButton.isHidden = true
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -135,7 +140,7 @@ class MPQuCheCCell: UITableViewCell {
         contactButton = MPYearCheckItemView(icon: #imageLiteral(resourceName: "phone"), selectedIcon: nil, title: "联系他")
         contactButton.font = UIFont.systemFont(ofSize: 13)
         contactButton.addTarget(self, action: #selector(MPQuCheCCell.contact), for: .touchUpInside)
-        let line = MPUtils.createLine()
+        line = MPUtils.createLine()
         contentView.addSubview(carTitleLabel)
         contentView.addSubview(carNameLabel)
         contentView.addSubview(addressTitleLabel)
@@ -188,6 +193,7 @@ class MPQuCheCCell: UITableViewCell {
         print("联系他")
     }
     
+    fileprivate var line: UIView!
     fileprivate var carNameLabel: UILabel!
     fileprivate var addressLabel: UILabel!
     fileprivate var timeLabel: UILabel!
