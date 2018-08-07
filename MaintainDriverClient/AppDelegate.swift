@@ -29,6 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = slideVC
         self.window?.makeKeyAndVisible()
         setupNormalUIStyle()
+        AMapServices.shared().apiKey = "4a539db4a6b5dca1d1dc53de781c3bd0"
         return true
     }
     
