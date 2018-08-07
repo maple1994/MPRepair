@@ -34,50 +34,146 @@ class MPStartYearCheckViewController: UIViewController {
             make.top.equalTo(yearCheckTitileView.snp.bottom)
             make.height.equalTo(50)
         }
-        scrollView = UIScrollView()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.delegate = self
-        scrollView.isPagingEnabled = true
-        view.addSubview(scrollView)
-        scrollView.snp.makeConstraints { (make) in
+        contentView = UIScrollView()
+        contentView.showsHorizontalScrollIndicator = false
+        contentView.delegate = self
+        contentView.isPagingEnabled = true
+        view.addSubview(contentView)
+        contentView.snp.makeConstraints { (make) in
             make.top.equalTo(titleView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
         }
-        let view1 = UIView()
-        view1.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
-        let view2 = UIView()
-        view2.backgroundColor = UIColor.colorWithHexString("#00ff00", alpha: 0.3)
-        let view3 = UIView()
-        view3.backgroundColor = UIColor.colorWithHexString("#0000ff", alpha: 0.3)
-        scrollView.addSubview(view1)
-        scrollView.addSubview(view2)
-        scrollView.addSubview(view3)
-        view1.snp.makeConstraints { (make) in
+
+        tableView1 = createTbView()
+        tableView2 = createTbView()
+        tableView2.rowHeight = 135
+        tableView3 = createTbView()
+        
+        contentView.addSubview(tableView1)
+        contentView.addSubview(tableView2)
+        contentView.addSubview(tableView3)
+        tableView1.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
             make.width.equalTo(MPUtils.screenW)
         }
-        view2.snp.makeConstraints { (make) in
+        tableView2.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
-            make.leading.equalTo(view1.snp.trailing)
-            make.trailing.equalTo(view3.snp.leading)
+            make.leading.equalTo(tableView1.snp.trailing)
+            make.trailing.equalTo(tableView3.snp.leading)
             make.height.equalTo(view).offset(-160)
             make.width.equalTo(MPUtils.screenW)
         }
-        view3.snp.makeConstraints { (make) in
+        tableView3.snp.makeConstraints { (make) in
             make.trailing.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
             make.width.equalTo(MPUtils.screenW)
         }
     }
+    
+    fileprivate func createTbView() -> UITableView {
+        let tb = UITableView(frame: CGRect.zero, style: .grouped)
+        tb.showsVerticalScrollIndicator = false
+        tb.separatorStyle = .none
+        tb.delegate = self
+        tb.dataSource = self
+        tb.tableFooterView = MPFooterConfirmView(title: "确认提交", target: self, action: #selector(MPStartYearCheckViewController.confirm))
+        return tb
+    }
+    
+    @objc fileprivate func confirm() {
+        print("提交")
+    }
 
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
     fileprivate var titleView: MPTitleView!
-    fileprivate var scrollView: UIScrollView!
+    fileprivate var contentView: UIScrollView!
+    fileprivate var tableView1: UITableView!
+    fileprivate var tableView2: UITableView!
+    fileprivate var tableView3: UITableView!
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView()
+}
+
+extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView == tableView1 {
+            return 1
+        }else if tableView == tableView2 {
+            return 3
+        }else {
+            return 1
+        }
+    }
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableView1 {
+            return 0
+        }else if tableView == tableView2 {
+            return 0
+        }else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPTwoPhotoTableViewCell") as? MPTwoPhotoTableViewCell
+        if cell == nil {
+            cell = MPTwoPhotoTableViewCell(style: .default, reuseIdentifier: "MPTwoPhotoTableViewCell")
+        }
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == tableView1 {
+            return MPTitleSectionHeaderView(title: "检车确认", reuseIdentifier: nil)
+        }else if tableView == tableView2 {
+            if section == 0 {
+                 return MPTitleSectionHeaderView(title: "车灯", reuseIdentifier: nil)
+            }else if section == 1 {
+                 return MPTitleSectionHeaderView(title: "排气", reuseIdentifier: nil)
+            }else {
+                 return MPTitleSectionHeaderView(title: "外观", reuseIdentifier: nil)
+            }
+        }else {
+            return nil
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == tableView1 {
+            return 50
+        }else if tableView == tableView2 {
+            return 50
+        }else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if tableView == tableView1 {
+            return horizontalPhotoView
+        }else if tableView == tableView2 {
+            return MPHorizonScrollPhotoView()
+        }else {
+            return nil
+        }
+    }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if tableView == tableView1 {
+            return 170
+        }else if tableView == tableView2 {
+            return 170
+        }else {
+            return 0.01
+        }
+    }
 }
 
 extension MPStartYearCheckViewController: UIScrollViewDelegate {
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView != contentView {
+            return
+        }
         let offsetX = scrollView.contentOffset.x + MPUtils.screenW * 0.5
         let index = Int(offsetX / MPUtils.screenW)
         titleView.setupSelectedIndex(index)
@@ -85,10 +181,16 @@ extension MPStartYearCheckViewController: UIScrollViewDelegate {
     }
     
     func scrollViewDidEndScrollingAnimation(_ scrollView: UIScrollView) {
+        if scrollView != contentView {
+            return
+        }
         titleView.isTouch = false
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView != contentView {
+            return
+        }
         if titleView.isTouch {
             return
         }
@@ -99,8 +201,7 @@ extension MPStartYearCheckViewController: UIScrollViewDelegate {
 extension MPStartYearCheckViewController: MPTitleViewDelegate {
     func titleView(didSelect index: Int) {
         titleView.isTouch = true
-        scrollView.setContentOffset(CGPoint(x: MPUtils.screenW * CGFloat(index), y: 0), animated: true)
-        print(index)
+        contentView.setContentOffset(CGPoint(x: MPUtils.screenW * CGFloat(index), y: 0), animated: true)
     }
 }
 
