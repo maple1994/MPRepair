@@ -18,6 +18,8 @@ extension UIColor {
     static let mpOrange: UIColor = UIColor.colorWithHexString("#ff8a4e")
     /// 绿色
     static let mpGreen: UIColor = UIColor.colorWithHexString("#5fff54")
+    /// 价格红
+    static let priceRed: UIColor = UIColor.colorWithHexString("ff3e3e")
     
     /// 返回16进制颜色
     ///

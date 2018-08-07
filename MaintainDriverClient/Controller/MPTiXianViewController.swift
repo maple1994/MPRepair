@@ -111,7 +111,7 @@ class MPTiXianViewController: UIViewController {
         ]
         let dic2: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
-            NSAttributedStringKey.foregroundColor: UIColor.red
+            NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "可提现余额", attributes: dic1)
         let str2 = NSAttributedString(string: String(format: " %.2f ", money), attributes: dic2)
@@ -186,7 +186,7 @@ class MPTiXianToWeChatCell: UITableViewCell {
         ]
         let dic2: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
-            NSAttributedStringKey.foregroundColor: UIColor.red
+            NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "提现至微信", attributes: dic1)
         let str2 = NSAttributedString(string: "(将收取1%手续费)", attributes: dic2)

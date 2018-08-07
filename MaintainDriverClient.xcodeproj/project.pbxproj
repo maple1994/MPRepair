@@ -27,6 +27,8 @@
 		F52A5814211974E20054B90D /* MPTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5813211974E20054B90D /* MPTitleView.swift */; };
 		F52A581621198C9C0054B90D /* MPFeedbackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A581521198C9C0054B90D /* MPFeedbackView.swift */; };
 		F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */; };
+		F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */; };
+		F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A581B2119938A0054B90D /* MPCheckOutFinishViewController2.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A633222116DA650075548A /* MPNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331F2116DA650075548A /* MPNavigationController.swift */; };
 		F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A633202116DA650075548A /* MPLeftMenuViewController.swift */; };
@@ -109,6 +111,8 @@
 		F52A5813211974E20054B90D /* MPTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTitleView.swift; sourceTree = "<group>"; };
 		F52A581521198C9C0054B90D /* MPFeedbackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPFeedbackView.swift; sourceTree = "<group>"; };
 		F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController2.swift; sourceTree = "<group>"; };
+		F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckOutFinishViewController1.swift; sourceTree = "<group>"; };
+		F52A581B2119938A0054B90D /* MPCheckOutFinishViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckOutFinishViewController2.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A6331F2116DA650075548A /* MPNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPNavigationController.swift; sourceTree = "<group>"; };
 		F5A633202116DA650075548A /* MPLeftMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPLeftMenuViewController.swift; sourceTree = "<group>"; };
@@ -214,6 +218,8 @@
 				F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */,
 				F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */,
 				F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */,
+				F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */,
+				F52A581B2119938A0054B90D /* MPCheckOutFinishViewController2.swift */,
 			);
 			path = YearCheck;
 			sourceTree = "<group>";
@@ -653,6 +659,8 @@
 				F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5A633222116DA650075548A /* MPNavigationController.swift in Sources */,
+				F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */,
+				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
 				F5A6334D211729BB0075548A /* MPMingXiTableViewCell.swift in Sources */,
 				F5A633302116F5D60075548A /* MPOrderViewController.swift in Sources */,
 				F5A633232116DA650075548A /* MPLeftMenuViewController.swift in Sources */,

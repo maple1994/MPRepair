@@ -25,7 +25,7 @@ class MPMingXiTableViewCell: UITableViewCell {
         startAddressLabel.numberOfLines = 0
         endAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区塘西桥兴商务大厦", textColor: UIColor.darkGray)
         endAddressLabel.numberOfLines = 0
-        moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "¥23.00", textColor: UIColor.red)
+        moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "¥ 23.00", textColor: UIColor.priceRed)
         moneyLabel.textAlignment = .right
         moneyLabel.adjustsFontSizeToFitWidth = true
         iconImageView1 = UIImageView()

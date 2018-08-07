@@ -55,7 +55,7 @@ class MPOrderTableViewCell: UITableViewCell {
         let timeTitleLabel = UILabel(font: smallFont, text: "预约时间：", textColor: UIColor.darkGray)
         timeLabel = UILabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.darkGray)
         let moneyTitleLabel = UILabel(font: smallFont, text: "服务收费：", textColor: UIColor.darkGray)
-        moneyLabel = UILabel(font: smallFont, text: "¥150.00", textColor: UIColor.red)
+        moneyLabel = UILabel(font: smallFont, text: "¥ 150.00", textColor: UIColor.priceRed)
         
         contentView.addSubview(orderTitleLabel)
         contentView.addSubview(orderIDLabel)

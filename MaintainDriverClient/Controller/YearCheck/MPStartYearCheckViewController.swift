@@ -82,7 +82,8 @@ class MPStartYearCheckViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        print("提交")
+        let vc = MPCheckOutFinishViewController1()
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
