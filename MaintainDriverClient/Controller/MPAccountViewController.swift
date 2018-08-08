@@ -32,7 +32,7 @@ class MPAccountViewController: UIViewController {
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white
         
-        let moneyTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "我的余额：", textColor: UIColor.black)
+        let moneyTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "我的余额：", textColor: UIColor.fontBlack)
         moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "¥10000.00", textColor: UIColor.priceRed)
         tiXianBtn = UIButton()
         tiXianBtn.setTitle("提现", for: .normal)

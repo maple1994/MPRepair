@@ -195,10 +195,10 @@ class MPTiXianToWeChatCell: UITableViewCell {
     fileprivate func setupUI() {
         let iconImageView = UIImageView()
         iconImageView.image = #imageLiteral(resourceName: "wechat")
-        let tipLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: nil, textColor: UIColor.black)
+        let tipLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: nil, textColor: UIColor.fontBlack)
         let dic1: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17),
-            NSAttributedStringKey.foregroundColor: UIColor.black
+            NSAttributedStringKey.foregroundColor: UIColor.fontBlack
         ]
         let dic2: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
