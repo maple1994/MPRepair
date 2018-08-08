@@ -106,7 +106,7 @@ class MPLoginViewController: UIViewController {
     }
     
     @objc fileprivate func login() {
-        (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC()
+        dismiss(animated: true, completion: nil)
     }
 
     

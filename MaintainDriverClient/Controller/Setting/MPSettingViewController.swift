@@ -57,7 +57,7 @@ class MPSettingViewController: UIViewController {
     }
     
     @objc fileprivate func loginOut() {
-        print("退出")
+        (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC()
     }
     
     fileprivate var tableView: UITableView!
