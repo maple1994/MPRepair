@@ -26,7 +26,7 @@ class MPQuCheViewController2: UIViewController {
         view.addSubview(yearCheckTitileView)
         yearCheckTitileView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(105)
         }
         
         tableView = UITableView()
@@ -42,7 +42,7 @@ class MPQuCheViewController2: UIViewController {
             make.leading.bottom.trailing.equalToSuperview()
             make.top.equalTo(yearCheckTitileView.snp.bottom)
         }
-        let tbHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 300))
+        let tbHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 265))
         mapView = MAMapView()
         tbHeaderView.addSubview(mapView!)
         mapView?.snp.makeConstraints { (make) in
@@ -112,90 +112,3 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-// MARK: -
-class MPQuCheCCell: UITableViewCell {
-    func hiddenRightView() {
-        line.isHidden = true
-        contactButton.isHidden = true
-    }
-    
-    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-     
-        fatalError("")
-    }
-    
-    fileprivate func setupUI() {
-        let carTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "车型：", textColor: UIColor.mpLightGary)
-        carNameLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "奔驰x123124", textColor: UIColor.mpLightGary)
-        let addressTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "交接地点：", textColor: UIColor.fontBlack)
-        addressLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "兴南大道33号月雅苑门口", textColor: UIColor.fontBlack)
-        addressLabel.numberOfLines = 0
-        let timeTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "交接时间：", textColor: UIColor.colorWithHexString("616161"))
-        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "2018-07-29 下午", textColor: UIColor.colorWithHexString("616161"))
-        contactButton = MPYearCheckItemView(icon: #imageLiteral(resourceName: "phone"), selectedIcon: nil, title: "联系他")
-        contactButton.font = UIFont.systemFont(ofSize: 13)
-        contactButton.addTarget(self, action: #selector(MPQuCheCCell.contact), for: .touchUpInside)
-        line = MPUtils.createLine()
-        contentView.addSubview(carTitleLabel)
-        contentView.addSubview(carNameLabel)
-        contentView.addSubview(addressTitleLabel)
-        contentView.addSubview(addressLabel)
-        contentView.addSubview(timeTitleLabel)
-        contentView.addSubview(timeLabel)
-        contentView.addSubview(contactButton)
-        contentView.addSubview(line)
-        
-        carTitleLabel.snp.makeConstraints { (make) in
-            make.leading.top.equalToSuperview().offset(15)
-        }
-        carNameLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(carTitleLabel)
-            make.leading.equalTo(carTitleLabel.snp.trailing)
-        }
-        addressTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(carTitleLabel)
-            make.top.equalTo(carTitleLabel.snp.bottom).offset(15).priority(.high)
-        }
-        addressLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(addressTitleLabel)
-            make.leading.equalTo(addressTitleLabel.snp.trailing)
-            make.trailing.equalTo(line.snp.leading).offset(-5)
-        }
-        timeTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(carTitleLabel)
-            make.top.equalTo(addressLabel.snp.bottom).offset(15).priority(.high)
-        }
-        timeLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(timeTitleLabel)
-            make.leading.equalTo(timeTitleLabel.snp.trailing)
-            make.bottom.equalToSuperview().offset(-12)
-        }
-        contactButton.snp.makeConstraints { (make) in
-            make.height.equalTo(55)
-            make.width.equalTo(40)
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-15)
-        }
-        line.snp.makeConstraints { (make) in
-            make.leading.equalTo(contactButton.snp.leading).offset(-13)
-            make.top.equalToSuperview().offset(15)
-            make.width.equalTo(1)
-            make.height.equalToSuperview().offset(-30)
-        }
-    }
-    
-    @objc fileprivate func contact() {
-        print("联系他")
-    }
-    
-    fileprivate var line: UIView!
-    fileprivate var carNameLabel: UILabel!
-    fileprivate var addressLabel: UILabel!
-    fileprivate var timeLabel: UILabel!
-    fileprivate var contactButton: MPYearCheckItemView!
-}

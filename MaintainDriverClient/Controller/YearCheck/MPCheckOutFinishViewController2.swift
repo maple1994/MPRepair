@@ -26,7 +26,7 @@ class MPCheckOutFinishViewController2: UIViewController {
         view.addSubview(yearCheckTitileView)
         yearCheckTitileView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(105)
         }
         
         tableView = UITableView()
@@ -42,7 +42,7 @@ class MPCheckOutFinishViewController2: UIViewController {
             make.leading.bottom.trailing.equalToSuperview()
             make.top.equalTo(yearCheckTitileView.snp.bottom)
         }
-        let tbHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 300))
+        let tbHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 265))
         mapView = MAMapView()
         tbHeaderView.addSubview(mapView!)
         mapView?.snp.makeConstraints { (make) in

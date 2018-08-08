@@ -101,6 +101,7 @@ extension MPAccountViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPMingXiTableViewCell(style: .default, reuseIdentifier: CellID)
         }
+        cell?.isLineHidden = indexPath.row == 9
         return cell!
     }
     

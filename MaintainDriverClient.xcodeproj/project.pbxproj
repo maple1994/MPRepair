@@ -58,6 +58,7 @@
 		F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */; };
 		F5DF739F211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */; };
 		F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */; };
+		F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -159,6 +160,7 @@
 		F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPImageButtonView.swift; sourceTree = "<group>"; };
 		F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckBoxOrderTableViewCell.swift; sourceTree = "<group>"; };
 		F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderModel.swift; sourceTree = "<group>"; };
+		F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheCCell.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -466,6 +468,7 @@
 				F5DF7381211A94E400B9F154 /* MPFeedbackView.swift */,
 				F5DF7382211A94E400B9F154 /* MPYearCheckTitleView.swift */,
 				F5DF7383211A94E400B9F154 /* MPHorizonScrollPhotoView.swift */,
+				F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */,
 			);
 			path = YearCheck;
 			sourceTree = "<group>";
@@ -812,6 +815,7 @@
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,
 				F5DF738A211A94E400B9F154 /* MPMingXiTableViewCell.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
+				F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */,
 				F5DF7372211A93E300B9F154 /* MPSettingViewController.swift in Sources */,
 				F5DF7371211A93E300B9F154 /* MPGongZuoTaiViewController.swift in Sources */,
 				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,

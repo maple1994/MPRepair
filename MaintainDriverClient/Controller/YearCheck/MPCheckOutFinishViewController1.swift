@@ -24,7 +24,7 @@ class MPCheckOutFinishViewController1: UIViewController {
         view.addSubview(yearCheckTitileView)
         yearCheckTitileView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(105)
         }
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
         tableView.rowHeight = 135

@@ -24,7 +24,7 @@ class MPYearCheckTitleView: UIView {
     /// 两边间距
     fileprivate let spaceX: CGFloat = 20
     fileprivate let itemW: CGFloat = 65
-    fileprivate let itemH: CGFloat = 65
+    fileprivate let itemH: CGFloat = 60
     
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
@@ -53,7 +53,7 @@ class MPYearCheckTitleView: UIView {
         lineArr.append(line3)
         for view in itemArr {
             addSubview(view)
-            view.addTarget(self, action: #selector(MPYearCheckTitleView.itemClick(_:)), for: .touchUpInside)
+//            view.addTarget(self, action: #selector(MPYearCheckTitleView.itemClick(_:)), for: .touchUpInside)
         }
         for line in lineArr {
             addSubview(line)
@@ -141,7 +141,7 @@ class MPYearCheckItemView: UIControl {
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
         iconImageView = UIImageView()
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "查看信息", textColor: UIColor.mpLightGary)
+        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 12), text: "查看信息", textColor: UIColor.mpLightGary)
         titleLabel.textAlignment = .center
         addSubview(iconImageView)
         addSubview(titleLabel)

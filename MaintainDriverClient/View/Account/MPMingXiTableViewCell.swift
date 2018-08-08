@@ -10,6 +10,13 @@ import UIKit
 
 /// 明细Cell
 class MPMingXiTableViewCell: UITableViewCell {
+    
+    var isLineHidden: Bool = false {
+        didSet {
+            line.isHidden = isLineHidden
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -80,6 +87,14 @@ class MPMingXiTableViewCell: UITableViewCell {
             make.bottom.equalTo(endAddressLabel.snp.centerY)
             make.width.equalTo(100)
         }
+        line = MPUtils.createLine()
+        contentView.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(1)
+        }
     }
     
     fileprivate var timeLabel: UILabel!
@@ -89,6 +104,7 @@ class MPMingXiTableViewCell: UITableViewCell {
     fileprivate var iconImageView1: UIImageView!
     fileprivate var iconImageView2: UIImageView!
     fileprivate var iconImageView3: UIImageView!
+    fileprivate var line: UIView!
 }
 
 

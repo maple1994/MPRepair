@@ -24,7 +24,7 @@ class MPStartYearCheckViewController: UIViewController {
         view.addSubview(yearCheckTitileView)
         yearCheckTitileView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(105)
         }
         titleView = MPTitleView(titleArr: ["年检已过", "年检未过", "服务反馈"])
         titleView.delegate = self

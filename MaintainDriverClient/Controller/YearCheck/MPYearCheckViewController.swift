@@ -24,7 +24,7 @@ class MPYearCheckViewController: UIViewController {
         view.addSubview(yearCheckTitileView)
         yearCheckTitileView.snp.makeConstraints { (make) in
             make.leading.trailing.top.equalToSuperview()
-            make.height.equalTo(110)
+            make.height.equalTo(105)
         }
     }
     
