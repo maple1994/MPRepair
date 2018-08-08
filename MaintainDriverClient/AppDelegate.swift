@@ -18,15 +18,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         setupNormalUIStyle()
-        setHomeVCToRootVC()
+        setHomeVCToRootVC(false)
         AMapServices.shared().apiKey = "4a539db4a6b5dca1d1dc53de781c3bd0"
         return true
     }
     
     /// 设置HomeVC为根控制器
-    func setHomeVCToRootVC() {
+    func setHomeVCToRootVC(_ isAnimated: Bool) {
         let mainVC = MPHomeViewController()
-        mainVC.isAnimationed = true
+        mainVC.isAnimationed = isAnimated
         let nav = MPNavigationController(rootViewController: mainVC)
         let leftVC = MPLeftMenuViewController()
         leftVC.delegate = mainVC

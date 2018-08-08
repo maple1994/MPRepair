@@ -9,8 +9,9 @@
 import UIKit
 
 class MPHomeViewController: UIViewController {
+    // TODO: 登录状态
     /// 标记用户是否已登录，未登录显示登录界面
-    fileprivate var isLogin: Bool = false
+    fileprivate var isLogin: Bool = true
     var isAnimationed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()

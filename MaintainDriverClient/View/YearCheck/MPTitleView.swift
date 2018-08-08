@@ -31,14 +31,22 @@ class MPTitleView: UIView {
         if isTouch {
             return
         }
-        let x = offsetX / CGFloat(labelArr.count)
-        indicatorLine.frame.origin.x = x + spaceX
+        let firstLabel = labelArr.first!
+        let lastLabel = labelArr.last!
+        var x = offsetX / CGFloat(labelArr.count) + margin
+        if x < firstLabel.frame.origin.x {
+            x = firstLabel.frame.origin.x
+        }
+        if x > lastLabel.frame.maxX - lastLabel.frame.width {
+            x = lastLabel.frame.maxX - lastLabel.frame.width
+        }
+        indicatorLine.frame.origin.x = x
     }
     
     var isTouch: Bool = false
     fileprivate var titleArr: [String]
     fileprivate var labelArr: [UILabel] = [UILabel]()
-    fileprivate let spaceX: CGFloat = 25
+    fileprivate var margin: CGFloat = 0
     
     init(titleArr: [String]) {
         self.titleArr = titleArr
@@ -83,8 +91,10 @@ class MPTitleView: UIView {
             totalW += size.width
         }
         // 计算间隔margin
-        let margin: CGFloat = (frame.width - 2 * spaceX - totalW) / CGFloat(labelArr.count - 1)
-        var preX: CGFloat = spaceX
+//        let margin: CGFloat = (frame.width - 2 * spaceX - totalW) / CGFloat(labelArr.count - 1)
+        margin = (frame.width - totalW) / CGFloat(labelArr.count + 1)
+        
+        var preX: CGFloat = margin
         for (index, label) in labelArr.enumerated() {
             let labelSize = labelSizeArr[index]
             label.frame = CGRect(x: preX, y: 0, width: labelSize.width, height: frame.height)
