@@ -22,6 +22,7 @@ class MPMunuViewCell: UITableViewCell {
     fileprivate func setupUI() {
         iconView = UIImageView()
         iconTitleLabel = UILabel()
+        iconTitleLabel.font = UIFont.mpBigFont
         iconTitleLabel.textColor = UIColor.fontBlack
         contentView.addSubview(iconView)
         contentView.addSubview(iconTitleLabel)

@@ -48,6 +48,7 @@ class MPLeftMenuViewController: UIViewController {
         userIconView.image = #imageLiteral(resourceName: "person")
         userIconView.isUserInteractionEnabled = true
         userNameLabel = UILabel()
+        userNameLabel.font = UIFont.mpBigFont
         userNameLabel.textColor = UIColor.white
         userNameLabel.text = "未登录"
         let tbHeaderView = UIView()

@@ -25,7 +25,7 @@ class MPTiXianViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 54
+        tableView.rowHeight = 50
         
         confirmButton = UIButton()
         confirmButton.addTarget(self, action: #selector(MPTiXianViewController.confirm), for: .touchUpInside)
@@ -48,18 +48,18 @@ class MPTiXianViewController: UIViewController {
         }
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white
-        let titleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "提现金额", textColor: UIColor.mpDarkGray)
-        let moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 13), text: nil, textColor: UIColor.mpLightGary)
+        let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "提现金额", textColor: UIColor.mpDarkGray)
+        let moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 12), text: nil, textColor: UIColor.mpLightGary)
         moneyLabel.attributedText = getMoneyAttrStr(0.00)
         allTiXianBtn = UIButton()
         allTiXianBtn.setTitleColor(UIColor.navBlue, for: .normal)
         allTiXianBtn.setTitle("全部提现", for: .normal)
-        allTiXianBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        allTiXianBtn.titleLabel?.font = UIFont.mpSmallFont
         allTiXianBtn.addTarget(self, action: #selector(MPTiXianViewController.allTiXian), for: .touchUpInside)
         textField = MPUnderLineTextField()
         textField.lineColor = UIColor.colorWithHexString("#DCDCDC")
         textField.placeholder = "请输入金额"
-        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.font = UIFont.mpBigFont
         textField.leftView = getLeftView()
         textField.leftViewMode = .always
         
@@ -107,11 +107,11 @@ class MPTiXianViewController: UIViewController {
     /// 转为富文本
     fileprivate func getMoneyAttrStr(_ money: Double) -> NSAttributedString {
         let dic1: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
             NSAttributedStringKey.foregroundColor: UIColor.mpLightGary
         ]
         let dic2: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 13),
+            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
             NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "可提现余额", attributes: dic1)
@@ -195,13 +195,13 @@ class MPTiXianToWeChatCell: UITableViewCell {
     fileprivate func setupUI() {
         let iconImageView = UIImageView()
         iconImageView.image = #imageLiteral(resourceName: "wechat")
-        let tipLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: nil, textColor: UIColor.fontBlack)
+        let tipLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: UIColor.fontBlack)
         let dic1: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 17),
+            NSAttributedStringKey.font: UIFont.mpNormalFont,
             NSAttributedStringKey.foregroundColor: UIColor.fontBlack
         ]
         let dic2: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.mpSmallFont),
+            NSAttributedStringKey.font: UIFont.mpSmallFont,
             NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "提现至微信", attributes: dic1)

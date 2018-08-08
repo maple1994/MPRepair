@@ -34,7 +34,7 @@ class MPSettingCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        leftTitleLabel = UILabel(font: UIFont.mpSmallFont), text: "头像", textColor: UIColor.fontBlack)
+        leftTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "头像", textColor: UIColor.fontBlack)
         let margin: CGFloat = 18
         if isShowIcon {
             iconView = UIButton()

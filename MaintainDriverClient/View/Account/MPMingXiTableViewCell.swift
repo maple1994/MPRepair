@@ -27,17 +27,17 @@ class MPMingXiTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "2018-07-29 09:04", textColor: UIColor.mpDarkGray)
-        startAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区大石武警医院", textColor: UIColor.mpDarkGray)
+        timeLabel = UILabel(font: UIFont.mpSmallFont, text: "2018-07-29 09:04", textColor: UIColor.mpDarkGray)
+        startAddressLabel = UILabel(font: UIFont.mpSmallFont, text: "广州番禺区大石武警医院", textColor: UIColor.mpDarkGray)
         startAddressLabel.numberOfLines = 0
-        endAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区塘西桥兴商务大厦", textColor: UIColor.mpDarkGray)
+        endAddressLabel = UILabel(font: UIFont.mpSmallFont, text: "广州番禺区塘西桥兴商务大厦", textColor: UIColor.mpDarkGray)
         endAddressLabel.numberOfLines = 0
-        moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "¥ 23.00", textColor: UIColor.priceRed)
+        moneyLabel = UILabel(font: UIFont.mpNormalFont, text: "¥ 23.00", textColor: UIColor.priceRed)
         moneyLabel.textAlignment = .right
         moneyLabel.adjustsFontSizeToFitWidth = true
         iconImageView1 = UIImageView()
         iconImageView1.backgroundColor = UIColor.navBlue
-        iconImageView1.setupCorner(7.5)
+        iconImageView1.setupCorner(7)
         iconImageView2 = UIImageView()
         iconImageView2.backgroundColor = UIColor.mpOrange
         iconImageView2.setupCorner(5)
@@ -54,8 +54,8 @@ class MPMingXiTableViewCell: UITableViewCell {
         
         iconImageView1.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(15)
-            make.height.width.equalTo(15)
+            make.top.equalToSuperview().offset(14)
+            make.height.width.equalTo(14)
         }
         timeLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(iconImageView1)
