@@ -19,7 +19,7 @@ class MPNavigationController: UINavigationController {
         navigationBar.isTranslucent = false
         navigationBar.tintColor = UIColor.white
         interactivePopGestureRecognizer?.delegate = self
-        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 20)]
+        navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)]
     }
     
     

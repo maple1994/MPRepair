@@ -52,6 +52,7 @@
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
 		F5D7206E2112AC5900585A19 /* MaintainDriverClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7206D2112AC5900585A19 /* MaintainDriverClientTests.swift */; };
 		F5D720792112AC5900585A19 /* MaintainDriverClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720782112AC5900585A19 /* MaintainDriverClientUITests.swift */; };
+		F5DF7358211A82DB00B9F154 /* MPSettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF7357211A82DB00B9F154 /* MPSettingViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -147,6 +148,7 @@
 		F5D720742112AC5900585A19 /* MaintainDriverClientUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaintainDriverClientUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720782112AC5900585A19 /* MaintainDriverClientUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintainDriverClientUITests.swift; sourceTree = "<group>"; };
 		F5D7207A2112AC5900585A19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5DF7357211A82DB00B9F154 /* MPSettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSettingViewController.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -274,6 +276,7 @@
 				F50D4DD82117EDEB006C50C7 /* MPGongZuoTaiViewController.swift */,
 				F50D4DDA2117EE0D006C50C7 /* MPYiJieDanViewController.swift */,
 				F50D4DE221182B2A006C50C7 /* MPOrderConfirmViewController.swift */,
+				F5DF7357211A82DB00B9F154 /* MPSettingViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -646,6 +649,7 @@
 				F50D4DDB2117EE0D006C50C7 /* MPYiJieDanViewController.swift in Sources */,
 				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
 				F5A63349211724300075548A /* MPAccountViewController.swift in Sources */,
+				F5DF7358211A82DB00B9F154 /* MPSettingViewController.swift in Sources */,
 				F52A5814211974E20054B90D /* MPTitleView.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A633332116FB070075548A /* MPOrderTableViewCell.swift in Sources */,

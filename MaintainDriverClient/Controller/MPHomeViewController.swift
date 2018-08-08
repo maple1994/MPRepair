@@ -119,7 +119,8 @@ extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
     }
     /// 设置
     func menuViewDidSelectSetting() {
-        // TODO: 设置
         slideMenuController()?.closeLeft()
+        let vc = MPSettingViewController()
+        navigationController?.show(vc, sender: true)
     }
 }

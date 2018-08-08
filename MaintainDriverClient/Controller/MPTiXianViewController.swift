@@ -10,7 +10,8 @@ import UIKit
 
 /// 提现界面
 class MPTiXianViewController: UIViewController {
-
+    /// 是否提现微信
+    fileprivate var isToWeChat: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         setpuUI()
@@ -162,11 +163,26 @@ extension MPTiXianViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("check box")
+        if let cell = tableView.cellForRow(at: indexPath) as? MPTiXianToWeChatCell {
+            cell.boxSelected = !cell.boxSelected
+            isToWeChat = cell.boxSelected
+        }
     }
 }
 
 class MPTiXianToWeChatCell: UITableViewCell {
+    
+    /// 单选按钮的选中状态
+    var boxSelected: Bool = false {
+        didSet {
+            if boxSelected {
+                checkBoxIconView.image = #imageLiteral(resourceName: "box_selected")
+            }else {
+                checkBoxIconView.image = #imageLiteral(resourceName: "box_unselected")
+            }
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -194,11 +210,11 @@ class MPTiXianToWeChatCell: UITableViewCell {
         res.append(str1)
         res.append(str2)
         tipLabel.attributedText = res
-        let checkBoxIcon = UIImageView()
-        checkBoxIcon.image = #imageLiteral(resourceName: "box_unselected")
+        checkBoxIconView = UIImageView()
+        checkBoxIconView.image = #imageLiteral(resourceName: "box_unselected")
         contentView.addSubview(iconImageView)
         contentView.addSubview(tipLabel)
-        contentView.addSubview(checkBoxIcon)
+        contentView.addSubview(checkBoxIconView)
         
         iconImageView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
@@ -208,11 +224,14 @@ class MPTiXianToWeChatCell: UITableViewCell {
             make.leading.equalTo(iconImageView.snp.trailing).offset(10)
             make.centerY.equalToSuperview()
         }
-        checkBoxIcon.snp.makeConstraints { (make) in
+        checkBoxIconView.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-15)
+            make.width.height.equalTo(18)
         }
     }
+    
+    fileprivate var checkBoxIconView: UIImageView!
 
 }
 

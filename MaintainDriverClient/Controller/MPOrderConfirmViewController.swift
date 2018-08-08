@@ -22,7 +22,7 @@ class MPOrderConfirmViewController: UIViewController {
         navigationItem.title = "确认信息"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPOrderConfirmViewController.cancelOrder))
         let dic: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)
+            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)
         ]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
