@@ -40,9 +40,11 @@ class MPLoginViewController: UIViewController {
         sendCodeBtn = MPSendCodeButton(count: 60)
         logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         phoneTextField = MPInputTextFiled()
+        phoneTextField.keyboardType = .numberPad
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         phoneTextField.leftIcon = #imageLiteral(resourceName: "mobile")
         codeTextField = MPInputTextFiled()
+        codeTextField.keyboardType = .numberPad
         codeTextField.attributedPlaceholder = getAttributeText("请输入验证码")
         codeTextField.leftIcon = #imageLiteral(resourceName: "pwd")
         loginButton = UIButton()
@@ -87,6 +89,12 @@ class MPLoginViewController: UIViewController {
             make.top.equalTo(codeTextField.snp.bottom).offset(45)
             make.height.equalTo(36)
         }
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLoginViewController.tap))
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc fileprivate func tap() {
+        view.endEditing(true)
     }
     
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
