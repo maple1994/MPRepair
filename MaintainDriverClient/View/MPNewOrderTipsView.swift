@@ -54,9 +54,9 @@ class MPNewOrderTipsView: UIView {
         bgImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "您有新的订单！", textColor: UIColor.navBlue)
-        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "请及时处理！", textColor: UIColor.mpDarkGray)
-        dismissButton = UIButton()
+        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 18), text: "您有新的订单！", textColor: UIColor.navBlue)
+        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "请及时处理！", textColor: UIColor.mpDarkGray)
+        dismissButton = MPImageButtonView(image: #imageLiteral(resourceName: "close_dary"), pos: .rightTop, imageW: 16, imageH: 16)
         dismissButton.addTarget(self, action: #selector(MPNewOrderTipsView.dismiss), for: .touchUpInside)
         confirmButton = UIButton()
         confirmButton.setTitle("确认", for: .normal)
@@ -79,29 +79,29 @@ class MPNewOrderTipsView: UIView {
         
         contentView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.width.equalTo(300)
-            make.height.equalTo(250)
+            make.width.equalTo(280)
+            make.height.equalTo(211)
         }
         dismissButton.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview()
-            make.top.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-15)
+            make.top.equalToSuperview().offset(15)
             make.width.height.equalTo(35)
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(dismissButton.snp.bottom).offset(20)
+            make.top.equalToSuperview().offset(53)
             make.centerX.equalToSuperview()
         }
         subTitleLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(titleLabel.snp.bottom).offset(40)
+            make.top.equalTo(titleLabel.snp.bottom).offset(29)
             make.centerX.equalToSuperview()
         }
         confirmButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.width.equalTo(120)
+            make.width.equalTo(110)
             make.height.equalTo(35)
-            make.bottom.equalToSuperview().offset(-25)
+            make.bottom.equalToSuperview().offset(-18)
         }
-        confirmButton.setupCorner(10)
+        confirmButton.setupCorner(8)
     }
     
     @objc fileprivate func dismiss() {
@@ -117,7 +117,7 @@ class MPNewOrderTipsView: UIView {
     
     fileprivate var titleLabel: UILabel!
     fileprivate var subTitleLabel: UILabel!
-    fileprivate var dismissButton: UIButton!
+    fileprivate var dismissButton: MPImageButtonView!
     fileprivate var confirmButton: UIButton!
     fileprivate var contentView: UIView!
     fileprivate var bgImageView: UIImageView!
