@@ -86,16 +86,16 @@ class MPLoginViewController: UIViewController {
         }
         
         // 添加退出按钮
-        let dismissBtn = UIButton()
-        dismissBtn.setImage(#imageLiteral(resourceName: "close"), for: .normal)
-        dismissBtn.setTitleColor(UIColor.white, for: .normal)
-        dismissBtn.addTarget(self, action: #selector(MPLoginViewController.dimissAction), for: .touchUpInside)
-        contentView.addSubview(dismissBtn)
-        dismissBtn.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-10)
-            make.top.equalToSuperview().offset(10)
-            make.width.height.equalTo(35)
-        }
+//        let dismissBtn = UIButton()
+//        dismissBtn.setImage(#imageLiteral(resourceName: "close"), for: .normal)
+//        dismissBtn.setTitleColor(UIColor.white, for: .normal)
+//        dismissBtn.addTarget(self, action: #selector(MPLoginViewController.dimissAction), for: .touchUpInside)
+//        contentView.addSubview(dismissBtn)
+//        dismissBtn.snp.makeConstraints { (make) in
+//            make.trailing.equalToSuperview().offset(-10)
+//            make.top.equalToSuperview().offset(10)
+//            make.width.height.equalTo(35)
+//        }
     }
     
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
@@ -107,13 +107,9 @@ class MPLoginViewController: UIViewController {
     }
     
     @objc fileprivate func login() {
-        // TODO: 登录
-        print("登录")
+        (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC()
     }
-    
-    @objc fileprivate func dimissAction() {
-        dismiss(animated: true, completion: nil)
-    }
+
     
     // MARK: - View
     fileprivate var scrollView: UIScrollView!

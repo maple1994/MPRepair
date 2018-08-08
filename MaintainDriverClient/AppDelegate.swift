@@ -13,9 +13,23 @@ import SlideMenuControllerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    /// 标记用户是否已登录，未登录显示登录界面
+    fileprivate var isLogin: Bool = true
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        self.window = UIWindow(frame: UIScreen.main.bounds)
+        setupNormalUIStyle()
+        if isLogin {
+            setHomeVCToRootVC()
+        }else {
+            setLoginVCToHomeVC()
+        }
+        AMapServices.shared().apiKey = "4a539db4a6b5dca1d1dc53de781c3bd0"
+        return true
+    }
+    
+    /// 设置HomeVC为根控制器
+    func setHomeVCToRootVC() {
         let mainVC = MPHomeViewController()
         let nav = MPNavigationController(rootViewController: mainVC)
         let leftVC = MPLeftMenuViewController()
@@ -25,12 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SlideMenuOptions.animationDuration = 0.25
         SlideMenuOptions.contentViewOpacity = 0.2
         let slideVC = SlideMenuController(mainViewController: nav, leftMenuViewController: leftVC)
-        self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.rootViewController = slideVC
         self.window?.makeKeyAndVisible()
-        setupNormalUIStyle()
-        AMapServices.shared().apiKey = "4a539db4a6b5dca1d1dc53de781c3bd0"
-        return true
+    }
+    
+    /// 设置LoginVC为根控制器
+    func setLoginVCToHomeVC() {
+        let loginVC = MPLoginViewController()
+        self.window?.rootViewController = loginVC
+        self.window?.makeKeyAndVisible()
     }
     
     /// 设置通用的UI样式
