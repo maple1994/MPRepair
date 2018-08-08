@@ -22,8 +22,8 @@ class MPOrderTableViewCell: UITableViewCell {
             }
         }
     }
-    fileprivate let smallFont = UIFont.systemFont(ofSize: 15)
-    fileprivate let bigFont = UIFont.systemFont(ofSize: 17)
+    fileprivate let smallFont = UIFont.mpSmallFont
+    fileprivate let bigFont = UIFont.mpNormalFont
     fileprivate let uncompleteColor = UIColor.mpOrange
     fileprivate let completedColor = UIColor.mpGreen
     /// 左右间距

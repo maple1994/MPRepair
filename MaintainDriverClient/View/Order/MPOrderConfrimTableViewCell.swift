@@ -27,8 +27,8 @@ class MPOrderConfrimTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "车主姓名", textColor: UIColor.mpDarkGray)
-        valueLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "王思迪", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: UIFont.mpNormalFont, text: "车主姓名", textColor: UIColor.mpDarkGray)
+        valueLabel = UILabel(font: UIFont.mpNormalFont, text: "王思迪", textColor: UIColor.mpDarkGray)
         valueLabel.numberOfLines = 0
         line = MPUtils.createLine()
         
@@ -74,7 +74,7 @@ class MPTitleSectionHeaderView: UITableViewHeaderFooterView {
     }
     fileprivate func setupUI() {
         backgroundColor = UIColor.viewBgColor
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "明细", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: UIFont.mpSmallFont, text: "明细", textColor: UIColor.mpDarkGray)
         addSubview(titleLabel)
         titleLabel.snp.makeConstraints({ (make) in
             make.leading.equalToSuperview().offset(15)

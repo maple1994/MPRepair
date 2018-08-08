@@ -65,6 +65,15 @@ extension UILabel {
     }
 }
 
+extension UIFont {
+    /// 小字体
+    static let mpSmallFont = UIFont.systemFont(ofSize: 14)
+    /// 普通大小字体
+    static let mpNormalFont = UIFont.systemFont(ofSize: 16)
+    /// 大字体
+    static let mpBigFont = UIFont.systemFont(ofSize: 18)
+}
+
 extension String {
     /// 自动算出字体空间大小
     func size(_ font:UIFont, width:CGFloat) -> CGSize {

@@ -54,12 +54,13 @@ class MPNewOrderTipsView: UIView {
         bgImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 18), text: "您有新的订单！", textColor: UIColor.navBlue)
-        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "请及时处理！", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: UIFont.mpBigFont, text: "您有新的订单！", textColor: UIColor.navBlue)
+        subTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "请及时处理！", textColor: UIColor.mpDarkGray)
         dismissButton = MPImageButtonView(image: #imageLiteral(resourceName: "close_dary"), pos: .rightTop, imageW: 16, imageH: 16)
         dismissButton.addTarget(self, action: #selector(MPNewOrderTipsView.dismiss), for: .touchUpInside)
         confirmButton = UIButton()
         confirmButton.setTitle("确认", for: .normal)
+        confirmButton.titleLabel?.font = UIFont.mpNormalFont
         confirmButton.setTitleColor(UIColor.white, for: .normal)
         confirmButton.backgroundColor = UIColor.navBlue
         confirmButton.addTarget(self, action: #selector(MPNewOrderTipsView.confirm), for: .touchUpInside)

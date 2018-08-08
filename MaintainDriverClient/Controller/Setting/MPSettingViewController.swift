@@ -21,7 +21,7 @@ class MPSettingViewController: UIViewController {
         navigationItem.title = "设置"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "保存", style: .plain, target: self, action: #selector(MPSettingViewController.save))
         let dic: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 14)
+            NSAttributedStringKey.font : UIFont.mpSmallFont)
         ]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
         

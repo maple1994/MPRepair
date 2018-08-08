@@ -201,7 +201,7 @@ class MPTiXianToWeChatCell: UITableViewCell {
             NSAttributedStringKey.foregroundColor: UIColor.fontBlack
         ]
         let dic2: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14),
+            NSAttributedStringKey.font: UIFont.mpSmallFont),
             NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "提现至微信", attributes: dic1)
