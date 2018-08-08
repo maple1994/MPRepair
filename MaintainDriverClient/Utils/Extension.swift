@@ -15,13 +15,17 @@ extension UIColor {
     /// view背景灰
     static let viewBgColor: UIColor = UIColor.colorWithHexString("#f5f5f5")
     /// 橙色
-    static let mpOrange: UIColor = UIColor.colorWithHexString("#ff8a4e")
+    static let mpOrange: UIColor = UIColor.colorWithHexString("#FF8A4E")
     /// 绿色
-    static let mpGreen: UIColor = UIColor.colorWithHexString("#5fff54")
+    static let mpGreen: UIColor = UIColor.colorWithHexString("#5FFF54")
     /// 价格红
-    static let priceRed: UIColor = UIColor.colorWithHexString("ff3e3e")
+    static let priceRed: UIColor = UIColor.colorWithHexString("#FF3C3C")
     /// 文字黑
-    static let fontBlack: UIColor = UIColor.colorWithHexString("333333")
+    static let fontBlack: UIColor = UIColor.colorWithHexString("#333333")
+    /// 浅灰
+    static let mpLightGary: UIColor = UIColor.colorWithHexString("#a3a3a3")
+    /// 深灰
+    static let mpDarkGray: UIColor = UIColor.colorWithHexString("#5B5B5B")
     
     /// 返回16进制颜色
     ///

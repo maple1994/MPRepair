@@ -138,6 +138,7 @@ class MPMunuViewCell: UITableViewCell {
     fileprivate func setupUI() {
         iconView = UIImageView()
         iconTitleLabel = UILabel()
+        iconTitleLabel.textColor = UIColor.fontBlack
         contentView.addSubview(iconView)
         contentView.addSubview(iconTitleLabel)
         iconView.snp.makeConstraints { (make) in

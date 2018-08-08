@@ -41,19 +41,19 @@ class MPOrderTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.lightGray)
-        orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.lightGray)
+        let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.mpLightGary)
+        orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.mpLightGary)
         statusLabel = UILabel(font: smallFont, text: "未完成", textColor: uncompleteColor)
         let line1 = MPUtils.createLine()
-        let carTitleLabel = UILabel(font: smallFont, text: "车型：", textColor: UIColor.darkGray)
-        carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.darkGray)
+        let carTitleLabel = UILabel(font: smallFont, text: "车型：", textColor: UIColor.mpDarkGray)
+        carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.mpDarkGray)
         let JJCDTitleLabel = UILabel(font: bigFont, text: "交接车点：", textColor: UIColor.fontBlack)
         JJCDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.fontBlack)
         let NJDDTitleLabel = UILabel(font: bigFont, text: "年检车点：", textColor: UIColor.fontBlack)
         NJDDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.fontBlack)
         let line2 = MPUtils.createLine()
-        let timeTitleLabel = UILabel(font: smallFont, text: "预约时间：", textColor: UIColor.darkGray)
-        timeLabel = UILabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.darkGray)
+        let timeTitleLabel = UILabel(font: smallFont, text: "预约时间：", textColor: UIColor.mpDarkGray)
+        timeLabel = UILabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.mpDarkGray)
         let moneyTitleLabel = UILabel(font: smallFont, text: "服务收费：", textColor: UIColor.darkGray)
         moneyLabel = UILabel(font: smallFont, text: "¥ 150.00", textColor: UIColor.priceRed)
         

@@ -130,8 +130,8 @@ class MPQuCheCCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        let carTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "车型：", textColor: UIColor.lightGray)
-        carNameLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "奔驰x123124", textColor: UIColor.lightGray)
+        let carTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "车型：", textColor: UIColor.mpLightGary)
+        carNameLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "奔驰x123124", textColor: UIColor.mpLightGary)
         let addressTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "交接地点：", textColor: UIColor.fontBlack)
         addressLabel = UILabel(font: UIFont.systemFont(ofSize: 17), text: "兴南大道33号月雅苑门口", textColor: UIColor.fontBlack)
         addressLabel.numberOfLines = 0

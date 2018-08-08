@@ -53,7 +53,7 @@ class MPTitleView: UIView {
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
         for title in titleArr {
-            let label = UILabel(font: UIFont.systemFont(ofSize: 17), text: title, textColor: UIColor.darkGray)
+            let label = UILabel(font: UIFont.systemFont(ofSize: 17), text: title, textColor: UIColor.mpDarkGray)
             label.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(MPTitleView.titileClick(tap:)))
             label.addGestureRecognizer(tap)
@@ -119,7 +119,7 @@ class MPTitleView: UIView {
         UIView.animate(withDuration: 0.25, animations: {
             self.indicatorLine.frame.origin.x = label.frame.origin.x
         })
-        selectedLabel?.textColor = UIColor.darkGray
+        selectedLabel?.textColor = UIColor.mpDarkGray
         label.textColor = UIColor.navBlue
         selectedLabel = label
         

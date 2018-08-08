@@ -63,9 +63,9 @@ class MPFeedbackItem: UIView {
         nameButton = UIButton()
         nameButton.setTitleColor(UIColor.white, for: .normal)
         nameButton.setTitle("车灯", for: .normal)
-        nameButton.backgroundColor = UIColor.colorWithHexString("#A3A3A3")
+        nameButton.backgroundColor = UIColor.mpLightGary
         nameButton.setupCorner(10)
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 13), text: "检测调试费", textColor: UIColor.lightGray)
+        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 13), text: "检测调试费", textColor: UIColor.mpLightGary)
         priceLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "¥ 200.00", textColor: UIColor.priceRed)
         addSubview(nameButton)
         addSubview(titleLabel)

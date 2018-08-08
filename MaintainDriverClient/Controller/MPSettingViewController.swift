@@ -152,7 +152,7 @@ class MPSettingCell: UITableViewCell {
                 make.trailing.equalToSuperview().offset(-margin)
             }
         }else {
-            rightTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "王一清", textColor: UIColor.colorWithHexString("a3a3a3"))
+            rightTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "王一清", textColor: UIColor.mpLightGary)
             contentView.addSubview(rightTitleLabel!)
             rightTitleLabel?.snp.makeConstraints({ (make) in
                 make.trailing.equalToSuperview().offset(-margin)

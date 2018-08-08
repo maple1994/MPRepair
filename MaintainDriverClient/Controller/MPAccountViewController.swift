@@ -80,7 +80,7 @@ class MPAccountViewController: UIViewController {
     fileprivate lazy var mingXiView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.viewBgColor
-        let label = UILabel(font: UIFont.systemFont(ofSize: 16), text: "明细", textColor: UIColor.darkGray)
+        let label = UILabel(font: UIFont.systemFont(ofSize: 16), text: "明细", textColor: UIColor.mpDarkGray)
         view.addSubview(label)
         label.snp.makeConstraints({ (make) in
             make.leading.equalToSuperview().offset(15)

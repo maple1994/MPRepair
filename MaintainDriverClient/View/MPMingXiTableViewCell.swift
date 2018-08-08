@@ -20,10 +20,10 @@ class MPMingXiTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "2018-07-29 09:04", textColor: UIColor.darkGray)
-        startAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区大石武警医院", textColor: UIColor.darkGray)
+        timeLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "2018-07-29 09:04", textColor: UIColor.mpDarkGray)
+        startAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区大石武警医院", textColor: UIColor.mpDarkGray)
         startAddressLabel.numberOfLines = 0
-        endAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区塘西桥兴商务大厦", textColor: UIColor.darkGray)
+        endAddressLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "广州番禺区塘西桥兴商务大厦", textColor: UIColor.mpDarkGray)
         endAddressLabel.numberOfLines = 0
         moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 16), text: "¥ 23.00", textColor: UIColor.priceRed)
         moneyLabel.textAlignment = .right

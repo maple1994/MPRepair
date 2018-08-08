@@ -55,10 +55,8 @@ class MPNewOrderTipsView: UIView {
             make.edges.equalToSuperview()
         }
         titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "您有新的订单！", textColor: UIColor.navBlue)
-        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "请及时处理！", textColor: UIColor.darkGray)
+        subTitleLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "请及时处理！", textColor: UIColor.mpDarkGray)
         dismissButton = UIButton()
-        dismissButton.setTitle("X", for: .normal)
-        dismissButton.setTitleColor(UIColor.fontBlack, for: .normal)
         dismissButton.addTarget(self, action: #selector(MPNewOrderTipsView.dismiss), for: .touchUpInside)
         confirmButton = UIButton()
         confirmButton.setTitle("确认", for: .normal)
