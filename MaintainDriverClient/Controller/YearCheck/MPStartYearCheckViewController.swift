@@ -203,7 +203,9 @@ extension MPStartYearCheckViewController: UIScrollViewDelegate {
 extension MPStartYearCheckViewController: MPTitleViewDelegate {
     func titleView(didSelect index: Int) {
         titleView.isTouch = true
-        contentView.setContentOffset(CGPoint(x: MPUtils.screenW * CGFloat(index), y: 0), animated: true)
+        let offsetX: CGFloat = MPUtils.screenW * CGFloat(index)
+        contentView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+        titleView.lastOffsetX = offsetX
     }
 }
 

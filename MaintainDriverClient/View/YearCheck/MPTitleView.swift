@@ -16,6 +16,8 @@ protocol MPTitleViewDelegate: class {
 class MPTitleView: UIView {
     
     var selectedIndex: Int?
+    /// 记录最后上一次偏移量
+    var lastOffsetX: CGFloat = 0
     weak var delegate: MPTitleViewDelegate?
     func setupSelectedIndex(_ index: Int) {
         if selectedIndex != nil {
@@ -31,16 +33,10 @@ class MPTitleView: UIView {
         if isTouch {
             return
         }
-        let firstLabel = labelArr.first!
-        let lastLabel = labelArr.last!
-        var x = offsetX / CGFloat(labelArr.count)
-        if x < firstLabel.frame.origin.x {
-            x = firstLabel.frame.origin.x
-        }
-        if x > lastLabel.frame.maxX - lastLabel.frame.width {
-            x = lastLabel.frame.maxX - lastLabel.frame.width
-        }
-        indicatorLine.frame.origin.x = x
+        let delta: CGFloat = offsetX - lastOffsetX
+        let x = delta / CGFloat(labelArr.count)
+        indicatorLine.frame.origin.x += x
+        lastOffsetX = offsetX
     }
     
     var isTouch: Bool = false
@@ -132,8 +128,9 @@ class MPTitleView: UIView {
         selectedLabel?.textColor = UIColor.mpDarkGray
         label.textColor = UIColor.navBlue
         selectedLabel = label
-        
-        delegate?.titleView(didSelect: labelArr.index(of: label)!)
+        let index = labelArr.index(of: label)!
+        selectedIndex = index
+        delegate?.titleView(didSelect: index)
     }
 
 }
