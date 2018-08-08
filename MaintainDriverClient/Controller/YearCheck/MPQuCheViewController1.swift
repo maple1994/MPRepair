@@ -54,7 +54,7 @@ class MPQuCheViewController1: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPQuCheViewController2()
+        let vc = MPStartYearCheckViewController2()
         navigationController?.pushViewController(vc, animated: true)
     }
     

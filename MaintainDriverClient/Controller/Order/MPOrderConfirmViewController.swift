@@ -45,7 +45,7 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPQuCheViewController1()
+        let vc = MPQuCheViewController2()
         navigationController?.pushViewController(vc, animated: true)
     }
     

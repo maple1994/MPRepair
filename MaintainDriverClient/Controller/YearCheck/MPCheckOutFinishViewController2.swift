@@ -72,7 +72,8 @@ class MPCheckOutFinishViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        navigationController?.popToRootViewController(animated: true)
+        let vc = MPCheckOutFinishViewController1()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!
