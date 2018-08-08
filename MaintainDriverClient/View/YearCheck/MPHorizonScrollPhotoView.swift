@@ -77,7 +77,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
         removeButton.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.remove), for: .touchUpInside)
         photoView = UIImageView()
         photoView.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 13), text: "有效期内交的强险保单副本", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "有效期内交的强险保单副本", textColor: UIColor.mpDarkGray)
         contentView.addSubview(photoView)
         contentView.addSubview(removeButton)
         contentView.addSubview(titleLabel)

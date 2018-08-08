@@ -64,9 +64,10 @@ class MPFeedbackItem: UIView {
         nameButton.setTitleColor(UIColor.white, for: .normal)
         nameButton.setTitle("车灯", for: .normal)
         nameButton.backgroundColor = UIColor.mpLightGary
-        nameButton.setupCorner(10)
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 13), text: "检测调试费", textColor: UIColor.mpLightGary)
-        priceLabel = UILabel(font: UIFont.systemFont(ofSize: 15), text: "¥ 200.00", textColor: UIColor.priceRed)
+        nameButton.titleLabel?.font = UIFont.mpNormalFont
+        nameButton.setupCorner(4)
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "检测调试费", textColor: UIColor.mpLightGary)
+        priceLabel = UILabel(font: UIFont.mpNormalFont, text: "¥ 200.00", textColor: UIColor.priceRed)
         addSubview(nameButton)
         addSubview(titleLabel)
         addSubview(priceLabel)
@@ -74,15 +75,15 @@ class MPFeedbackItem: UIView {
             make.top.equalToSuperview()
             make.centerX.equalToSuperview()
             make.width.equalTo(100)
-            make.height.equalTo(44)
+            make.height.equalTo(38)
         }
         titleLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(nameButton.snp.bottom).offset(8)
+            make.top.equalTo(nameButton.snp.bottom).offset(6)
         }
         priceLabel.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalTo(titleLabel.snp.bottom).offset(8)
+            make.top.equalTo(titleLabel.snp.bottom).offset(6)
         }
     }
     

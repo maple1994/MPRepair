@@ -147,7 +147,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         }else if tableView == tableView2 {
             return 50
         }else {
-            return 250
+            return 195
         }
     }
     

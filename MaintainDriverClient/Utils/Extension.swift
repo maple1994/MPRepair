@@ -66,6 +66,8 @@ extension UILabel {
 }
 
 extension UIFont {
+    /// 小小字体
+    static let mpXSmallFont = UIFont.systemFont(ofSize: 12)
     /// 小字体
     static let mpSmallFont = UIFont.systemFont(ofSize: 14)
     /// 普通大小字体

@@ -49,7 +49,7 @@ class MPTiXianViewController: UIViewController {
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "提现金额", textColor: UIColor.mpDarkGray)
-        let moneyLabel = UILabel(font: UIFont.systemFont(ofSize: 12), text: nil, textColor: UIColor.mpLightGary)
+        let moneyLabel = UILabel(font: UIFont.mpXSmallFont, text: nil, textColor: UIColor.mpLightGary)
         moneyLabel.attributedText = getMoneyAttrStr(0.00)
         allTiXianBtn = UIButton()
         allTiXianBtn.setTitleColor(UIColor.navBlue, for: .normal)
@@ -107,11 +107,11 @@ class MPTiXianViewController: UIViewController {
     /// 转为富文本
     fileprivate func getMoneyAttrStr(_ money: Double) -> NSAttributedString {
         let dic1: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
+            NSAttributedStringKey.font: UIFont.mpXSmallFont,
             NSAttributedStringKey.foregroundColor: UIColor.mpLightGary
         ]
         let dic2: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12),
+            NSAttributedStringKey.font: UIFont.mpXSmallFont,
             NSAttributedStringKey.foregroundColor: UIColor.priceRed
         ]
         let str1 = NSAttributedString(string: "可提现余额", attributes: dic1)

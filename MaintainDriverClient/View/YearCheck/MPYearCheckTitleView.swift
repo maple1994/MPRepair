@@ -141,7 +141,7 @@ class MPYearCheckItemView: UIControl {
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
         iconImageView = UIImageView()
-        titleLabel = UILabel(font: UIFont.systemFont(ofSize: 12), text: "查看信息", textColor: UIColor.mpLightGary)
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "查看信息", textColor: UIColor.mpLightGary)
         titleLabel.textAlignment = .center
         addSubview(iconImageView)
         addSubview(titleLabel)

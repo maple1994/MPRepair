@@ -33,7 +33,7 @@ class MPTitleView: UIView {
         }
         let firstLabel = labelArr.first!
         let lastLabel = labelArr.last!
-        var x = offsetX / CGFloat(labelArr.count) + margin
+        var x = offsetX / CGFloat(labelArr.count)
         if x < firstLabel.frame.origin.x {
             x = firstLabel.frame.origin.x
         }
@@ -61,7 +61,7 @@ class MPTitleView: UIView {
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
         for title in titleArr {
-            let label = UILabel(font: UIFont.systemFont(ofSize: 17), text: title, textColor: UIColor.mpDarkGray)
+            let label = UILabel(font: UIFont.mpSmallFont, text: title, textColor: UIColor.mpDarkGray)
             label.isUserInteractionEnabled = true
             let tap = UITapGestureRecognizer(target: self, action: #selector(MPTitleView.titileClick(tap:)))
             label.addGestureRecognizer(tap)
