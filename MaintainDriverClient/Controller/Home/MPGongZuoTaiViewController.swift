@@ -11,17 +11,22 @@ import UIKit
 /// 工作台
 class MPGongZuoTaiViewController: UIViewController {
 
-    fileprivate let CellID = "MPOrderTableViewCell_GongZuoTai"
+    fileprivate let CellID = "MPCheckBoxOrderTableViewCell"
+    fileprivate var orderModelArr: [MPOrderModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        orderModelArr = [MPOrderModel]()
+        orderModelArr?.append(MPOrderModel())
+        orderModelArr?.append(MPOrderModel())
+        tableView.reloadData()
     }
     
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.white
         tableView = UITableView()
-        tableView.register(MPOrderTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
+        tableView.register(MPCheckBoxOrderTableViewCell.classForCoder(), forCellReuseIdentifier: CellID)
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
@@ -79,27 +84,31 @@ class MPGongZuoTaiViewController: UIViewController {
 extension MPGongZuoTaiViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return orderModelArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: CellID) as? MPOrderTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: CellID) as? MPCheckBoxOrderTableViewCell
         if cell == nil {
-            cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID)
+            cell = MPCheckBoxOrderTableViewCell(style: .default, reuseIdentifier: CellID)
         }
-        cell?.row = indexPath.row
+        cell?.orderModel = orderModelArr?[indexPath.row]
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let h = tableView.fd_heightForCell(withIdentifier: CellID) { (cell) in
-            
+        let h = tableView.fd_heightForCell(withIdentifier: CellID) { (cell1) in
+            let cell = cell1 as? MPCheckBoxOrderTableViewCell
+            cell?.orderModel = self.orderModelArr?[indexPath.row]
         }
         return h
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MPOrderConfirmViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        guard let arr = orderModelArr else {
+            return
+        }
+        orderModelArr?[indexPath.row].isSelected = !arr[indexPath.row].isSelected
+        tableView.reloadData()
     }
 }

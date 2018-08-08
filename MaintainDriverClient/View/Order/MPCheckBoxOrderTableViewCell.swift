@@ -1,27 +1,23 @@
 //
-//  MPOrderTableViewCell.swift
+//  MPCheckBoxOrderTableViewCell.swift
 //  MaintainDriverClient
 //
-//  Created by Maple on 2018/8/5.
+//  Created by Maple on 2018/8/8.
 //  Copyright © 2018年 Maple. All rights reserved.
 //
 
 import UIKit
 
-/// 订单Cell
-class MPOrderTableViewCell: UITableViewCell {
-    
-    var row: Int = 0{
+/// 带checkbox的订单Cell
+class MPCheckBoxOrderTableViewCell: UITableViewCell {
+
+    var orderModel: MPOrderModel? {
         didSet {
-            if row % 2 == 0 {
-                statusLabel.textColor = uncompleteColor
-                statusLabel.text = "未完成"
-            }else {
-                statusLabel.textColor = completedColor
-                statusLabel.text = "已完成"
-            }
+            let sel = orderModel?.isSelected ?? false
+            checkBoxView.image = sel ? #imageLiteral(resourceName: "box_selected") : #imageLiteral(resourceName: "box_unselected")
         }
     }
+    
     fileprivate let smallFont = UIFont.systemFont(ofSize: 15)
     fileprivate let bigFont = UIFont.systemFont(ofSize: 17)
     fileprivate let uncompleteColor = UIColor.mpOrange
@@ -41,9 +37,10 @@ class MPOrderTableViewCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
+        checkBoxView = UIImageView()
+        checkBoxView.image = #imageLiteral(resourceName: "box_unselected")
         let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.mpLightGary)
         orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.mpLightGary)
-        statusLabel = UILabel(font: smallFont, text: "未完成", textColor: uncompleteColor)
         let line1 = MPUtils.createLine()
         let carTitleLabel = UILabel(font: smallFont, text: "车型：", textColor: UIColor.mpDarkGray)
         carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.mpDarkGray)
@@ -57,9 +54,9 @@ class MPOrderTableViewCell: UITableViewCell {
         let moneyTitleLabel = UILabel(font: smallFont, text: "服务收费：", textColor: UIColor.darkGray)
         moneyLabel = UILabel(font: smallFont, text: "¥ 150.00", textColor: UIColor.priceRed)
         
+        contentView.addSubview(checkBoxView)
         contentView.addSubview(orderTitleLabel)
         contentView.addSubview(orderIDLabel)
-        contentView.addSubview(statusLabel)
         contentView.addSubview(line1)
         contentView.addSubview(carTitleLabel)
         contentView.addSubview(carNameLabel)
@@ -73,21 +70,22 @@ class MPOrderTableViewCell: UITableViewCell {
         contentView.addSubview(moneyTitleLabel)
         contentView.addSubview(moneyLabel)
         
-        orderTitleLabel.snp.makeConstraints { (make) in
+        checkBoxView.snp.makeConstraints { (make) in
+            make.top.equalToSuperview().offset(vMargin)
             make.leading.equalToSuperview().offset(hMargin)
+            make.width.height.equalTo(18)
+        }
+        orderTitleLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(43)
             make.top.equalToSuperview().offset(vMargin)
         }
         orderIDLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(orderTitleLabel.snp.trailing)
             make.top.equalTo(orderTitleLabel)
         }
-        statusLabel.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-hMargin)
-            make.top.equalTo(orderTitleLabel)
-        }
         line1.snp.makeConstraints { (make) in
             make.leading.equalTo(orderTitleLabel)
-            make.trailing.equalTo(statusLabel)
+            make.trailing.equalToSuperview().offset(-hMargin)
             make.top.equalTo(orderTitleLabel.snp.bottom).offset(vMargin)
             make.height.equalTo(1)
         }
@@ -117,7 +115,7 @@ class MPOrderTableViewCell: UITableViewCell {
         }
         line2.snp.makeConstraints { (make) in
             make.leading.equalTo(orderTitleLabel)
-            make.trailing.equalTo(statusLabel)
+            make.trailing.equalToSuperview().offset(-hMargin)
             make.top.equalTo(NJDDTitleLabel.snp.bottom).offset(vMargin)
             make.height.equalTo(1)
         }
@@ -150,8 +148,6 @@ class MPOrderTableViewCell: UITableViewCell {
     // MARK: - View
     /// 订单ID
     fileprivate var orderIDLabel: UILabel!
-    /// 完成状态
-    fileprivate var statusLabel: UILabel!
     /// 车型
     fileprivate var carNameLabel: UILabel!
     /// 交接车点
@@ -164,5 +160,6 @@ class MPOrderTableViewCell: UITableViewCell {
     fileprivate var moneyLabel: UILabel!
     /// 灰块
     fileprivate var blockView: UIView!
+    /// 选择按钮
+    fileprivate var checkBoxView: UIImageView!
 }
-

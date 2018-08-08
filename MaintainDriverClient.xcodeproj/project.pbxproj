@@ -55,6 +55,9 @@
 		F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF7389211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift */; };
 		F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF7397211A950900B9F154 /* MPSettingCell.swift */; };
 		F5DF739A211A953A00B9F154 /* MPMunuViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF7399211A953A00B9F154 /* MPMunuViewCell.swift */; };
+		F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */; };
+		F5DF739F211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */; };
+		F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,6 +156,9 @@
 		F5DF7389211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPOrderConfrimTableViewCell.swift; sourceTree = "<group>"; };
 		F5DF7397211A950900B9F154 /* MPSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSettingCell.swift; sourceTree = "<group>"; };
 		F5DF7399211A953A00B9F154 /* MPMunuViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMunuViewCell.swift; sourceTree = "<group>"; };
+		F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPImageButtonView.swift; sourceTree = "<group>"; };
+		F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckBoxOrderTableViewCell.swift; sourceTree = "<group>"; };
+		F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderModel.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -242,6 +248,7 @@
 		F5A6331C2116DA5A0075548A /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F5DF739B211AE9DA00B9F154 /* Other */,
 				F5DF7377211A94E400B9F154 /* Account */,
 				F5DF7384211A94E400B9F154 /* Home */,
 				F5DF737A211A94E400B9F154 /* Login */,
@@ -256,6 +263,7 @@
 		F5A6331D2116DA5F0075548A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -476,8 +484,17 @@
 				F5DF7387211A94E400B9F154 /* MPNewOrderTipsView.swift */,
 				F5DF7388211A94E400B9F154 /* MPOrderTableViewCell.swift */,
 				F5DF7389211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift */,
+				F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */,
 			);
 			path = Order;
+			sourceTree = "<group>";
+		};
+		F5DF739B211AE9DA00B9F154 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */,
+			);
+			path = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -769,6 +786,7 @@
 				F5DF738E211A94E400B9F154 /* MPTitleView.swift in Sources */,
 				F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */,
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
+				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
@@ -784,6 +802,7 @@
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,
 				F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */,
 				F5DF7393211A94E400B9F154 /* MPFooterConfirmView.swift in Sources */,
+				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
@@ -803,6 +822,7 @@
 				F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */,
 				F5DF7375211A93E300B9F154 /* MPNavigationController.swift in Sources */,
 				F5DF736B211A93E300B9F154 /* MPAccountViewController.swift in Sources */,
+				F5DF739F211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
