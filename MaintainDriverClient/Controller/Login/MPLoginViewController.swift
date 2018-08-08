@@ -15,11 +15,14 @@ class MPLoginViewController: UIViewController {
         setupUI()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        view.endEditing(true)
+    }
+    
     fileprivate func setupUI() {
         scrollView = UIScrollView()
-        scrollView.bounces = false
         let contentView = UIImageView()
-        contentView.isUserInteractionEnabled = true
         contentView.image = #imageLiteral(resourceName: "background")
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
@@ -50,21 +53,21 @@ class MPLoginViewController: UIViewController {
         loginButton.backgroundColor = UIColor.navBlue
         loginButton.setupCorner(5)
         
-        contentView.addSubview(logoView)
-        contentView.addSubview(phoneTextField)
-        contentView.addSubview(codeTextField)
-        contentView.addSubview(loginButton)
-        contentView.addSubview(sendCodeBtn)
+        scrollView.addSubview(logoView)
+        scrollView.addSubview(phoneTextField)
+        scrollView.addSubview(codeTextField)
+        scrollView.addSubview(loginButton)
+        scrollView.addSubview(sendCodeBtn)
         
         logoView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(120)
+            make.top.equalToSuperview().offset(112)
         }
         phoneTextField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
             make.height.equalTo(tfH)
-            make.top.equalTo(logoView.snp.bottom).offset(70)
+            make.top.equalTo(logoView.snp.bottom).offset(60)
         }
         codeTextField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
@@ -84,18 +87,6 @@ class MPLoginViewController: UIViewController {
             make.top.equalTo(codeTextField.snp.bottom).offset(45)
             make.height.equalTo(36)
         }
-        
-        // 添加退出按钮
-//        let dismissBtn = UIButton()
-//        dismissBtn.setImage(#imageLiteral(resourceName: "close"), for: .normal)
-//        dismissBtn.setTitleColor(UIColor.white, for: .normal)
-//        dismissBtn.addTarget(self, action: #selector(MPLoginViewController.dimissAction), for: .touchUpInside)
-//        contentView.addSubview(dismissBtn)
-//        dismissBtn.snp.makeConstraints { (make) in
-//            make.trailing.equalToSuperview().offset(-10)
-//            make.top.equalToSuperview().offset(10)
-//            make.width.height.equalTo(35)
-//        }
     }
     
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
