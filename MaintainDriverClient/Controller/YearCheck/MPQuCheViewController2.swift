@@ -31,9 +31,6 @@ class MPQuCheViewController2: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 //        mapView?.setZoomLevel(12, animated: true)
-        mapView?.showsUserLocation = true
-        mapView?.userTrackingMode = .follow
-        mapView?.customizeUserLocationAccuracyCircleRepresentation = true
     }
     
     fileprivate func setupUI() {
@@ -64,7 +61,8 @@ class MPQuCheViewController2: UIViewController {
         mapView?.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        
+        mapView?.showsUserLocation = true
+        mapView?.userTrackingMode = .follow
         mapView?.delegate = self
         tableView.tableHeaderView = tbHeaderView
         /*
@@ -86,16 +84,9 @@ class MPQuCheViewController2: UIViewController {
     
     /// 添加起点，目的地
     fileprivate func addAnnotations() {
-        guard let st = startCoordinate,
-            let des = destinationCoordinate else {
+        guard let des = destinationCoordinate else {
                 return
         }
-//        let anno = MAPointAnnotation()
-//        anno.coordinate = st
-//        anno.title = "起点"
-//
-//        mapView?.addAnnotation(anno)
-        
         let annod = MAPointAnnotation()
         annod.coordinate = des
         annod.title = "终点"
@@ -199,7 +190,14 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
 extension MPQuCheViewController2: MPQuCheCCellDelegate {
     /// 联系
     func quCheCellDidSelectContact() {
-        
+        guard let url = URL(string: "tel:10086") else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }else {
+            UIApplication.shared.openURL(url)
+        }
     }
     
     /// 导航
@@ -216,7 +214,11 @@ extension MPQuCheViewController2: MPQuCheCCellDelegate {
             return
         }
         if UIApplication.shared.canOpenURL(url) {
-            UIApplication.shared.openURL(url)
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }else {
+                UIApplication.shared.openURL(url)
+            }
         }else {
             let config = AMapNaviCompositeUserConfig.init()
             config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "华南农业大学", poiId: nil)  //传入终点
