@@ -25,7 +25,10 @@ class MPQuCheViewController2: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        mapView?.setZoomLevel(12, animated: true)
+//        mapView?.setZoomLevel(12, animated: true)
+        mapView?.showsUserLocation = true
+        mapView?.userTrackingMode = .follow
+        mapView?.customizeUserLocationAccuracyCircleRepresentation = true
     }
     
     fileprivate func setupUI() {
@@ -56,14 +59,14 @@ class MPQuCheViewController2: UIViewController {
         mapView?.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        mapView?.showsUserLocation = true
-        mapView?.userTrackingMode = .follow
+        
         mapView?.delegate = self
         tableView.tableHeaderView = tbHeaderView
         /*
          typedef void (^AMapLocatingCompletionBlock)(CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error);
          */
-        
+        locationManager.locationTimeout = 2
+        locationManager.reGeocodeTimeout = 2
         locationManager.requestLocation(withReGeocode: true) { (location, regeocode, error) in
             guard let coord = location?.coordinate else {
                 return
@@ -73,8 +76,7 @@ class MPQuCheViewController2: UIViewController {
             self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
             self.addAnnotations()
         }
-        locationManager.locationTimeout = 6
-        locationManager.reGeocodeTimeout = 3
+        
     }
     
     /// 添加起点，目的地
@@ -83,11 +85,11 @@ class MPQuCheViewController2: UIViewController {
             let des = destinationCoordinate else {
                 return
         }
-        let anno = MAPointAnnotation()
-        anno.coordinate = st
-        anno.title = "起点"
-        
-        mapView?.addAnnotation(anno)
+//        let anno = MAPointAnnotation()
+//        anno.coordinate = st
+//        anno.title = "起点"
+//
+//        mapView?.addAnnotation(anno)
         
         let annod = MAPointAnnotation()
         annod.coordinate = des
@@ -124,10 +126,24 @@ class MPQuCheViewController2: UIViewController {
 extension MPQuCheViewController2: MAMapViewDelegate {
     /// 设置所添加的 标注 样式
     func mapView(_ mapView: MAMapView!, viewFor annotation: MAAnnotation!) -> MAAnnotationView! {
+        if annotation.isKind(of: MAUserLocation.self) {
+            let pointReuseIndetifier = "userLocationStyleReuseIndetifier"
+            var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier)
+            
+            if annotationView == nil {
+                annotationView = MAAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
+            }
+            
+            annotationView?.image = UIImage.init(named: "position")
+            
+            self.customUserLocationView = annotationView
+            
+            return annotationView!
+        }
         if annotation.isKind(of: MAPointAnnotation.self) {
             let pointReuseIndetifier = "pointReuseIndetifier"
             var annotationView: MAAnnotationView? = mapView.dequeueReusableAnnotationView(withIdentifier: pointReuseIndetifier)
-            
+
             if annotationView == nil {
                 annotationView = MAAnnotationView(annotation: annotation, reuseIdentifier: pointReuseIndetifier)
                 annotationView!.canShowCallout = true
@@ -136,33 +152,17 @@ extension MPQuCheViewController2: MAMapViewDelegate {
             if annotation.title == "终点" {
                 annotationView!.image = UIImage(named: "endPoint")
             }
-            
+
             return annotationView!
         }
         return nil
-    }
-    
-    /// 替换当前用户的图标
-    func mapView(_ mapView: MAMapView!, didAddAnnotationViews views: [Any]!) {
-        let annoationview = views.first as! MAAnnotationView
-        
-        if(annoationview.annotation .isKind(of: MAUserLocation.self)) {
-            let rprt = MAUserLocationRepresentation.init()
-            rprt.image = UIImage.init(named: "position")
-            
-            mapView.update(rprt)
-            
-            annoationview.calloutOffset = CGPoint.init(x: 0, y: 0)
-            annoationview.canShowCallout = false
-            self.customUserLocationView = annoationview
-        }
     }
     
     /// 旋转当前用户图标
     func mapView(_ mapView:MAMapView!, didUpdate userLocation: MAUserLocation!, updatingLocation:Bool ) {
         if(!updatingLocation && self.customUserLocationView != nil) {
             UIView.animate(withDuration: 0.1, animations: {
-                let degree = userLocation.heading.trueHeading
+                let degree = userLocation.heading.trueHeading - Double(mapView.rotationDegree)
                 let radian = (degree * Double.pi) / 180.0
                 self.customUserLocationView.transform = CGAffineTransform.init(rotationAngle: CGFloat(radian))
             })
