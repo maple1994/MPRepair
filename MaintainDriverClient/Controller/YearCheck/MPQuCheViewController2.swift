@@ -56,8 +56,8 @@ class MPQuCheViewController2: UIViewController {
         mapView?.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        mapView?.isShowsUserLocation = true
-        mapView?.userTrackingMode = MAUserTrackingMode.follow
+        mapView?.showsUserLocation = true
+        mapView?.userTrackingMode = .follow
         mapView?.delegate = self
         tableView.tableHeaderView = tbHeaderView
         /*
