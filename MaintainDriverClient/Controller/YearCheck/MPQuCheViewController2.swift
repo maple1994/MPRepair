@@ -15,6 +15,11 @@ class MPQuCheViewController2: UIViewController {
     fileprivate let locationManager = AMapLocationManager()
     fileprivate var startCoordinate: CLLocationCoordinate2D?
     fileprivate var destinationCoordinate: CLLocationCoordinate2D?
+    fileprivate lazy var compositeManager : AMapNaviCompositeManager = {
+        let mgr = AMapNaviCompositeManager.init()
+        mgr.delegate = self
+        return mgr
+    }()
     
     // MARK: -
     override func viewDidLoad() {
@@ -204,14 +209,47 @@ extension MPQuCheViewController2: MPQuCheCCellDelegate {
                 return
         }
         // https://lbs.amap.com/api/amap-mobile/guide/ios/navi
-//        let str = "iosamap://navi?sourceApplication=applicationName&poiname=fangheng&poiid=BGVIS&lat=\(des.latitude)&lon=\(des.longitude)&dev=1&style=2"
         let source = "当前位置".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
         let destion = "华南农业大学".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
         let str = "iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=\(st.latitude)&slon=\(st.longitude)&sname=\(source)&did=BGVIS2&dlat=\(des.latitude)&dlon=\(des.longitude)&dname=\(destion)&dev=0&t=0"
         guard let url = URL.init(string: str) else {
             return
         }
-        UIApplication.shared.openURL(url)
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.openURL(url)
+        }else {
+            let config = AMapNaviCompositeUserConfig.init()
+            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "华南农业大学", poiId: nil)  //传入终点
+            self.compositeManager.presentRoutePlanViewController(withOptions: config)
+        }
+    }
+}
+
+extension MPQuCheViewController2: AMapNaviCompositeManagerDelegate {
+    func compositeManager(_ compositeManager: AMapNaviCompositeManager, error: Error) {
+        let error = error as NSError
+        NSLog("error:{%d - %@}", error.code, error.localizedDescription)
+    }
+    
+    func compositeManager(onCalculateRouteSuccess compositeManager: AMapNaviCompositeManager) {
+        NSLog("onCalculateRouteSuccess,%ld", compositeManager.naviRouteID)
+    }
+    
+    func compositeManager(_ compositeManager: AMapNaviCompositeManager, onCalculateRouteFailure error: Error) {
+        let error = error as NSError
+        NSLog("onCalculateRouteFailure error:{%d - %@}", error.code, error.localizedDescription)
+    }
+    
+    func compositeManager(_ compositeManager: AMapNaviCompositeManager, didStartNavi naviMode: AMapNaviMode) {
+        NSLog("didStartNavi")
+    }
+    
+    func compositeManager(_ compositeManager: AMapNaviCompositeManager, didArrivedDestination naviMode: AMapNaviMode) {
+        NSLog("didArrivedDestination")
+    }
+    
+    func compositeManager(_ compositeManager: AMapNaviCompositeManager, update naviLocation: AMapNaviLocation?) {
+        //        NSLog("updateNaviLocation,%@",naviLocation)
     }
 }
 

@@ -576,6 +576,11 @@
 					F5D720542112AC5500585A19 = {
 						CreatedOnToolsVersion = 9.4.1;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					F5D720682112AC5900585A19 = {
 						CreatedOnToolsVersion = 9.4.1;
