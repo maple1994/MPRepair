@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         setupNormalUIStyle()
         setHomeVCToRootVC(false)
-        AMapServices.shared().apiKey = "4a539db4a6b5dca1d1dc53de781c3bd0"
+        AMapServices.shared().apiKey = "fa5c335316d7a9bde2efb410932e6244"
         return true
     }
     

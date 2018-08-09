@@ -8,8 +8,18 @@
 
 import UIKit
 
+protocol MPQuCheCCellDelegate: class {
+    /// 联系
+    func quCheCellDidSelectContact()
+    /// 导航
+    func quCheCellDidSelectNavigation()
+}
+
 /// 上门取车Cell，时间地点车型，两个按钮
 class MPQuCheCCell: UITableViewCell {
+    
+    weak var delegate: MPQuCheCCellDelegate?
+    
     func hiddenRightView() {
         contactButton.isHidden = true
     }
@@ -86,11 +96,11 @@ class MPQuCheCCell: UITableViewCell {
     }
     
     @objc fileprivate func contact() {
-        print("联系他")
+        delegate?.quCheCellDidSelectContact()
     }
     
     @objc fileprivate func navigation() {
-        print("导航")
+        delegate?.quCheCellDidSelectNavigation()
     }
     
     fileprivate var carNameLabel: UILabel!
