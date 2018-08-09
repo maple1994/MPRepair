@@ -55,7 +55,7 @@ class MPQuCheCCell: UITableViewCell {
         }
         addressTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(carTitleLabel)
-            make.width.equalTo(70)
+            make.width.equalTo(73)
             make.top.equalTo(carTitleLabel.snp.bottom).offset(15).priority(.high)
         }
         addressLabel.snp.makeConstraints { (make) in
@@ -65,6 +65,7 @@ class MPQuCheCCell: UITableViewCell {
         }
         timeTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(carTitleLabel)
+            make.width.equalTo(73)
             make.top.equalTo(addressLabel.snp.bottom).offset(15).priority(.high)
         }
         timeLabel.snp.makeConstraints { (make) in

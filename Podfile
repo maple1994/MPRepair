@@ -11,6 +11,7 @@ pod 'MJRefresh'
 pod 'AMap2DMap'
 pod 'AMapSearch'
 pod 'AMapLocation'
+pod 'TZImagePickerController'
 
   # Pods for MaintainDriverClient
 

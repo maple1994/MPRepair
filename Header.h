@@ -11,4 +11,5 @@
 #import <AMapSearchKit/AMapSearchKit.h>
 #import <MAMapKit/MAMapKit.h>
 #import <AMapLocationKit/AMapLocationManager.h>
+#import <TZImagePickerController/TZImagePickerController.h>
 

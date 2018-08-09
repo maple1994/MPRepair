@@ -47,6 +47,7 @@ class MPLeftMenuViewController: UIViewController {
         userIconView = UIImageView()
         userIconView.image = #imageLiteral(resourceName: "person")
         userIconView.isUserInteractionEnabled = true
+        userIconView.setupCorner(35)
         userNameLabel = UILabel()
         userNameLabel.font = UIFont.mpBigFont
         userNameLabel.textColor = UIColor.white
@@ -73,13 +74,28 @@ class MPLeftMenuViewController: UIViewController {
     }
     
     @objc fileprivate func userIconClick() {
-        delegate?.menuViewDidSelectLogin()
+        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
+        vc.showSelectBtn = false
+        vc.circleCropRadius = 150
+        vc.needCircleCrop = true
+        vc.allowCrop = true
+        vc.preferredLanguage = "zh-Hans"
+        vc.naviBgColor = UIColor.navBlue
+        vc.allowTakeVideo = false
+        vc.allowPickingVideo = false
+        present(vc, animated: true, completion: nil)
     }
 
     // MARK: - UIView
     fileprivate var tableView: UITableView!
     fileprivate var userIconView: UIImageView!
     fileprivate var userNameLabel: UILabel!
+}
+
+extension MPLeftMenuViewController: TZImagePickerControllerDelegate {
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        userIconView.image = photos.first
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource

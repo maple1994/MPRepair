@@ -109,8 +109,7 @@ extension MPHomeViewController: UIScrollViewDelegate {
 extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
     /// 登录
     func menuViewDidSelectLogin() {
-        let vc = MPLoginViewController()
-        present(vc, animated: true, completion: nil)
+        
     }
     /// 订单
     func menuViewDidSelectOrder() {
