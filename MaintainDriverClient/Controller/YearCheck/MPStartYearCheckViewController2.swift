@@ -48,7 +48,7 @@ class MPStartYearCheckViewController2: UIViewController {
         mapView?.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        mapView?.isShowsUserLocation = true
+        mapView?.showsUserLocation = true
         mapView?.userTrackingMode = MAUserTrackingMode.follow
         mapView?.delegate = self
         tableView.tableHeaderView = tbHeaderView

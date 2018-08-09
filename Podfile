@@ -8,9 +8,9 @@ pod 'SnapKit', '~> 4.0.0'
 pod 'Alamofire', '~> 4.7'
 pod 'SlideMenuControllerSwift'
 pod 'MJRefresh'
-pod 'AMap2DMap'
 pod 'AMapSearch'
 pod 'AMapLocation'
+pod 'AMapNavi'
 pod 'TZImagePickerController'
 
   # Pods for MaintainDriverClient
