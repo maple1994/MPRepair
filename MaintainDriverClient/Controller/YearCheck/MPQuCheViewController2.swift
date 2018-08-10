@@ -76,9 +76,10 @@ class MPQuCheViewController2: UIViewController {
             }
             self.startCoordinate = coord
             // 23.1575700000,113.3513600000
-            self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
-            self.addAnnotations()
+            // https://lbs.amap.com/api/ios-location-sdk/guide/get-location/singlelocation
         }
+        self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
+        self.addAnnotations()
         
     }
     
@@ -98,7 +99,7 @@ class MPQuCheViewController2: UIViewController {
         navigationItem.title = "上门取车"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPQuCheViewController2.cancelOrder))
         let dic: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.font : UIFont.systemFont(ofSize: 15)
+            NSAttributedStringKey.font : UIFont.mpSmallFont
         ]
         navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
     }
