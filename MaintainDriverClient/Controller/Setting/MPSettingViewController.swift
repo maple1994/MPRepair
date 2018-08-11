@@ -11,9 +11,42 @@ import UIKit
 /// 设置界面
 class MPSettingViewController: UIViewController {
 
+    fileprivate let editViewH: CGFloat = 60
+    fileprivate var iconImage: UIImage?
+    fileprivate var userName: String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPSettingViewController.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPSettingViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    @objc func keyboardShow(noti: Notification) {
+        guard let info = noti.userInfo else {
+            return
+        }
+        bgView.isHidden = false
+        if let duration = info["UIKeyboardAnimationDurationUserInfoKey"] as? Double,
+            let keyboardFrame = info["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let h = keyboardFrame.height + editViewH
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.init(translationX: 0, y: -h)
+            }
+        }
+    }
+    
+    @objc func keyboardHidden(noti: Notification) {
+        if let duration = noti.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double {
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.identity
+            }
+        }
+        bgView.isHidden = true
+    }
+    
+    deinit {
+         NotificationCenter.default.removeObserver(self)
     }
     
     fileprivate func setupUI() {
@@ -33,9 +66,6 @@ class MPSettingViewController: UIViewController {
         tableView.separatorStyle = .none
         tableView.tableFooterView = UIView()
         view.addSubview(tableView)
-        tableView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
         loginOutButton = UIButton()
         loginOutButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         loginOutButton.setTitle("退出登录", for: .normal)
@@ -50,6 +80,24 @@ class MPSettingViewController: UIViewController {
             make.height.equalTo(40)
             make.width.equalTo(160)
         }
+        view.addSubview(bgView)
+        view.addSubview(editView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        editView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(editViewH)
+        }
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    @objc fileprivate func remove() {
+        editView.hideKeyBoard()
+        bgView.isHidden = true
     }
     
     @objc fileprivate func save() {
@@ -62,7 +110,17 @@ class MPSettingViewController: UIViewController {
     
     fileprivate var tableView: UITableView!
     fileprivate var loginOutButton: UIButton!
-    fileprivate var iconImage: UIImage?
+    fileprivate lazy var bgView: UIControl = {
+        let view = UIControl()
+        view.isHidden = true
+        view.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.3)
+        view.addTarget(self, action: #selector(MPSettingViewController.remove), for: .touchDown)
+        return view
+    }()
+    fileprivate lazy var editView: MPEditView = {
+        let tv = MPEditView()
+        return tv
+    }()
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -78,7 +136,7 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
             cell.iconView?.image = iconImage
         case 1:
             cell.leftTitleLabel?.text = "昵称"
-            cell.rightTitleLabel?.text = "王一清"
+            cell.rightTitleLabel?.text = userName ?? "王一清"
         case 2:
             cell.leftTitleLabel?.text = "手机号"
             cell.rightTitleLabel?.text = "13445564538"
@@ -115,7 +173,10 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
             vc.allowPickingVideo = false
             present(vc, animated: true, completion: nil)
         case 1:
-            print("")
+            editView.showKeyBoard(userName) { [weak self] (name) in
+                self?.userName = name
+                self?.tableView.reloadData()
+            }
         default:
             break
         }
