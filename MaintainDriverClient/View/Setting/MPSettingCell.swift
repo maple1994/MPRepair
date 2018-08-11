@@ -8,16 +8,11 @@
 
 import UIKit
 
-protocol MPSettingCellDelegate: class {
-    func settingCellDidClickIcon()
-}
-
 /// 设置界面的Cell
 class MPSettingCell: UITableViewCell {
     
     /// 是否显示头像
     fileprivate var isShowIcon: Bool = false
-    weak var delegate: MPSettingCellDelegate?
     
     convenience init(style: UITableViewCellStyle, reuseIdentifier: String?, isShowIcon: Bool) {
         self.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -37,11 +32,9 @@ class MPSettingCell: UITableViewCell {
         leftTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "头像", textColor: UIColor.fontBlack)
         let margin: CGFloat = 18
         if isShowIcon {
-            iconView = UIButton()
+            iconView = UIImageView()
             iconView?.setupCorner(20)
             iconView?.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
-            iconView?.addTarget(self, action: #selector(MPSettingCell.iconClick), for: .touchUpInside)
-            iconView?.adjustsImageWhenHighlighted = false
             contentView.addSubview(iconView!)
             iconView?.snp.makeConstraints { (make) in
                 make.centerY.equalToSuperview()
@@ -71,11 +64,7 @@ class MPSettingCell: UITableViewCell {
         }
     }
     
-    @objc fileprivate func iconClick() {
-        delegate?.settingCellDidClickIcon()
-    }
-    
     var leftTitleLabel: UILabel?
     var rightTitleLabel: UILabel?
-    var iconView: UIButton?
+    var iconView: UIImageView?
 }

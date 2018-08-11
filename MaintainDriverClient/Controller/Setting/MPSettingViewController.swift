@@ -62,6 +62,7 @@ class MPSettingViewController: UIViewController {
     
     fileprivate var tableView: UITableView!
     fileprivate var loginOutButton: UIButton!
+    fileprivate var iconImage: UIImage?
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
@@ -74,6 +75,7 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.leftTitleLabel?.text = "头像"
+            cell.iconView?.image = iconImage
         case 1:
             cell.leftTitleLabel?.text = "昵称"
             cell.rightTitleLabel?.text = "王一清"
@@ -83,7 +85,6 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
         default:
             break
         }
-        cell.delegate = self
         return cell
     }
     
@@ -100,14 +101,35 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
         return MPUtils.createLine(UIColor.white)
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
+            vc.showSelectBtn = false
+            vc.circleCropRadius = 150
+            vc.needCircleCrop = true
+            vc.allowCrop = true
+            vc.preferredLanguage = "zh-Hans"
+            vc.naviBgColor = UIColor.navBlue
+            vc.allowTakeVideo = false
+            vc.allowPickingVideo = false
+            present(vc, animated: true, completion: nil)
+        case 1:
+            print("")
+        default:
+            break
+        }
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 26
     }
 }
 
-extension MPSettingViewController: MPSettingCellDelegate {
-    func settingCellDidClickIcon() {
-        print("修改头像")
+extension MPSettingViewController: TZImagePickerControllerDelegate {
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        iconImage = photos.first
+        tableView.reloadData()
     }
 }
 
