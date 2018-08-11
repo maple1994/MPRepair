@@ -13,4 +13,5 @@
 #import <AMapLocationKit/AMapLocationManager.h>
 #import <TZImagePickerController/TZImagePickerController.h>
 #import <AMapNaviKit/AMapNaviKit.h>
+#import <MBProgressHUD/MBProgressHUD.h>
 

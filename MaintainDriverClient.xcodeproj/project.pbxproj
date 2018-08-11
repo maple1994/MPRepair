@@ -26,6 +26,7 @@
 		F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */; };
 		F5A6334B211728520075548A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6334A211728520075548A /* Extension.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
+		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
 		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
@@ -124,6 +125,7 @@
 		F5A63347211701030075548A /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		F5A6334A211728520075548A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
+		F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTipsView.swift; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */,
+				F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,
 				F5DF738A211A94E400B9F154 /* MPMingXiTableViewCell.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
+				F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */,
 				F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */,
 				F5DF7372211A93E300B9F154 /* MPSettingViewController.swift in Sources */,
 				F5DF7371211A93E300B9F154 /* MPGongZuoTaiViewController.swift in Sources */,
