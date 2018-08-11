@@ -12,6 +12,10 @@ pod 'AMapSearch'
 pod 'AMapLocation'
 pod 'AMapNavi'
 pod 'TZImagePickerController'
+pod 'Moya'
+pod 'Kingfisher'
+pod 'MBProgressHUD'
+
 
   # Pods for MaintainDriverClient
 

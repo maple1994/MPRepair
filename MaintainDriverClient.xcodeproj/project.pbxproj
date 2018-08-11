@@ -18,6 +18,7 @@
 		F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */; };
 		F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */; };
 		F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A581B2119938A0054B90D /* MPCheckOutFinishViewController2.swift */; };
+		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
 		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
@@ -109,6 +110,7 @@
 		F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController2.swift; sourceTree = "<group>"; };
 		F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckOutFinishViewController1.swift; sourceTree = "<group>"; };
 		F52A581B2119938A0054B90D /* MPCheckOutFinishViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckOutFinishViewController2.swift; sourceTree = "<group>"; };
+		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
 		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 			children = (
 				F5A6331A2116DA530075548A /* MPUtils.swift */,
 				F5A6334A211728520075548A /* Extension.swift */,
+				F5867E5F211D7F4600F8A07D /* MPApiType.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -687,7 +690,11 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
@@ -695,7 +702,11 @@
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
@@ -749,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
+				F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				F5DF736D211A93E300B9F154 /* MPOrderConfirmViewController.swift in Sources */,
