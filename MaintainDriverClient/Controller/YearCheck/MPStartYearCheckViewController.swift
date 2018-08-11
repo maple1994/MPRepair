@@ -92,7 +92,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var tableView1: UITableView!
     fileprivate var tableView2: UITableView!
     fileprivate var tableView3: UITableView!
-    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView()
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
     fileprivate lazy var feekbackView = MPFeedbackView()
 }
 
@@ -155,7 +155,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return horizontalPhotoView
         }else if tableView == tableView2 {
-            return MPHorizonScrollPhotoView()
+            return MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
         }else {
             return nil
         }

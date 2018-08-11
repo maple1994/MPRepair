@@ -8,6 +8,9 @@
 
 import UIKit
 
+/// 无图片高度的图片Cell高度
+let mp_noTitlePicH: CGFloat = 130
+
 /// 工具类
 class MPUtils {
     static let screenH: CGFloat = UIScreen.main.bounds.height

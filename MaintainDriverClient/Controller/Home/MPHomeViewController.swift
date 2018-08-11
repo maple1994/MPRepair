@@ -70,7 +70,6 @@ class MPHomeViewController: UIViewController {
     // MARK: - Action
     @objc fileprivate func meAction() {
         slideMenuController()?.openLeft()
-//        MPTipsView.showLoadingView()
     }
     
     @objc fileprivate func segChange() {

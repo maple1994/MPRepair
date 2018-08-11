@@ -7,11 +7,16 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 /// 水平滚动的图片View
 class MPHorizonScrollPhotoView: UIView {
     fileprivate let CellID = "MPHorizonScrollPhotoItemCell"
-    init() {
+    fileprivate var pictureCount: Int
+    fileprivate var isShowTitle: Bool
+    init(count: Int, isShowTitle: Bool) {
+        pictureCount = count
+        self.isShowTitle = isShowTitle
         super.init(frame: CGRect.zero)
         setupUI()
     }
@@ -26,8 +31,7 @@ class MPHorizonScrollPhotoView: UIView {
         let vSpace: CGFloat = 10
         let hSpcace: CGFloat = 15
         let itemW: CGFloat = (MPUtils.screenW - 3 * hSpcace) * 0.5
-        let itemH: CGFloat = 150
-        flow.scrollDirection = .horizontal
+        let itemH: CGFloat = isShowTitle ? 150 : mp_noTitlePicH
         flow.itemSize = CGSize(width: itemW, height: itemH)
         flow.minimumInteritemSpacing = vSpace
         flow.minimumLineSpacing = hSpcace
@@ -36,6 +40,7 @@ class MPHorizonScrollPhotoView: UIView {
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = self
+        collectionView.bounces = false
         collectionView.backgroundColor = UIColor.white
         
         addSubview(collectionView)
@@ -53,11 +58,12 @@ class MPHorizonScrollPhotoView: UIView {
 extension MPHorizonScrollPhotoView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 6
+        return pictureCount
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath)
-        return cell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as? MPHorizonScrollPhotoItemCell
+        cell?.titleLabel.isHidden = !isShowTitle
+        return cell!
     }
 }
 
@@ -75,8 +81,10 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     fileprivate func setupUI() {
         removeButton = MPImageButtonView(image: #imageLiteral(resourceName: "delete"), pos: .rightTop)
         removeButton.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.remove), for: .touchUpInside)
-        photoView = UIImageView()
-        photoView.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
+        photoView = UIButton()
+        photoView.setImage(#imageLiteral(resourceName: "add_pic"), for: .normal)
+        photoView.adjustsImageWhenHighlighted = false
+        photoView.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.pickPicture), for: .touchUpInside)
         titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "有效期内交的强险保单副本", textColor: UIColor.mpDarkGray)
         contentView.addSubview(photoView)
         contentView.addSubview(removeButton)
@@ -90,6 +98,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
             make.width.equalTo(itemW)
             make.height.equalTo(itemH)
         }
+        removeButton.isHidden = true
         removeButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview()
             make.top.equalToSuperview()
@@ -102,11 +111,39 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func remove() {
-        
+        photoView.setImage(#imageLiteral(resourceName: "add_pic"), for: .normal)
+        removeButton.isHidden = true
     }
     
-    fileprivate var removeButton: MPImageButtonView!
-    fileprivate var photoView: UIImageView!
-    fileprivate var titleLabel: UILabel!
+    @objc func pickPicture() {
+        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
+        vc.showSelectBtn = false
+        vc.allowPreview = false
+        vc.preferredLanguage = "zh-Hans"
+        vc.naviBgColor = UIColor.navBlue
+        vc.allowTakeVideo = false
+        vc.allowPickingVideo = false
+        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)?.topViewController
+        nav?.present(vc, animated: true, completion: nil)
+    }
+    
+    var removeButton: MPImageButtonView!
+    var photoView: UIButton!
+    var titleLabel: UILabel!
+}
+
+extension MPHorizonScrollPhotoItemCell: TZImagePickerControllerDelegate {
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        guard let image = photos.first else {
+            return
+        }
+        photoView.setImage(image, for: .normal)
+        removeButton.isHidden = false
+    }
+}
+
+class MPUploadImageModel {
+    var titleLabel: String?
+    var image: UIImage?
 }
 

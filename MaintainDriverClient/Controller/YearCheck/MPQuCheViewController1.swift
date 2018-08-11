@@ -78,7 +78,8 @@ class MPQuCheViewController1: UIViewController {
     }()
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
-    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView()
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
+    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 6, isShowTitle: false)
 }
 
 extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
@@ -89,7 +90,7 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 0
         }else {
-            return 3
+            return 0
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -104,7 +105,7 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return MPTitleSectionHeaderView(title: "检车确认", reuseIdentifier: ID)
         }else {
-            return secondSectionHeaderView
+            return MPTitleSectionHeaderView(title: "车身拍照", reuseIdentifier: ID)
         }
     }
     
@@ -112,7 +113,7 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return 50
         }else {
-            return 65
+            return 50
         }
     }
     
@@ -120,14 +121,14 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             return horizontalPhotoView
         }else {
-            return nil
+            return horizontalPhotoView2
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
             return 170
         }
-        return 0.01
+        return mp_noTitlePicH * 3 + 40
     }
 }
 

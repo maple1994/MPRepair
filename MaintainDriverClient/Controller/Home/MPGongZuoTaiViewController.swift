@@ -67,6 +67,20 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func stealAction() {
+        guard let arr = orderModelArr else {
+            return
+        }
+        var isValid = false
+        for model in arr {
+            if model.isSelected {
+                isValid = true
+                break
+            }
+        }
+        if !isValid {
+            MPTipsView.showMsg("请选择订单")
+            return 
+        }
         MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!")
     }
     
