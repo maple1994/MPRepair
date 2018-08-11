@@ -24,12 +24,26 @@ class MPFeedbackView: UIView {
         item1 = MPFeedbackItem()
         item2 = MPFeedbackItem()
         item3 = MPFeedbackItem()
+        item1.isSelected = true
         item1.nameButton.backgroundColor = UIColor.navBlue
         item2.nameButton.setTitle("排气", for: .normal)
         item3.nameButton.setTitle("外观", for: .normal)
         addSubview(item1)
         addSubview(item2)
         addSubview(item3)
+        
+        item1.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
+        item2.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
+        item3.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
+    }
+    
+    @objc fileprivate func itemClick(_ item: MPFeedbackItem) {
+        item.isSelected = !item.isSelected
+        if item.isSelected {
+            item.nameButton.backgroundColor = UIColor.navBlue
+        }else {
+            item.nameButton.backgroundColor = UIColor.mpLightGary
+        }
     }
     
     override func layoutSubviews() {
@@ -48,7 +62,7 @@ class MPFeedbackView: UIView {
 }
 
 /// 维修反馈View的子Item
-class MPFeedbackItem: UIView {
+class MPFeedbackItem: UIControl {
     
     init() {
         super.init(frame: CGRect.zero)
@@ -65,6 +79,7 @@ class MPFeedbackItem: UIView {
         nameButton.setTitle("车灯", for: .normal)
         nameButton.backgroundColor = UIColor.mpLightGary
         nameButton.titleLabel?.font = UIFont.mpNormalFont
+        nameButton.isUserInteractionEnabled = false
         nameButton.setupCorner(4)
         titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "检测调试费", textColor: UIColor.mpLightGary)
         priceLabel = UILabel(font: UIFont.mpNormalFont, text: "¥ 200.00", textColor: UIColor.priceRed)
