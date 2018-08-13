@@ -11,7 +11,7 @@ import UIKit
 /// 底部确认按钮View
 class MPFooterConfirmView: UIView {
     init(title: String, target: Any?, action: Selector) {
-        let rect = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 150)
+        let rect = CGRect(x: 0, y: 0, width: mp_screenW, height: 150)
         super.init(frame: rect)
         confrimButton = UIButton()
         confrimButton.setTitle(title, for: .normal)

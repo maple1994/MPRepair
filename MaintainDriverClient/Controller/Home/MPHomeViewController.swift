@@ -73,7 +73,7 @@ class MPHomeViewController: UIViewController {
     }
     
     @objc fileprivate func segChange() {
-        let offsetX: CGFloat = CGFloat(segCtr.selectedSegmentIndex) * MPUtils.screenW
+        let offsetX: CGFloat = CGFloat(segCtr.selectedSegmentIndex) * mp_screenW
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
     

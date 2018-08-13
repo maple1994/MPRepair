@@ -48,13 +48,13 @@ class MPOrderViewController: UIViewController {
         
         uncompleteTableView.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
-            make.width.equalTo(MPUtils.screenW)
+            make.width.equalTo(mp_screenW)
             make.height.equalTo(view).offset(-44)
         }
         completedTableView.snp.makeConstraints { (make) in
             make.trailing.top.bottom.equalToSuperview()
             make.leading.equalTo(uncompleteTableView.snp.trailing)
-            make.width.equalTo(MPUtils.screenW)
+            make.width.equalTo(mp_screenW)
             make.height.equalTo(view).offset(-44)
         }
     }
@@ -117,8 +117,8 @@ extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
         if scrollView != contentView {
             return
         }
-        let offsetX = scrollView.contentOffset.x + MPUtils.screenW * 0.5
-        let index = Int(offsetX / MPUtils.screenW)
+        let offsetX = scrollView.contentOffset.x + mp_screenW * 0.5
+        let index = Int(offsetX / mp_screenW)
         titleView.setupSelectedIndex(index)
         titleView.isTouch = false
     }
@@ -144,7 +144,7 @@ extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
 extension MPOrderViewController: MPTitleViewDelegate {
     func titleView(didSelect index: Int) {
         titleView.isTouch = true
-        let offsetX: CGFloat = MPUtils.screenW * CGFloat(index)
+        let offsetX: CGFloat = mp_screenW * CGFloat(index)
         contentView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         titleView.lastOffsetX = offsetX
     }

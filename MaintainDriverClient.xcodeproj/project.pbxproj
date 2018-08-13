@@ -10,6 +10,7 @@
 		2002E9C19EE3A6BA05A2AFF1 /* Pods_MaintainDriverClientUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */; };
 		295D3709D0AC2D2874E51AC7 /* Pods_MaintainDriverClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */; };
 		ADC8A0301EB8B7BA103F2CCE /* Pods_MaintainDriverClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */; };
+		F5031F97212126E500329BC0 /* MPConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5031F96212126E500329BC0 /* MPConstant.swift */; };
 		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
 		F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */; };
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
@@ -103,6 +104,7 @@
 		840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		933E4E24AB834923AD3EAF95 /* Pods-MaintainDriverClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests.release.xcconfig"; sourceTree = "<group>"; };
+		F5031F96212126E500329BC0 /* MPConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPConstant.swift; sourceTree = "<group>"; };
 		F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 		F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckViewController.swift; sourceTree = "<group>"; };
@@ -250,6 +252,7 @@
 				F5A6331A2116DA530075548A /* MPUtils.swift */,
 				F5A6334A211728520075548A /* Extension.swift */,
 				F5867E5F211D7F4600F8A07D /* MPApiType.swift */,
+				F5031F96212126E500329BC0 /* MPConstant.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
 				F5DF7395211A94E400B9F154 /* MPOrderTableViewCell.swift in Sources */,
 				F5DF736F211A93E300B9F154 /* MPYiJieDanViewController.swift in Sources */,
+				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,

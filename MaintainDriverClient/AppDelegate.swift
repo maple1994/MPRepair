@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let nav = MPNavigationController(rootViewController: mainVC)
         let leftVC = MPLeftMenuViewController()
         leftVC.delegate = mainVC
-        SlideMenuOptions.leftViewWidth = MPUtils.screenW * 0.6
+        SlideMenuOptions.leftViewWidth = mp_screenW * 0.6
         SlideMenuOptions.contentViewScale = 1
         SlideMenuOptions.animationDuration = 0.25
         SlideMenuOptions.contentViewOpacity = 0.2

@@ -53,7 +53,7 @@ class MPLeftMenuViewController: UIViewController {
         userNameLabel.textColor = UIColor.white
         userNameLabel.text = "未登录"
         let tbHeaderView = UIView()
-        tbHeaderView.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 150)
+        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 150)
         tbHeaderView.backgroundColor = UIColor.navBlue
         tbHeaderView.addSubview(userIconView)
         tbHeaderView.addSubview(userNameLabel)

@@ -67,7 +67,7 @@ class MPTiXianViewController: UIViewController {
         tbHeaderView.addSubview(textField)
         tbHeaderView.addSubview(moneyLabel)
         tbHeaderView.addSubview(allTiXianBtn)
-        tbHeaderView.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: 125)
+        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 125)
         titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
             make.top.equalToSuperview().offset(15)
@@ -75,7 +75,7 @@ class MPTiXianViewController: UIViewController {
         textField.snp.makeConstraints { (make) in
             make.leading.equalTo(titleLabel)
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.width.equalTo(MPUtils.screenW - 30)
+            make.width.equalTo(mp_screenW - 30)
             make.height.equalTo(44)
         }
         moneyLabel.snp.makeConstraints { (make) in

@@ -28,10 +28,9 @@ class MPHorizonScrollPhotoView: UIView {
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
         let flow = UICollectionViewFlowLayout()
-        let vSpace: CGFloat = 10
-        let hSpcace: CGFloat = 15
-        let itemW: CGFloat = (MPUtils.screenW - 3 * hSpcace) * 0.5
-        mp_noTitlePicH = itemW * 0.63
+        let vSpace: CGFloat = mp_vSpace
+        let hSpcace: CGFloat = mp_hSpace
+        let itemW: CGFloat = mp_picW
         let itemH: CGFloat = isShowTitle ? mp_hasTitlePicH : mp_noTitlePicH
         flow.itemSize = CGSize(width: itemW, height: itemH)
         flow.minimumInteritemSpacing = vSpace
@@ -80,25 +79,20 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     fileprivate func setupUI() {
-        contentView.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
         removeButton = MPImageButtonView(image: #imageLiteral(resourceName: "delete"), pos: .rightTop)
         removeButton.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.remove), for: .touchUpInside)
-        photoView = UIButton()
-        photoView.setImage(#imageLiteral(resourceName: "add_pic"), for: .normal)
-        photoView.adjustsImageWhenHighlighted = false
+        photoView = MPImageButtonView(image: #imageLiteral(resourceName: "add_pic"), pos: .center, imageW: mp_picW, imageH: mp_noTitlePicH)
         photoView.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.pickPicture), for: .touchUpInside)
+        photoView.mode = .scaleAspectFill
         titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "有效期内交的强险保单副本", textColor: UIColor.mpDarkGray)
         contentView.addSubview(photoView)
         contentView.addSubview(removeButton)
         contentView.addSubview(titleLabel)
-        let hSpcace: CGFloat = 15
-        let itemW: CGFloat = (MPUtils.screenW - 3 * hSpcace) * 0.5
-        let itemH: CGFloat = mp_hasTitlePicH - 35
         photoView.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview()
+            make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(10)
-            make.width.equalTo(itemW)
-            make.height.equalTo(itemH)
+            make.width.equalTo(mp_picW)
+            make.height.equalTo(mp_noTitlePicH)
         }
         removeButton.isHidden = true
         removeButton.snp.makeConstraints { (make) in
@@ -113,7 +107,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func remove() {
-        photoView.setImage(#imageLiteral(resourceName: "add_pic"), for: .normal)
+        photoView.image = #imageLiteral(resourceName: "add_pic")
         removeButton.isHidden = true
     }
     
@@ -130,7 +124,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     var removeButton: MPImageButtonView!
-    var photoView: UIButton!
+    var photoView: MPImageButtonView!
     var titleLabel: UILabel!
 }
 
@@ -139,7 +133,7 @@ extension MPHorizonScrollPhotoItemCell: TZImagePickerControllerDelegate {
         guard let image = photos.first else {
             return
         }
-        photoView.setImage(image, for: .normal)
+        photoView.image = image
         removeButton.isHidden = false
     }
 }

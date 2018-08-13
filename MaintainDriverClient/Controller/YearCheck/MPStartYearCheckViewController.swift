@@ -55,19 +55,19 @@ class MPStartYearCheckViewController: UIViewController {
         tableView1.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
-            make.width.equalTo(MPUtils.screenW)
+            make.width.equalTo(mp_screenW)
         }
         tableView2.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.leading.equalTo(tableView1.snp.trailing)
             make.trailing.equalTo(tableView3.snp.leading)
             make.height.equalTo(view).offset(-160)
-            make.width.equalTo(MPUtils.screenW)
+            make.width.equalTo(mp_screenW)
         }
         tableView3.snp.makeConstraints { (make) in
             make.trailing.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
-            make.width.equalTo(MPUtils.screenW)
+            make.width.equalTo(mp_screenW)
         }
     }
     
@@ -162,9 +162,9 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if tableView == tableView1 {
-            return 170
+            return mp_hasTitlePicH + mp_vSpace + 10
         }else if tableView == tableView2 {
-            return 170
+            return mp_hasTitlePicH + mp_vSpace + 10
         }else {
             return 0.01
         }
@@ -176,8 +176,8 @@ extension MPStartYearCheckViewController: UIScrollViewDelegate {
         if scrollView != contentView {
             return
         }
-        let offsetX = scrollView.contentOffset.x + MPUtils.screenW * 0.5
-        let index = Int(offsetX / MPUtils.screenW)
+        let offsetX = scrollView.contentOffset.x + mp_screenW * 0.5
+        let index = Int(offsetX / mp_screenW)
         titleView.setupSelectedIndex(index)
         titleView.isTouch = false
     }
@@ -203,7 +203,7 @@ extension MPStartYearCheckViewController: UIScrollViewDelegate {
 extension MPStartYearCheckViewController: MPTitleViewDelegate {
     func titleView(didSelect index: Int) {
         titleView.isTouch = true
-        let offsetX: CGFloat = MPUtils.screenW * CGFloat(index)
+        let offsetX: CGFloat = mp_screenW * CGFloat(index)
         contentView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
         titleView.lastOffsetX = offsetX
     }

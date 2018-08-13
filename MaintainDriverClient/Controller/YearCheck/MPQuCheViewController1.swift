@@ -15,6 +15,7 @@ class MPQuCheViewController1: UIViewController {
         super.viewDidLoad()
         setupUI()
         setupNav()
+        tableView.reloadData()
     }
     
     fileprivate func setupUI() {
@@ -126,9 +127,9 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return mp_hasTitlePicH
-        }
-        return mp_noTitlePicH * 3
+            return mp_hasTitlePicH + mp_vSpace + 10
+        } 
+        return (mp_noTitlePicH + mp_vSpace + 10) * 3
     }
 }
 

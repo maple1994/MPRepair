@@ -116,8 +116,8 @@ extension MPCheckOutFinishViewController1: UITableViewDelegate, UITableViewDataS
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 170
+            return mp_hasTitlePicH + mp_vSpace + 10
         }
-        return mp_noTitlePicH * 3 + 40
+        return (mp_noTitlePicH + mp_vSpace + 10) * 3
     }
 }

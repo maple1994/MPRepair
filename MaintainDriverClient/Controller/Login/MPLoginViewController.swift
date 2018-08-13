@@ -40,8 +40,8 @@ class MPLoginViewController: UIViewController {
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
-            make.height.equalTo(MPUtils.screenH)
-            make.width.equalTo(MPUtils.screenW)
+            make.height.equalTo(mp_screenH)
+            make.width.equalTo(mp_screenW)
         }
         scrollView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()

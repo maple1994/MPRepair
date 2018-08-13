@@ -10,7 +10,22 @@ import UIKit
 
 /// 专门为那些图片小，但是触摸区域要大的图片按钮设计的View
 class MPImageButtonView: UIControl {
-    var image: UIImage?
+    var image: UIImage? {
+        didSet {
+            imageView.image = image
+        }
+    }
+    /*
+     case scaleAspectFit // contents scaled to fit with fixed aspect. remainder is transparent
+     
+     case scaleAspectFill // contents scaled to fill with fixed aspect. some portion of content may be clipped.
+     */
+    var mode: UIViewContentMode = .scaleAspectFill {
+        didSet {
+            imageView.contentMode = mode
+        }
+    }
+    
     /// 指定图片尺寸
     convenience init(image: UIImage?, pos: MPImageButtonPositionType, imageW: CGFloat, imageH: CGFloat) {
         self.init(image: image, pos: pos)
@@ -18,6 +33,7 @@ class MPImageButtonView: UIControl {
             make.width.equalTo(imageW)
             make.height.equalTo(imageH)
         }
+        imageView.clipsToBounds = true
     }
     
     /// 使用图片原始尺寸

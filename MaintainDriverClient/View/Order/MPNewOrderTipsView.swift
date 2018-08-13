@@ -18,7 +18,7 @@ class MPNewOrderTipsView: UIView {
         UIGraphicsEndImageContext()
         
         let view = MPNewOrderTipsView()
-        view.frame = CGRect(x: 0, y: 0, width: MPUtils.screenW, height: MPUtils.screenH)
+        view.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: mp_screenH)
         view.bgImage = image
         view.set(title: title, subTitle: subTitle)
         UIApplication.shared.keyWindow?.addSubview(view)
