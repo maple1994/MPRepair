@@ -11,6 +11,7 @@
 		295D3709D0AC2D2874E51AC7 /* Pods_MaintainDriverClientTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 840F6F2F741E381F5A662F82 /* Pods_MaintainDriverClientTests.framework */; };
 		ADC8A0301EB8B7BA103F2CCE /* Pods_MaintainDriverClient.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */; };
 		F5031F97212126E500329BC0 /* MPConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5031F96212126E500329BC0 /* MPConstant.swift */; };
+		F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */; };
 		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
 		F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */; };
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
@@ -105,6 +106,7 @@
 		90A0C4BCEC64F8C1F9DCD95D /* Pods_MaintainDriverClient.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClient.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		933E4E24AB834923AD3EAF95 /* Pods-MaintainDriverClientTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MaintainDriverClientTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-MaintainDriverClientTests/Pods-MaintainDriverClientTests.release.xcconfig"; sourceTree = "<group>"; };
 		F5031F96212126E500329BC0 /* MPConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPConstant.swift; sourceTree = "<group>"; };
+		F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
 		F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckViewController.swift; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */,
 				F5A6331A2116DA530075548A /* MPUtils.swift */,
 				F5A6334A211728520075548A /* Extension.swift */,
 				F5867E5F211D7F4600F8A07D /* MPApiType.swift */,
@@ -795,6 +798,7 @@
 				F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */,
 				F5DF7393211A94E400B9F154 /* MPFooterConfirmView.swift in Sources */,
 				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
+				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,

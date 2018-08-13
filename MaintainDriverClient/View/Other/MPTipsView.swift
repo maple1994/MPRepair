@@ -25,10 +25,15 @@ class MPTipsView {
     }
     
     /// 显示正在loading的标志
-    class func showLoadingView() {
-//        guard let window = UIApplication.shared.keyWindow else {
-//            return
-//        }
-//        let hud = MBProgressHUD.showAdded(to: window, animated: true)
+    class func showLoadingView() -> MBProgressHUD? {
+        guard let window = UIApplication.shared.keyWindow else {
+            return nil
+        }
+        let hud = MBProgressHUD.showAdded(to: window, animated: true)
+        hud.bezelView.style = MBProgressHUDBackgroundStyle.solidColor
+        hud.bezelView.color = UIColor.black
+        hud.contentColor = UIColor.white
+        hud.label.text = "正在加载..."
+        return hud
     }
 }
