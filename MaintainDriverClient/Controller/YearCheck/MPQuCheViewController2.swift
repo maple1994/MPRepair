@@ -177,6 +177,8 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPQuCheCCell(style: .default, reuseIdentifier: CellID)
         }
+        cell?.timeTitleLabel.text = "取车时间"
+        cell?.addressTitleLabel.text = "取车地点"
         cell?.delegate = self
         return cell!
     }

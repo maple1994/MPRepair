@@ -37,10 +37,10 @@ class MPQuCheCCell: UITableViewCell {
     fileprivate func setupUI() {
         let carTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "车型：", textColor: UIColor.mpLightGary)
         carNameLabel = UILabel(font: UIFont.mpSmallFont, text: "奔驰x123124", textColor: UIColor.mpLightGary)
-        let addressTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "交接地点：", textColor: UIColor.fontBlack)
+        addressTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "交接地点：", textColor: UIColor.fontBlack)
         addressLabel = UILabel(font: UIFont.mpSmallFont, text: "兴南大道33号月雅苑门口", textColor: UIColor.fontBlack)
         addressLabel.numberOfLines = 0
-        let timeTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "交接时间：", textColor: UIColor.colorWithHexString("616161"))
+        timeTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "交接时间：", textColor: UIColor.colorWithHexString("616161"))
         timeLabel = UILabel(font: UIFont.mpSmallFont, text: "2018-07-29 下午", textColor: UIColor.colorWithHexString("616161"))
         contactButton = MPImageButtonView(image: #imageLiteral(resourceName: "phone"), pos: .center, imageW: 30, imageH: 30)
         navigationButton = MPImageButtonView(image: #imageLiteral(resourceName: "navigation"), pos: .center, imageW: 30, imageH: 30)
@@ -103,6 +103,8 @@ class MPQuCheCCell: UITableViewCell {
         delegate?.quCheCellDidSelectNavigation()
     }
     
+    var addressTitleLabel: UILabel!
+    var timeTitleLabel: UILabel!
     fileprivate var carNameLabel: UILabel!
     fileprivate var addressLabel: UILabel!
     fileprivate var timeLabel: UILabel!

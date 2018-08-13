@@ -166,6 +166,8 @@ extension MPCheckOutFinishViewController2: UITableViewDelegate, UITableViewDataS
         if cell == nil {
             cell = MPQuCheCCell(style: .default, reuseIdentifier: CellID)
         }
+        cell?.timeTitleLabel.text = "还车时间"
+        cell?.addressTitleLabel.text = "还车地点"
         cell?.delegate = self
         return cell!
     }

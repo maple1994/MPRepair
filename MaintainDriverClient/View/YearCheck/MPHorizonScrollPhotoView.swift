@@ -31,7 +31,8 @@ class MPHorizonScrollPhotoView: UIView {
         let vSpace: CGFloat = 10
         let hSpcace: CGFloat = 15
         let itemW: CGFloat = (MPUtils.screenW - 3 * hSpcace) * 0.5
-        let itemH: CGFloat = isShowTitle ? 150 : mp_noTitlePicH
+        mp_noTitlePicH = itemW * 0.63
+        let itemH: CGFloat = isShowTitle ? mp_hasTitlePicH : mp_noTitlePicH
         flow.itemSize = CGSize(width: itemW, height: itemH)
         flow.minimumInteritemSpacing = vSpace
         flow.minimumLineSpacing = hSpcace
@@ -79,6 +80,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     fileprivate func setupUI() {
+        contentView.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
         removeButton = MPImageButtonView(image: #imageLiteral(resourceName: "delete"), pos: .rightTop)
         removeButton.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.remove), for: .touchUpInside)
         photoView = UIButton()
@@ -91,7 +93,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
         contentView.addSubview(titleLabel)
         let hSpcace: CGFloat = 15
         let itemW: CGFloat = (MPUtils.screenW - 3 * hSpcace) * 0.5
-        let itemH: CGFloat = 150 - 35
+        let itemH: CGFloat = mp_hasTitlePicH - 35
         photoView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
             make.top.equalToSuperview().offset(10)

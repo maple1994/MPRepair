@@ -168,6 +168,8 @@ extension MPStartYearCheckViewController2: UITableViewDelegate, UITableViewDataS
         if cell == nil {
             cell = MPQuCheCCell(style: .default, reuseIdentifier: CellID)
         }
+        cell?.timeTitleLabel.text = "年检时间"
+        cell?.addressTitleLabel.text = "年检地点"
         cell?.delegate = self
         return cell!
     }

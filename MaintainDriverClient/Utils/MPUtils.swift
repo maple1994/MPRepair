@@ -9,7 +9,11 @@
 import UIKit
 
 /// 无图片高度的图片Cell高度
-let mp_noTitlePicH: CGFloat = 130
+var mp_noTitlePicH: CGFloat = 130
+/// 有图片高度的图片Cell高度
+var mp_hasTitlePicH: CGFloat {
+    return mp_noTitlePicH + 20
+}
 
 /// 工具类
 class MPUtils {

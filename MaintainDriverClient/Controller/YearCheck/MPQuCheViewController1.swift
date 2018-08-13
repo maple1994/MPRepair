@@ -126,9 +126,9 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
-            return 170
+            return mp_hasTitlePicH
         }
-        return mp_noTitlePicH * 3 + 40
+        return mp_noTitlePicH * 3
     }
 }
 

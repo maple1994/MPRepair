@@ -16,15 +16,15 @@ class MPLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        provide.request(.login) { (result) in
-            switch result {
-            case let .success(moyaResponse):
-                let data = moyaResponse.data
-                let statusCode = moyaResponse.statusCode
-            case let .failure(error):
-                print(error)
-            }
-        }
+//        provide.request(.login) { (result) in
+//            switch result {
+//            case let .success(moyaResponse):
+//                let data = moyaResponse.data
+//                let statusCode = moyaResponse.statusCode
+//            case let .failure(error):
+//                print(error)
+//            }
+//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
