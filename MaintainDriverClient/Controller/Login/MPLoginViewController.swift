@@ -32,10 +32,18 @@ class MPLoginViewController: UIViewController {
         view.endEditing(true)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        scrollView.contentSize = CGSize(width: mp_screenW, height: mp_screenH + 1)
+    }
+    
     fileprivate func setupUI() {
         scrollView = UIScrollView()
+        scrollView.delegate = self
         let contentView = UIImageView()
         contentView.image = #imageLiteral(resourceName: "background")
+//        let contentView = UIView()
+//        contentView.backgroundColor = UIColor.fontBlack
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
@@ -44,21 +52,21 @@ class MPLoginViewController: UIViewController {
             make.width.equalTo(mp_screenW)
         }
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.bottom.leading.trailing.equalToSuperview()
+            make.top.equalToSuperview().offset(-64)
         }
         // 布局子内容
         let tfH: CGFloat = 44
         let margin: CGFloat = 25
-        sendCodeBtn = MPSendCodeButton(count: 60)
         logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         phoneTextField = MPInputTextFiled()
         phoneTextField.keyboardType = .numberPad
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         phoneTextField.leftIcon = #imageLiteral(resourceName: "mobile")
-        codeTextField = MPInputTextFiled()
-        codeTextField.keyboardType = .numberPad
-        codeTextField.attributedPlaceholder = getAttributeText("请输入验证码")
-        codeTextField.leftIcon = #imageLiteral(resourceName: "pwd")
+        pwdTextField = MPInputTextFiled()
+        pwdTextField.keyboardType = .numberPad
+        pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
+        pwdTextField.leftIcon = #imageLiteral(resourceName: "pwd")
         loginButton = UIButton()
         loginButton.setTitleColor(UIColor.white, for: .normal)
         loginButton.setTitle("登录", for: .normal)
@@ -66,12 +74,24 @@ class MPLoginViewController: UIViewController {
         loginButton.addTarget(self, action: #selector(MPLoginViewController.login), for: .touchUpInside)
         loginButton.backgroundColor = UIColor.navBlue
         loginButton.setupCorner(5)
+        resetPwdButton = UIButton()
+        resetPwdButton.setTitle("忘记密码？", for: .normal)
+        resetPwdButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
+        resetPwdButton.titleLabel?.font = UIFont.mpSmallFont
+        resetPwdButton.addTarget(self, action: #selector(MPLoginViewController.resetPwd), for: .touchUpInside)
+        
+        registerButton = UIButton()
+        registerButton.setTitle("新用户注册", for: .normal)
+        registerButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
+        registerButton.titleLabel?.font = UIFont.mpSmallFont
+        registerButton.addTarget(self, action: #selector(MPLoginViewController.register), for: .touchUpInside)
         
         scrollView.addSubview(logoView)
         scrollView.addSubview(phoneTextField)
-        scrollView.addSubview(codeTextField)
+        scrollView.addSubview(pwdTextField)
         scrollView.addSubview(loginButton)
-        scrollView.addSubview(sendCodeBtn)
+        scrollView.addSubview(resetPwdButton)
+        scrollView.addSubview(registerButton)
         
         logoView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
@@ -83,26 +103,31 @@ class MPLoginViewController: UIViewController {
             make.height.equalTo(tfH)
             make.top.equalTo(logoView.snp.bottom).offset(60)
         }
-        codeTextField.snp.makeConstraints { (make) in
+        pwdTextField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
             make.height.equalTo(tfH)
             make.top.equalTo(phoneTextField.snp.bottom).offset(10)
         }
-        sendCodeBtn.snp.makeConstraints { (make) in
-            make.bottom.equalTo(codeTextField.snp.bottom).offset(-10)
-            make.trailing.equalTo(codeTextField)
-            make.width.equalTo(100)
+        resetPwdButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(pwdTextField)
+            make.top.equalTo(pwdTextField.snp.bottom).offset(5)
             make.height.equalTo(35)
         }
+        registerButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(pwdTextField)
+            make.top.equalTo(resetPwdButton)
+            make.height.equalTo(35)
+        }
+        
         loginButton.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
-            make.top.equalTo(codeTextField.snp.bottom).offset(45)
+            make.top.equalTo(resetPwdButton.snp.bottom).offset(20)
             make.height.equalTo(36)
         }
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLoginViewController.tap))
-        view.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLoginViewController.tap))
+//        view.addGestureRecognizer(tap)
     }
     
     @objc fileprivate func tap() {
@@ -120,13 +145,29 @@ class MPLoginViewController: UIViewController {
     @objc fileprivate func login() {
         dismiss(animated: true, completion: nil)
     }
-
+    
+    @objc fileprivate func resetPwd() {
+        let vc = MPResetPwdViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc fileprivate func register() {
+        let vc = MPRegisterViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
     
     // MARK: - View
     fileprivate var scrollView: UIScrollView!
     fileprivate var logoView: UIImageView!
     fileprivate var phoneTextField: MPInputTextFiled!
-    fileprivate var codeTextField: MPInputTextFiled!
+    fileprivate var pwdTextField: MPInputTextFiled!
     fileprivate var loginButton: UIButton!
-    fileprivate var sendCodeBtn: MPSendCodeButton!
+    fileprivate var resetPwdButton: UIButton!
+    fileprivate var registerButton: UIButton!
+}
+
+extension MPLoginViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        print(scrollView.contentOffset.y)
+    }
 }

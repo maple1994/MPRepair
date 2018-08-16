@@ -11,13 +11,14 @@ import UIKit
 class MPHomeViewController: UIViewController {
     // TODO: 登录状态
     /// 标记用户是否已登录，未登录显示登录界面
-    fileprivate var isLogin: Bool = true
+    fileprivate var isLogin: Bool = false
     var isAnimationed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
         if !isLogin {
             let loginVC = MPLoginViewController()
-            present(loginVC, animated: isAnimationed, completion: nil)
+            let nav = MPLoginNavViewController(rootViewController: loginVC)
+            present(nav, animated: isAnimationed, completion: nil)
         }
         setupUI()
     }
@@ -69,12 +70,9 @@ class MPHomeViewController: UIViewController {
 
     // MARK: - Action
     @objc fileprivate func meAction() {
-//        slideMenuController()?.openLeft()
-        mp_Provider.request(.test(idList: "SH000001,SZ399001,SZ399006")) { (result) in
-//            if let jsonStr = try? result.value?.mapString() {
-//                print(jsonStr)
-//            }
-        }
+        slideMenuController()?.openLeft()
+//        mp_Provider.request(.test(idList: "SH000001,SZ399001,SZ399006")) { (result) in
+//        }
     }
     
     @objc fileprivate func segChange() {
