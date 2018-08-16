@@ -51,6 +51,7 @@ class MPUnderLineTextField: UITextField {
     }
     
     fileprivate func setupUI() {
+        font = UIFont.mpNormalFont
         borderStyle = .none
         tintColor = UIColor.white
         line = UIView()

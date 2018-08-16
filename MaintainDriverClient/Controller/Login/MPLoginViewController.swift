@@ -42,8 +42,6 @@ class MPLoginViewController: UIViewController {
         scrollView.delegate = self
         let contentView = UIImageView()
         contentView.image = #imageLiteral(resourceName: "background")
-//        let contentView = UIView()
-//        contentView.backgroundColor = UIColor.fontBlack
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
@@ -73,7 +71,7 @@ class MPLoginViewController: UIViewController {
         loginButton.adjustsImageWhenHighlighted = false
         loginButton.addTarget(self, action: #selector(MPLoginViewController.login), for: .touchUpInside)
         loginButton.backgroundColor = UIColor.navBlue
-        loginButton.setupCorner(5)
+//        loginButton.setupCorner(5)
         resetPwdButton = UIButton()
         resetPwdButton.setTitle("忘记密码？", for: .normal)
         resetPwdButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
@@ -137,7 +135,7 @@ class MPLoginViewController: UIViewController {
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
         let dic: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.foregroundColor: UIColor.colorWithHexString("#B2B2B3"),
-            NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)
+            NSAttributedStringKey.font: UIFont.mpSmallFont
         ]
         return NSAttributedString(string: text, attributes: dic)
     }

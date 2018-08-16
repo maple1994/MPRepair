@@ -34,11 +34,11 @@ class MPSendCodeButton: UIButton {
     
     private func setup() {
         setTitle("获取验证码", for: .normal)
-        titleLabel?.font = UIFont.systemFont(ofSize: 16)
+        titleLabel?.font = UIFont.mpSmallFont
         backgroundColor = .clear
         adjustsImageWhenHighlighted = false
         setTitleColor(UIColor.navBlue, for: .normal)
-        setupCorner(5)
+        setupCorner(3)
         setupBorder(borderColor: UIColor.navBlue)
         addTarget(self, action: #selector(MPSendCodeButton.getCode), for: .touchUpInside)
     }
