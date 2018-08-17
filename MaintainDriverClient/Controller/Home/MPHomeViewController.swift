@@ -11,7 +11,7 @@ import UIKit
 class MPHomeViewController: UIViewController {
     // TODO: 登录状态
     /// 标记用户是否已登录，未登录显示登录界面
-    fileprivate var isLogin: Bool = false
+    fileprivate var isLogin: Bool = true
     var isAnimationed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +48,7 @@ class MPHomeViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         gongZuoTaiVC = MPGongZuoTaiViewController()
+        gongZuoTaiVC.delegate = self
         yiJieDanVC = MPYiJieDanViewController()
         addChildViewController(gongZuoTaiVC)
         addChildViewController(yiJieDanVC)
@@ -131,5 +132,23 @@ extension MPHomeViewController: MPLeftMenuViewControllerDelegate {
         slideMenuController()?.closeLeft()
         let vc = MPSettingViewController()
         navigationController?.show(vc, sender: true)
+    }
+}
+
+// MARK: - MPGongZuoTaiViewControllerDelegate
+extension MPHomeViewController: MPGongZuoTaiViewControllerDelegate {
+    /// 点击了出车
+    func gongZuoTaiDidSelectChuChe() {
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "下车", style: .plain, target: self, action: #selector(MPHomeViewController.xiaChe))
+        let dic: [NSAttributedStringKey: Any] = [
+            NSAttributedStringKey.font : UIFont.mpSmallFont
+        ]
+        navigationItem.rightBarButtonItem?.setTitleTextAttributes(dic, for: .normal)
+    }
+    
+    @objc fileprivate func xiaChe() {
+        navigationItem.rightBarButtonItem = nil
+        gongZuoTaiVC?.xiaCheAction()
     }
 }

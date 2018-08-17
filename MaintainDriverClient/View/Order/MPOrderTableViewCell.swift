@@ -22,6 +22,11 @@ class MPOrderTableViewCell: UITableViewCell {
             }
         }
     }
+    var isStateHidden: Bool = false {
+        didSet {
+            statusLabel.isHidden = isStateHidden
+        }
+    }
     fileprivate let smallFont = UIFont.mpSmallFont
     fileprivate let bigFont = UIFont.mpNormalFont
     fileprivate let uncompleteColor = UIColor.mpOrange
