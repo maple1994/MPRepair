@@ -20,6 +20,11 @@ class MPRegisterViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        view.endEditing(true)
+    }
+    
     fileprivate func setupUI() {
         scrollView = UIScrollView()
         let contentView = UIImageView()
@@ -40,13 +45,19 @@ class MPRegisterViewController: UIViewController {
         logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         phoneTextField = MPUnderLineTextField()
         phoneTextField.keyboardType = .numberPad
+        phoneTextField.textColor = UIColor.white
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         codeTextField = MPUnderLineTextField()
         codeTextField.keyboardType = .numberPad
+        codeTextField.textColor = UIColor.white
         codeTextField.attributedPlaceholder = getAttributeText("请输入验证码")
         pwdTextField = MPUnderLineTextField()
+        pwdTextField.keyboardType = .asciiCapable
+        pwdTextField.textColor = UIColor.white
         pwdTextField.attributedPlaceholder = getAttributeText("请输入新密码")
         pwdComfirmTextField = MPUnderLineTextField()
+        pwdComfirmTextField.keyboardType = .asciiCapable
+        pwdComfirmTextField.textColor = UIColor.white
         pwdComfirmTextField.attributedPlaceholder = getAttributeText("请确认新密码")
         registerButton = UIButton()
         registerButton.setTitleColor(UIColor.white, for: .normal)
@@ -59,8 +70,8 @@ class MPRegisterViewController: UIViewController {
         scrollView.addSubview(logoView)
         scrollView.addSubview(phoneTextField)
         scrollView.addSubview(codeTextField)
-        scrollView.addSubview(pwdComfirmTextField)
         scrollView.addSubview(pwdTextField)
+        scrollView.addSubview(pwdComfirmTextField)
         scrollView.addSubview(getCodeButton)
         scrollView.addSubview(registerButton)
         

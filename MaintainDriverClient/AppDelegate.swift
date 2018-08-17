@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setHomeVCToRootVC(false)
         AMapServices.shared().apiKey = "fa5c335316d7a9bde2efb410932e6244"
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.enableAutoToolbar = false
+        IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         return true
     }
     

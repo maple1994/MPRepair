@@ -21,6 +21,11 @@ class MPResetPwdViewController: UIViewController {
         }
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        view.endEditing(true)
+    }
+    
     fileprivate func setupUI() {
         scrollView = UIScrollView()
         let contentView = UIImageView()
@@ -40,13 +45,19 @@ class MPResetPwdViewController: UIViewController {
         let margin: CGFloat = 25
         phoneTextField = MPUnderLineTextField()
         phoneTextField.keyboardType = .numberPad
+        phoneTextField.textColor = UIColor.white
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         codeTextField = MPUnderLineTextField()
         codeTextField.keyboardType = .numberPad
+        codeTextField.textColor = UIColor.white
         codeTextField.attributedPlaceholder = getAttributeText("请输入验证码")
         pwdTextField = MPUnderLineTextField()
+        pwdTextField.textColor = UIColor.white
+        pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入新密码")
         pwdComfirmTextField = MPUnderLineTextField()
+        pwdComfirmTextField.textColor = UIColor.white
+        pwdComfirmTextField.keyboardType = .asciiCapable
         pwdComfirmTextField.attributedPlaceholder = getAttributeText("请确认新密码")
         saveButton = UIButton()
         saveButton.setTitleColor(UIColor.white, for: .normal)
@@ -58,8 +69,8 @@ class MPResetPwdViewController: UIViewController {
         getCodeButton = MPSendCodeButton(count: 60)
         scrollView.addSubview(phoneTextField)
         scrollView.addSubview(codeTextField)
-        scrollView.addSubview(pwdComfirmTextField)
         scrollView.addSubview(pwdTextField)
+        scrollView.addSubview(pwdComfirmTextField)
         scrollView.addSubview(getCodeButton)
         scrollView.addSubview(saveButton)
         

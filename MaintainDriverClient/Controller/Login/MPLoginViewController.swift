@@ -36,11 +36,6 @@ class MPLoginViewController: UIViewController {
         view.endEditing(true)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        scrollView.contentSize = CGSize(width: mp_screenW, height: mp_screenH + 1)
-    }
-    
     fileprivate func setupUI() {
         scrollView = UIScrollView()
         scrollView.delegate = self
@@ -55,7 +50,6 @@ class MPLoginViewController: UIViewController {
         }
         scrollView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
-            
             make.top.equalToSuperview()
         }
         // 布局子内容
@@ -67,8 +61,9 @@ class MPLoginViewController: UIViewController {
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         phoneTextField.leftIcon = #imageLiteral(resourceName: "mobile")
         pwdTextField = MPInputTextFiled()
-        pwdTextField.keyboardType = .numberPad
+        pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
+        pwdTextField.isSecureTextEntry = true
         pwdTextField.leftIcon = #imageLiteral(resourceName: "pwd")
         loginButton = UIButton()
         loginButton.setTitleColor(UIColor.white, for: .normal)
