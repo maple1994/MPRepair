@@ -8,6 +8,7 @@
 
 import UIKit
 import SlideMenuControllerSwift
+import IQKeyboardManagerSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         setupNormalUIStyle()
         setHomeVCToRootVC(false)
         AMapServices.shared().apiKey = "fa5c335316d7a9bde2efb410932e6244"
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = false
         return true
     }
     

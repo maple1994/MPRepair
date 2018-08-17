@@ -15,6 +15,7 @@ pod 'TZImagePickerController'
 pod 'Moya'
 pod 'Kingfisher'
 pod 'MBProgressHUD'
+pod 'IQKeyboardManagerSwift'
 
 
   # Pods for MaintainDriverClient

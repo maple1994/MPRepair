@@ -17,7 +17,15 @@ class MPLoginNavViewController: UINavigationController {
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)]
         navigationBar.shadowImage = UIImage()
         if let barImg = navigationBar.subviews.first {
-            barImg.alpha = 0
+            
+            if #available(iOS 11, *) {
+                barImg.alpha = 0
+                for v in barImg.subviews {
+                    v.alpha = 0
+                }
+            }else {
+                barImg.alpha = 0
+            }
         }
     }
     

@@ -49,9 +49,14 @@ class MPLoginViewController: UIViewController {
             make.height.equalTo(mp_screenH)
             make.width.equalTo(mp_screenW)
         }
+        var offset: CGFloat = -64
+        if #available(iOS 11, *) {
+            offset = 0
+        }
         scrollView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(-64)
+            
+            make.top.equalToSuperview().offset(offset)
         }
         // 布局子内容
         let tfH: CGFloat = 44

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 /// 设置界面
 class MPSettingViewController: UIViewController {
@@ -15,6 +16,7 @@ class MPSettingViewController: UIViewController {
     fileprivate var iconImage: UIImage?
     fileprivate var userName: String?
     
+    // MARK: - Life
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -22,6 +24,17 @@ class MPSettingViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(MPSettingViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+    
+    // MARK: -
     @objc func keyboardShow(noti: Notification) {
         guard let info = noti.userInfo else {
             return
@@ -108,6 +121,7 @@ class MPSettingViewController: UIViewController {
         (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
     }
     
+    // MARK: - View
     fileprivate var tableView: UITableView!
     fileprivate var loginOutButton: UIButton!
     fileprivate lazy var bgView: UIControl = {
