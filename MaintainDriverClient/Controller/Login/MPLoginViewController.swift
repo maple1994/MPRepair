@@ -16,6 +16,10 @@ class MPLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        if #available(iOS 11, *) {
+        }else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
 //        provide.request(.login) { (result) in
 //            switch result {
 //            case let .success(moyaResponse):
@@ -49,14 +53,10 @@ class MPLoginViewController: UIViewController {
             make.height.equalTo(mp_screenH)
             make.width.equalTo(mp_screenW)
         }
-        var offset: CGFloat = -64
-        if #available(iOS 11, *) {
-            offset = 0
-        }
         scrollView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
             
-            make.top.equalToSuperview().offset(offset)
+            make.top.equalToSuperview()
         }
         // 布局子内容
         let tfH: CGFloat = 44

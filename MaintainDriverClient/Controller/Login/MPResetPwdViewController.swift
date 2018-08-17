@@ -15,6 +15,10 @@ class MPResetPwdViewController: UIViewController {
         super.viewDidLoad()
         setupUI()
         navigationItem.title = "重置密码"
+        if #available(iOS 11, *) {
+        }else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     fileprivate func setupUI() {
@@ -28,13 +32,9 @@ class MPResetPwdViewController: UIViewController {
             make.height.equalTo(mp_screenH)
             make.width.equalTo(mp_screenW)
         }
-        var offset: CGFloat = -64
-        if #available(iOS 11, *) {
-            offset = 0
-        }
         scrollView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(offset)
+            make.top.equalToSuperview()
         }
         let tfH: CGFloat = 44
         let margin: CGFloat = 25

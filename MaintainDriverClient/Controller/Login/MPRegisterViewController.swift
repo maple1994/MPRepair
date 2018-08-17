@@ -14,6 +14,10 @@ class MPRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        if #available(iOS 11, *) {
+        }else {
+            automaticallyAdjustsScrollViewInsets = false
+        }
     }
     
     fileprivate func setupUI() {
@@ -27,13 +31,9 @@ class MPRegisterViewController: UIViewController {
             make.height.equalTo(mp_screenH)
             make.width.equalTo(mp_screenW)
         }
-        var offset: CGFloat = -64
-        if #available(iOS 11, *) {
-            offset = 0
-        }
         scrollView.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(offset)
+            make.top.equalToSuperview()
         }
         let tfH: CGFloat = 44
         let margin: CGFloat = 25
