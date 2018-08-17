@@ -14,7 +14,6 @@ class MPRegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        navigationItem.title = "注册"
     }
     
     fileprivate func setupUI() {
@@ -51,7 +50,7 @@ class MPRegisterViewController: UIViewController {
         registerButton.adjustsImageWhenHighlighted = false
         registerButton.addTarget(self, action: #selector(MPRegisterViewController.register), for: .touchUpInside)
         registerButton.backgroundColor = UIColor.navBlue
-//        registerButton.setupCorner(5)
+        registerButton.setupCorner(3)
         getCodeButton = MPSendCodeButton(count: 60)
         scrollView.addSubview(logoView)
         scrollView.addSubview(phoneTextField)

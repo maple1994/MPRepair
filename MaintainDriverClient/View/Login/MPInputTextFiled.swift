@@ -55,7 +55,7 @@ class MPUnderLineTextField: UITextField {
         borderStyle = .none
         tintColor = UIColor.white
         line = UIView()
-        line.backgroundColor = UIColor.white
+        line.backgroundColor = UIColor.colorWithHexString("#B7B7B8")
         addSubview(line)
         line.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()

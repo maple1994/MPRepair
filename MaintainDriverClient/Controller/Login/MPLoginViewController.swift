@@ -71,7 +71,7 @@ class MPLoginViewController: UIViewController {
         loginButton.adjustsImageWhenHighlighted = false
         loginButton.addTarget(self, action: #selector(MPLoginViewController.login), for: .touchUpInside)
         loginButton.backgroundColor = UIColor.navBlue
-//        loginButton.setupCorner(5)
+        loginButton.setupCorner(3)
         resetPwdButton = UIButton()
         resetPwdButton.setTitle("忘记密码？", for: .normal)
         resetPwdButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
@@ -166,6 +166,5 @@ class MPLoginViewController: UIViewController {
 
 extension MPLoginViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        print(scrollView.contentOffset.y)
     }
 }
