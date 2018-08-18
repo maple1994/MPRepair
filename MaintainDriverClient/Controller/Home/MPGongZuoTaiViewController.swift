@@ -113,11 +113,12 @@ class MPGongZuoTaiViewController: UIViewController {
 //            MPTipsView.showMsg("请选择订单")
 //            return 
 //        }
-        MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!")
+        let view = MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!")
+        view.showTimeCount()
     }
     
     @objc fileprivate func listenAction() {
-        MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!")
+        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!")
     }
     
     @objc fileprivate func chuCheAction() {

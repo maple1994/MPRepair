@@ -46,10 +46,7 @@ enum MPApiType {
 extension MPApiType: TargetType {
     /// The target's base `URL`.
     var baseURL: URL {
-        /*
-        a=RefreshStockList&Token=b745884bfbe45272f237ba417fe1f78e&c=UserSelectStock&UserID=275125&DeviceID=bb26404159b776a841a6101f017c3d331b251ff2&StockIDList=SH000001,SZ399001,SZ399006&apiv=w11
-         */
-        return URL(string: "https://test.kaipanla.com")!
+        return URL(string: "www.nolasthope.cn")!
     }
     
     /// The path to be appended to `baseURL` to form the full `URL`.
