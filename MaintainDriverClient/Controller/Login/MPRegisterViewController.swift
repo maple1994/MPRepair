@@ -122,7 +122,17 @@ class MPRegisterViewController: UIViewController {
     }
     
     @objc fileprivate func register() {
-        
+//        MPApiType.register(phone: phoneTextField.text!, pwd: pwdTextField.text!, code: codeTextField.text!)
+        mp_Provider.request(.register(phone: phoneTextField.text!, pwd: pwdTextField.text!, code: codeTextField.text!)) { (result) in
+            switch result {
+                case let .success(moyaResponse):
+                    if let str = try? moyaResponse.mapString() {
+                        print(str)
+                    }
+                case let .failure(error):
+                    print(error)
+            }
+        }
     }
 
     // MARK: - View

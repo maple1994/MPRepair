@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>lhb.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>armv7</string>
+				<string>arm64</string>
+			</array>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>049FF6DD011EB39FE6A731FE94BC8F765DF2165F</string>
+				<key>dateExpires</key>
+				<string>2019/4/16</string>
+				<key>type</key>
+				<string>iOS Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>049FF6DD011EB39FE6A731FE94BC8F765DF2165F</string>
+						<key>dateExpires</key>
+						<string>2019/4/16</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Alamofire.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>53D2P848US</string>
+						<key>name</key>
+						<string>Guangzhou AIYU Network Technology Co., Ltd.</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>049FF6DD011EB39FE6A731FE94BC8F765DF2165F</string>
+						<key>dateExpires</key>
+						<string>2019/4/16</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>MJRefresh.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>53D2P848US</string>
+						<key>name</key>
+						<string>Guangzhou AIYU Network Technology Co., Ltd.</string>
+					</dict>
+				</dict>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>armv7</string>
+						<string>arm64</string>
+					</array>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>049FF6DD011EB39FE6A731FE94BC8F765DF2165F</string>
+						<key>dateExpires</key>
+						<string>2019/4/16</string>
+						<key>type</key>
+						<string>iOS Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>SnapKit.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>53D2P848US</string>
+						<key>name</key>
+						<string>Guangzhou AIYU Network Technology Co., Ltd.</string>
+					</dict>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>53D2P848US.com.kaipanla.www</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.associated-domains</key>
+				<array/>
+				<key>com.apple.developer.team-identifier</key>
+				<string>53D2P848US</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>53D2P848US.com.kaipanla.www</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>lhb.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>9991e0ed-5ca9-4e08-a24a-cf950c0fb693</string>
+				<key>name</key>
+				<string>08_15</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>53D2P848US</string>
+				<key>name</key>
+				<string>Guangzhou AIYU Network Technology Co., Ltd.</string>
+			</dict>
+		</dict>
+	</array>
+</dict>
+</plist>
