@@ -84,6 +84,30 @@ extension String {
         let dic = [NSAttributedStringKey.font:font]
         return str.boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: dic, context: nil).size
     }
+    
+    /// 是否匹配正则
+    func isMatchRegularExp(_ pattern: String) -> Bool {
+        guard let reg = try? NSRegularExpression(pattern: pattern, options: NSRegularExpression.Options.caseInsensitive) else {
+            return false
+        }
+        let result = reg.matches(in: self, options: .reportProgress, range: NSMakeRange(0, self.count))
+        return (result.count > 0)
+    }
+}
+
+extension UITextField {
+    /// 去掉左右空格的text
+    var trimText: String {
+        get {
+            let txt = text ?? ""
+            return txt.trimmingCharacters(in: CharacterSet.whitespaces)
+        }
+    }
+    
+    /// 肯定有值的txt
+    var mText: String {
+        return text ?? ""
+    }
 }
 
 extension UIView {

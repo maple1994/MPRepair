@@ -55,10 +55,12 @@ class MPRegisterViewController: UIViewController {
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.textColor = UIColor.white
         pwdTextField.attributedPlaceholder = getAttributeText("请输入新密码")
+        pwdTextField.isSecureTextEntry = true
         pwdComfirmTextField = MPUnderLineTextField()
         pwdComfirmTextField.keyboardType = .asciiCapable
         pwdComfirmTextField.textColor = UIColor.white
         pwdComfirmTextField.attributedPlaceholder = getAttributeText("请确认新密码")
+        pwdComfirmTextField.isSecureTextEntry = true
         registerButton = UIButton()
         registerButton.setTitleColor(UIColor.white, for: .normal)
         registerButton.setTitle("注册", for: .normal)
@@ -67,6 +69,7 @@ class MPRegisterViewController: UIViewController {
         registerButton.backgroundColor = UIColor.navBlue
         registerButton.setupCorner(3)
         getCodeButton = MPSendCodeButton(count: 60)
+        getCodeButton.delegate = self
         scrollView.addSubview(logoView)
         scrollView.addSubview(phoneTextField)
         scrollView.addSubview(codeTextField)
@@ -122,8 +125,10 @@ class MPRegisterViewController: UIViewController {
     }
     
     @objc fileprivate func register() {
-//        MPApiType.register(phone: phoneTextField.text!, pwd: pwdTextField.text!, code: codeTextField.text!)
-        mp_Provider.request(.register(phone: phoneTextField.text!, pwd: pwdTextField.text!, code: codeTextField.text!)) { (result) in
+        if !isValid() {
+            return
+        }
+        mp_provider.request(.register(phone: phoneTextField.mText, pwd: pwdTextField.mText, code: codeTextField.mText)) { (result) in
             switch result {
                 case let .success(moyaResponse):
                     if let str = try? moyaResponse.mapString() {
@@ -133,6 +138,23 @@ class MPRegisterViewController: UIViewController {
                     print(error)
             }
         }
+    }
+    
+    /// 检测输入是否合法
+    fileprivate func isValid() -> Bool {
+        if !phoneTextField.trimText.isMatchRegularExp("1[0-9]{10}$") {
+            MPTipsView.showMsg("请输入合法的手机号码")
+            return false
+        }
+        if codeTextField.trimText.isEmpty {
+            MPTipsView.showMsg("请输入验证码")
+            return false
+        }
+        if pwdTextField.mText != pwdComfirmTextField.mText {
+            MPTipsView.showMsg("两次输入的密码不同")
+            return false
+        }
+        return true
     }
 
     // MARK: - View
@@ -144,4 +166,25 @@ class MPRegisterViewController: UIViewController {
     fileprivate var getCodeButton: MPSendCodeButton!
     fileprivate var logoView: UIImageView!
     fileprivate var registerButton: UIButton!
+}
+
+extension MPRegisterViewController: MPSendCodeButtonDelegate {
+    /// 获取验证码
+    func getCode() {
+        mp_provider.request(.sendCode(phone: phoneTextField.text!, type: MPMsgCodeKey.register_driver)) { (result) in
+            switch result {
+            case let .success(response):
+                if let json = try? response.mapJSON() as AnyObject {
+                    if let msg = json["msg"] as? String {
+                        print(msg)
+                    }
+                }
+                MPTipsView.showMsg("发送成功")
+                self.getCodeButton.startTimeCount()
+            case let .failure(error):
+                print(error)
+                MPTipsView.showMsg("发送失败，请重新发送")
+            }
+        }
+    }
 }

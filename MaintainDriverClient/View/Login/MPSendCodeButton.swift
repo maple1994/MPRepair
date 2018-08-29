@@ -8,9 +8,22 @@
 
 import UIKit
 
+protocol MPSendCodeButtonDelegate: class {
+    /// 获取验证码
+    func getCode()
+}
+
 /// 发送验证码的按钮
 class MPSendCodeButton: UIButton {
     
+    /// 开启定时
+    func startTimeCount() {
+        setTitle("\(timeCount)", for: .normal)
+        isEnabled = false
+        time = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerFired), userInfo:nil, repeats: true)
+    }
+    
+    weak var delegate: MPSendCodeButtonDelegate?
     fileprivate var time: Timer?
     /// count代表倒计多少秒
     fileprivate var count: Int
@@ -45,9 +58,7 @@ class MPSendCodeButton: UIButton {
     
     @objc fileprivate func getCode() {
         timeCount = count
-        setTitle("\(timeCount)", for: .normal)
-        isEnabled = false
-        time = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(timerFired), userInfo:nil, repeats: true)
+        delegate?.getCode()
     }
     
    @objc private func timerFired() {

@@ -27,37 +27,12 @@ enum MPApiType {
 
 // https://www.jianshu.com/p/38fbc22a1e2b
 /// 网络请求类
-let mp_Provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
-
-class MPNetwordActivityPlugin: PluginType {
-    var loadingHud: MBProgressHUD?
-    
-    /// Called to modify a request before sending.
-    func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-        
-        return request
-    }
-    
-    /// Called immediately before a request is sent over the network (or stubbed).
-    func willSend(_ request: RequestType, target: TargetType) {
-        loadingHud = MPTipsView.showLoadingView()
-    }
-    
-    /// Called after a response has been received, but before the MoyaProvider has invoked its completion handler.
-    func didReceive(_ result: Result<Moya.Response, MoyaError>, target: TargetType) {
-        loadingHud?.hide(animated: true, afterDelay: 5)
-    }
-    
-    /// Called to modify a result before completion.
-    func process(_ result: Result<Moya.Response, MoyaError>, target: TargetType) -> Result<Moya.Response, MoyaError> {
-        return result
-    }
-}
+let mp_provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
 
 extension MPApiType: TargetType {
     /// The target's base `URL`.
     var baseURL: URL {
-        return URL(string: "www.nolasthope.cn/")!
+        return URL(string: "http://www.nolasthope.cn/")!
     }
     
     /// The path to be appended to `baseURL` to form the full `URL`.
@@ -100,27 +75,27 @@ extension MPApiType: TargetType {
                 "phone": phone,
                 "password": pwd
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .register(let phone, let pwd, let code):
             let param: [String: String] = [
                 "phone": phone,
                 "password": pwd,
                 "message": code
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .sendCode(let phone, let type):
             let param: [String: String] = [
                 "phone": phone,
                 "type": type
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         case .resetPwd(let phone, let pwd, let code):
             let param: [String: String] = [
                 "phone": phone,
                 "password": pwd,
                 "message": code
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
         default:
             return .requestPlain
         }
