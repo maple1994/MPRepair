@@ -55,10 +55,12 @@ class MPResetPwdViewController: UIViewController {
         pwdTextField.textColor = UIColor.white
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入新密码")
+        pwdTextField.isSecureTextEntry = true
         pwdComfirmTextField = MPUnderLineTextField()
         pwdComfirmTextField.textColor = UIColor.white
         pwdComfirmTextField.keyboardType = .asciiCapable
         pwdComfirmTextField.attributedPlaceholder = getAttributeText("请确认新密码")
+        pwdComfirmTextField.isSecureTextEntry = true
         saveButton = UIButton()
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.setTitle("保存", for: .normal)
@@ -67,6 +69,7 @@ class MPResetPwdViewController: UIViewController {
         saveButton.backgroundColor = UIColor.navBlue
         saveButton.setupCorner(3)
         getCodeButton = MPSendCodeButton(count: 60)
+        getCodeButton.delegate = self
         scrollView.addSubview(phoneTextField)
         scrollView.addSubview(codeTextField)
         scrollView.addSubview(pwdTextField)
@@ -117,7 +120,30 @@ class MPResetPwdViewController: UIViewController {
     }
     
     @objc fileprivate func save() {
-        
+        if !isValid() {
+            return
+        }
+        MPNetword.requestJson(target: .resetPwd(phone: phoneTextField.mText, pwd: pwdTextField.mText, code: codeTextField.mText), success: { (json) in
+            MPTipsView.showMsg("修改成功")
+            self.navigationController?.popViewController(animated: true)
+        })
+    }
+    
+    /// 检测输入是否合法
+    fileprivate func isValid() -> Bool {
+        if !phoneTextField.trimText.isMatchRegularExp("1[0-9]{10}$") {
+            MPTipsView.showMsg("请输入合法的手机号码")
+            return false
+        }
+        if codeTextField.trimText.isEmpty {
+            MPTipsView.showMsg("请输入验证码")
+            return false
+        }
+        if pwdTextField.mText != pwdComfirmTextField.mText {
+            MPTipsView.showMsg("两次输入的密码不同")
+            return false
+        }
+        return true
     }
     
     // MARK: - View
@@ -128,5 +154,17 @@ class MPResetPwdViewController: UIViewController {
     fileprivate var pwdComfirmTextField: MPUnderLineTextField!
     fileprivate var getCodeButton: MPSendCodeButton!
     fileprivate var saveButton: UIButton!
+}
 
+extension MPResetPwdViewController: MPSendCodeButtonDelegate {
+    /// 获取验证码
+    func getCode() {
+        MPNetword.requestJson(target: .sendCode(phone: phoneTextField.text!, type: MPMsgCodeKey.reset_driver), success: { (json) in
+            MPTipsView.showMsg("发送成功")
+            self.getCodeButton.startTimeCount()
+        }) { (error) in
+            print(error)
+            MPTipsView.showMsg("发送失败，请重新发送")
+        }
+    }
 }
