@@ -76,6 +76,44 @@ extension UIFont {
     static let mpBigFont = UIFont.systemFont(ofSize: 18)
 }
 
+private func defaultNumberFormatter() -> NumberFormatter {
+    return threadLocalInstance(.defaultNumberFormatter, initialValue: NumberFormatter())
+}
+
+private func threadLocalInstance<T: AnyObject>(_ identifier: ThreadLocalIdentifier, initialValue: @autoclosure () -> T) -> T {
+    #if os(Linux)
+    var storage = Thread.current.threadDictionary
+    #else
+    let storage = Thread.current.threadDictionary
+    #endif
+    let k = identifier.objcDictKey
+    
+    let instance: T = storage[k] as? T ?? initialValue()
+    if storage[k] == nil {
+        storage[k] = instance
+    }
+    
+    return instance
+}
+
+private enum ThreadLocalIdentifier {
+    case dateFormatter(String)
+    
+    case defaultNumberFormatter
+    case localeNumberFormatter(Locale)
+    
+    var objcDictKey: String {
+        switch self {
+        case .dateFormatter(let format):
+            return "SS\(self)\(format)"
+        case .localeNumberFormatter(let l):
+            return "SS\(self)\(l.identifier)"
+        default:
+            return "SS\(self)"
+        }
+    }
+}
+
 extension String {
     /// 自动算出字体空间大小
     func size(_ font:UIFont, width:CGFloat) -> CGSize {
@@ -92,6 +130,27 @@ extension String {
         }
         let result = reg.matches(in: self, options: .reportProgress, range: NSMakeRange(0, self.count))
         return (result.count > 0)
+    }
+    
+    func toDouble() -> Double? {
+        if let number : NSNumber = defaultNumberFormatter().number(from: self){
+            return number.doubleValue
+        }
+        return nil
+    }
+    
+    func toFloat() -> Float? {
+        if let number = defaultNumberFormatter().number(from: self) {
+            return number.floatValue
+        }
+        return nil
+    }
+    
+    func toInt() -> Int? {
+        if let number = defaultNumberFormatter().number(from: self) {
+            return number.intValue
+        }
+        return nil
     }
 }
 
@@ -120,3 +179,28 @@ extension UIView {
         layer.borderColor = borderColor.cgColor
     }
 }
+
+// MARK:- 给所有遵守Codeale协议添加便利转换方法
+extension Decodable{
+    static func deserialize<T:Decodable>(from: String) -> T?{
+        guard let data : Data = from.data(using: .utf8) else {
+            return nil
+        }
+        let decoder : JSONDecoder = JSONDecoder()
+        guard let temp : T = try? decoder.decode(T.self, from: data) else {
+            return nil
+        }
+        return temp
+    }
+    
+}
+extension Encodable{
+    func toJSONString()->String? {
+        let encoder : JSONEncoder = JSONEncoder()
+        guard let data = try? encoder.encode(self) else {
+            return nil
+        }
+        return String(data : data,encoding:.utf8)
+    }
+}
+

@@ -128,16 +128,11 @@ class MPRegisterViewController: UIViewController {
         if !isValid() {
             return
         }
-        mp_provider.request(.register(phone: phoneTextField.mText, pwd: pwdTextField.mText, code: codeTextField.mText)) { (result) in
-            switch result {
-                case let .success(moyaResponse):
-                    if let str = try? moyaResponse.mapString() {
-                        print(str)
-                    }
-                case let .failure(error):
-                    print(error)
-            }
-        }
+        MPNetword.requestJson(target: .register(phone: phoneTextField.mText, pwd: pwdTextField.mText, code: codeTextField.mText), success: { (json) in
+            print(json)
+            MPTipsView.showMsg("注册成功")
+            self.navigationController?.popViewController(animated: true)
+        })
     }
     
     /// 检测输入是否合法
@@ -171,20 +166,12 @@ class MPRegisterViewController: UIViewController {
 extension MPRegisterViewController: MPSendCodeButtonDelegate {
     /// 获取验证码
     func getCode() {
-        mp_provider.request(.sendCode(phone: phoneTextField.text!, type: MPMsgCodeKey.register_driver)) { (result) in
-            switch result {
-            case let .success(response):
-                if let json = try? response.mapJSON() as AnyObject {
-                    if let msg = json["msg"] as? String {
-                        print(msg)
-                    }
-                }
-                MPTipsView.showMsg("发送成功")
-                self.getCodeButton.startTimeCount()
-            case let .failure(error):
-                print(error)
-                MPTipsView.showMsg("发送失败，请重新发送")
-            }
+        MPNetword.requestJson(target: .sendCode(phone: phoneTextField.text!, type: MPMsgCodeKey.register_driver), success: { (json) in
+            MPTipsView.showMsg("发送成功")
+            self.getCodeButton.startTimeCount()
+        }) { (error) in
+            print(error)
+            MPTipsView.showMsg("发送失败，请重新发送")
         }
     }
 }

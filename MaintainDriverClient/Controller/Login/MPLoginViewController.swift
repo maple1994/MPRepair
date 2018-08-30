@@ -20,15 +20,6 @@ class MPLoginViewController: UIViewController {
         }else {
             automaticallyAdjustsScrollViewInsets = false
         }
-//        provide.request(.login) { (result) in
-//            switch result {
-//            case let .success(moyaResponse):
-//                let data = moyaResponse.data
-//                let statusCode = moyaResponse.statusCode
-//            case let .failure(error):
-//                print(error)
-//            }
-//        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -140,8 +131,65 @@ class MPLoginViewController: UIViewController {
         return NSAttributedString(string: text, attributes: dic)
     }
     
+    /// 检测输入是否合法
+    fileprivate func isValid() -> Bool {
+        if !phoneTextField.trimText.isMatchRegularExp("1[0-9]{10}$") {
+            MPTipsView.showMsg("请输入合法的手机号码")
+            return false
+        }
+        if pwdTextField.mText.isEmpty {
+            MPTipsView.showMsg("请输入密码")
+            return false
+        }
+        return true
+    }
+    
     @objc fileprivate func login() {
-        dismiss(animated: true, completion: nil)
+        if !isValid() {
+            return
+        }
+        MPNetword.requestJson(target: .login(phone: phoneTextField.mText, pwd: pwdTextField.mText), success: { (json) in
+            let dic = json["data"] as AnyObject
+            guard let ID = dic["user_id"] as? Int,
+                let token = dic["token"] as? String,
+                let expire = dic["expire"] as? String else {
+                    MPTipsView.showMsg("登录失败，请重新再试")
+                    return
+            }
+            MPUserModel.shared.userID = ID
+            MPUserModel.shared.token = token
+            MPUserModel.shared.expire = expire
+            self.getUsetInfo()
+        })
+    }
+    
+    fileprivate func getUsetInfo() {
+        if MPUserModel.shared.userID == 0 {
+            MPTipsView.showMsg("登录失败，请重新再试")
+            return
+        }
+        MPNetword.requestJson(target: .getUserInfo, success: { (json) in
+            let dic = json["data"] as AnyObject
+            guard
+                let phone = dic["phone"] as? String,
+                let name = dic["name"] as? String,
+                let picUrl = dic["pic_url"] as? String,
+                let point = dic["point"] as? Int,
+                let isPass = dic["is_pass"] as? Bool
+                else {
+                    MPTipsView.showMsg("登录失败，请重新再试")
+                    return
+            }
+            MPUserModel.shared.phone = phone
+            MPUserModel.shared.userName = name
+            MPUserModel.shared.picUrl = picUrl
+            MPUserModel.shared.point = point
+            MPUserModel.shared.isPass = isPass
+            MPUserModel.shared.loginSucc()
+            self.dismiss(animated: true, completion: nil)
+        }) { (err) in
+            MPTipsView.showMsg("登录失败，请重新再试")
+        }
     }
     
     @objc fileprivate func resetPwd() {

@@ -25,6 +25,35 @@ class MPNetwordActivityPlugin: PluginType {
     
     /// Called after a response has been received, but before the MoyaProvider has invoked its completion handler.
     func didReceive(_ result: Result<Moya.Response, MoyaError>, target: TargetType) {
+        switch result {
+        case let .success(response):
+            guard let json = try? response.mapJSON() as AnyObject,
+            let code = json["code"] as? Int else {
+                return
+            }
+            switch code {
+            case 100:
+                if let msg = json["msg"] as? String {
+                    print("100-\(msg)")
+                }
+            case 200:
+                if let msg = json["msg"] as? String {
+                    MPTipsView.showMsg(msg)
+                    print("200-\(msg)")
+                }
+            case 300:
+                // TODO: - Token失效处理
+                if let msg = json["msg"] as? String {
+                    MPTipsView.showMsg(msg)
+                    print("300-\(msg)")
+                }
+                print("token失效")
+            default:
+                break
+            }
+        case let .failure(err):
+            print(err)
+        }
 //        loadingHud?.hide(animated: true, afterDelay: 5)
     }
     

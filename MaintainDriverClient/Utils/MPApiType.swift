@@ -9,6 +9,7 @@
 import UIKit
 import Moya
 import Result
+import SwiftHash
 
 enum MPApiType {
     /// 注册
@@ -23,12 +24,11 @@ enum MPApiType {
     case resetPwd(phone: String, pwd: String, code: String)
     /// 刷新token
     case refreshToken
+    /// 查询用户数据
+    case getUserInfo
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
-/// 网络请求类
-let mp_provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
-
 extension MPApiType: TargetType {
     /// The target's base `URL`.
     var baseURL: URL {
@@ -41,20 +41,22 @@ extension MPApiType: TargetType {
         case .login(phone: _, pwd: _):
             return "api/login/login/"
         case .register(phone: _, pwd: _, code: _):
-            return "api/login/register/"
+            return "api/login/register_driver/"
         case .sendCode(phone: _, type: _):
             return "api/login/message/"
         case .resetPwd(phone: _, pwd: _, code: _):
             return "api/login/reset_driver/"
         case .refreshToken:
             return "api/login/refresh/"
+        case .getUserInfo:
+            return "api/user/user/"
         }
     }
     
     /// The HTTP method used in the request.
     var method: Moya.Method {
         switch self {
-        case .refreshToken:
+        case .refreshToken, .getUserInfo:
             return .get
         default:
             return .post
@@ -70,32 +72,36 @@ extension MPApiType: TargetType {
     /// 请求任务事件（这里附带上参数）
     var task: Task {
         switch self {
-        case .login(let phone, let pwd):
+        case let .login(phone, pwd):
             let param: [String: String] = [
                 "phone": phone,
                 "password": pwd
             ]
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
-        case .register(let phone, let pwd, let code):
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .register(phone, pwd, code):
             let param: [String: String] = [
                 "phone": phone,
                 "password": pwd,
                 "message": code
             ]
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
-        case .sendCode(let phone, let type):
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .sendCode(phone, type):
             let param: [String: String] = [
                 "phone": phone,
                 "type": type
             ]
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
-        case .resetPwd(let phone, let pwd, let code):
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .resetPwd(phone, pwd, code):
             let param: [String: String] = [
                 "phone": phone,
                 "password": pwd,
                 "message": code
             ]
-            return .requestParameters(parameters: param, encoding: JSONEncoding.default)
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case .getUserInfo:
+            var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
@@ -110,6 +116,24 @@ extension MPApiType: TargetType {
     var headers: [String: String]? {
         return nil
     }
+    
+    var defaultParam: [String: Any] {
+        let stamp: String = "\(Date().timeIntervalSince1970)"
+        let sign: String = MD5(MPUserModel.shared.token + stamp)
+        if MPUserModel.shared.userID != 0 &&
+            MPUserModel.shared.token != "0" {
+            let param: [String: Any] = [
+                "user_id": MPUserModel.shared.userID,
+                "timestamp": stamp,
+                "sign": sign,
+                "system": "ios",
+                "version": mp_version
+            ]
+            return param
+        }else {
+            return [String: Any]()
+        }
+    }
 }
 
 
@@ -119,6 +143,63 @@ struct MPMsgCodeKey {
     static let register_driver = "register_driver"
     /// 司机重置密码
     static let reset_driver = "reset_driver"
+}
+
+/// 网络请求工具
+struct MPNetword {
+    // 单例
+    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
+    
+    /// 发送网络请求
+    static func requestJson(
+        target: MPApiType,
+        success: ((AnyObject) -> Void)?,
+        failure: ((MoyaError) -> Void)? = nil
+        ) {
+        
+        provider.request(target) { result in
+            switch result {
+            case let .success(moyaResponse):
+                do {
+                    let json = try moyaResponse.mapJSON() as AnyObject
+                    if let code = json["code"] as? Int {
+                        if code == 100 {
+                            success?(json)
+                        }
+                    }
+                } catch {
+                    failure?(MoyaError.jsonMapping(moyaResponse))
+                }
+            case let .failure(error):
+                failure?(error)
+            }
+        }
+    }
+    
+    static func requestResponse(
+        target: MPApiType,
+        success: ((Response) -> Void)?,
+        failure: ((MoyaError) -> Void)? = nil
+        ) {
+        
+        provider.request(target) { result in
+            switch result {
+            case let .success(moyaResponse):
+                do {
+                    let json = try moyaResponse.mapJSON() as AnyObject
+                    if let code = json["code"] as? Int {
+                        if code == 100 {
+                            success?(moyaResponse)
+                        }
+                    }
+                } catch {
+                    failure?(MoyaError.jsonMapping(moyaResponse))
+                }
+            case let .failure(error):
+                failure?(error)
+            }
+        }
+    }
 }
 
 

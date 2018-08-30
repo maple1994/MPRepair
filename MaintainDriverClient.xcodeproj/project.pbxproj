@@ -17,6 +17,7 @@
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
 		F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */; };
 		F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */; };
+		F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E90282136E9D700ED1B44 /* MPUserModel.swift */; };
 		F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */; };
 		F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */; };
 		F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */; };
@@ -117,6 +118,7 @@
 		F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController1.swift; sourceTree = "<group>"; };
 		F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController2.swift; sourceTree = "<group>"; };
 		F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordActivityPlugin.swift; sourceTree = "<group>"; };
+		F51E90282136E9D700ED1B44 /* MPUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserModel.swift; sourceTree = "<group>"; };
 		F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController.swift; sourceTree = "<group>"; };
 		F52A5817211991160054B90D /* MPStartYearCheckViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController2.swift; sourceTree = "<group>"; };
 		F52A5819211993700054B90D /* MPCheckOutFinishViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckOutFinishViewController1.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */,
+				F51E90282136E9D700ED1B44 /* MPUserModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -722,6 +725,7 @@
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftHash/SwiftHash.framework",
 				"${BUILT_PRODUCTS_DIR}/TZImagePickerController/TZImagePickerController.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -735,6 +739,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftHash.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TZImagePickerController.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -797,6 +802,7 @@
 				F5DF738E211A94E400B9F154 /* MPTitleView.swift in Sources */,
 				F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */,
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
+				F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,

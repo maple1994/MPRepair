@@ -16,6 +16,7 @@ pod 'Moya'
 pod 'Kingfisher'
 pod 'MBProgressHUD'
 pod 'IQKeyboardManagerSwift'
+pod 'SwiftHash'
 
 
   # Pods for MaintainDriverClient

@@ -10,13 +10,24 @@ import UIKit
 
 /// 工具类
 class MPUtils {
-//    static let screenH: CGFloat = UIScreen.main.bounds.height
-//    static let screenW: CGFloat = UIScreen.main.bounds.width
     
     class func createLine(_ lineColor: UIColor = UIColor.colorWithHexString("#E0E0E0")) -> UIView {
         let line = UIView()
         line.backgroundColor = lineColor
         return line
+    }
+    
+    class func toInt(_ value: Any?) -> Int? {
+        guard let value1 = value else {
+            return nil
+        }
+        if let val = value1 as? Int {
+            return val
+        }
+        if let val = value1 as? String {
+            return val.toInt()
+        }
+        return nil
     }
 }
 

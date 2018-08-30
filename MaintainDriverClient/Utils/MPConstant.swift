@@ -8,6 +8,11 @@
 
 import UIKit
 
+/// 版本号
+let mp_version: Double = 1.0
+/// 保存用户json的URL
+let mp_path_url: URL = URL(string: NSHomeDirectory() + "/Documents/userInfo.json")!
+
 /// 垂直space
 let mp_vSpace: CGFloat = 10
 /// 水平space

@@ -11,7 +11,9 @@ import UIKit
 class MPHomeViewController: UIViewController {
     // TODO: 登录状态
     /// 标记用户是否已登录，未登录显示登录界面
-    fileprivate var isLogin: Bool = false
+    fileprivate var isLogin: Bool {
+        return MPUserModel.shared.isLogin
+    }
     var isAnimationed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,8 +74,6 @@ class MPHomeViewController: UIViewController {
     // MARK: - Action
     @objc fileprivate func meAction() {
         slideMenuController()?.openLeft()
-//        mp_Provider.request(.test(idList: "SH000001,SZ399001,SZ399006")) { (result) in
-//        }
     }
     
     @objc fileprivate func segChange() {
