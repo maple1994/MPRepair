@@ -40,6 +40,7 @@ class MPUserModel: Codable {
     /// 登录成功
     func loginSucc() {
         serilization()
+        NotificationCenter.default.post(name: MP_LOGIN_NOTIFICATION, object: nil)
     }
     
     /// 退出登录

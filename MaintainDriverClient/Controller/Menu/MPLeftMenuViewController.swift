@@ -26,7 +26,18 @@ class MPLeftMenuViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        var name = MPUserModel.shared.userName
+        if MPUserModel.shared.userName.isEmpty {
+            name = "默认名"
+        }
+        userNameLabel.text = name
+        userIconView.mp_setImage(MPUserModel.shared.picUrl)
         tableView.reloadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPLeftMenuViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     fileprivate func setupUI() {
@@ -71,6 +82,15 @@ class MPLeftMenuViewController: UIViewController {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(MPLeftMenuViewController.userIconClick))
         userIconView.addGestureRecognizer(tap)
+    }
+    
+    @objc fileprivate func loginSucc() {
+        var name = MPUserModel.shared.userName
+        if MPUserModel.shared.userName.isEmpty {
+            name = "默认名"
+        }
+        userNameLabel.text = name
+        userIconView.mp_setImage(MPUserModel.shared.picUrl)
     }
     
     @objc fileprivate func userIconClick() {

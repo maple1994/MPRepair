@@ -12,6 +12,9 @@ import UIKit
 let mp_version: Double = 1.0
 /// 保存用户json的URL
 let mp_path_url: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/userInfo.json")
+/// 登录成功通知
+let MP_LOGIN_NOTIFICATION = NSNotification.Name.init("MP_LOGIN_SUCCESS_NOTIFICATION")
+
 
 /// 垂直space
 let mp_vSpace: CGFloat = 10

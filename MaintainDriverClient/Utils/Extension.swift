@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// 扩展
 extension UIColor {
@@ -177,6 +178,17 @@ extension UIView {
     func setupBorder(width: CGFloat = 1, borderColor: UIColor) {
         layer.borderWidth = width
         layer.borderColor = borderColor.cgColor
+    }
+}
+
+extension UIImageView {
+    func mp_setImage(_ urlString: String) {
+        let url = URL(string: urlString)
+        kf.setImage(with: url, placeholder: UIImage(named: "person"), options: nil, progressBlock: nil) { (img, _, _, _) in
+            if img == nil {
+                self.image = UIImage(named: "person")
+            }
+        }
     }
 }
 
