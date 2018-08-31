@@ -34,25 +34,26 @@ class MPNetwordActivityPlugin: PluginType {
             switch code {
             case 100:
                 if let msg = json["msg"] as? String {
-                    print("100-\(msg)")
+                    MPPrint("100-\(msg)")
                 }
             case 200:
                 if let msg = json["msg"] as? String {
                     MPTipsView.showMsg(msg)
-                    print("200-\(msg)")
+                    MPPrint("200-\(msg)")
                 }
             case 300:
                 // TODO: - Token失效处理
                 if let msg = json["msg"] as? String {
                     MPTipsView.showMsg(msg)
-                    print("300-\(msg)")
+                    MPPrint("300-\(msg)")
                 }
-                print("token失效")
+                MPPrint("token失效")
+                MPUserModel.shared.loginOut()
             default:
                 break
             }
         case let .failure(err):
-            print(err)
+            MPPrint(err)
         }
 //        loadingHud?.hide(animated: true, afterDelay: 5)
     }

@@ -102,6 +102,8 @@ extension MPApiType: TargetType {
             var param = defaultParam
             param["id"] = MPUserModel.shared.userID
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case .refreshToken:
+            return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         default:
             return .requestPlain
         }

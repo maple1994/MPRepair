@@ -129,7 +129,6 @@ class MPRegisterViewController: UIViewController {
             return
         }
         MPNetword.requestJson(target: .register(phone: phoneTextField.mText, pwd: pwdTextField.mText, code: codeTextField.mText), success: { (json) in
-            print(json)
             MPTipsView.showMsg("注册成功")
             self.navigationController?.popViewController(animated: true)
         })
@@ -170,7 +169,7 @@ extension MPRegisterViewController: MPSendCodeButtonDelegate {
             MPTipsView.showMsg("发送成功")
             self.getCodeButton.startTimeCount()
         }) { (error) in
-            print(error)
+            MPPrint(error)
             MPTipsView.showMsg("发送失败，请重新发送")
         }
     }

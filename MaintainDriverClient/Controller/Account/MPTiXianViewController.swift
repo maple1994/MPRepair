@@ -125,11 +125,11 @@ class MPTiXianViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        print("确认提现")
+        MPPrint("确认提现")
     }
     
     @objc fileprivate func allTiXian() {
-        print("全部提现")
+        MPPrint("全部提现")
     }
     
     fileprivate var tableView: UITableView!

@@ -114,7 +114,7 @@ class MPSettingViewController: UIViewController {
     }
     
     @objc fileprivate func save() {
-        print("保存")
+        MPPrint("保存")
     }
     
     @objc fileprivate func loginOut() {

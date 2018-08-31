@@ -163,7 +163,7 @@ extension MPResetPwdViewController: MPSendCodeButtonDelegate {
             MPTipsView.showMsg("发送成功")
             self.getCodeButton.startTimeCount()
         }) { (error) in
-            print(error)
+            MPPrint(error)
             MPTipsView.showMsg("发送失败，请重新发送")
         }
     }

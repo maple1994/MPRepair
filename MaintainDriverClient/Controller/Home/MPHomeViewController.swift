@@ -12,12 +12,22 @@ class MPHomeViewController: UIViewController {
     // TODO: 登录状态
     /// 标记用户是否已登录，未登录显示登录界面
     fileprivate var isLogin: Bool {
-        return false
-//        return MPUserModel.shared.isLogin
+        return MPUserModel.shared.isLogin
     }
     var isAnimationed: Bool = false
     override func viewDidLoad() {
         super.viewDidLoad()
+        MPNetword.requestJson(target: .refreshToken, success: { (json) in
+            let data = json["data"] as AnyObject
+            if let token = data["token"] as? String,
+                let expire = data["expire"] as? String {
+                MPPrint(token)
+                MPPrint(expire)
+            }
+        }) { (err) in
+            // TODO: - 刷新Token失败
+            MPTipsView.showMsg("刷新Token失败")
+        }
         if !isLogin {
             let loginVC = MPLoginViewController()
             let nav = MPLoginNavViewController(rootViewController: loginVC)

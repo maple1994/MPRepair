@@ -31,5 +31,14 @@ class MPUtils {
     }
 }
 
+#if DEBUG
+func MPPrint<T>(_ str: T) {
+    print(str)
+}
+#else
+func MPPrint<T>(_ str: T) {
+}
+#endif
+
 
 

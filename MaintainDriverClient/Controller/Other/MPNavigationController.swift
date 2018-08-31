@@ -22,6 +22,9 @@ class MPNavigationController: UINavigationController {
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)]
     }
     
+    deinit {
+        MPPrint("MPNavigationController deinit")
+    }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         if self.viewControllers.count > 0 {

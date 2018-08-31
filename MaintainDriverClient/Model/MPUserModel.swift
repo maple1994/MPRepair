@@ -30,7 +30,7 @@ class MPUserModel: Codable {
     // MARK: - Method
     private init() {
         if readLocalData() {
-            
+            refreshToken()
         }else {
             userID = 0
             token = "0"
@@ -45,7 +45,24 @@ class MPUserModel: Codable {
     
     /// 退出登录
     func loginOut() {
-        // TODO: - 注销
+        // 清除数据
+        removeUserInfo()
+        // 切换根控制器
+        (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
+    }
+    
+    /// 刷新token
+    func refreshToken() {
+//        MPNetword.requestJson(target: .refreshToken, success: { (json) in
+//            if let token = json["token"] as? String,
+//                let expire = json["expire"] as? String {
+//                self.token = token
+//                self.expire = expire
+//            }
+//        }) { (err) in
+//            // TODO: - 刷新Token失败
+//            MPTipsView.showMsg("刷新Token失败")
+//        }
     }
     
     /// 序列化
@@ -54,8 +71,26 @@ class MPUserModel: Codable {
             do {
                 try data.write(to: mp_path_url)
             }catch {
-                print("写入失败")
+                MPPrint("写入失败")
             }
+        }
+    }
+    
+    /// 清除数据
+    fileprivate func removeUserInfo() {
+        // 清空数据
+        userID = 0
+        userName = ""
+        phone = ""
+        token = ""
+        expire = ""
+        picUrl = ""
+        point = 0
+        isPass = false
+        do {
+            try FileManager.default.removeItem(at: mp_path_url)
+        }catch {
+            MPPrint("文件不存在")
         }
     }
     

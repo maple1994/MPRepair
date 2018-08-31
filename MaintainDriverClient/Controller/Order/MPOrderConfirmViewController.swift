@@ -41,7 +41,7 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     @objc fileprivate func cancelOrder() {
-        print("取消订单")
+        MPPrint("取消订单")
     }
     
     @objc fileprivate func confirm() {
