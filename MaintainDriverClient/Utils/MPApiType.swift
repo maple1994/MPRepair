@@ -26,6 +26,8 @@ enum MPApiType {
     case refreshToken
     /// 查询用户数据
     case getUserInfo
+    /// 修改用户信息
+    case updateUserInfo(name: String?, pic: UIImage?)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -50,13 +52,16 @@ extension MPApiType: TargetType {
             return "api/login/refresh/"
         case .getUserInfo:
             return "api/user/user/"
+        case .updateUserInfo(name: _, pic: _):
+            return "api/user/user/"
         }
     }
     
     /// The HTTP method used in the request.
     var method: Moya.Method {
         switch self {
-        case .refreshToken, .getUserInfo:
+        case .refreshToken,
+             .getUserInfo:
             return .get
         default:
             return .post
@@ -104,8 +109,21 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .refreshToken:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
-        default:
-            return .requestPlain
+        case let .updateUserInfo(name, pic):
+            var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            param["phone"] = MPUserModel.shared.phone
+            if let name1 = name {
+                param["name"] = name1
+            }
+            if let pic1 = pic {
+                if let base64 = UIImageJPEGRepresentation(pic1, 1)?.base64EncodedString(){
+                    param["pic"] = base64
+                }
+            }
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+//        default:
+//            return .requestPlain
         }
     }
     

@@ -21,7 +21,7 @@ class MPEditView: UIView {
         editView.resignFirstResponder()
     }
     
-    fileprivate var callBack: ((String?) -> Void)?
+    fileprivate var callBack: ((String) -> Void)?
     
     init() {
         super.init(frame: CGRect.zero)

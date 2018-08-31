@@ -7,16 +7,28 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 /// 用户模型
 class MPUserModel: Codable {
+    // 只对以下属性执行序列化
+    enum CodingKeys: String, CodingKey {
+        case userID
+        case userName
+        case phone
+        case token
+        case expire
+        case picUrl
+        case point
+        case isPass
+    }
     // MARK: - Property
     static let shared = MPUserModel()
     
     var userID: Int = 0
     var userName: String = ""
     var phone: String = ""
-    var token: String = ""
+    var token: String = "0"
     var expire: String = ""
     var picUrl: String = ""
     var point: Int = 0
@@ -26,11 +38,18 @@ class MPUserModel: Codable {
     var isLogin: Bool {
         return token != "0"
     }
+    var userIcon: UIImage {
+        if let icon = _userIcon {
+            return icon
+        }
+        return #imageLiteral(resourceName: "person")
+    }
+    var _userIcon: UIImage?
     
     // MARK: - Method
     private init() {
         if readLocalData() {
-            refreshToken()
+            
         }else {
             userID = 0
             token = "0"
@@ -47,22 +66,28 @@ class MPUserModel: Codable {
     func loginOut() {
         // 清除数据
         removeUserInfo()
+        if let slideVC = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? SlideMenuController {
+            slideVC.mainViewController?.dismiss(animated: false, completion: nil)
+        }
         // 切换根控制器
         (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
     }
     
     /// 刷新token
     func refreshToken() {
-//        MPNetword.requestJson(target: .refreshToken, success: { (json) in
-//            if let token = json["token"] as? String,
-//                let expire = json["expire"] as? String {
-//                self.token = token
-//                self.expire = expire
-//            }
-//        }) { (err) in
-//            // TODO: - 刷新Token失败
-//            MPTipsView.showMsg("刷新Token失败")
-//        }
+        MPNetword.requestJson(target: .refreshToken, success: { (json) in
+            let data = json["data"] as AnyObject
+            if let token = data["token"] as? String,
+                let expire = data["expire"] as? String {
+                self.token = token
+                self.expire = expire
+                // 序列化
+                self.serilization()
+            }
+        }) { (err) in
+            // TODO: - 刷新Token失败
+            MPTipsView.showMsg("刷新Token失败")
+        }
     }
     
     /// 序列化
@@ -82,11 +107,12 @@ class MPUserModel: Codable {
         userID = 0
         userName = ""
         phone = ""
-        token = ""
+        token = "0"
         expire = ""
         picUrl = ""
         point = 0
         isPass = false
+        _userIcon = nil
         do {
             try FileManager.default.removeItem(at: mp_path_url)
         }catch {

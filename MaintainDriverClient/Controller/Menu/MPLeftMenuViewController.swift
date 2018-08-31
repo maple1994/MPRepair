@@ -90,7 +90,15 @@ class MPLeftMenuViewController: UIViewController {
             name = "默认名"
         }
         userNameLabel.text = name
-        userIconView.mp_setImage(MPUserModel.shared.picUrl)
+//        userIconView.mp_setImage(MPUserModel.shared.picUrl)
+        let url = URL(string: MPUserModel.shared.picUrl)
+        userIconView.kf.setImage(with: url, placeholder: UIImage(named: "person"), options: nil, progressBlock: nil) { [weak self] (img, _, _, _) in
+            if let img1 = img {
+                MPUserModel.shared._userIcon = img1
+            }else {
+                self?.userIconView.image = UIImage(named: "person")
+            }
+        }
     }
     
     @objc fileprivate func userIconClick() {

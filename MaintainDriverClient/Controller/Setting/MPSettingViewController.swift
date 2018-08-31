@@ -13,8 +13,8 @@ import IQKeyboardManagerSwift
 class MPSettingViewController: UIViewController {
 
     fileprivate let editViewH: CGFloat = 60
-    fileprivate var iconImage: UIImage?
-    fileprivate var userName: String?
+    fileprivate var icon: UIImage = MPUserModel.shared.userIcon
+    fileprivate var userName: String = MPUserModel.shared.userName
     
     // MARK: - Life
     override func viewDidLoad() {
@@ -27,6 +27,7 @@ class MPSettingViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -114,11 +115,25 @@ class MPSettingViewController: UIViewController {
     }
     
     @objc fileprivate func save() {
-        MPPrint("保存")
+        var name: String? = nil
+        var pic: UIImage? = nil
+        if userName != MPUserModel.shared.userName {
+            name = userName
+        }
+        if icon != MPUserModel.shared.userIcon {
+            pic = icon
+        }
+        MPNetword.requestJson(target: .updateUserInfo(name: name, pic: pic), success: { (json) in
+            MPTipsView.showMsg("修改成功")
+            MPUserModel.shared.userName = self.userName
+            MPUserModel.shared._userIcon = self.icon
+        }) { (_) in
+           MPTipsView.showMsg("修改失败")
+        }
     }
     
     @objc fileprivate func loginOut() {
-        (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
+        MPUserModel.shared.loginOut()
     }
     
     // MARK: - View
@@ -147,13 +162,13 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.leftTitleLabel?.text = "头像"
-            cell.iconView?.image = iconImage
+            cell.iconView?.image = icon
         case 1:
             cell.leftTitleLabel?.text = "昵称"
-            cell.rightTitleLabel?.text = userName ?? "王一清"
+            cell.rightTitleLabel?.text = userName
         case 2:
             cell.leftTitleLabel?.text = "手机号"
-            cell.rightTitleLabel?.text = "13445564538"
+            cell.rightTitleLabel?.text = MPUserModel.shared.phone
         default:
             break
         }
@@ -188,7 +203,7 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
             present(vc, animated: true, completion: nil)
         case 1:
             editView.showKeyBoard(userName) { [weak self] (name) in
-                self?.userName = name
+                self?.userName = name!
                 self?.tableView.reloadData()
             }
         default:
@@ -203,7 +218,9 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MPSettingViewController: TZImagePickerControllerDelegate {
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        iconImage = photos.first
+        if let img = photos.first {
+            icon = img
+        }
         tableView.reloadData()
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 import Moya
+import IQKeyboardManagerSwift
 
 class MPLoginViewController: UIViewController {
 
@@ -20,6 +21,8 @@ class MPLoginViewController: UIViewController {
         }else {
             automaticallyAdjustsScrollViewInsets = false
         }
+        IQKeyboardManager.shared.enable = true
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
     
     override func viewDidDisappear(_ animated: Bool) {
