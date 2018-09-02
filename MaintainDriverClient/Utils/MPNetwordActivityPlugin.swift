@@ -20,7 +20,12 @@ class MPNetwordActivityPlugin: PluginType {
     
     /// Called immediately before a request is sent over the network (or stubbed).
     func willSend(_ request: RequestType, target: TargetType) {
-//        loadingHud = MPTipsView.showLoadingView()
+        switch target {
+        case MPApiType.updateUserInfo(name: _, pic: _):
+            loadingHud = MPTipsView.showLoadingView("正在上传...")
+        default:
+            break
+        }
     }
     
     /// Called after a response has been received, but before the MoyaProvider has invoked its completion handler.
@@ -54,6 +59,12 @@ class MPNetwordActivityPlugin: PluginType {
             }
         case let .failure(err):
             MPPrint(err)
+        }
+        switch target {
+        case MPApiType.updateUserInfo(name: _, pic: _):
+            loadingHud?.hide(animated: true)
+        default:
+            break
         }
 //        loadingHud?.hide(animated: true, afterDelay: 5)
     }

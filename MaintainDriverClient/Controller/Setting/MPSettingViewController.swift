@@ -127,6 +127,9 @@ class MPSettingViewController: UIViewController {
             MPTipsView.showMsg("修改成功")
             MPUserModel.shared.userName = self.userName
             MPUserModel.shared._userIcon = self.icon
+            MPUserModel.shared.getUserInfo(succ: {
+                MPUserModel.shared.serilization()
+            }, fail: nil)
             NotificationCenter.default.post(name: MP_USERINFO_UPDATE_NOTIFICATION, object: nil)
         }) { (_) in
            MPTipsView.showMsg("修改失败")

@@ -119,7 +119,7 @@ class MPUserModel: Codable {
 // MARK: - IO
 extension MPUserModel {
     /// 序列化
-    fileprivate func serilization() {
+    func serilization() {
         if let data = self.toJSONString()?.data(using: .utf8) {
             do {
                 try data.write(to: mp_path_url)

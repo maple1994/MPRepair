@@ -81,8 +81,8 @@ class MPLeftMenuViewController: UIViewController {
         }
         tableView.tableHeaderView = tbHeaderView
         
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLeftMenuViewController.userIconClick))
-        userIconView.addGestureRecognizer(tap)
+//        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLeftMenuViewController.userIconClick))
+//        userIconView.addGestureRecognizer(tap)
     }
     
     @objc fileprivate func loginSucc() {
@@ -106,16 +106,16 @@ class MPLeftMenuViewController: UIViewController {
     }
     
     @objc fileprivate func userIconClick() {
-        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
-        vc.showSelectBtn = false
-        vc.circleCropRadius = 150
-        vc.needCircleCrop = true
-        vc.allowCrop = true
-        vc.preferredLanguage = "zh-Hans"
-        vc.naviBgColor = UIColor.navBlue
-        vc.allowTakeVideo = false
-        vc.allowPickingVideo = false
-        present(vc, animated: true, completion: nil)
+//        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
+//        vc.showSelectBtn = false
+//        vc.circleCropRadius = 150
+//        vc.needCircleCrop = true
+//        vc.allowCrop = true
+//        vc.preferredLanguage = "zh-Hans"
+//        vc.naviBgColor = UIColor.navBlue
+//        vc.allowTakeVideo = false
+//        vc.allowPickingVideo = false
+//        present(vc, animated: true, completion: nil)
     }
 
     // MARK: - UIView
