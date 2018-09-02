@@ -28,8 +28,10 @@ enum MPApiType {
     case getUserInfo
     /// 修改用户信息
     case updateUserInfo(name: String?, pic: UIImage?)
-    /// 获取账户明细洗洗
+    /// 获取账户明细信息
     case getAccountInfo
+    /// 明细操作信息-提现 via- alipay, weixin
+    case tiXian(money: Double, via: String)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -56,7 +58,7 @@ extension MPApiType: TargetType {
             return "api/user/user/"
         case .updateUserInfo(name: _, pic: _):
             return "api/user/user/"
-        case .getAccountInfo:
+        case .getAccountInfo, .tiXian(money: _, via: _):
             return "api/driver/account/"
         }
     }
@@ -129,6 +131,11 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .getAccountInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
+        case let .tiXian(money, via):
+            var param = defaultParam
+            param["money"] = money
+            param["via"] = via
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain
         }

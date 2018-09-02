@@ -12,6 +12,17 @@ import UIKit
 class MPTiXianViewController: UIViewController {
     /// 是否提现微信
     fileprivate var isToWeChat: Bool = false
+    fileprivate var wechatCell: MPTiXianToWeChatCell?
+    fileprivate var alipayCell: MPTiXianToWeChatCell?
+    fileprivate var tiXianType: String {
+        if isToWeChat {
+            return "winxin"
+        }else {
+            return "alipay"
+        }
+    }
+    
+    // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         setpuUI()
@@ -58,6 +69,7 @@ class MPTiXianViewController: UIViewController {
         allTiXianBtn.addTarget(self, action: #selector(MPTiXianViewController.allTiXian), for: .touchUpInside)
         textField = MPUnderLineTextField()
         textField.lineColor = UIColor.colorWithHexString("#DCDCDC")
+        textField.keyboardType = .numberPad
         textField.placeholder = "请输入金额"
         textField.font = UIFont.mpBigFont
         textField.leftView = getLeftView()
@@ -125,13 +137,26 @@ class MPTiXianViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        MPPrint("确认提现")
+        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
+            MPTipsView.showMsg("请收入合法的数字")
+        }
+        guard let money = textField.mText.toDouble() else {
+            MPTipsView.showMsg("请收入合法的数字")
+            return
+        }
+        MPNetword.requestJson(target: .tiXian(money: money, via: tiXianType), success: { (json) in
+            MPTipsView.showMsg("提现成功")
+        }) { (_) in
+            MPTipsView.showMsg("提现失败")
+        }
     }
     
     @objc fileprivate func allTiXian() {
-        MPPrint("全部提现")
+//        MPApiType.tiXian(money: <#T##Double#>, via: <#T##String#>)
+//        MPNetword.requestJson(target: <#T##MPApiType#>, success: <#T##((AnyObject) -> Void)?##((AnyObject) -> Void)?##(AnyObject) -> Void#>, failure: <#T##((MoyaError) -> Void)?##((MoyaError) -> Void)?##(MoyaError) -> Void#>)
     }
     
+    // MARK: - View
     fileprivate var tableView: UITableView!
     fileprivate var tiXianBtn: UIButton!
     fileprivate var moneyLabel: UILabel!
@@ -143,15 +168,23 @@ class MPTiXianViewController: UIViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPTiXianViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return 2
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "MPTiXianToWeChatCell") as? MPTiXianToWeChatCell
-        if cell == nil {
-            cell = MPTiXianToWeChatCell(style: .default, reuseIdentifier: "MPTiXianToWeChatCell")
+        let cell = MPTiXianToWeChatCell(style: .default, reuseIdentifier: nil)
+        if indexPath.row == 0 {
+            cell.icon = #imageLiteral(resourceName: "wechat")
+            cell.tips = "提现至微信"
+            cell.boxSelected = isToWeChat
+            wechatCell = cell
+        }else {
+            cell.icon = #imageLiteral(resourceName: "alipay")
+            cell.tips = "提现至支付宝"
+            cell.boxSelected = !isToWeChat
+            alipayCell = cell
         }
-        return cell!
+        return cell
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -163,10 +196,18 @@ extension MPTiXianViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? MPTiXianToWeChatCell {
-            cell.boxSelected = !cell.boxSelected
-            isToWeChat = cell.boxSelected
+        if indexPath.row == 0 {
+            if wechatCell!.boxSelected {
+                return
+            }
+            isToWeChat = true
+        }else {
+            if alipayCell!.boxSelected {
+                return
+            }
+            isToWeChat = false
         }
+        tableView.reloadData()
     }
 }
 
@@ -183,6 +224,33 @@ class MPTiXianToWeChatCell: UITableViewCell {
         }
     }
     
+    var icon: UIImage? {
+        didSet {
+            iconImageView.image = icon
+        }
+    }
+    
+    var tips: String? {
+        didSet {
+            if let txt = tips {
+                let dic1: [NSAttributedStringKey: Any] = [
+                    NSAttributedStringKey.font: UIFont.mpNormalFont,
+                    NSAttributedStringKey.foregroundColor: UIColor.fontBlack
+                ]
+                let dic2: [NSAttributedStringKey: Any] = [
+                    NSAttributedStringKey.font: UIFont.mpSmallFont,
+                    NSAttributedStringKey.foregroundColor: UIColor.priceRed
+                ]
+                let str1 = NSAttributedString(string: txt, attributes: dic1)
+                let str2 = NSAttributedString(string: "(将收取1%手续费)", attributes: dic2)
+                let res = NSMutableAttributedString()
+                res.append(str1)
+                res.append(str2)
+                tipLabel.attributedText = res
+            }
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()
@@ -193,9 +261,9 @@ class MPTiXianToWeChatCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        let iconImageView = UIImageView()
+        iconImageView = UIImageView()
         iconImageView.image = #imageLiteral(resourceName: "wechat")
-        let tipLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: UIColor.fontBlack)
+        tipLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: UIColor.fontBlack)
         let dic1: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.mpNormalFont,
             NSAttributedStringKey.foregroundColor: UIColor.fontBlack
@@ -229,8 +297,16 @@ class MPTiXianToWeChatCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-15)
             make.width.height.equalTo(18)
         }
+        let line = MPUtils.createLine()
+        contentView.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.height.equalTo(0.4)
+        }
     }
     
+    fileprivate var iconImageView: UIImageView!
+    fileprivate var tipLabel: UILabel!
     fileprivate var checkBoxIconView: UIImageView!
 
 }
