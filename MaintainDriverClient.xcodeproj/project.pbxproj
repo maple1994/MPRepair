@@ -1009,6 +1009,7 @@
 			baseConfigurationReference = 02B61D9DEE07324DDA6735D9 /* Pods-MaintainDriverClient.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -1031,6 +1032,7 @@
 			baseConfigurationReference = 4371321C7CF3066700812709 /* Pods-MaintainDriverClient.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 53D2P848US;
 				FRAMEWORK_SEARCH_PATHS = (
