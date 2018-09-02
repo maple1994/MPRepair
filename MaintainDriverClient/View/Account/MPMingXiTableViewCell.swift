@@ -11,12 +11,12 @@ import UIKit
 /// 明细Cell
 class MPMingXiTableViewCell: UITableViewCell {
     
-    var orderModel: MPOrderModel? {
+    var detailModel: MPMingXiModel? {
         didSet {
-            timeLabel.text = orderModel?.create_time
-            startAddressLabel.text = orderModel?.start_address
-            endAddressLabel.text = orderModel?.end_address
-            if let money = orderModel?.cost {
+            timeLabel.text = detailModel?.create_time
+            startAddressLabel.text = detailModel?.start_address
+            endAddressLabel.text = detailModel?.end_address
+            if let money = detailModel?.cost {
                 moneyLabel.text = String(format: "¥ %.02f", money)
             }
         }

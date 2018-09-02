@@ -17,7 +17,7 @@ protocol MPGongZuoTaiViewControllerDelegate: class {
 class MPGongZuoTaiViewController: UIViewController {
 
     fileprivate let CellID = "MPCheckBoxOrderTableViewCell"
-    fileprivate var orderModelArr: [MPOrderModel]?
+    fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     
     /// 下车
@@ -30,10 +30,17 @@ class MPGongZuoTaiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        orderModelArr = [MPOrderModel]()
-        orderModelArr?.append(MPOrderModel())
-        orderModelArr?.append(MPOrderModel())
         tableView.reloadData()
+        loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func loginSucc() {
+        loadData()
     }
     
     fileprivate func setupUI() {
@@ -97,6 +104,22 @@ class MPGongZuoTaiViewController: UIViewController {
         chuCheButton.isHidden = false
     }
     
+    fileprivate func loadData() {
+        MPNetword.requestJson(target: .checkOrderList(type: "order"), success: { (json) in
+            guard let data = json["data"] as? [[String: Any]] else {
+                return
+            }
+            var arr = [MPOrderModel]()
+            for dic in data {
+                if let model: MPOrderModel = MPOrderModel.mapFromDict(dic) {
+                    arr.append(model)
+                }
+            }
+            self.modelArr = arr
+            self.tableView.reloadData()
+        })
+    }
+    
     // MARK: - Action
     @objc fileprivate func stealAction() {
 //        guard let arr = orderModelArr else {
@@ -141,7 +164,7 @@ class MPGongZuoTaiViewController: UIViewController {
 extension MPGongZuoTaiViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderModelArr?.count ?? 0
+        return modelArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -149,22 +172,19 @@ extension MPGongZuoTaiViewController: UITableViewDelegate, UITableViewDataSource
         if cell == nil {
             cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID)
         }
-        cell?.isStateHidden = true
+        cell?.orderModel = modelArr[indexPath.row]
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let h = tableView.fd_heightForCell(withIdentifier: CellID) { (cell1) in
-//            let cell = cell1 as? MPOrderTableViewCell
+            let cell = cell1 as? MPOrderTableViewCell
+            cell?.orderModel = self.modelArr[indexPath.row]
         }
         return h
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let arr = orderModelArr else {
-            return
-        }
-        orderModelArr?[indexPath.row].isSelected = !arr[indexPath.row].isSelected
-        tableView.reloadData()
+
     }
 }

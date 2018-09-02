@@ -12,10 +12,17 @@ import UIKit
 class MPYiJieDanViewController: UIViewController {
 
     fileprivate let CellID = "MPOrderTableViewCell_YiJieDan"
+    fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadData()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     fileprivate func setupUI() {
@@ -32,13 +39,33 @@ class MPYiJieDanViewController: UIViewController {
         }
     }
     
+    fileprivate func loadData() {
+        MPNetword.requestJson(target: .checkOrderList(type: "driver"), success: { (json) in
+            guard let data = json["data"] as? [[String: Any]] else {
+                return
+            }
+            var arr = [MPOrderModel]()
+            for dic in data {
+                if let model: MPOrderModel = MPOrderModel.mapFromDict(dic) {
+                    arr.append(model)
+                }
+            }
+            self.modelArr = arr
+            self.tableView.reloadData()
+        })
+    }
+    
+    @objc fileprivate func loginSucc() {
+        loadData()
+    }
+    
     fileprivate var tableView: UITableView!
 }
 
 extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return modelArr.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -46,13 +73,14 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID)
         }
-        cell?.row = indexPath.row
+        cell?.orderModel = modelArr[indexPath.row]
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let h = tableView.fd_heightForCell(withIdentifier: CellID) { (cell) in
-            
+            let cell1 = cell as? MPOrderTableViewCell
+            cell1?.orderModel = self.modelArr[indexPath.row]
         }
         return h
     }

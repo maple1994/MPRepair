@@ -73,6 +73,28 @@ class MPUserModel: Codable {
         (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
     }
     
+    func checkIsExpire(target: MPApiType) -> Bool {
+        switch target {
+        case .login(phone: _, pwd: _),
+            .register(phone: _, pwd: _, code: _),
+            .sendCode(phone: _, type: _),
+            .resetPwd(phone: _, pwd: _, code: _),
+            .refreshToken:
+            return false
+        default:
+            break
+        }
+        guard let date = expire.toDate(format: "yyyy-MM-dd HH:mm:ss") else {
+            return true
+        }
+        let today = Date()
+        let delta = date.timeIntervalSince(today)
+        if delta <= 0 {
+            return true
+        }
+        return false
+    }
+    
     /// 刷新token
     func refreshToken() {
         MPNetword.requestJson(target: .refreshToken, success: { (json) in

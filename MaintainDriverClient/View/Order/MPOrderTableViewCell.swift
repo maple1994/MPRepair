@@ -11,6 +11,16 @@ import UIKit
 /// 订单Cell
 class MPOrderTableViewCell: UITableViewCell {
     
+    var orderModel: MPOrderModel = MPOrderModel() {
+        didSet {
+            orderIDLabel.text = "\(orderModel.id)"
+            carNameLabel.text = orderModel.car_brand
+            JJCDLabel.text = orderModel.order_address
+            NJDDLabel.text = orderModel.surveystation?.name
+            timeLabel.text = orderModel.subscribe_time
+            moneyLabel.text = "\(orderModel.total_price)"
+        }
+    }
     var row: Int = 0{
         didSet {
             if row % 2 == 0 {

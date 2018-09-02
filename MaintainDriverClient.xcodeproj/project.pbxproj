@@ -16,6 +16,7 @@
 		F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */; };
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
 		F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */; };
+		F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */; };
 		F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */; };
 		F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E90282136E9D700ED1B44 /* MPUserModel.swift */; };
 		F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */; };
@@ -116,6 +117,7 @@
 		F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckViewController.swift; sourceTree = "<group>"; };
 		F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController1.swift; sourceTree = "<group>"; };
 		F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController2.swift; sourceTree = "<group>"; };
+		F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMingXiModel.swift; sourceTree = "<group>"; };
 		F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordActivityPlugin.swift; sourceTree = "<group>"; };
 		F51E90282136E9D700ED1B44 /* MPUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserModel.swift; sourceTree = "<group>"; };
 		F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 			children = (
 				F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */,
 				F51E90282136E9D700ED1B44 /* MPUserModel.swift */,
+				F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -810,6 +813,7 @@
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
 				F5DF7395211A94E400B9F154 /* MPOrderTableViewCell.swift in Sources */,
 				F5DF736F211A93E300B9F154 /* MPYiJieDanViewController.swift in Sources */,
+				F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */,
 				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,

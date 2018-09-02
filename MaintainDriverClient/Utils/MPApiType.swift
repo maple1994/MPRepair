@@ -32,6 +32,8 @@ enum MPApiType {
     case getAccountInfo
     /// 明细操作信息-提现 via- alipay, weixin
     case tiXian(money: Double, via: String)
+    /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
+    case checkOrderList(type: String)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -60,6 +62,8 @@ extension MPApiType: TargetType {
             return "api/user/user/"
         case .getAccountInfo, .tiXian(money: _, via: _):
             return "api/driver/account/"
+        case .checkOrderList(type: _):
+            return "api/driver/order/"
         }
     }
     
@@ -68,7 +72,8 @@ extension MPApiType: TargetType {
         switch self {
         case .refreshToken,
              .getUserInfo,
-            .getAccountInfo:
+            .getAccountInfo,
+            .checkOrderList(type: _):
             return .get
         default:
             return .post
@@ -136,6 +141,10 @@ extension MPApiType: TargetType {
             param["money"] = money
             param["via"] = via
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .checkOrderList(type):
+            var param = defaultParam
+            param["type"] = type
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain
         }
@@ -190,7 +199,10 @@ struct MPNetword {
         success: ((AnyObject) -> Void)?,
         failure: ((MoyaError) -> Void)? = nil
         ) {
-        
+        if MPUserModel.shared.checkIsExpire(target: target) {
+            MPPrint("Token过期")
+            return
+        }
         provider.request(target) { result in
             switch result {
             case let .success(moyaResponse):
@@ -215,7 +227,10 @@ struct MPNetword {
         success: ((Response) -> Void)?,
         failure: ((MoyaError) -> Void)? = nil
         ) {
-        
+        if MPUserModel.shared.checkIsExpire(target: target) {
+            MPPrint("Token过期")
+            return
+        }
         provider.request(target) { result in
             switch result {
             case let .success(moyaResponse):

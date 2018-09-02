@@ -153,6 +153,13 @@ extension String {
         }
         return nil
     }
+    
+    func toDate(format: String) -> Date? {
+        let df = DateFormatter()
+        df.dateFormat = format
+        df.timeZone = TimeZone(identifier: "Asia/Shanghai") ?? TimeZone.current
+        return df.date(from: self)
+    }
 }
 
 extension UITextField {
