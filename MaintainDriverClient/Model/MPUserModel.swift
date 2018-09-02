@@ -90,6 +90,34 @@ class MPUserModel: Codable {
         }
     }
     
+    /// 获取用户数据
+    func getUserInfo(succ: (()->Void)?, fail: (()->Void)?) {
+        MPNetword.requestJson(target: .getUserInfo, success: { (json) in
+            let dic = json["data"] as AnyObject
+            guard
+                let phone = dic["phone"] as? String,
+                let name = dic["name"] as? String,
+                let picUrl = dic["pic_url"] as? String,
+                let point = dic["point"] as? Int,
+                let isPass = dic["is_pass"] as? Bool
+                else {
+                    fail?()
+                    return
+            }
+            self.phone = phone
+            self.userName = name
+            self.picUrl = picUrl
+            self.point = point
+            self.isPass = isPass
+            succ?()
+        }) { (err) in
+            fail?()
+        }
+    }
+}
+
+// MARK: - IO
+extension MPUserModel {
     /// 序列化
     fileprivate func serilization() {
         if let data = self.toJSONString()?.data(using: .utf8) {

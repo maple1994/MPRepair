@@ -36,7 +36,6 @@
 		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
-		F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5D720612112AC5800585A19 /* LaunchScreen.storyboard */; };
 		F5D7206E2112AC5900585A19 /* MaintainDriverClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7206D2112AC5900585A19 /* MaintainDriverClientTests.swift */; };
 		F5D720792112AC5900585A19 /* MaintainDriverClientUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720782112AC5900585A19 /* MaintainDriverClientUITests.swift */; };
 		F5DF736B211A93E300B9F154 /* MPAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF735A211A93E300B9F154 /* MPAccountViewController.swift */; };
@@ -143,7 +142,6 @@
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F5D720622112AC5800585A19 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F5D720642112AC5800585A19 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F5D720692112AC5900585A19 /* MaintainDriverClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MaintainDriverClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D7206D2112AC5900585A19 /* MaintainDriverClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MaintainDriverClientTests.swift; sourceTree = "<group>"; };
@@ -367,7 +365,6 @@
 				F5A633352116FD3B0075548A /* Frameword */,
 				F5D720582112AC5500585A19 /* AppDelegate.swift */,
 				F5D7205F2112AC5800585A19 /* Assets.xcassets */,
-				F5D720612112AC5800585A19 /* LaunchScreen.storyboard */,
 				F5D720642112AC5800585A19 /* Info.plist */,
 			);
 			path = MaintainDriverClient;
@@ -649,7 +646,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5D720632112AC5800585A19 /* LaunchScreen.storyboard in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -878,17 +874,6 @@
 			targetProxy = F5D720752112AC5900585A19 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		F5D720612112AC5800585A19 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F5D720622112AC5800585A19 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		F5D7207B2112AC5900585A19 /* Debug */ = {

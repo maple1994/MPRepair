@@ -34,7 +34,6 @@ class MPSettingCell: UITableViewCell {
         if isShowIcon {
             iconView = UIImageView()
             iconView?.setupCorner(20)
-            iconView?.backgroundColor = UIColor.colorWithHexString("#ff0000", alpha: 0.3)
             contentView.addSubview(iconView!)
             iconView?.snp.makeConstraints { (make) in
                 make.centerY.equalToSuperview()

@@ -171,28 +171,34 @@ class MPLoginViewController: UIViewController {
             MPTipsView.showMsg("登录失败，请重新再试")
             return
         }
-        MPNetword.requestJson(target: .getUserInfo, success: { (json) in
-            let dic = json["data"] as AnyObject
-            guard
-                let phone = dic["phone"] as? String,
-                let name = dic["name"] as? String,
-                let picUrl = dic["pic_url"] as? String,
-                let point = dic["point"] as? Int,
-                let isPass = dic["is_pass"] as? Bool
-                else {
-                    MPTipsView.showMsg("登录失败，请重新再试")
-                    return
-            }
-            MPUserModel.shared.phone = phone
-            MPUserModel.shared.userName = name
-            MPUserModel.shared.picUrl = picUrl
-            MPUserModel.shared.point = point
-            MPUserModel.shared.isPass = isPass
+        MPUserModel.shared.getUserInfo(succ: {
             MPUserModel.shared.loginSucc()
             self.dismiss(animated: true, completion: nil)
-        }) { (err) in
+        }) {
             MPTipsView.showMsg("登录失败，请重新再试")
         }
+//        MPNetword.requestJson(target: .getUserInfo, success: { (json) in
+//            let dic = json["data"] as AnyObject
+//            guard
+//                let phone = dic["phone"] as? String,
+//                let name = dic["name"] as? String,
+//                let picUrl = dic["pic_url"] as? String,
+//                let point = dic["point"] as? Int,
+//                let isPass = dic["is_pass"] as? Bool
+//                else {
+//                    MPTipsView.showMsg("登录失败，请重新再试")
+//                    return
+//            }
+//            MPUserModel.shared.phone = phone
+//            MPUserModel.shared.userName = name
+//            MPUserModel.shared.picUrl = picUrl
+//            MPUserModel.shared.point = point
+//            MPUserModel.shared.isPass = isPass
+//            MPUserModel.shared.loginSucc()
+//            self.dismiss(animated: true, completion: nil)
+//        }) { (err) in
+//            MPTipsView.showMsg("登录失败，请重新再试")
+//        }
     }
     
     @objc fileprivate func resetPwd() {

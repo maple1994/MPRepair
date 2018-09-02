@@ -34,6 +34,7 @@ class MPLeftMenuViewController: UIViewController {
         userIconView.mp_setImage(MPUserModel.shared.picUrl)
         tableView.reloadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPLeftMenuViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPLeftMenuViewController.userInfoUpdate), name: MP_USERINFO_UPDATE_NOTIFICATION, object: nil)
     }
     
     deinit {
@@ -90,7 +91,6 @@ class MPLeftMenuViewController: UIViewController {
             name = "默认名"
         }
         userNameLabel.text = name
-//        userIconView.mp_setImage(MPUserModel.shared.picUrl)
         let url = URL(string: MPUserModel.shared.picUrl)
         userIconView.kf.setImage(with: url, placeholder: UIImage(named: "person"), options: nil, progressBlock: nil) { [weak self] (img, _, _, _) in
             if let img1 = img {
@@ -99,6 +99,10 @@ class MPLeftMenuViewController: UIViewController {
                 self?.userIconView.image = UIImage(named: "person")
             }
         }
+    }
+    
+    @objc fileprivate func userInfoUpdate() {
+        loginSucc()
     }
     
     @objc fileprivate func userIconClick() {
