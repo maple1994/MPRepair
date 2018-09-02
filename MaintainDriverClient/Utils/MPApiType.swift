@@ -28,6 +28,8 @@ enum MPApiType {
     case getUserInfo
     /// 修改用户信息
     case updateUserInfo(name: String?, pic: UIImage?)
+    /// 获取账户明细洗洗
+    case getAccountInfo
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -54,6 +56,8 @@ extension MPApiType: TargetType {
             return "api/user/user/"
         case .updateUserInfo(name: _, pic: _):
             return "api/user/user/"
+        case .getAccountInfo:
+            return "api/driver/account/"
         }
     }
     
@@ -61,7 +65,8 @@ extension MPApiType: TargetType {
     var method: Moya.Method {
         switch self {
         case .refreshToken,
-             .getUserInfo:
+             .getUserInfo,
+            .getAccountInfo:
             return .get
         default:
             return .post
@@ -122,6 +127,8 @@ extension MPApiType: TargetType {
                 }
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case .getAccountInfo:
+            return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain
         }

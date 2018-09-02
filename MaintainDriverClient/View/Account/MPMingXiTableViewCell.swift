@@ -11,6 +11,17 @@ import UIKit
 /// 明细Cell
 class MPMingXiTableViewCell: UITableViewCell {
     
+    var orderModel: MPOrderModel? {
+        didSet {
+            timeLabel.text = orderModel?.create_time
+            startAddressLabel.text = orderModel?.start_address
+            endAddressLabel.text = orderModel?.end_address
+            if let money = orderModel?.cost {
+                moneyLabel.text = String(format: "¥ %.02f", money)
+            }
+        }
+    }
+    
     var isLineHidden: Bool = false {
         didSet {
             line.isHidden = isLineHidden

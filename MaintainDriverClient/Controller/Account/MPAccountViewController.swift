@@ -12,10 +12,12 @@ import UIKit
 class MPAccountViewController: UIViewController {
 
     fileprivate let CellID = "MPMingXiTableViewCell"
+    fileprivate var orderModelArr: [MPOrderModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadData()
     }
     
     fileprivate func setupUI() {
@@ -69,12 +71,27 @@ class MPAccountViewController: UIViewController {
         }
     }
     
+    fileprivate func loadData() {
+        MPNetword.requestJson(target: .getAccountInfo, success: { (json) in
+            guard let data = json["data"] as? [[String: Any]] else {
+                return
+            }
+            var modelArr = [MPOrderModel]()
+            for dic in data {
+                if let model: MPOrderModel = MPOrderModel.mapFromDict(dic) {
+                    modelArr.append(model)
+                }
+            }
+            self.orderModelArr = modelArr
+        })
+    }
+    
     @objc fileprivate func tiXian() {
         let vc = MPTiXianViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    
+    // MARK: - View
     fileprivate var tableView: UITableView!
     fileprivate var tiXianBtn: UIButton!
     fileprivate var moneyLabel: UILabel!
@@ -94,7 +111,7 @@ class MPAccountViewController: UIViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPAccountViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return orderModelArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -102,7 +119,9 @@ extension MPAccountViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPMingXiTableViewCell(style: .default, reuseIdentifier: CellID)
         }
-        cell?.isLineHidden = indexPath.row == 9
+        let count = orderModelArr?.count ?? 0
+        cell?.isLineHidden = (indexPath.row == count - 1)
+        cell?.orderModel = orderModelArr?[indexPath.row]
         return cell!
     }
     
@@ -116,7 +135,8 @@ extension MPAccountViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return tableView.fd_heightForCell(withIdentifier: CellID) { (cell) in
-            
+            let cell1 = (cell as? MPMingXiTableViewCell)
+            cell1?.orderModel = self.orderModelArr?[indexPath.row]
         }
     }
 }

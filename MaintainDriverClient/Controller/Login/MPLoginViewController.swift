@@ -51,12 +51,14 @@ class MPLoginViewController: UIViewController {
         let margin: CGFloat = 25
         logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         phoneTextField = MPInputTextFiled()
+        phoneTextField.text = "18819457942"
         phoneTextField.keyboardType = .numberPad
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         phoneTextField.leftIcon = #imageLiteral(resourceName: "mobile")
         pwdTextField = MPInputTextFiled()
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
+        pwdTextField.text = "654321"
         pwdTextField.isSecureTextEntry = true
         pwdTextField.leftIcon = #imageLiteral(resourceName: "pwd")
         loginButton = UIButton()

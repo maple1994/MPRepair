@@ -205,7 +205,38 @@ extension Decodable{
         return temp
     }
     
+    //字典转模型
+    static func mapFromDict<T : Decodable>(_ dict : [String: Any]) -> T? {
+        guard let JSONString = dict.toJSONString() else {
+            return nil
+        }
+        guard let jsonData = JSONString.data(using: .utf8) else {
+            return nil
+        }
+        let decoder = JSONDecoder()
+        
+        if let obj = try? decoder.decode(T.self, from: jsonData) {
+            return obj
+        }
+        return nil
+    }
 }
+
+extension Dictionary {
+    func toJSONString() -> String? {
+        if (!JSONSerialization.isValidJSONObject(self)) {
+            print("dict转json失败")
+            return nil
+        }
+        if let newData : Data = try? JSONSerialization.data(withJSONObject: self, options: []) {
+            let JSONString = NSString(data:newData as Data,encoding: String.Encoding.utf8.rawValue)
+            return JSONString as String? ?? nil
+        }
+        print("dict转json失败")
+        return nil
+    }
+}
+
 extension Encodable{
     func toJSONString()->String? {
         let encoder : JSONEncoder = JSONEncoder()

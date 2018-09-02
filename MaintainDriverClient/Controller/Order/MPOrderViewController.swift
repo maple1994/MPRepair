@@ -28,6 +28,7 @@ class MPOrderViewController: UIViewController {
         contentView.showsHorizontalScrollIndicator = false
         contentView.isPagingEnabled = true
         contentView.delegate = self
+        contentView.bounces = false
         view.addSubview(titleView)
         view.addSubview(contentView)
         
