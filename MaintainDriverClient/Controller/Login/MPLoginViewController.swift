@@ -58,7 +58,7 @@ class MPLoginViewController: UIViewController {
         pwdTextField = MPInputTextFiled()
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
-        pwdTextField.text = "654321"
+        pwdTextField.text = "123456"
         pwdTextField.isSecureTextEntry = true
         pwdTextField.leftIcon = #imageLiteral(resourceName: "pwd")
         loginButton = UIButton()

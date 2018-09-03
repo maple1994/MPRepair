@@ -74,6 +74,7 @@ class MPUserModel: Codable {
     }
     
     func checkIsExpire(target: MPApiType) -> Bool {
+        
         switch target {
         case .login(phone: _, pwd: _),
             .register(phone: _, pwd: _, code: _),

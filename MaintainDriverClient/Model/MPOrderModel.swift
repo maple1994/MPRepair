@@ -9,7 +9,7 @@
 import UIKit
 
 /// 订单模型
-struct MPOrderModel: Codable {
+class MPOrderModel: Codable {
     /// 订单ID
     var id: Int = 0
     /// 创建时间
@@ -76,6 +76,12 @@ struct MPOrderModel: Codable {
     var confirm_time: String = ""
     /// 取消时间
     var cancel_time: String = ""
+    /// 接单用户id
+    var driver_user_id: Int = 0
+    /// 接单用户头像url
+    var driver_user_pic_url: String = ""
+    /// 接单用户名称
+    var driver_user_name: String = ""
     /// 图片备注对象列表
 //    pic_list
     
@@ -84,7 +90,7 @@ struct MPOrderModel: Codable {
 }
 
 /// 年检站点
-struct MPSurveyStationModel: Codable {
+class MPSurveyStationModel: Codable {
     var id: Int = 0
     var create_time: String = ""
     var update_time: String = ""

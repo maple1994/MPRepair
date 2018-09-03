@@ -200,7 +200,7 @@ struct MPNetword {
         failure: ((MoyaError) -> Void)? = nil
         ) {
         if MPUserModel.shared.checkIsExpire(target: target) {
-            MPPrint("Token过期")
+            MPPrint("\(target)-Token过期")
             return
         }
         provider.request(target) { result in
