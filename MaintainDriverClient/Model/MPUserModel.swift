@@ -97,7 +97,7 @@ class MPUserModel: Codable {
     }
     
     /// 刷新token
-    func refreshToken() {
+    func refreshToken(succ: MPCallback = nil) {
         MPNetword.requestJson(target: .refreshToken, success: { (json) in
             let data = json["data"] as AnyObject
             if let token = data["token"] as? String,
@@ -106,6 +106,7 @@ class MPUserModel: Codable {
                 self.expire = expire
                 // 序列化
                 self.serilization()
+                succ?()
             }
         }) { (err) in
             // TODO: - 刷新Token失败

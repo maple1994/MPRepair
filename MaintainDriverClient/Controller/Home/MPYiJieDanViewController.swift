@@ -17,8 +17,8 @@ class MPYiJieDanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
     }
     
     deinit {
@@ -39,14 +39,14 @@ class MPYiJieDanViewController: UIViewController {
         }
     }
     
-    fileprivate func loadData() {
+    @objc fileprivate func loadData() {
         MPNetword.requestJson(target: .checkOrderList(type: "driver"), success: { (json) in
             guard let data = json["data"] as? [[String: Any]] else {
                 return
             }
             var arr = [MPOrderModel]()
             for dic in data {
-                if let model: MPOrderModel = MPOrderModel.mapFromDict(dic) {
+                if let model = MPOrderModel.toModel(dic) {
                     arr.append(model)
                 }
             }

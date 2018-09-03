@@ -23,7 +23,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AMapServices.shared().apiKey = "fa5c335316d7a9bde2efb410932e6244"
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
-        MPUserModel.shared.refreshToken()
+        MPUserModel.shared.refreshToken {
+            NotificationCenter.default.post(name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
+        }
         return true
     }
     

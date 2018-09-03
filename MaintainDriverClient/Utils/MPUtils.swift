@@ -31,6 +31,40 @@ class MPUtils {
     }
 }
 
+func toInt(_ value: Any?) -> Int {
+    if let value1 = value as? Int {
+        return value1
+    }
+    if let value2 = value as? String {
+        return value2.toInt() ?? 0
+    }
+    return 0
+}
+
+func toString(_ value: Any?) -> String {
+    if let value1 = value as? String {
+        return value1
+    }
+    return ""
+}
+
+func toBool(_ value: Any?) -> Bool {
+    if let value1 = value as? Bool {
+        return value1
+    }
+    return false
+}
+
+func toDouble(_ value: Any?) -> Double {
+    if let value1 = value as? Double {
+        return value1
+    }
+    if let value2 = value as? String {
+        return value2.toDouble() ?? 0
+    }
+    return 0
+}
+
 #if DEBUG
 func MPPrint<T>(_ str: T) {
     print(str)
