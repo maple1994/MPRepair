@@ -78,7 +78,7 @@ class MPAccountViewController: UIViewController {
             }
             var modelArr = [MPMingXiModel]()
             for dic in data {
-                if let model: MPMingXiModel = MPMingXiModel.mapFromDict(dic) {
+                if let model: MPMingXiModel = MPMingXiModel.toModel(dic) {
                     modelArr.append(model)
                 }
             }

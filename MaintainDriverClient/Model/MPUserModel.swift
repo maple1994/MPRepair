@@ -54,6 +54,18 @@ class MPUserModel: Codable {
             userID = 0
             token = "0"
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(MPUserModel.refreshTokenSucc), name: MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func refreshTokenSucc() {
+        while MPNetword.requestQueue.isEmpty {
+            let block = MPNetword.requestQueue.dequeue()
+            block?()
+        }
     }
     
     /// 登录成功
@@ -107,6 +119,7 @@ class MPUserModel: Codable {
                 // 序列化
                 self.serilization()
                 succ?()
+                NotificationCenter.default.post(name: MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION, object: nil)
             }
         }) { (err) in
             // TODO: - 刷新Token失败

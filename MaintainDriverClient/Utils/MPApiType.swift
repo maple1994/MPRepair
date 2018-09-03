@@ -190,8 +190,9 @@ struct MPMsgCodeKey {
 
 /// 网络请求工具
 struct MPNetword {
-    // 单例
     static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
+    /// 请求队列，当token过期时，请求入队
+    static var requestQueue: Queue<MPRequestType> = Queue<MPRequestType>()
     
     /// 发送网络请求
     static func requestJson(
@@ -199,27 +200,35 @@ struct MPNetword {
         success: ((AnyObject) -> Void)?,
         failure: ((MoyaError) -> Void)? = nil
         ) {
-        if MPUserModel.shared.checkIsExpire(target: target) {
-            MPPrint("\(target)-Token过期")
-            return
-        }
-        provider.request(target) { result in
-            switch result {
-            case let .success(moyaResponse):
-                do {
-                    let json = try moyaResponse.mapJSON() as AnyObject
-                    if let code = json["code"] as? Int {
-                        if code == 100 {
-                            success?(json)
+        func request(target: MPApiType,
+                     success: ((AnyObject) -> Void)?,
+                     failure: ((MoyaError) -> Void)? = nil) {
+            provider.request(target) { result in
+                switch result {
+                case let .success(moyaResponse):
+                    do {
+                        let json = try moyaResponse.mapJSON() as AnyObject
+                        if let code = json["code"] as? Int {
+                            if code == 100 {
+                                success?(json)
+                            }
                         }
+                    } catch {
+                        failure?(MoyaError.jsonMapping(moyaResponse))
                     }
-                } catch {
-                    failure?(MoyaError.jsonMapping(moyaResponse))
+                case let .failure(error):
+                    failure?(error)
                 }
-            case let .failure(error):
-                failure?(error)
             }
         }
+        if MPUserModel.shared.checkIsExpire(target: target) {
+            MPPrint("\(target)-Token过期")
+            requestQueue.enqueue {
+                request(target: target, success: success, failure: failure)
+            }
+            return
+        }
+        request(target: target, success: success, failure: failure)
     }
     
     static func requestResponse(
@@ -227,27 +236,71 @@ struct MPNetword {
         success: ((Response) -> Void)?,
         failure: ((MoyaError) -> Void)? = nil
         ) {
-        if MPUserModel.shared.checkIsExpire(target: target) {
-            MPPrint("Token过期")
-            return
-        }
-        provider.request(target) { result in
-            switch result {
-            case let .success(moyaResponse):
-                do {
-                    let json = try moyaResponse.mapJSON() as AnyObject
-                    if let code = json["code"] as? Int {
-                        if code == 100 {
-                            success?(moyaResponse)
+        func request(target: MPApiType,
+                     success: ((Response) -> Void)?,
+                     failure: ((MoyaError) -> Void)? = nil) {
+            provider.request(target) { result in
+                switch result {
+                case let .success(moyaResponse):
+                    do {
+                        let json = try moyaResponse.mapJSON() as AnyObject
+                        if let code = json["code"] as? Int {
+                            if code == 100 {
+                                success?(moyaResponse)
+                            }
                         }
+                    } catch {
+                        failure?(MoyaError.jsonMapping(moyaResponse))
                     }
-                } catch {
-                    failure?(MoyaError.jsonMapping(moyaResponse))
+                case let .failure(error):
+                    failure?(error)
                 }
-            case let .failure(error):
-                failure?(error)
             }
         }
+        if MPUserModel.shared.checkIsExpire(target: target) {
+            MPPrint("Token过期")
+            requestQueue.enqueue {
+                request(target: target, success: success, failure: failure)
+            }
+            return
+        }
+        request(target: target, success: success, failure: failure)
+    }
+}
+
+struct Queue<Element> {
+    
+    private var elements: [Element] = []
+    
+    init() { }
+    
+    // MARK: - Getters
+    
+    var count: Int {
+        return elements.count
+    }
+    
+    var isEmpty: Bool {
+        return elements.isEmpty
+    }
+    
+    var peek: Element? {
+        return elements.first
+    }
+    
+    // MARK: - Enqueue & Dequeue
+    
+    mutating func enqueue(_ element: Element) {
+        elements.append(element)
+    }
+    
+    @discardableResult
+    mutating func dequeue() -> Element? {
+        return isEmpty ? nil : elements.removeFirst()
+    }
+    
+    mutating func removeAll() {
+        elements.removeAll()
     }
 }
 

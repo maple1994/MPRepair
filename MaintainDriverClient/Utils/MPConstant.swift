@@ -9,6 +9,8 @@
 import UIKit
 
 typealias MPCallback = (() -> Void)?
+typealias MPRequestType = () -> Void
+
 /// 版本号
 let mp_version: Double = 1.0
 /// 保存用户json的URL
@@ -19,6 +21,8 @@ let MP_LOGIN_NOTIFICATION = NSNotification.Name.init("MP_LOGIN_NOTIFICATION")
 let MP_USERINFO_UPDATE_NOTIFICATION = NSNotification.Name.init("MP_USERINFO_UPDATE_NOTIFICATION")
 /// 启动App刷新Token成功通知
 let MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION = NSNotification.Name.init("MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION")
+/// 刷新Token成功的通知
+let MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION = NSNotification.Name.init("MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION")
 
 
 /// 垂直space
