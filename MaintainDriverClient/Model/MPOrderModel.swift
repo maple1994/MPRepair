@@ -9,7 +9,7 @@
 import UIKit
 
 /// 订单模型
-class MPOrderModel: Codable {
+class MPOrderModel {
     /// 订单ID
     var id: Int = 0
     /// 创建时间
@@ -41,7 +41,7 @@ class MPOrderModel: Codable {
     /// 是否自驾
     var is_self: Bool = false
     /// 套餐对象
-//    combo
+    var combo: MPComboModel?
     /// 套餐项列表
 //    surveycomboitem_set
     /// 基础费用
@@ -87,10 +87,54 @@ class MPOrderModel: Codable {
     
     /// 是否选中
     var isSelected: Bool = false
+    
+    class func toModel(_ dic1: Any?) -> MPOrderModel? {
+        guard let dic = dic1 as? [String: Any] else {
+            return nil
+        }
+        if toInt(dic["id"]) == 0 {
+            return nil
+        }
+        let model = MPOrderModel()
+        model.id = toInt(dic["id"])
+        model.create_time = toString(dic["create_time"])
+        model.update_time = toString(dic["update_time"])
+        model.name = toString(dic["name"])
+        model.phone = toString(dic["phone"])
+        model.car_name = toString(dic["car_name"])
+        model.car_type = toString(dic["car_type"])
+        model.car_brand = toString(dic["car_brand"])
+        model.car_code = toString(dic["car_code"])
+        model.surveystation = MPSurveyStationModel.toModel(dic["surveystation"])
+        model.order_longitude = toDouble(dic["order_longitude"])
+        model.order_latitude = toDouble(dic["order_latitude"])
+        model.order_address = toString(dic["order_address"])
+        model.subscribe_time = toString(dic["subscribe_time"])
+        model.is_self = toBool(dic["is_self"])
+        model.combo = MPComboModel.toModel(dic["combo"])
+        model.base_price = toDouble(dic["base_price"])
+        model.combo_price = toDouble(dic["combo_price"])
+        model.survey_price = toDouble(dic["survey_price"])
+        model.total_price = toDouble(dic["total_price"])
+        model.state = toInt(dic["state"])
+        model.driver_user_id = toInt(dic["driver_user_id"])
+        model.driver_user_pic_url = toString(dic["driver_user_pic_url"])
+        model.driver_user_name = toString(dic["driver_user_name"])
+        model.order_time = toString(dic["order_time"])
+        model.receive_time = toString(dic["receive_time"])
+        model.arrive_survey_time = toString(dic["arrive_survey_time"])
+        model.survey_time = toString(dic["survey_time"])
+        model.arrive_return_time = toString(dic["arrive_return_time"])
+        model.return_time = toString(dic["return_time"])
+        model.confirm_time = toString(dic["confirm_time"])
+        model.cancel_time = toString(dic["cancel_time"])
+        model.is_success = toBool(dic["is_success"])
+        return model
+    }
 }
 
 /// 年检站点
-class MPSurveyStationModel: Codable {
+class MPSurveyStationModel {
     var id: Int = 0
     var create_time: String = ""
     var update_time: String = ""
@@ -99,6 +143,86 @@ class MPSurveyStationModel: Codable {
     var latitude: Double = 0
     var address: String = ""
     var price: Double = 0
+    
+    class func toModel(_ dic1: Any?) -> MPSurveyStationModel? {
+        guard let dic = dic1 as? [String: Any] else {
+            return nil
+        }
+        if toInt(dic["id"]) == 0 {
+            return nil
+        }
+        let model = MPSurveyStationModel()
+        model.id = toInt(dic["id"])
+        model.create_time = toString(dic["create_time"])
+        model.update_time = toString(dic["update_time"])
+        model.name = toString(dic["name"])
+        model.longitude = toDouble(dic["longitude"])
+        model.latitude = toDouble(dic["latitude"])
+        model.price = toDouble(dic["price"])
+        return model
+    }
+}
+
+/// 套餐对象
+class MPComboModel {
+    var id: Int = 0
+    var create_time: String = ""
+    var update_time: String = ""
+    var name: String = ""
+    var detail: String = ""
+    var comboitem_set: [MPComboItemModel] = [MPComboItemModel]()
+    
+    class func toModel(_ dic1: Any?) -> MPComboModel? {
+        guard let dic = dic1 as? [String: Any] else {
+            return nil
+        }
+        if toInt(dic["id"]) == 0 {
+            return nil
+        }
+        let model = MPComboModel()
+        model.id = toInt(dic["id"])
+        model.create_time = toString(dic["create_time"])
+        model.update_time = toString(dic["update_time"])
+        model.name = toString(dic["name"])
+        model.detail = toString(dic["detail"])
+        if let set = dic["comboitem_set"] as? [String: Any] {
+            var arr = [MPComboItemModel]()
+            for tmp in set {
+                if let model = MPComboItemModel.toModel(tmp) {
+                    arr.append(model)
+                }
+            }
+            model.comboitem_set = arr
+        }
+        return model
+    }
+}
+
+/// 套餐子Item
+class MPComboItemModel {
+    var id: Int = 0
+    var create_time: String = ""
+    var update_time: String = ""
+    var name: String = ""
+    var detail: String = ""
+    var price: Double = 0
+    
+    class func toModel(_ dic1: Any?) -> MPComboItemModel? {
+        guard let dic = dic1 as? [String: Any] else {
+            return nil
+        }
+        if toInt(dic["id"]) == 0 {
+            return nil
+        }
+        let model = MPComboItemModel()
+        model.id = toInt(dic["id"])
+        model.create_time = toString(dic["create_time"])
+        model.update_time = toString(dic["update_time"])
+        model.name = toString(dic["name"])
+        model.detail = toString(dic["detail"])
+        model.price = toDouble(dic["price"])
+        return model
+    }
 }
 
 /// 订单状态
