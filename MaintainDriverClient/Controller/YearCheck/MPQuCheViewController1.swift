@@ -11,6 +11,17 @@ import UIKit
 /// 上门取车情况一
 class MPQuCheViewController1: UIViewController {
 
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -51,7 +62,12 @@ class MPQuCheViewController1: UIViewController {
     }
     
     @objc fileprivate func cancelOrder() {
-        MPPrint("取消订单")
+        MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+            MPTipsView.showMsg("取消成功")
+            self.navigationController?.popToRootViewController(animated: true)
+        }) { (_) in
+            MPTipsView.showMsg("取消失败")
+        }
     }
     
     @objc fileprivate func confirm() {

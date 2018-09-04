@@ -109,6 +109,7 @@ class MPOrderModel {
         model.order_longitude = toDouble(dic["order_longitude"])
         model.order_latitude = toDouble(dic["order_latitude"])
         model.order_address = toString(dic["order_address"])
+        model.get_time = toString(dic["get_time"])
         model.subscribe_time = toString(dic["subscribe_time"])
         model.is_self = toBool(dic["is_self"])
         model.combo = MPComboModel.toModel(dic["combo"])

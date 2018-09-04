@@ -13,7 +13,6 @@
 		F5031F97212126E500329BC0 /* MPConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5031F96212126E500329BC0 /* MPConstant.swift */; };
 		F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */; };
 		F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */; };
-		F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */; };
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
 		F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */; };
 		F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */; };
@@ -114,7 +113,6 @@
 		F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkLoggerPlugin.swift; sourceTree = "<group>"; };
 		F50D4DDF211823F5006C50C7 /* UIImageView+LBBlurredImage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+LBBlurredImage.h"; sourceTree = "<group>"; };
 		F50D4DE0211823F5006C50C7 /* UIImageView+LBBlurredImage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+LBBlurredImage.m"; sourceTree = "<group>"; };
-		F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPYearCheckViewController.swift; sourceTree = "<group>"; };
 		F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController1.swift; sourceTree = "<group>"; };
 		F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController2.swift; sourceTree = "<group>"; };
 		F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMingXiModel.swift; sourceTree = "<group>"; };
@@ -247,7 +245,6 @@
 		F50D4DE621183E2E006C50C7 /* YearCheck */ = {
 			isa = PBXGroup;
 			children = (
-				F50D4DE721183E3D006C50C7 /* MPYearCheckViewController.swift */,
 				F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */,
 				F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */,
 				F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */,
@@ -809,7 +806,6 @@
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
 				F5DF738B211A94E400B9F154 /* MPInputTextFiled.swift in Sources */,
 				F5DF739A211A953A00B9F154 /* MPMunuViewCell.swift in Sources */,
-				F50D4DE821183E3D006C50C7 /* MPYearCheckViewController.swift in Sources */,
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
 				F5DF7395211A94E400B9F154 /* MPOrderTableViewCell.swift in Sources */,
 				F5DF736F211A93E300B9F154 /* MPYiJieDanViewController.swift in Sources */,

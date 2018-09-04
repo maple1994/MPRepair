@@ -38,13 +38,6 @@ class MPUserModel: Codable {
     var isLogin: Bool {
         return token != "0"
     }
-    var userIcon: UIImage {
-        if let icon = _userIcon {
-            return icon
-        }
-        return #imageLiteral(resourceName: "person")
-    }
-    var _userIcon: UIImage?
     
     // MARK: - Method
     private init() {
@@ -177,7 +170,6 @@ extension MPUserModel {
         picUrl = ""
         point = 0
         isPass = false
-        _userIcon = nil
         do {
             try FileManager.default.removeItem(at: mp_path_url)
         }catch {

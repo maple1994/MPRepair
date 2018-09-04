@@ -105,9 +105,9 @@ class MPQuCheCCell: UITableViewCell {
     
     var addressTitleLabel: UILabel!
     var timeTitleLabel: UILabel!
-    fileprivate var carNameLabel: UILabel!
-    fileprivate var addressLabel: UILabel!
-    fileprivate var timeLabel: UILabel!
+    var carNameLabel: UILabel!
+    var addressLabel: UILabel!
+    var timeLabel: UILabel!
     fileprivate var contactButton: MPImageButtonView!
     fileprivate var navigationButton: MPImageButtonView!
 }

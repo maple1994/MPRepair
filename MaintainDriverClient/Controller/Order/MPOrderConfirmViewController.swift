@@ -53,14 +53,14 @@ class MPOrderConfirmViewController: UIViewController {
     @objc fileprivate func cancelOrder() {
         MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
             MPTipsView.showMsg("取消成功")
-            self.navigationController?.popViewController(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
         }) { (_) in
             MPTipsView.showMsg("取消失败")
         }
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPQuCheViewController2()
+        let vc = MPQuCheViewController2(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     

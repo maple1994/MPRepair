@@ -21,6 +21,17 @@ class MPQuCheViewController2: UIViewController {
         return mgr
     }()
     
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,10 +86,8 @@ class MPQuCheViewController2: UIViewController {
                 return
             }
             self.startCoordinate = coord
-            // 23.1575700000,113.3513600000
-            // https://lbs.amap.com/api/ios-location-sdk/guide/get-location/singlelocation
         }
-        self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
+        self.destinationCoordinate = CLLocationCoordinate2DMake(orderModel.order_latitude, orderModel.order_longitude)
         self.addAnnotations()
         
     }
@@ -105,11 +114,16 @@ class MPQuCheViewController2: UIViewController {
     }
     
     @objc fileprivate func cancelOrder() {
-        MPPrint("取消订单")
+        MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+            MPTipsView.showMsg("取消成功")
+            self.navigationController?.popToRootViewController(animated: true)
+        }) { (_) in
+            MPTipsView.showMsg("取消失败")
+        }
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPQuCheViewController1()
+        let vc = MPQuCheViewController1(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -179,12 +193,18 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
         }
         cell?.timeTitleLabel.text = "取车时间"
         cell?.addressTitleLabel.text = "取车地点"
+        cell?.carNameLabel.text = orderModel.car_brand
+        cell?.timeLabel.text = orderModel.get_time
+        cell?.addressLabel.text = orderModel.order_address
         cell?.delegate = self
         return cell!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (_) in
-            
+        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (cell1) in
+            let cell = cell1 as? MPQuCheCCell
+            cell?.carNameLabel.text = self.orderModel.car_brand
+            cell?.timeLabel.text = self.orderModel.get_time
+            cell?.addressLabel.text = self.orderModel.order_address
         })
     }
 }
@@ -193,7 +213,7 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
 extension MPQuCheViewController2: MPQuCheCCellDelegate {
     /// 联系
     func quCheCellDidSelectContact() {
-        guard let url = URL(string: "tel:10086") else {
+        guard let url = URL(string: "tel:\(orderModel.phone)") else {
             return
         }
         if #available(iOS 10.0, *) {
@@ -211,7 +231,7 @@ extension MPQuCheViewController2: MPQuCheCCellDelegate {
         }
         // https://lbs.amap.com/api/amap-mobile/guide/ios/navi
         let source = "当前位置".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
-        let destion = "华南农业大学".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+        let destion = "\(orderModel.order_address)".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
         let str = "iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=\(st.latitude)&slon=\(st.longitude)&sname=\(source)&did=BGVIS2&dlat=\(des.latitude)&dlon=\(des.longitude)&dname=\(destion)&dev=0&t=0"
         guard let url = URL.init(string: str) else {
             return
@@ -224,7 +244,7 @@ extension MPQuCheViewController2: MPQuCheCCellDelegate {
             }
         }else {
             let config = AMapNaviCompositeUserConfig.init()
-            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "华南农业大学", poiId: nil)  //传入终点
+            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "\(orderModel.order_address)", poiId: nil)  //传入终点
             self.compositeManager.presentRoutePlanViewController(withOptions: config)
         }
     }

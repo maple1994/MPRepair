@@ -13,8 +13,9 @@ import IQKeyboardManagerSwift
 class MPSettingViewController: UIViewController {
 
     fileprivate let editViewH: CGFloat = 60
-    fileprivate var icon: UIImage = MPUserModel.shared.userIcon
     fileprivate var userName: String = MPUserModel.shared.userName
+    /// 修改后的img
+    fileprivate var updatedImg: UIImage?
     
     // MARK: - Life
     override func viewDidLoad() {
@@ -120,17 +121,16 @@ class MPSettingViewController: UIViewController {
         if userName != MPUserModel.shared.userName {
             name = userName
         }
-        if icon != MPUserModel.shared.userIcon {
-            pic = icon
+        if let img = updatedImg {
+            pic = img
         }
         MPNetword.requestJson(target: .updateUserInfo(name: name, pic: pic), success: { (json) in
             MPTipsView.showMsg("修改成功")
             MPUserModel.shared.userName = self.userName
-            MPUserModel.shared._userIcon = self.icon
             MPUserModel.shared.getUserInfo(succ: {
                 MPUserModel.shared.serilization()
+                NotificationCenter.default.post(name: MP_USERINFO_UPDATE_NOTIFICATION, object: nil)
             }, fail: nil)
-            NotificationCenter.default.post(name: MP_USERINFO_UPDATE_NOTIFICATION, object: nil)
         }) { (_) in
            MPTipsView.showMsg("修改失败")
         }
@@ -166,7 +166,11 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
         switch indexPath.row {
         case 0:
             cell.leftTitleLabel?.text = "头像"
-            cell.iconView?.image = icon
+            if let img = updatedImg {
+                cell.iconView?.image = img
+            }else {
+                cell.iconView?.mp_setImage(MPUserModel.shared.picUrl)
+            }
         case 1:
             cell.leftTitleLabel?.text = "昵称"
             cell.rightTitleLabel?.text = userName
@@ -222,9 +226,7 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MPSettingViewController: TZImagePickerControllerDelegate {
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        if let img = photos.first {
-            icon = img
-        }
+        updatedImg = photos.first
         tableView.reloadData()
     }
 }
