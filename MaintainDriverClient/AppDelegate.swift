@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         MPUserModel.shared.refreshToken {
-//            NotificationCenter.default.post(name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
+            NotificationCenter.default.post(name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
         }
         return true
     }

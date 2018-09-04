@@ -11,6 +11,16 @@ import UIKit
 /// 订单信息确认
 class MPOrderConfirmViewController: UIViewController {
     fileprivate let CellID = "MPOrderConfrimTableViewCell"
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +51,12 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     @objc fileprivate func cancelOrder() {
-        MPPrint("取消订单")
+        MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+            MPTipsView.showMsg("取消成功")
+            self.navigationController?.popViewController(animated: true)
+        }) { (_) in
+            MPTipsView.showMsg("取消失败")
+        }
     }
     
     @objc fileprivate func confirm() {
@@ -84,35 +99,35 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
         case 0:
             switch indexPath.row {
             case 0:
-                cell?.set(title: "车主姓名", value: "王思迪", isHiddenLine: isHiddenLine)
+                cell?.set(title: "车主姓名", value: orderModel.name, isHiddenLine: isHiddenLine)
             case 1:
-                cell?.set(title: "身份证号码", value: "42510199404046434", isHiddenLine: isHiddenLine)
+                cell?.set(title: "身份证号码", value: "暂无", isHiddenLine: isHiddenLine)
             case 2:
-                cell?.set(title: "品牌型号", value: "奥迪 A8L", isHiddenLine: isHiddenLine)
+                cell?.set(title: "品牌型号", value: orderModel.car_brand, isHiddenLine: isHiddenLine)
             case 3:
-                cell?.set(title: "号码号牌", value: "粤 AB5642", isHiddenLine: isHiddenLine)
+                cell?.set(title: "号码号牌", value: orderModel.car_code, isHiddenLine: isHiddenLine)
             case 4:
-                cell?.set(title: "车辆类型", value: "小桥车", isHiddenLine: isHiddenLine)
+                cell?.set(title: "车辆类型", value: orderModel.car_type, isHiddenLine: isHiddenLine)
             default:
                 break
             }
         case 1:
             switch indexPath.row {
             case 0:
-                cell?.set(title: "联系人", value: "王小二", isHiddenLine: isHiddenLine)
+                cell?.set(title: "联系人", value: orderModel.name, isHiddenLine: isHiddenLine)
             case 1:
-                cell?.set(title: "联系电话", value: "13556674538", isHiddenLine: isHiddenLine)
+                cell?.set(title: "联系电话", value: orderModel.phone, isHiddenLine: isHiddenLine)
             default:
                 break
             }
         case 2:
             switch indexPath.row {
             case 0:
-                cell?.set(title: "选择年检站", value: "城厢区海沧机动年检站", isHiddenLine: isHiddenLine)
+                cell?.set(title: "选择年检站", value: orderModel.surveystation?.name ?? "", isHiddenLine: isHiddenLine)
             case 1:
-                cell?.set(title: "交接车地点", value: "兴南大道33号", isHiddenLine: isHiddenLine)
+                cell?.set(title: "交接车地点", value: orderModel.order_address, isHiddenLine: isHiddenLine)
             case 2:
-                cell?.set(title: "预约日期", value: "2018-07-16 商务", isHiddenLine: isHiddenLine)
+                cell?.set(title: "预约日期", value: orderModel.subscribe_time, isHiddenLine: isHiddenLine)
             default:
                 break
             }

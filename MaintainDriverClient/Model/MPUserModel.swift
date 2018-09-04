@@ -62,7 +62,7 @@ class MPUserModel: Codable {
     }
     
     @objc fileprivate func refreshTokenSucc() {
-        while MPNetword.requestQueue.isEmpty {
+        while !MPNetword.requestQueue.isEmpty {
             let block = MPNetword.requestQueue.dequeue()
             block?()
         }

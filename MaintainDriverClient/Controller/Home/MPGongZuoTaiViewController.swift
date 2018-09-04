@@ -19,6 +19,7 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate let CellID = "MPCheckBoxOrderTableViewCell"
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
+    fileprivate var selectedModel: MPOrderModel?
     
     /// 下车
     func xiaCheAction() {
@@ -30,7 +31,7 @@ class MPGongZuoTaiViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
+//        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
     }
@@ -122,26 +123,23 @@ class MPGongZuoTaiViewController: UIViewController {
     
     // MARK: - Action
     @objc fileprivate func stealAction() {
-//        guard let arr = orderModelArr else {
-//            return
-//        }
-//        var isValid = false
-//        for model in arr {
-//            if model.isSelected {
-//                isValid = true
-//                break
-//            }
-//        }
-//        if !isValid {
-//            MPTipsView.showMsg("请选择订单")
-//            return 
-//        }
-        let view = MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!")
+        guard let order = modelArr.first else {
+            return
+        }
+        let view = MPNewOrderTipsView.show(title: "抢单成功!", subTitle: "请尽快处理!", delegate: self)
         view.showTimeCount()
+        MPNetword.requestJson(target: .grab(id: order.id), success: { (json) in
+            view.endTimeCount()
+            self.selectedModel = order
+        }) { (_) in
+            MPTipsView.showMsg("抢单失败")
+            self.selectedModel = nil
+            view.endTimeCount()
+        }
     }
     
     @objc fileprivate func listenAction() {
-        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!")
+        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!", delegate: self)
     }
     
     @objc fileprivate func chuCheAction() {
@@ -186,5 +184,15 @@ extension MPGongZuoTaiViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
+    }
+}
+
+extension MPGongZuoTaiViewController: MPNewOrderTipsViewDelegate {
+    func tipsViewDidConfirm() {
+        guard let model = selectedModel else {
+            return
+        }
+        let vc = MPOrderConfirmViewController(model: model)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }

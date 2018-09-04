@@ -34,6 +34,10 @@ enum MPApiType {
     case tiXian(money: Double, via: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
     case checkOrderList(type: String)
+    /// 抢单
+    case grab(id: Int)
+    /// 取消订单
+    case cancelOrder(id: Int)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -64,6 +68,10 @@ extension MPApiType: TargetType {
             return "api/driver/account/"
         case .checkOrderList(type: _):
             return "api/driver/order/"
+        case .grab(id: _):
+            return "api/driver/order_grab/"
+        case .cancelOrder(id: _):
+            return "api/driver/order_cancel/"
         }
     }
     
@@ -144,6 +152,14 @@ extension MPApiType: TargetType {
         case let .checkOrderList(type):
             var param = defaultParam
             param["type"] = type
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .grab(id):
+            var param = defaultParam
+            param["id"] = id
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .cancelOrder(id):
+            var param = defaultParam
+            param["id"] = id
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain

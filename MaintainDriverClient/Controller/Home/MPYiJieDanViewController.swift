@@ -17,7 +17,7 @@ class MPYiJieDanViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        loadData()
+//        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
     }
@@ -87,7 +87,7 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MPOrderConfirmViewController()
+        let vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
         navigationController?.pushViewController(vc, animated: true)
     }
 }

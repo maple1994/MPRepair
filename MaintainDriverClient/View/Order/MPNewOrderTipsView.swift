@@ -9,15 +9,20 @@
 import UIKit
 import SlideMenuControllerSwift
 
+protocol MPNewOrderTipsViewDelegate: class {
+    func tipsViewDidConfirm()
+}
+
 /// 提示新订单View
 class MPNewOrderTipsView: UIView {
-    class func show(title: String, subTitle: String) -> MPNewOrderTipsView {
+    class func show(title: String, subTitle: String, delegate: MPNewOrderTipsViewDelegate?) -> MPNewOrderTipsView {
         UIGraphicsBeginImageContextWithOptions(UIScreen.main.bounds.size, false, UIScreen.main.scale)
         UIApplication.shared.keyWindow?.drawHierarchy(in: UIScreen.main.bounds, afterScreenUpdates: false)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
         let view = MPNewOrderTipsView()
+        view.delegate = delegate
         view.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: mp_screenH)
         view.bgImage = image
         view.set(title: title, subTitle: subTitle)
@@ -35,6 +40,13 @@ class MPNewOrderTipsView: UIView {
         timeCountView.isHidden = false
     }
     
+    /// 结束倒计时
+    func endTimeCount() {
+        timer?.invalidate()
+        timeCountView.isHidden = true
+        showResultView.isHidden = false
+    }
+    
     func set(title: String, subTitle: String) {
         titleLabel.text = title
         subTitleLabel.text = subTitle
@@ -49,6 +61,8 @@ class MPNewOrderTipsView: UIView {
             }
         }
     }
+    
+    weak var delegate: MPNewOrderTipsViewDelegate?
     
     // MARK: -
     fileprivate weak var timer: Timer?
@@ -168,17 +182,11 @@ class MPNewOrderTipsView: UIView {
     @objc fileprivate func confirm() {
         timer?.invalidate()
         removeFromSuperview()
-        let vc = MPOrderConfirmViewController()
-        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)
-        nav?.pushViewController(vc, animated: true)
+        delegate?.tipsViewDidConfirm()
     }
     
     @objc fileprivate func timeCount() {
         count += 1
-        if count == 4 {
-            timeCountView.isHidden = true
-            showResultView.isHidden = false
-        }
         timeCountLabel.text = "\(count)s"
     }
     
