@@ -77,7 +77,7 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
         case 0:
-            return 5
+            return 4
         case 1:
             return 2
         case 2:
@@ -101,12 +101,10 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
             case 0:
                 cell?.set(title: "车主姓名", value: orderModel.name, isHiddenLine: isHiddenLine)
             case 1:
-                cell?.set(title: "身份证号码", value: "暂无", isHiddenLine: isHiddenLine)
-            case 2:
                 cell?.set(title: "品牌型号", value: orderModel.car_brand, isHiddenLine: isHiddenLine)
-            case 3:
+            case 2:
                 cell?.set(title: "号码号牌", value: orderModel.car_code, isHiddenLine: isHiddenLine)
-            case 4:
+            case 3:
                 cell?.set(title: "车辆类型", value: orderModel.car_type, isHiddenLine: isHiddenLine)
             default:
                 break

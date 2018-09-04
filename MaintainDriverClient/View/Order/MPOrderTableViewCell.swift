@@ -21,22 +21,19 @@ class MPOrderTableViewCell: UITableViewCell {
             moneyLabel.text = "\(orderModel.total_price)"
         }
     }
-    var row: Int = 0{
+    var orderState: MPOrderState = MPOrderState.waitJieDan {
         didSet {
-            if row % 2 == 0 {
-                statusLabel.textColor = uncompleteColor
-                statusLabel.text = "未完成"
-            }else {
+            statusLabel.isHidden = false
+            if orderState == MPOrderState.completed {
                 statusLabel.textColor = completedColor
                 statusLabel.text = "已完成"
+            }else {
+                statusLabel.textColor = uncompleteColor
+                statusLabel.text = "未完成"
             }
         }
     }
-    var isStateHidden: Bool = false {
-        didSet {
-            statusLabel.isHidden = isStateHidden
-        }
-    }
+
     fileprivate let smallFont = UIFont.mpSmallFont
     fileprivate let bigFont = UIFont.mpNormalFont
     fileprivate let uncompleteColor = UIColor.mpOrange
@@ -59,6 +56,7 @@ class MPOrderTableViewCell: UITableViewCell {
         let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.mpLightGary)
         orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.mpLightGary)
         statusLabel = UILabel(font: smallFont, text: "未完成", textColor: uncompleteColor)
+        statusLabel.isHidden = true
         let line1 = MPUtils.createLine()
         let carTitleLabel = UILabel(font: smallFont, text: "车型：", textColor: UIColor.mpDarkGray)
         carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.mpDarkGray)

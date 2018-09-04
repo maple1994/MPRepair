@@ -53,7 +53,7 @@ class MPOrderModel {
     /// 总计费用
     var total_price: Double = 0
     /// 状态
-    var state: Int = 0
+    var state: MPOrderState = MPOrderState.waitQuChe
     /// 年检是否成功
     var is_success: Bool = false
     /// 接单用户id
@@ -116,7 +116,7 @@ class MPOrderModel {
         model.combo_price = toDouble(dic["combo_price"])
         model.survey_price = toDouble(dic["survey_price"])
         model.total_price = toDouble(dic["total_price"])
-        model.state = toInt(dic["state"])
+        model.state = MPOrderState.init(rawValue: toInt(dic["state"])) ?? MPOrderState.waitJieDan
         model.driver_user_id = toInt(dic["driver_user_id"])
         model.driver_user_pic_url = toString(dic["driver_user_pic_url"])
         model.driver_user_name = toString(dic["driver_user_name"])

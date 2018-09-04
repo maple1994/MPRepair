@@ -33,7 +33,8 @@ enum MPApiType {
     /// 明细操作信息-提现 via- alipay, weixin
     case tiXian(money: Double, via: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
-    case checkOrderList(type: String)
+    /// finish: 0表示所有，1表示未完成，2表示已完成, 当type=driver的时候必填
+    case checkOrderList(type: String, finish: Int)
     /// 抢单
     case grab(id: Int)
     /// 取消订单
@@ -78,7 +79,7 @@ extension MPApiType: TargetType {
             return "api/user/user/"
         case .getAccountInfo, .tiXian(money: _, via: _):
             return "api/driver/account/"
-        case .checkOrderList(type: _):
+        case .checkOrderList(type: _, finish: _):
             return "api/driver/order/"
         case .grab(id: _):
             return "api/driver/order_grab/"
@@ -105,7 +106,7 @@ extension MPApiType: TargetType {
         case .refreshToken,
              .getUserInfo,
             .getAccountInfo,
-            .checkOrderList(type: _):
+            .checkOrderList(type: _, finish: _):
             return .get
         default:
             return .post
@@ -173,9 +174,12 @@ extension MPApiType: TargetType {
             param["money"] = money
             param["via"] = via
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .checkOrderList(type):
+        case let .checkOrderList(type, finish):
             var param = defaultParam
             param["type"] = type
+            if type == "driver" {
+                param["finish"] = finish
+            }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .grab(id):
             var param = defaultParam

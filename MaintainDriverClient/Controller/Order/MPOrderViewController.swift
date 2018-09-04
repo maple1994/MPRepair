@@ -13,10 +13,14 @@ class MPOrderViewController: UIViewController {
     fileprivate let CellID1 = "MPOrderTableViewCell_UNComplete"
     fileprivate let CellID2 = "MPOrderTableViewCell_Completed"
     fileprivate let blockViewH: CGFloat = 10
+    fileprivate var completeModelArr: [MPOrderModel] = [MPOrderModel]()
+    fileprivate var uncompleteModelArr: [MPOrderModel] = [MPOrderModel]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        loadData()
+        loadData1()
     }
 
     fileprivate func setupUI() {
@@ -60,6 +64,40 @@ class MPOrderViewController: UIViewController {
         }
     }
     
+    /// 加载未完成订单
+    @objc fileprivate func loadData() {
+        MPNetword.requestJson(target: .checkOrderList(type: "driver", finish: 1), success: { (json) in
+            guard let data = json["data"] as? [[String: Any]] else {
+                return
+            }
+            var arr = [MPOrderModel]()
+            for dic in data {
+                if let model = MPOrderModel.toModel(dic) {
+                    arr.append(model)
+                }
+            }
+            self.uncompleteModelArr = arr
+            self.uncompleteTableView.reloadData()
+        })
+    }
+    
+    /// 加载已完成订单
+    @objc fileprivate func loadData1() {
+        MPNetword.requestJson(target: .checkOrderList(type: "driver", finish: 2), success: { (json) in
+            guard let data = json["data"] as? [[String: Any]] else {
+                return
+            }
+            var arr = [MPOrderModel]()
+            for dic in data {
+                if let model = MPOrderModel.toModel(dic) {
+                    arr.append(model)
+                }
+            }
+            self.completeModelArr = arr
+            self.completedTableView.reloadData()
+        })
+    }
+    
     fileprivate func createTbView(cellID: String) -> UITableView {
         let tb = UITableView()
         tb.register(MPOrderTableViewCell.classForCoder(), forCellReuseIdentifier: cellID)
@@ -70,6 +108,8 @@ class MPOrderViewController: UIViewController {
         return tb
     }
     
+    
+    
     fileprivate var uncompleteTableView: UITableView!
     fileprivate var completedTableView: UITableView!
     fileprivate var titleView: MPTitleView!
@@ -79,7 +119,11 @@ class MPOrderViewController: UIViewController {
 extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        if tableView == completedTableView {
+            return completeModelArr.count
+        }else {
+            return uncompleteModelArr.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -88,14 +132,16 @@ extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
             if cell == nil {
                 cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID1)
             }
-            cell?.row = indexPath.row
+            cell?.orderModel = uncompleteModelArr[indexPath.row]
+            cell?.orderState = uncompleteModelArr[indexPath.row].state
             return cell!
         }else {
             var cell = tableView.dequeueReusableCell(withIdentifier: CellID2) as? MPOrderTableViewCell
             if cell == nil {
                 cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID1)
             }
-            cell?.row = indexPath.row
+            cell?.orderModel = completeModelArr[indexPath.row]
+            cell?.orderState = completeModelArr[indexPath.row].state
             return cell!
         }
     }

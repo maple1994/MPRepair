@@ -106,7 +106,7 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
-        MPNetword.requestJson(target: .checkOrderList(type: "order"), success: { (json) in
+        MPNetword.requestJson(target: .checkOrderList(type: "order", finish: 0), success: { (json) in
             guard let data = json["data"] as? [[String: Any]] else {
                 return
             }
