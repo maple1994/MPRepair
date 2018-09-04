@@ -38,6 +38,18 @@ enum MPApiType {
     case grab(id: Int)
     /// 取消订单
     case cancelOrder(id: Int)
+    /// 确认取车
+    case quChe(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
+    /// 开始年检
+    case startYearCheck(id: Int)
+    /// 年检已过
+    case yearCheckSucc(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
+    /// 年检未过
+    case yearCheckFail(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
+    /// 到达还车
+    case arriveHuanChe(id: Int)
+    /// 确认还车
+    case confirmReturn(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -72,6 +84,18 @@ extension MPApiType: TargetType {
             return "api/driver/order_grab/"
         case .cancelOrder(id: _):
             return "api/driver/order_cancel/"
+        case .quChe(id: _, number: _, picArr: _, typeArr: _, note: _):
+            return "api/driver/order_get/"
+        case .startYearCheck(id: _):
+            return "api/driver/order_survey/"
+        case .yearCheckSucc:
+            return "api/driver/order_success/"
+        case .yearCheckFail(id: _, number: _, picArr: _, typeArr: _, note: _):
+            return "api/driver/order_fail/"
+        case .arriveHuanChe(id: _):
+            return "api/driver/order_arrive/"
+        case .confirmReturn(id: _, number: _, picArr: _, typeArr: _, note: _):
+            return "api/driver/order_return/"
         }
     }
     
@@ -137,7 +161,7 @@ extension MPApiType: TargetType {
                 param["name"] = name1
             }
             if let pic1 = pic {
-                if let base64 = UIImageJPEGRepresentation(pic1, 1)?.base64EncodedString(){
+                if let base64 = pic1.base64 {
                     param["pic"] = base64
                 }
             }
@@ -160,6 +184,102 @@ extension MPApiType: TargetType {
         case let .cancelOrder(id):
             var param = defaultParam
             param["id"] = id
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .quChe(id, number, picArr, typeArr, note):
+            var param = defaultParam
+            param["id"] = id
+            param["number"] = number
+            if let arr1 = picArr {
+                for (index, img) in arr1.enumerated() {
+                    if let base = img.base64 {
+                        param["pic\(index + 1)"] = base
+                    }
+                }
+            }
+            if let arr1 = typeArr {
+                for (index, type) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type
+                }
+            }
+            if let arr1 = note {
+                for (index, note1) in arr1.enumerated() {
+                    param["note\(index + 1)"] = note1
+                }
+            }
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .startYearCheck(id):
+            var param = defaultParam
+            param["id"] = id
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .yearCheckSucc(id, number, picArr, typeArr, note):
+            var param = defaultParam
+            param["id"] = id
+            param["number"] = number
+            if let arr1 = picArr {
+                for (index, img) in arr1.enumerated() {
+                    if let base = img.base64 {
+                        param["pic\(index + 1)"] = base
+                    }
+                }
+            }
+            if let arr1 = typeArr {
+                for (index, type) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type
+                }
+            }
+            if let arr1 = note {
+                for (index, note1) in arr1.enumerated() {
+                    param["note\(index + 1)"] = note1
+                }
+            }
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .yearCheckFail(id, number, picArr, typeArr, note):
+            var param = defaultParam
+            param["id"] = id
+            param["number"] = number
+            if let arr1 = picArr {
+                for (index, img) in arr1.enumerated() {
+                    if let base = img.base64 {
+                        param["pic\(index + 1)"] = base
+                    }
+                }
+            }
+            if let arr1 = typeArr {
+                for (index, type) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type
+                }
+            }
+            if let arr1 = note {
+                for (index, note1) in arr1.enumerated() {
+                    param["note\(index + 1)"] = note1
+                }
+            }
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .arriveHuanChe(id):
+            var param = defaultParam
+            param["id"] = id
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .confirmReturn(id, number, picArr, typeArr, note):
+            var param = defaultParam
+            param["id"] = id
+            param["number"] = number
+            if let arr1 = picArr {
+                for (index, img) in arr1.enumerated() {
+                    if let base = img.base64 {
+                        param["pic\(index + 1)"] = base
+                    }
+                }
+            }
+            if let arr1 = typeArr {
+                for (index, type) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type
+                }
+            }
+            if let arr1 = note {
+                for (index, note1) in arr1.enumerated() {
+                    param["note\(index + 1)"] = note1
+                }
+            }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain

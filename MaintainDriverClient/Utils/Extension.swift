@@ -199,6 +199,15 @@ extension UIImageView {
     }
 }
 
+extension UIImage {
+    var base64: String? {
+        if let base = UIImageJPEGRepresentation(self, 1)?.base64EncodedString(){
+            return base
+        }
+        return nil
+    }
+}
+
 // MARK:- 给所有遵守Codeale协议添加便利转换方法
 extension Decodable{
     static func deserialize<T:Decodable>(from: String) -> T?{
