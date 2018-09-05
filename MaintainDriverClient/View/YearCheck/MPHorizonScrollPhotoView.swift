@@ -12,10 +12,11 @@ import SlideMenuControllerSwift
 /// 水平滚动的图片View
 class MPHorizonScrollPhotoView: UIView {
     fileprivate let CellID = "MPHorizonScrollPhotoItemCell"
-    fileprivate var pictureCount: Int
+    fileprivate var photoModelArr: [MPPhotoModel]
     fileprivate var isShowTitle: Bool
-    init(count: Int, isShowTitle: Bool) {
-        pictureCount = count
+    
+    init(modelArr: [MPPhotoModel], isShowTitle: Bool) {
+        photoModelArr = modelArr
         self.isShowTitle = isShowTitle
         super.init(frame: CGRect.zero)
         setupUI()
@@ -58,10 +59,11 @@ class MPHorizonScrollPhotoView: UIView {
 extension MPHorizonScrollPhotoView: UICollectionViewDelegate, UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return pictureCount
+        return photoModelArr.count
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as? MPHorizonScrollPhotoItemCell
+        cell?.model = photoModelArr[indexPath.row]
         cell?.titleLabel.isHidden = !isShowTitle
         return cell!
     }
@@ -69,6 +71,18 @@ extension MPHorizonScrollPhotoView: UICollectionViewDelegate, UICollectionViewDa
 
 /// MPHorizonScrollPhotoView的cell
 class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
+    
+    var model: MPPhotoModel? {
+        didSet {
+            if let img = model?.image {
+                photoView.image = img
+            }else {
+                photoView.image = #imageLiteral(resourceName: "add_pic")
+            }
+            titleLabel.text = model?.title
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: CGRect.zero)
         setupUI()
@@ -107,6 +121,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func remove() {
+        model?.image = nil
         photoView.image = #imageLiteral(resourceName: "add_pic")
         removeButton.isHidden = true
     }
@@ -133,6 +148,7 @@ extension MPHorizonScrollPhotoItemCell: TZImagePickerControllerDelegate {
         guard let image = photos.first else {
             return
         }
+        model?.image = image
         photoView.image = image
         removeButton.isHidden = false
     }

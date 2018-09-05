@@ -12,6 +12,10 @@ import UIKit
 class MPQuCheViewController1: UIViewController {
 
     fileprivate var orderModel: MPOrderModel
+    /// 检车区域的图片
+    fileprivate var jianCheModelArr: [MPPhotoModel] = [MPPhotoModel]()
+    /// 车身拍照区域的图片
+    fileprivate var cheShenModelArr: [MPPhotoModel] = [MPPhotoModel]()
     
     init(model: MPOrderModel) {
         orderModel = model
@@ -24,6 +28,19 @@ class MPQuCheViewController1: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        for i in 0...1 {
+            let model = MPPhotoModel()
+            if i == 0 {
+                model.title = "有效期内交的强险保单副本"
+            }else {
+                model.title = "车钥匙"
+            }
+            jianCheModelArr.append(model)
+        }
+        for _ in 0...5 {
+            let model = MPPhotoModel()
+            cheShenModelArr.append(model)
+        }
         setupUI()
         setupNav()
         tableView.reloadData()
@@ -71,8 +88,18 @@ class MPQuCheViewController1: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPStartYearCheckViewController2()
-        navigationController?.pushViewController(vc, animated: true)
+        for model in jianCheModelArr {
+            if let img = model.image {
+                print(img)
+            }
+        }
+        for model in cheShenModelArr {
+            if let img = model.image {
+                print(img)
+            }
+        }
+//        let vc = MPStartYearCheckViewController2()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!
@@ -95,8 +122,8 @@ class MPQuCheViewController1: UIViewController {
     }()
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
-    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
-    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 6, isShowTitle: false)
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: jianCheModelArr, isShowTitle: true)
+    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheShenModelArr, isShowTitle: false)
 }
 
 extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {

@@ -10,9 +10,26 @@ import UIKit
 
 /// 检完还车1
 class MPCheckOutFinishViewController1: UIViewController {
-
+    /// 检查确认图片
+    fileprivate var confirmModelArr: [MPPhotoModel] = [MPPhotoModel]()
+    /// 车身拍照区域的图片
+    fileprivate var cheShenModelArr: [MPPhotoModel] = [MPPhotoModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        for i in 0...1 {
+            let model = MPPhotoModel()
+            if i == 0 {
+                model.title = "有效期内交的强险保单副本"
+            }else {
+                model.title = "车钥匙"
+            }
+            confirmModelArr.append(model)
+        }
+        for _ in 0...5 {
+            let model = MPPhotoModel()
+            cheShenModelArr.append(model)
+        }
         setupUI()
         setupNav()
     }
@@ -68,8 +85,8 @@ class MPCheckOutFinishViewController1: UIViewController {
     }()
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
-    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
-    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 6, isShowTitle: false)
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmModelArr, isShowTitle: true)
+    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheShenModelArr, isShowTitle: false)
 }
 
 extension MPCheckOutFinishViewController1: UITableViewDelegate, UITableViewDataSource {

@@ -11,8 +11,35 @@ import UIKit
 /// 开始年检
 class MPStartYearCheckViewController: UIViewController {
 
+    fileprivate var confirmPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    fileprivate var cheDengPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        for j in 0...3 {
+            for i in 0...1 {
+                let model = MPPhotoModel()
+                if i == 0 {
+                    model.title = "有效期内交的强险保单副本"
+                }else {
+                    model.title = "车钥匙"
+                }
+                switch j {
+                case 0:
+                    confirmPhotoArr.append(model)
+                case 1:
+                    cheDengPhotoArr.append(model)
+                case 2:
+                    paiQiPhotoArr.append(model)
+                case 3:
+                    waiQiPhotoArr.append(model)
+                default:
+                    break
+                }
+            }
+        }
         setupUI()
     }
     
@@ -92,7 +119,10 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var tableView1: UITableView!
     fileprivate var tableView2: UITableView!
     fileprivate var tableView3: UITableView!
-    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
+    fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmPhotoArr, isShowTitle: true)
+    fileprivate lazy var cheDengPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheDengPhotoArr, isShowTitle: true)
+    fileprivate lazy var paiQiPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: paiQiPhotoArr, isShowTitle: true)
+    fileprivate lazy var waiGuanPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: waiQiPhotoArr, isShowTitle: true)
     fileprivate lazy var feekbackView = MPFeedbackView()
 }
 
@@ -155,7 +185,13 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return horizontalPhotoView
         }else if tableView == tableView2 {
-            return MPHorizonScrollPhotoView(count: 2, isShowTitle: true)
+            if section == 0 {
+                return cheDengPhotoView
+            }else if section == 1 {
+                return paiQiPhotoView
+            }else {
+                return waiGuanPhotoView
+            }
         }else {
             return nil
         }

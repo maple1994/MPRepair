@@ -25,6 +25,7 @@
 		F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */; };
 		F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */; };
 		F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */; };
+		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
@@ -125,6 +126,7 @@
 		F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPRegisterViewController.swift; sourceTree = "<group>"; };
 		F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPResetPwdViewController.swift; sourceTree = "<group>"; };
 		F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginNavViewController.swift; sourceTree = "<group>"; };
+		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */,
 				F51E90282136E9D700ED1B44 /* MPUserModel.swift */,
 				F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */,
+				F583EA5121400E480071CE9B /* MPPhotoModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -823,6 +826,7 @@
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F5DF7390211A94E400B9F154 /* MPFeedbackView.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
+				F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */,
 				F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,
