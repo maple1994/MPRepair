@@ -21,6 +21,17 @@ class MPStartYearCheckViewController2: UIViewController {
         return mgr
     }()
     
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,17 +81,13 @@ class MPStartYearCheckViewController2: UIViewController {
                 return
             }
             self.startCoordinate = coord
-            // 23.1575700000,113.3513600000
-            self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
-            self.addAnnotations()
         }
-        locationManager.locationTimeout = 6
-        locationManager.reGeocodeTimeout = 3
+        self.destinationCoordinate = CLLocationCoordinate2DMake(orderModel.order_latitude, orderModel.order_longitude)
+        self.addAnnotations()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        mapView?.setZoomLevel(12, animated: true)
     }
     
     fileprivate func setupNav() {
@@ -100,8 +107,15 @@ class MPStartYearCheckViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPStartYearCheckViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .startYearCheck(id: orderModel.id), success: { (_) in
+            hud?.hide(animated: true)
+            let vc = MPStartYearCheckViewController(model: self.orderModel)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }) { (_) in
+            hud?.hide(animated: true)
+            MPTipsView.showMsg("上传失败，请重新再试")
+        }
     }
     
     // MARK: - View
@@ -170,12 +184,18 @@ extension MPStartYearCheckViewController2: UITableViewDelegate, UITableViewDataS
         }
         cell?.timeTitleLabel.text = "年检时间"
         cell?.addressTitleLabel.text = "年检地点"
+        cell?.carNameLabel.text = orderModel.car_brand
+        cell?.timeLabel.text = orderModel.survey_time
+        cell?.addressLabel.text = orderModel.surveystation?.name
         cell?.delegate = self
         return cell!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (_) in
-            
+        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (cell1) in
+            let cell = cell1 as? MPQuCheCCell
+            cell?.carNameLabel.text = self.orderModel.car_brand
+            cell?.timeLabel.text = self.orderModel.survey_time
+            cell?.addressLabel.text = self.orderModel.surveystation?.name
         })
     }
 }
@@ -184,7 +204,7 @@ extension MPStartYearCheckViewController2: UITableViewDelegate, UITableViewDataS
 extension MPStartYearCheckViewController2: MPQuCheCCellDelegate {
     /// 联系
     func quCheCellDidSelectContact() {
-        guard let url = URL(string: "tel:10086") else {
+        guard let url = URL(string: "tel:\(orderModel.phone)") else {
             return
         }
         if #available(iOS 10.0, *) {
@@ -202,7 +222,11 @@ extension MPStartYearCheckViewController2: MPQuCheCCellDelegate {
         }
         // https://lbs.amap.com/api/amap-mobile/guide/ios/navi
         let source = "当前位置".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
-        let destion = "华南农业大学".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+        var name = ""
+        if let name1 = orderModel.surveystation?.name {
+            name = name1
+        }
+        let destion = name.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
         let str = "iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=\(st.latitude)&slon=\(st.longitude)&sname=\(source)&did=BGVIS2&dlat=\(des.latitude)&dlon=\(des.longitude)&dname=\(destion)&dev=0&t=0"
         guard let url = URL.init(string: str) else {
             return
@@ -215,7 +239,7 @@ extension MPStartYearCheckViewController2: MPQuCheCCellDelegate {
             }
         }else {
             let config = AMapNaviCompositeUserConfig.init()
-            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "华南农业大学", poiId: nil)  //传入终点
+            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: name, poiId: nil)  //传入终点
             self.compositeManager.presentRoutePlanViewController(withOptions: config)
         }
     }

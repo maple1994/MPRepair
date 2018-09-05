@@ -20,6 +20,16 @@ class MPCheckOutFinishViewController2: UIViewController {
         mgr.delegate = self
         return mgr
     }()
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     // MARK: -
     override func viewDidLoad() {
@@ -98,7 +108,7 @@ class MPCheckOutFinishViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPCheckOutFinishViewController1()
+        let vc = MPCheckOutFinishViewController1(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     

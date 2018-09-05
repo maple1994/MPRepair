@@ -88,7 +88,23 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
-        navigationController?.pushViewController(vc, animated: true)
+        let model = modelArr[indexPath.row]
+        var vc: UIViewController? = nil
+        switch model.state {
+        case .waitQuChe:
+            vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
+        case .waitNianJian:
+            vc = MPStartYearCheckViewController2(model: modelArr[indexPath.row])
+        case .nianJianing,
+             .nianJianOver:
+            vc = MPStartYearCheckViewController(model: modelArr[indexPath.row])
+        case .daoDaHuanChe:
+            vc = MPCheckOutFinishViewController2(model: modelArr[indexPath.row])
+        case .yiHuanChe:
+            vc = MPCheckOutFinishViewController1(model: modelArr[indexPath.row])
+        default:
+            vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
+        }
+        navigationController?.pushViewController(vc!, animated: true)
     }
 }

@@ -201,7 +201,7 @@ extension UIImageView {
 
 extension UIImage {
     var base64: String? {
-        if let base = UIImageJPEGRepresentation(self, 1)?.base64EncodedString(){
+        if let base = UIImageJPEGRepresentation(self, 0.3)?.base64EncodedString(){
             return base
         }
         return nil

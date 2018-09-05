@@ -15,6 +15,16 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var cheDengPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    fileprivate var orderModel: MPOrderModel
+    
+    init(model: MPOrderModel) {
+        orderModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -109,7 +119,7 @@ class MPStartYearCheckViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPCheckOutFinishViewController2()
+        let vc = MPCheckOutFinishViewController2(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }
 

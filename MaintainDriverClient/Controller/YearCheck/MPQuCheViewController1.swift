@@ -11,11 +11,11 @@ import UIKit
 /// 上门取车情况一
 class MPQuCheViewController1: UIViewController {
 
-    fileprivate var orderModel: MPOrderModel
     /// 检车区域的图片
     fileprivate var jianCheModelArr: [MPPhotoModel] = [MPPhotoModel]()
     /// 车身拍照区域的图片
     fileprivate var cheShenModelArr: [MPPhotoModel] = [MPPhotoModel]()
+    fileprivate var orderModel: MPOrderModel
     
     init(model: MPOrderModel) {
         orderModel = model
@@ -88,18 +88,32 @@ class MPQuCheViewController1: UIViewController {
     }
     
     @objc fileprivate func confirm() {
+        var picArr = [UIImage]()
+        var typeArr = [String]()
+        var noteArr = [String]()
         for model in jianCheModelArr {
             if let img = model.image {
-                print(img)
+                picArr.append(img)
+                typeArr.append("get_confirm")
+                noteArr.append(model.title ?? "")
             }
         }
         for model in cheShenModelArr {
             if let img = model.image {
-                print(img)
+                picArr.append(img)
+                typeArr.append("get_car")
+                noteArr.append(model.title ?? "")
             }
         }
-//        let vc = MPStartYearCheckViewController2()
-//        navigationController?.pushViewController(vc, animated: true)
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .quChe(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (json) in
+            hud?.hide(animated: true)
+            let vc = MPStartYearCheckViewController2(model: self.orderModel)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }) { (_) in
+            MPTipsView.showMsg("上传失败，请重新再试")
+            hud?.hide(animated: true)
+        }
     }
     
     fileprivate var tableView: UITableView!

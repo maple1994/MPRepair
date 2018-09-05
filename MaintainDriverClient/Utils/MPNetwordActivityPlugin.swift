@@ -22,7 +22,7 @@ class MPNetwordActivityPlugin: PluginType {
     func willSend(_ request: RequestType, target: TargetType) {
         switch target {
         case MPApiType.updateUserInfo(name: _, pic: _):
-            loadingHud = MPTipsView.showLoadingView("正在上传...")
+            loadingHud = MPTipsView.showLoadingView("上传中...")
         default:
             break
         }
