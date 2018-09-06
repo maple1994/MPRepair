@@ -24,7 +24,6 @@ let MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION = NSNotification.Name.init("MP_APP_
 /// 刷新Token成功的通知
 let MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION = NSNotification.Name.init("MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION")
 
-
 /// 垂直space
 let mp_vSpace: CGFloat = 10
 /// 水平space

@@ -47,13 +47,13 @@ class MPNetwordActivityPlugin: PluginType {
                     MPPrint("200-\(msg)")
                 }
             case 300:
-                // TODO: - Token失效处理
                 if let msg = json["msg"] as? String {
                     MPTipsView.showMsg("登录信息过期，请重新登录")
                     MPPrint("300-\(msg)")
                 }
-                MPPrint("token失效")
-                MPUserModel.shared.loginOut()
+                if MPUserModel.shared.isLogin {                
+                    MPUserModel.shared.loginOut()
+                }
             default:
                 break
             }

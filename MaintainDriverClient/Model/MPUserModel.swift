@@ -38,6 +38,7 @@ class MPUserModel: Codable {
     var isLogin: Bool {
         return token != "0"
     }
+    fileprivate weak var timer: Timer?
     
     // MARK: - Method
     private init() {
@@ -55,6 +56,7 @@ class MPUserModel: Codable {
     }
     
     @objc fileprivate func refreshTokenSucc() {
+        startTimer()
         while !MPNetword.requestQueue.isEmpty {
             let block = MPNetword.requestQueue.dequeue()
             block?()
@@ -64,11 +66,14 @@ class MPUserModel: Codable {
     /// 登录成功
     func loginSucc() {
         serilization()
+        startTimer()
         NotificationCenter.default.post(name: MP_LOGIN_NOTIFICATION, object: nil)
     }
     
     /// 退出登录
     func loginOut() {
+        // 停止定时器
+        stopTimer()
         // 清除数据
         removeUserInfo()
         if let slideVC = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? SlideMenuController {
@@ -142,6 +147,32 @@ class MPUserModel: Codable {
             succ?()
         }) { (err) in
             fail?()
+        }
+    }
+}
+
+// MARK: - Timer
+extension MPUserModel {
+    func startTimer() {
+        stopTimer()
+        let timer = Timer(timeInterval: 60, target: self, selector: #selector(MPUserModel.refreshAction), userInfo: nil, repeats: true)
+        self.timer = timer
+        RunLoop.current.add(timer, forMode: .commonModes)
+    }
+    
+    func stopTimer() {
+        timer?.invalidate()
+    }
+    /// 每分钟都去检测Token的有效期，当token小于10分钟就过期时
+    /// 刷新Token
+    @objc func refreshAction() {
+        guard let date = expire.toDate(format: "yyyy-MM-dd HH:mm:ss") else {
+            return
+        }
+        let today = Date()
+        let delta = date.timeIntervalSince(today)
+        if delta <= 600 {
+            refreshToken()
         }
     }
 }
