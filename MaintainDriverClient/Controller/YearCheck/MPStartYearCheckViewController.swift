@@ -74,6 +74,7 @@ class MPStartYearCheckViewController: UIViewController {
         contentView = UIScrollView()
         contentView.showsHorizontalScrollIndicator = false
         contentView.delegate = self
+        contentView.bounces = false
         contentView.isPagingEnabled = true
         view.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
@@ -119,6 +120,60 @@ class MPStartYearCheckViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
+        var picArr = [UIImage]()
+        var typeArr = [String]()
+        var noteArr = [String]()
+        if titleView.selectedIndex == 0 {
+            for model in confirmPhotoArr {
+                if let img = model.image {
+                    picArr.append(img)
+                    typeArr.append("get_confirm")
+                    noteArr.append(model.title ?? "")
+                }
+            }
+            let hud = MPTipsView.showLoadingView("上传中...")
+            MPNetword.requestJson(target: .yearCheckSucc(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (_) in
+                hud?.hide(animated: true)
+                self.jump()
+            }) { (_) in
+                hud?.hide(animated: true)
+                MPTipsView.showMsg("上传失败，请重新再试")
+            }
+        }else {
+            for model in cheDengPhotoArr {
+                if let img = model.image {
+                    picArr.append(img)
+                    typeArr.append("get_car")
+                    noteArr.append("车灯")
+                }
+            }
+            for model in paiQiPhotoArr {
+                if let img = model.image {
+                    picArr.append(img)
+                    typeArr.append("get_car")
+                    noteArr.append("排气")
+                }
+            }
+            for model in waiQiPhotoArr {
+                if let img = model.image {
+                    picArr.append(img)
+                    typeArr.append("get_car")
+                    noteArr.append("外观")
+                }
+            }
+            let hud = MPTipsView.showLoadingView("上传中...")
+            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (_) in
+                hud?.hide(animated: true)
+                self.jump()
+            }) { (_) in
+                hud?.hide(animated: true)
+                MPTipsView.showMsg("上传失败，请重新再试")
+            }
+        }
+
+    }
+    
+    fileprivate func jump() {
         let vc = MPCheckOutFinishViewController2(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }

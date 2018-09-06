@@ -15,15 +15,13 @@ protocol MPTitleViewDelegate: class {
 /// 显示年检已过，年检未过，维护反馈的titleView
 class MPTitleView: UIView {
     
-    var selectedIndex: Int?
+    var selectedIndex: Int = 0
     /// 记录最后上一次偏移量
     var lastOffsetX: CGFloat = 0
     weak var delegate: MPTitleViewDelegate?
     func setupSelectedIndex(_ index: Int) {
-        if selectedIndex != nil {
-            if selectedIndex! == index {
-                return
-            }
+        if selectedIndex != index {
+            return
         }
         setupSelected(labelArr[index])
         selectedIndex = index
