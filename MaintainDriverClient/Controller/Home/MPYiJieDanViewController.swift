@@ -95,12 +95,11 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
             vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
         case .waitNianJian:
             vc = MPStartYearCheckViewController2(model: modelArr[indexPath.row])
-        case .nianJianing,
-             .nianJianOver:
+        case .nianJianing:
             vc = MPStartYearCheckViewController(model: modelArr[indexPath.row])
-        case .daoDaHuanChe:
+        case .nianJianOver:
             vc = MPCheckOutFinishViewController2(model: modelArr[indexPath.row])
-        case .yiHuanChe:
+        case .daoDaHuanChe:
             vc = MPCheckOutFinishViewController1(model: modelArr[indexPath.row])
         default:
             vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])

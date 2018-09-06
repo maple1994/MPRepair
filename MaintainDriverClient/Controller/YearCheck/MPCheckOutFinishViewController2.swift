@@ -70,20 +70,17 @@ class MPCheckOutFinishViewController2: UIViewController {
         mapView?.userTrackingMode = MAUserTrackingMode.follow
         mapView?.delegate = self
         tableView.tableHeaderView = tbHeaderView
-        /*
-         CLLocation *location, AMapLocationReGeocode *regeocode, NSError *error
-         */
+
+        locationManager.locationTimeout = 2
+        locationManager.reGeocodeTimeout = 2
         locationManager.requestLocation(withReGeocode: true) { (location, regeocode, error) in
             guard let coord = location?.coordinate else {
                 return
             }
             self.startCoordinate = coord
-            // 23.1575700000,113.3513600000
-            self.destinationCoordinate = CLLocationCoordinate2DMake(23.1575700000, 113.3513600000)
-            self.addAnnotations()
         }
-        locationManager.locationTimeout = 6
-        locationManager.reGeocodeTimeout = 3
+        self.destinationCoordinate = CLLocationCoordinate2DMake(orderModel.order_latitude, orderModel.order_longitude)
+        addAnnotations()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -108,8 +105,16 @@ class MPCheckOutFinishViewController2: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPCheckOutFinishViewController1(model: orderModel)
-        navigationController?.pushViewController(vc, animated: true)
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .arriveHuanChe(id: orderModel.id), success: { (_) in
+            hud?.hide(animated: true)
+            let vc = MPCheckOutFinishViewController1(model: self.orderModel)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }) { (_) in
+            hud?.hide(animated: true)
+            MPTipsView.showMsg("上传失败，请重新再试")
+        }
+        
     }
     
     // MARK: - View
@@ -178,12 +183,18 @@ extension MPCheckOutFinishViewController2: UITableViewDelegate, UITableViewDataS
         }
         cell?.timeTitleLabel.text = "还车时间"
         cell?.addressTitleLabel.text = "还车地点"
+        cell?.carNameLabel.text = orderModel.car_brand
+        cell?.timeLabel.text = orderModel.return_time
+        cell?.addressLabel.text = orderModel.order_address
         cell?.delegate = self
         return cell!
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (_) in
-            
+        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (cell1) in
+            let cell = cell1 as? MPQuCheCCell
+            cell?.carNameLabel.text = self.orderModel.car_brand
+            cell?.timeLabel.text = self.orderModel.return_time
+            cell?.addressLabel.text = self.orderModel.order_address
         })
     }
 }
@@ -192,7 +203,7 @@ extension MPCheckOutFinishViewController2: UITableViewDelegate, UITableViewDataS
 extension MPCheckOutFinishViewController2: MPQuCheCCellDelegate {
     /// 联系
     func quCheCellDidSelectContact() {
-        guard let url = URL(string: "tel:10086") else {
+        guard let url = URL(string: "\(orderModel.phone)") else {
             return
         }
         if #available(iOS 10.0, *) {
@@ -210,7 +221,7 @@ extension MPCheckOutFinishViewController2: MPQuCheCCellDelegate {
         }
         // https://lbs.amap.com/api/amap-mobile/guide/ios/navi
         let source = "当前位置".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
-        let destion = "华南农业大学".addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
+        let destion = orderModel.order_address.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)!
         let str = "iosamap://path?sourceApplication=applicationName&sid=BGVIS1&slat=\(st.latitude)&slon=\(st.longitude)&sname=\(source)&did=BGVIS2&dlat=\(des.latitude)&dlon=\(des.longitude)&dname=\(destion)&dev=0&t=0"
         guard let url = URL.init(string: str) else {
             return
@@ -223,7 +234,7 @@ extension MPCheckOutFinishViewController2: MPQuCheCCellDelegate {
             }
         }else {
             let config = AMapNaviCompositeUserConfig.init()
-            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: "华南农业大学", poiId: nil)  //传入终点
+            config.setRoutePlanPOIType(AMapNaviRoutePlanPOIType.end, location: AMapNaviPoint.location(withLatitude: CGFloat(des.latitude), longitude: CGFloat(des.longitude)), name: orderModel.order_address, poiId: nil)  //传入终点
             self.compositeManager.presentRoutePlanViewController(withOptions: config)
         }
     }

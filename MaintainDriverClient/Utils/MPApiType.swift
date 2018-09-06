@@ -351,7 +351,11 @@ struct MPNetword {
                         if let code = json["code"] as? Int {
                             if code == 100 {
                                 success?(json)
+                            }else {
+                                failure?(MoyaError.statusCode(moyaResponse))
                             }
+                        }else {
+                            failure?(MoyaError.statusCode(moyaResponse))
                         }
                     } catch {
                         failure?(MoyaError.jsonMapping(moyaResponse))
