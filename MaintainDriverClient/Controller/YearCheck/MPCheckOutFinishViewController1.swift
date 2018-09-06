@@ -72,7 +72,32 @@ class MPCheckOutFinishViewController1: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        navigationController?.popToRootViewController(animated: true)
+        var picArr = [UIImage]()
+        var typeArr = [String]()
+        var noteArr = [String]()
+        for model in confirmModelArr {
+            if let img = model.image {
+                picArr.append(img)
+                typeArr.append("get_confirm")
+                noteArr.append(model.title ?? "")
+            }
+        }
+        for model in cheShenModelArr {
+            if let img = model.image {
+                picArr.append(img)
+                typeArr.append("get_car")
+                noteArr.append(model.title ?? "")
+            }
+        }
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .confirmReturn(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (json) in
+            hud?.hide(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
+        }) { (_) in
+            MPTipsView.showMsg("上传失败，请重新再试")
+            hud?.hide(animated: true)
+        }
+        
     }
     
     fileprivate var tableView: UITableView!
