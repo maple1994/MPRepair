@@ -34,7 +34,7 @@ enum MPApiType {
     case tiXian(money: Double, via: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
     /// finish: 0表示所有，1表示未完成，2表示已完成, 当type=driver的时候必填
-    case checkOrderList(type: String, finish: Int)
+    case getOrderList(type: String, finish: Int)
     /// 抢单
     case grab(id: Int)
     /// 取消订单
@@ -51,6 +51,10 @@ enum MPApiType {
     case arriveHuanChe(id: Int)
     /// 确认还车
     case confirmReturn(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
+    /// 查询订单信息
+    case getOrderInfo(id: Int)
+    /// 查询提交图片的类别名称信息
+    case getPicName
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -63,40 +67,42 @@ extension MPApiType: TargetType {
     /// The path to be appended to `baseURL` to form the full `URL`.
     var path: String {
         switch self {
-        case .login(phone: _, pwd: _):
+        case .login:
             return "api/login/login/"
-        case .register(phone: _, pwd: _, code: _):
+        case .register:
             return "api/login/register_driver/"
-        case .sendCode(phone: _, type: _):
+        case .sendCode:
             return "api/login/message/"
-        case .resetPwd(phone: _, pwd: _, code: _):
+        case .resetPwd:
             return "api/login/reset_driver/"
         case .refreshToken:
             return "api/login/refresh/"
         case .getUserInfo:
             return "api/user/user/"
-        case .updateUserInfo(name: _, pic: _):
+        case .updateUserInfo:
             return "api/user/user/"
-        case .getAccountInfo, .tiXian(money: _, via: _):
+        case .getAccountInfo, .tiXian:
             return "api/driver/account/"
-        case .checkOrderList(type: _, finish: _):
+        case .getOrderList, .getOrderInfo:
             return "api/driver/order/"
-        case .grab(id: _):
+        case .grab:
             return "api/driver/order_grab/"
-        case .cancelOrder(id: _):
+        case .cancelOrder:
             return "api/driver/order_cancel/"
-        case .quChe(id: _, number: _, picArr: _, typeArr: _, note: _):
+        case .quChe:
             return "api/driver/order_get/"
-        case .startYearCheck(id: _):
+        case .startYearCheck:
             return "api/driver/order_survey/"
         case .yearCheckSucc:
             return "api/driver/order_success/"
-        case .yearCheckFail(id: _, number: _, picArr: _, typeArr: _, note: _):
+        case .yearCheckFail:
             return "api/driver/order_fail/"
-        case .arriveHuanChe(id: _):
+        case .arriveHuanChe:
             return "api/driver/order_arrive/"
-        case .confirmReturn(id: _, number: _, picArr: _, typeArr: _, note: _):
+        case .confirmReturn:
             return "api/driver/order_return/"
+        case .getPicName:
+            return "api/driver/picname/"
         }
     }
     
@@ -106,7 +112,9 @@ extension MPApiType: TargetType {
         case .refreshToken,
              .getUserInfo,
             .getAccountInfo,
-            .checkOrderList(type: _, finish: _):
+            .getOrderList,
+            .getOrderInfo,
+            .getPicName:
             return .get
         default:
             return .post
@@ -167,17 +175,17 @@ extension MPApiType: TargetType {
                 }
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case .getAccountInfo:
+        case .getAccountInfo, .getPicName:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case let .tiXian(money, via):
             var param = defaultParam
             param["money"] = money
             param["via"] = via
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .checkOrderList(type, finish):
+        case let .getOrderList(type1, finish):
             var param = defaultParam
-            param["type"] = type
-            if type == "driver" {
+            param["type"] = type1
+            if type1 == "driver" {
                 param["finish"] = finish
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
@@ -201,8 +209,8 @@ extension MPApiType: TargetType {
                 }
             }
             if let arr1 = typeArr {
-                for (index, type) in arr1.enumerated() {
-                    param["type\(index + 1)"] = type
+                for (index, type1) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type1
                 }
             }
             if let arr1 = note {
@@ -227,8 +235,8 @@ extension MPApiType: TargetType {
                 }
             }
             if let arr1 = typeArr {
-                for (index, type) in arr1.enumerated() {
-                    param["type\(index + 1)"] = type
+                for (index, type1) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type1
                 }
             }
             if let arr1 = note {
@@ -249,8 +257,8 @@ extension MPApiType: TargetType {
                 }
             }
             if let arr1 = typeArr {
-                for (index, type) in arr1.enumerated() {
-                    param["type\(index + 1)"] = type
+                for (index, type1) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type1
                 }
             }
             if let arr1 = note {
@@ -275,8 +283,8 @@ extension MPApiType: TargetType {
                 }
             }
             if let arr1 = typeArr {
-                for (index, type) in arr1.enumerated() {
-                    param["type\(index + 1)"] = type
+                for (index, type1) in arr1.enumerated() {
+                    param["type\(index + 1)"] = type1
                 }
             }
             if let arr1 = note {
@@ -284,6 +292,10 @@ extension MPApiType: TargetType {
                     param["note\(index + 1)"] = note1
                 }
             }
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .getOrderInfo(id):
+            var param = defaultParam
+            param["id"] = id
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain
@@ -330,7 +342,12 @@ struct MPMsgCodeKey {
 
 /// 网络请求工具
 struct MPNetword {
+    #if DEBUG
     static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
+    #else
+    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin()])
+    #endif
+    
     /// 请求队列，当token过期时，请求入队
     static var requestQueue: Queue<MPRequestType> = Queue<MPRequestType>()
     

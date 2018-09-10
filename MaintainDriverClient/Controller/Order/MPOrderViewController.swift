@@ -66,7 +66,7 @@ class MPOrderViewController: UIViewController {
     
     /// 加载未完成订单
     @objc fileprivate func loadData() {
-        MPNetword.requestJson(target: .checkOrderList(type: "driver", finish: 1), success: { (json) in
+        MPNetword.requestJson(target: .getOrderList(type: "driver", finish: 1), success: { (json) in
             guard let data = json["data"] as? [[String: Any]] else {
                 return
             }
@@ -83,7 +83,7 @@ class MPOrderViewController: UIViewController {
     
     /// 加载已完成订单
     @objc fileprivate func loadData1() {
-        MPNetword.requestJson(target: .checkOrderList(type: "driver", finish: 2), success: { (json) in
+        MPNetword.requestJson(target: .getOrderList(type: "driver", finish: 2), success: { (json) in
             guard let data = json["data"] as? [[String: Any]] else {
                 return
             }
