@@ -72,18 +72,10 @@ class MPAccountViewController: UIViewController {
     }
     
     fileprivate func loadData() {
-        MPNetword.requestJson(target: .getAccountInfo, success: { (json) in
-            guard let data = json["data"] as? [[String: Any]] else {
-                return
-            }
-            var modelArr = [MPMingXiModel]()
-            for dic in data {
-                if let model: MPMingXiModel = MPMingXiModel.toModel(dic) {
-                    modelArr.append(model)
-                }
-            }
-            self.mingXiModelArr = modelArr
-        })
+        MPNetwordTool.getAccountInfo(succ: { (arr) in
+            self.mingXiModelArr = arr
+            self.tableView.reloadData()
+        }, fail: nil)
     }
     
     @objc fileprivate func tiXian() {

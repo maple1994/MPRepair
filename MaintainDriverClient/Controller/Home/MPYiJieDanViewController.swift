@@ -41,19 +41,10 @@ class MPYiJieDanViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
-        MPNetword.requestJson(target: .getOrderList(type: "driver", finish: 0), success: { (json) in
-            guard let data = json["data"] as? [[String: Any]] else {
-                return
-            }
-            var arr = [MPOrderModel]()
-            for dic in data {
-                if let model = MPOrderModel.toModel(dic) {
-                    arr.append(model)
-                }
-            }
+        MPNetwordTool.getOrderList(type: "driver", finish: 0, succ: { (arr) in
             self.modelArr = arr
             self.tableView.reloadData()
-        })
+        }, fail: nil)
     }
     
     @objc fileprivate func loginSucc() {
@@ -97,7 +88,7 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
             vc = MPStartYearCheckViewController2(model: modelArr[indexPath.row])
         case .nianJianing:
             vc = MPStartYearCheckViewController(model: modelArr[indexPath.row])
-        case .nianJianOver:
+        case .nianJianSucc:
             vc = MPCheckOutFinishViewController2(model: modelArr[indexPath.row])
         case .daoDaHuanChe:
             vc = MPCheckOutFinishViewController1(model: modelArr[indexPath.row])

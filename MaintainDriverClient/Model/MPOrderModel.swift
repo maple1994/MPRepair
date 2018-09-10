@@ -82,8 +82,20 @@ class MPOrderModel {
     var driver_user_pic_url: String = ""
     /// 接单用户名称
     var driver_user_name: String = ""
-    /// 图片备注对象列表
-//    pic_list
+    /// 接单用户联系电话
+    var drive_user_phone: String = ""
+    /// 取车图片-检车确认
+    var get_confirm: MPServerPhotoModel?
+    /// 取车图片-车身拍照
+    var get_car: MPServerPhotoModel?
+    /// 年检已过-上传照片
+    var survey_upload: MPServerPhotoModel?
+    /// 还车图片-检车确认
+    var return_confirm: MPServerPhotoModel?
+    /// 还车图片-车身拍照
+    var return_car: MPServerPhotoModel?
+    /// 失败信息对象
+    var failure_object: MPYearCheckFailureModel?
     
     /// 是否选中
     var isSelected: Bool = false
@@ -238,17 +250,17 @@ enum MPOrderState: Int {
     case waitNianJian = 3
     /// 正在年检
     case nianJianing = 4
-    /// 年检结束
-    case nianJianOver = 5
+    /// 年检成功
+    case nianJianSucc = 5
     /// 到达还车
     case daoDaHuanChe = 6
     /// 已还车
     case yiHuanChe = 7
     /// 已完成
     case completed = 8
-    /// 已取消
-    case cancel = 9
 }
+
+
 
 
 

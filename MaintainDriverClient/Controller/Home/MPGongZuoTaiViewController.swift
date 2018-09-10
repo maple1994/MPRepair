@@ -106,19 +106,10 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
-        MPNetword.requestJson(target: .getOrderList(type: "order", finish: 0), success: { (json) in
-            guard let data = json["data"] as? [[String: Any]] else {
-                return
-            }
-            var arr = [MPOrderModel]()
-            for dic in data {
-                if let model = MPOrderModel.toModel(dic) {
-                    arr.append(model)
-                }
-            }
+        MPNetwordTool.getOrderList(type: "order", finish: 0, succ: { (arr) in
             self.modelArr = arr
             self.tableView.reloadData()
-        })
+        }, fail: nil)
     }
     
     // MARK: - Action

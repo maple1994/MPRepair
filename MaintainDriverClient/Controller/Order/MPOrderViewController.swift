@@ -66,36 +66,18 @@ class MPOrderViewController: UIViewController {
     
     /// 加载未完成订单
     @objc fileprivate func loadData() {
-        MPNetword.requestJson(target: .getOrderList(type: "driver", finish: 1), success: { (json) in
-            guard let data = json["data"] as? [[String: Any]] else {
-                return
-            }
-            var arr = [MPOrderModel]()
-            for dic in data {
-                if let model = MPOrderModel.toModel(dic) {
-                    arr.append(model)
-                }
-            }
+        MPNetwordTool.getOrderList(type: "driver", finish: 1, succ: { (arr) in
             self.uncompleteModelArr = arr
             self.uncompleteTableView.reloadData()
-        })
+        }, fail: nil)
     }
     
     /// 加载已完成订单
     @objc fileprivate func loadData1() {
-        MPNetword.requestJson(target: .getOrderList(type: "driver", finish: 2), success: { (json) in
-            guard let data = json["data"] as? [[String: Any]] else {
-                return
-            }
-            var arr = [MPOrderModel]()
-            for dic in data {
-                if let model = MPOrderModel.toModel(dic) {
-                    arr.append(model)
-                }
-            }
+        MPNetwordTool.getOrderList(type: "driver", finish: 2, succ: { (arr) in
             self.completeModelArr = arr
             self.completedTableView.reloadData()
-        })
+        }, fail: nil)
     }
     
     fileprivate func createTbView(cellID: String) -> UITableView {
