@@ -35,6 +35,7 @@
 		F5A6334B211728520075548A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6334A211728520075548A /* Extension.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
 		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
+		F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2446921467C3500353C88 /* MPNetwordTool.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
 		F5D7206E2112AC5900585A19 /* MaintainDriverClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D7206D2112AC5900585A19 /* MaintainDriverClientTests.swift */; };
@@ -141,6 +142,7 @@
 		F5A6334A211728520075548A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
 		F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTipsView.swift; sourceTree = "<group>"; };
+		F5D2446921467C3500353C88 /* MPNetwordTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordTool.swift; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F5D7205F2112AC5800585A19 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -266,6 +268,7 @@
 				F5867E5F211D7F4600F8A07D /* MPApiType.swift */,
 				F5031F96212126E500329BC0 /* MPConstant.swift */,
 				F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */,
+				F5D2446921467C3500353C88 /* MPNetwordTool.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -814,6 +817,7 @@
 				F5DF736F211A93E300B9F154 /* MPYiJieDanViewController.swift in Sources */,
 				F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */,
 				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
+				F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,
