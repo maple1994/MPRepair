@@ -27,6 +27,12 @@ extension UIColor {
     static let mpLightGary: UIColor = UIColor.colorWithHexString("#a3a3a3")
     /// 深灰
     static let mpDarkGray: UIColor = UIColor.colorWithHexString("#5B5B5B")
+    static var randomColor: UIColor {
+        let r = CGFloat(arc4random() % 255)
+        let g = CGFloat(arc4random() % 255)
+        let b = CGFloat(arc4random() % 255)
+        return UIColor.init(red: r / 255, green: g / 255, blue: b / 255, alpha: 1)
+    }
     
     /// 返回16进制颜色
     ///

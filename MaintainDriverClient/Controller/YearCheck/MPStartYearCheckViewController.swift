@@ -12,9 +12,9 @@ import UIKit
 class MPStartYearCheckViewController: UIViewController {
 
     fileprivate var confirmPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-    fileprivate var cheDengPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-    fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-    fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+//    fileprivate var cheDengPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+//    fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+//    fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var orderModel: MPOrderModel
     fileprivate var itemArr: [MPComboItemModel]?
     
@@ -30,27 +30,14 @@ class MPStartYearCheckViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        for j in 0...3 {
-            for i in 0...1 {
-                let model = MPPhotoModel()
-                if i == 0 {
-                    model.title = "有效期内交的强险保单副本"
-                }else {
-                    model.title = "车钥匙"
-                }
-                switch j {
-                case 0:
-                    confirmPhotoArr.append(model)
-                case 1:
-                    cheDengPhotoArr.append(model)
-                case 2:
-                    paiQiPhotoArr.append(model)
-                case 3:
-                    waiQiPhotoArr.append(model)
-                default:
-                    break
-                }
+        for i in 0...1 {
+            let model = MPPhotoModel()
+            if i == 0 {
+                model.title = "有效期内交的强险保单副本"
+            }else {
+                model.title = "车钥匙"
             }
+            confirmPhotoArr.append(model)
         }
         MPNetwordTool.getYearCheckInfo(succ: { (arr) in
             self.itemArr = arr
@@ -148,31 +135,16 @@ class MPStartYearCheckViewController: UIViewController {
             }
         }else {
             var idArr = [Int]()
-            for model in cheDengPhotoArr {
-                if let img = model.image {
-                    picArr.append(img)
-                    let id = itemArr?.get(0)?.id ?? 0
-                    let name = itemArr?.get(0)?.name ?? ""
-                    idArr.append(id)
-                    noteArr.append(name)
-                }
+            guard let arr = itemArr else {
+                return
             }
-            for model in paiQiPhotoArr {
-                if let img = model.image {
-                    picArr.append(img)
-                    let name = itemArr?.get(1)?.name ?? ""
-                    let id = itemArr?.get(1)?.id ?? 0
-                    idArr.append(id)
-                    noteArr.append(name)
-                }
-            }
-            for model in waiQiPhotoArr {
-                if let img = model.image {
-                    picArr.append(img)
-                    let name = itemArr?.get(2)?.name ?? ""
-                    let id = itemArr?.get(2)?.id ?? 0
-                    idArr.append(id)
-                    noteArr.append(name)
+            for item in arr {
+                for model in item.photoArr {
+                    if let img = model.image {
+                        picArr.append(img)
+                        idArr.append(item.id)
+                        noteArr.append(item.name)
+                    }
                 }
             }
             let hud = MPTipsView.showLoadingView("上传中...")
@@ -203,9 +175,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var tableView2: UITableView!
     fileprivate var tableView3: UITableView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmPhotoArr, isShowTitle: true)
-    fileprivate lazy var cheDengPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheDengPhotoArr, isShowTitle: true)
-    fileprivate lazy var paiQiPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: paiQiPhotoArr, isShowTitle: true)
-    fileprivate lazy var waiGuanPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: waiQiPhotoArr, isShowTitle: true)
+    fileprivate var feekbackView: MPFeedbackView?
 }
 
 extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSource {
@@ -252,7 +222,10 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
             }
         }else {
             if let arr = itemArr{
-                return MPFeedbackView(itemArr: arr)
+                if feekbackView == nil {
+                    feekbackView = MPFeedbackView(itemArr: arr)
+                }
+                return feekbackView
             }else {
                 return nil
             }
@@ -266,7 +239,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         }else if tableView == tableView2 {
             return 50
         }else {
-            return 195
+            return MPFeedbackView.getHeight(itemArr)
         }
     }
     
@@ -274,12 +247,10 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return horizontalPhotoView
         }else if tableView == tableView2 {
-            if section == 0 {
-                return cheDengPhotoView
-            }else if section == 1 {
-                return paiQiPhotoView
-            }else {
-                return waiGuanPhotoView
+            if let arr = itemArr?.get(section)?.photoArr {
+                return MPHorizonScrollPhotoView(modelArr: arr, isShowTitle: true)
+            }else{
+                return nil
             }
         }else {
             return nil

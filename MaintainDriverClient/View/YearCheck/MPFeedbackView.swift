@@ -11,8 +11,17 @@ import UIKit
 /// 维修反馈View
 class MPFeedbackView: UIView {
     
+    static func getHeight(_ itemArr: [MPComboItemModel]?) -> CGFloat {
+        guard let arr = itemArr else {
+            return 0.01
+        }
+        let col = (arr.count + 3 - 1) / 3;
+        let h = CGFloat(col) * 100 + 95
+        return h
+    }
     fileprivate var itemModelArr: [MPComboItemModel]
     fileprivate var itemViewArr: [UIView] = [UIView]()
+    fileprivate var suggestHeight: CGFloat = 0
     
     init(itemArr: [MPComboItemModel]) {
         itemModelArr = itemArr
@@ -46,11 +55,15 @@ class MPFeedbackView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let w = frame.width / CGFloat(itemModelArr.count)
-        let h: CGFloat = 135
+        let w = frame.width / 3
+        let h: CGFloat = 100
         let y: CGFloat = 20
         for (index, view) in itemViewArr.enumerated() {
-            view.frame = CGRect(x: CGFloat(index) * w, y: y, width: w, height: h)
+            let col = index % 3
+            let row = index / 3
+            let y1 = y + CGFloat(row) * h
+            let x1 = CGFloat(col) * w
+            view.frame = CGRect(x: x1, y: y1, width: w, height: h)
         }
     }
 }
