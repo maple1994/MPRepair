@@ -15,12 +15,13 @@ protocol MPTitleViewDelegate: class {
 /// 显示年检已过，年检未过，维护反馈的titleView
 class MPTitleView: UIView {
     
+    var isTouch: Bool = false
     var selectedIndex: Int = 0
     /// 记录最后上一次偏移量
     var lastOffsetX: CGFloat = 0
     weak var delegate: MPTitleViewDelegate?
     func setupSelectedIndex(_ index: Int) {
-        if selectedIndex != index {
+        if selectedIndex == index {
             return
         }
         setupSelected(labelArr[index])
@@ -31,17 +32,42 @@ class MPTitleView: UIView {
         if isTouch {
             return
         }
-        let delta: CGFloat = offsetX - lastOffsetX
-        let x = delta / CGFloat(labelArr.count)
-        indicatorLine.frame.origin.x += x
+        let leftIndex = Int(offsetX / mp_screenW)
+        if leftIndex >= labelArr.count {
+            return
+        }
+        let leftLabel = labelArr[leftIndex]
+        let rightIndex = leftIndex + 1
+        var rightLabel = UILabel()
+        if rightIndex < labelArr.count {
+            rightLabel = labelArr[rightIndex]
+            setupTitleColorGradient(offsetX: offsetX, rightLabel: rightLabel, leftLabel: leftLabel)
+            setupUnderLine(offsetX: offsetX, rightLabel: rightLabel, leftLabel: leftLabel)
+        }
         lastOffsetX = offsetX
     }
-    
-    var isTouch: Bool = false
+
+    // MARK: - Property
     fileprivate var titleArr: [String]
     fileprivate var labelArr: [UILabel] = [UILabel]()
     fileprivate var margin: CGFloat = 0
+    fileprivate let normalColor = UIColor.mpDarkGray
+    fileprivate let selectedColor = UIColor.navBlue
+    /**
+     开始颜色,取值范围0~1
+     */
+    fileprivate var startR: CGFloat = 0
+    fileprivate var startG: CGFloat = 0
+    fileprivate var startB: CGFloat = 0
     
+    /**
+     完成颜色,取值范围0~1
+     */
+    fileprivate var endR: CGFloat = 0
+    fileprivate var endG: CGFloat = 0
+    fileprivate var endB: CGFloat = 0
+    
+    // MARK: - Method
     init(titleArr: [String]) {
         self.titleArr = titleArr
         super.init(frame: CGRect.zero)
@@ -53,10 +79,13 @@ class MPTitleView: UIView {
     }
     
     fileprivate func setupUI() {
+        setupStartColor()
+        setupEndColor()
         backgroundColor = UIColor.white
-        for title in titleArr {
+        for (index, title) in titleArr.enumerated() {
             let label = UILabel(font: UIFont.mpSmallFont, text: title, textColor: UIColor.mpDarkGray)
             label.isUserInteractionEnabled = true
+            label.tag = 100 + index
             let tap = UITapGestureRecognizer(target: self, action: #selector(MPTitleView.titileClick(tap:)))
             label.addGestureRecognizer(tap)
             labelArr.append(label)
@@ -68,6 +97,37 @@ class MPTitleView: UIView {
         addSubview(topLine)
         addSubview(bottomLine)
         addSubview(indicatorLine)
+    }
+    
+    fileprivate func setupUnderLine(offsetX: CGFloat, rightLabel: UILabel, leftLabel: UILabel) {
+        // 获取两个标题中心点距离
+        let centerDelta = rightLabel.frame.origin.x - leftLabel.frame.origin.x
+        // 标题宽度差值
+        let widthDelta = rightLabel.frame.width - leftLabel.frame.width
+        // 获取移动距离
+        let offsetDelta = offsetX - lastOffsetX
+        // 计算当前下划线偏移量
+        let underLineTransformX = offsetDelta * centerDelta / UIScreen.main.bounds.width
+        let underLineWidth = offsetDelta * widthDelta / UIScreen.main.bounds.width
+        indicatorLine.frame.size.width = indicatorLine.frame.size.width + underLineWidth
+        indicatorLine.frame.origin.x = indicatorLine.frame.origin.x + underLineTransformX
+    }
+    
+    fileprivate func setupTitleColorGradient(offsetX: CGFloat, rightLabel: UILabel?, leftLabel: UILabel) {
+        // 获取右边缩放
+        let rightScale: CGFloat = offsetX / mp_screenW - CGFloat(leftLabel.tag - 100)
+        let leftScale: CGFloat = 1 - rightScale
+        // RGB渐变
+        let r = endR - startR
+        let g = endG - startG
+        let b = endB - startB
+        
+        let rightColor = UIColor(red: startR + r * rightScale, green: startG + g * rightScale, blue: startB + b * rightScale, alpha: 1)
+        
+        let leftColor = UIColor(red: startR + r * leftScale, green: startG + g * leftScale, blue: startB + b * leftScale, alpha: 1)
+        
+        leftLabel.textColor = leftColor
+        rightLabel?.textColor = rightColor
     }
     
     override func layoutSubviews() {
@@ -102,11 +162,6 @@ class MPTitleView: UIView {
         indicatorLine.frame = CGRect(x: firstLabel.frame.origin.x, y: frame.height - 2, width: firstLabel.frame.width, height: 2)
     }
     
-    fileprivate var topLine: UIView!
-    fileprivate var bottomLine: UIView!
-    fileprivate var indicatorLine: UIView!
-    fileprivate var selectedLabel: UILabel?
-    
     @objc fileprivate func titileClick(tap: UIGestureRecognizer) {
         guard let label = tap.view as? UILabel else {
             return
@@ -130,5 +185,33 @@ class MPTitleView: UIView {
         selectedIndex = index
         delegate?.titleView(didSelect: index)
     }
+    
+    fileprivate func setupStartColor() {
+        if let componets = normalColor.cgColor.components {
+            if normalColor.cgColor.numberOfComponents > 3 {
+                startR = componets[0]
+                startG = componets[1]
+                startB = componets[2]
+            }else {
+                startR = componets[0]
+                startG = componets[0]
+                startB = componets[0]
+            }
+        }
+    }
+    
+    fileprivate func setupEndColor() {
+        if let componets = selectedColor.cgColor.components {
+            endR = componets[0]
+            endG = componets[1]
+            endB = componets[2]
+        }
+    }
+    
+    // MARK: - View
+    fileprivate var topLine: UIView!
+    fileprivate var bottomLine: UIView!
+    fileprivate var indicatorLine: UIView!
+    fileprivate var selectedLabel: UILabel?
 
 }

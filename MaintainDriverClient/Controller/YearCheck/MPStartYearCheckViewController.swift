@@ -127,7 +127,7 @@ class MPStartYearCheckViewController: UIViewController {
             for model in confirmPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    typeArr.append("get_confirm")
+                    typeArr.append("survey_upload")
                     noteArr.append(model.title ?? "")
                 }
             }

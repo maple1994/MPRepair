@@ -78,14 +78,14 @@ class MPCheckOutFinishViewController1: UIViewController {
         for model in confirmModelArr {
             if let img = model.image {
                 picArr.append(img)
-                typeArr.append("get_confirm")
+                typeArr.append("return_confirm")
                 noteArr.append(model.title ?? "")
             }
         }
         for model in cheShenModelArr {
             if let img = model.image {
                 picArr.append(img)
-                typeArr.append("get_car")
+                typeArr.append("return_car")
                 noteArr.append(model.title ?? "")
             }
         }
