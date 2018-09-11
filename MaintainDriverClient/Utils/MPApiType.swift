@@ -55,6 +55,8 @@ enum MPApiType {
     case getOrderInfo(id: Int)
     /// 查询提交图片的类别名称信息
     case getPicName
+    /// 查询年检检查项信息
+    case getYearCheckItemInfo
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -103,6 +105,8 @@ extension MPApiType: TargetType {
             return "api/driver/order_return/"
         case .getPicName:
             return "api/driver/picname/"
+        case .getYearCheckItemInfo:
+            return "api/driver/surveyitem/"
         }
     }
     
@@ -114,7 +118,8 @@ extension MPApiType: TargetType {
             .getAccountInfo,
             .getOrderList,
             .getOrderInfo,
-            .getPicName:
+            .getPicName,
+            .getYearCheckItemInfo:
             return .get
         default:
             return .post
@@ -233,6 +238,8 @@ extension MPApiType: TargetType {
             var param = defaultParam
             param["id"] = id
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case .getYearCheckItemInfo:
+            return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
 //        default:
 //            return .requestPlain
         }

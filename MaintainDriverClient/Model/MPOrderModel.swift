@@ -43,7 +43,7 @@ class MPOrderModel {
     /// 套餐对象
     var combo: MPComboModel?
     /// 套餐项列表
-//    surveycomboitem_set
+    var surveycomboitem_set: [MPComboItemModel] = [MPComboItemModel]()
     /// 基础费用
     var base_price: Double = 0
     /// 套餐费用
@@ -54,6 +54,8 @@ class MPOrderModel {
     var total_price: Double = 0
     /// 状态
     var state: MPOrderState = MPOrderState.waitQuChe
+    /// 年检状态
+    var survey_state: MPSurveyState = MPSurveyState.normal
     /// 年检是否成功
     var is_success: Bool = false
     /// 接单用户id
@@ -125,6 +127,15 @@ class MPOrderModel {
         model.subscribe_time = toString(dic["subscribe_time"])
         model.is_self = toBool(dic["is_self"])
         model.combo = MPComboModel.toModel(dic["combo"])
+        if let arr = dic["surveycomboitem_set"] as? [Any] {
+            var itemArr = [MPComboItemModel]()
+            for dic in arr {
+                if let item = MPComboItemModel.toModel(dic) {
+                    itemArr.append(item)
+                }
+            }
+            model.surveycomboitem_set = itemArr
+        }
         model.base_price = toDouble(dic["base_price"])
         model.combo_price = toDouble(dic["combo_price"])
         model.survey_price = toDouble(dic["survey_price"])
@@ -141,7 +152,18 @@ class MPOrderModel {
         model.return_time = toString(dic["return_time"])
         model.confirm_time = toString(dic["confirm_time"])
         model.cancel_time = toString(dic["cancel_time"])
+        model.drive_user_id = toInt(dic["drive_user_id"])
+        model.driver_user_pic_url = toString(dic["drive_user_pic_url"])
+        model.driver_user_name = toString(dic["drive_user_name"])
+        model.drive_user_phone = toString(dic["drive_user_phone"])
         model.is_success = toBool(dic["is_success"])
+        model.survey_state = MPSurveyState.init(rawValue: toInt(dic["survey_state"])) ?? MPSurveyState.normal
+        model.get_confirm = MPServerPhotoModel.toModel(dic["get_confirm"])
+        model.get_car = MPServerPhotoModel.toModel(dic["get_car"])
+        model.survey_upload = MPServerPhotoModel.toModel(dic["survey_upload"])
+        model.return_confirm = MPServerPhotoModel.toModel(dic["return_confirm"])
+        model.return_car = MPServerPhotoModel.toModel(dic["return_car"])
+        model.failure_object = MPYearCheckFailureModel.toModel(dic["failure_object"])
         return model
     }
 }
@@ -258,6 +280,18 @@ enum MPOrderState: Int {
     case yiHuanChe = 7
     /// 已完成
     case completed = 8
+}
+
+/// 年检状态
+enum MPSurveyState: Int {
+    /// 还没有开始或是正在进行
+    case normal = 0
+    /// 成功
+    case success = 1
+    /// 不成功
+    case failure = 2
+    /// 复查
+    case recheck = 3
 }
 
 
