@@ -148,9 +148,9 @@ extension MPCheckOutFinishViewController1: UITableViewDelegate, UITableViewDataS
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let ID = "MPTitleSectionHeaderView"
         if section == 0 {
-            return MPTitleSectionHeaderView(title: "检查确认", reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: return_confirm, reuseIdentifier: ID)
         }else {
-            return MPTitleSectionHeaderView(title: "车身拍照", reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: return_car, reuseIdentifier: ID)
         }
     }
     

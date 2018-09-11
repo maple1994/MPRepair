@@ -164,9 +164,9 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let ID = "MPTitleSectionHeaderView"
         if section == 0 {
-            return MPTitleSectionHeaderView(title: "检车确认", reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: get_confirm, reuseIdentifier: ID)
         }else {
-            return MPTitleSectionHeaderView(title: "车身拍照", reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: get_car, reuseIdentifier: ID)
         }
     }
     

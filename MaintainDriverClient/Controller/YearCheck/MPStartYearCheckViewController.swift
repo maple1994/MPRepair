@@ -225,7 +225,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == tableView1 {
-            return MPTitleSectionHeaderView(title: "检车确认", reuseIdentifier: nil)
+            return MPTitleSectionHeaderView(title: survey_upload, reuseIdentifier: nil)
         }else if tableView == tableView2 {
             if section == 0 {
                  return MPTitleSectionHeaderView(title: "车灯", reuseIdentifier: nil)
