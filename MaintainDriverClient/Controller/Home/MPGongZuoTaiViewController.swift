@@ -106,6 +106,8 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
+        // 从网络拉取上传图片的picName
+        MPNetwordTool.getPicName()
         MPNetwordTool.getOrderList(type: "order", finish: 0, succ: { (arr) in
             self.modelArr = arr
             self.tableView.reloadData()

@@ -49,7 +49,7 @@ class MPNetwordActivityPlugin: PluginType {
             case 300:
                 if let msg = json["msg"] as? String {
                     MPTipsView.showMsg("登录信息过期，请重新登录")
-                    MPPrint("300-\(msg)")
+                    MPPrint("300-\(target)-\(msg)")
                 }
                 if MPUserModel.shared.isLogin {                
                     MPUserModel.shared.loginOut()

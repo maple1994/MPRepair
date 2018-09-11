@@ -28,8 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         // 现加载本地
         MPNetwordTool.loadPicNameFromUserDefault()
-        // 再从网络拉取
-        MPNetwordTool.getPicName()
         return true
     }
     

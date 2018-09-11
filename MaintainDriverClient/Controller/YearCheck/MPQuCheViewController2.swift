@@ -198,7 +198,7 @@ extension MPQuCheViewController2: UITableViewDelegate, UITableViewDataSource {
         cell?.addressTitleLabel.text = "取车地点"
         cell?.carNameLabel.text = orderModel.car_brand
         cell?.timeLabel.text = orderModel.get_time
-        cell?.addressLabel.text = orderModel.order_address
+        cell?.addressLabel.text = "\(orderModel.order_address)\(orderModel.order_address)\(orderModel.order_address)"
         cell?.delegate = self
         return cell!
     }

@@ -66,7 +66,6 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
             cell = MPOrderTableViewCell(style: .default, reuseIdentifier: CellID)
         }
         cell?.orderModel = modelArr[indexPath.row]
-        cell?.orderState = modelArr[indexPath.row].state
         return cell!
     }
     
