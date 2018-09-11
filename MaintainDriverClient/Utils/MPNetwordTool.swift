@@ -87,7 +87,7 @@ struct MPNetwordTool {
     /// 查询年检检查项信息
     static func getYearCheckInfo(succ: @escaping ([MPComboItemModel]) -> Void, fail: (() -> Void)?) {
         MPNetword.requestJson(target: .getYearCheckItemInfo, success: { (json) in
-            if let arr = json as? [Any] {
+            if let arr = json["data"] as? [Any] {
                 var itemArr = [MPComboItemModel]()
                 for dic in arr {
                     if let item = MPComboItemModel.toModel(dic) {

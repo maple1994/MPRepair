@@ -199,6 +199,15 @@ extension UIImageView {
     }
 }
 
+extension Array {
+    func get(_ index: Int) -> Element?{
+        if index < 0 || index >= self.count {
+            return nil
+        }
+        return self[index]
+    }
+}
+
 extension UIImage {
     var base64: String? {
         if let base = UIImageJPEGRepresentation(self, 0.3)?.base64EncodedString(){

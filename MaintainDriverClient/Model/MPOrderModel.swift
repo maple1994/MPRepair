@@ -241,6 +241,14 @@ class MPComboItemModel {
     var name: String = ""
     var detail: String = ""
     var price: Double = 0
+    lazy var photoArr: [MPPhotoModel] = {
+        var arr = [MPPhotoModel]()
+        let item1 = MPPhotoModel()
+        let item2 = MPPhotoModel()
+        arr.append(item1)
+        arr.append(item2)
+        return arr
+    }()
     
     class func toModel(_ dic1: Any?) -> MPComboItemModel? {
         guard let dic = dic1 as? [String: Any] else {

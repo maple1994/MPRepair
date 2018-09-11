@@ -16,7 +16,9 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var orderModel: MPOrderModel
+    fileprivate var itemArr: [MPComboItemModel]?
     
+    // MARK: - Method
     init(model: MPOrderModel) {
         orderModel = model
         super.init(nibName: nil, bundle: nil)
@@ -50,6 +52,11 @@ class MPStartYearCheckViewController: UIViewController {
                 }
             }
         }
+        MPNetwordTool.getYearCheckInfo(succ: { (arr) in
+            self.itemArr = arr
+            self.tableView2.reloadData()
+            self.tableView3.reloadData()
+        }, fail: nil)
         setupUI()
     }
     
@@ -144,22 +151,28 @@ class MPStartYearCheckViewController: UIViewController {
             for model in cheDengPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    idArr.append(1)
-                    noteArr.append("车灯")
+                    let id = itemArr?.get(0)?.id ?? 0
+                    let name = itemArr?.get(0)?.name ?? ""
+                    idArr.append(id)
+                    noteArr.append(name)
                 }
             }
             for model in paiQiPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    idArr.append(2)
-                    noteArr.append("排气")
+                    let name = itemArr?.get(1)?.name ?? ""
+                    let id = itemArr?.get(1)?.id ?? 0
+                    idArr.append(id)
+                    noteArr.append(name)
                 }
             }
             for model in waiQiPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    idArr.append(3)
-                    noteArr.append("外观")
+                    let name = itemArr?.get(2)?.name ?? ""
+                    let id = itemArr?.get(2)?.id ?? 0
+                    idArr.append(id)
+                    noteArr.append(name)
                 }
             }
             let hud = MPTipsView.showLoadingView("上传中...")
@@ -182,6 +195,7 @@ class MPStartYearCheckViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
 
+    // MARK: - View
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
     fileprivate var titleView: MPTitleView!
     fileprivate var contentView: UIScrollView!
@@ -192,7 +206,6 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate lazy var cheDengPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheDengPhotoArr, isShowTitle: true)
     fileprivate lazy var paiQiPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: paiQiPhotoArr, isShowTitle: true)
     fileprivate lazy var waiGuanPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: waiQiPhotoArr, isShowTitle: true)
-    fileprivate lazy var feekbackView = MPFeedbackView()
 }
 
 extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSource {
@@ -200,9 +213,14 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return 1
         }else if tableView == tableView2 {
-            return 3
+            return itemArr?.count ?? 0
         }else {
-            return 1
+            let count = itemArr?.count ?? 0
+            if count > 0 {
+                return 1
+            }else {
+                return 0
+            }
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -227,15 +245,17 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return MPTitleSectionHeaderView(title: survey_upload, reuseIdentifier: nil)
         }else if tableView == tableView2 {
-            if section == 0 {
-                 return MPTitleSectionHeaderView(title: "车灯", reuseIdentifier: nil)
-            }else if section == 1 {
-                 return MPTitleSectionHeaderView(title: "排气", reuseIdentifier: nil)
+            if let name = itemArr?.get(section)?.name {
+                return MPTitleSectionHeaderView(title: name, reuseIdentifier: nil)
             }else {
-                 return MPTitleSectionHeaderView(title: "外观", reuseIdentifier: nil)
+                return nil
             }
         }else {
-            return feekbackView
+            if let arr = itemArr{
+                return MPFeedbackView(itemArr: arr)
+            }else {
+                return nil
+            }
         }
         
     }

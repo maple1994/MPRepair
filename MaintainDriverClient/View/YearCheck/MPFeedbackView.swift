@@ -10,7 +10,12 @@ import UIKit
 
 /// 维修反馈View
 class MPFeedbackView: UIView {
-    init() {
+    
+    fileprivate var itemModelArr: [MPComboItemModel]
+    fileprivate var itemViewArr: [UIView] = [UIView]()
+    
+    init(itemArr: [MPComboItemModel]) {
+        itemModelArr = itemArr
         super.init(frame: CGRect.zero)
         setupUI()
     }
@@ -21,20 +26,13 @@ class MPFeedbackView: UIView {
     
     fileprivate func setupUI() {
         backgroundColor = UIColor.white
-        item1 = MPFeedbackItem()
-        item2 = MPFeedbackItem()
-        item3 = MPFeedbackItem()
-        item1.isSelected = true
-        item1.nameButton.backgroundColor = UIColor.navBlue
-        item2.nameButton.setTitle("排气", for: .normal)
-        item3.nameButton.setTitle("外观", for: .normal)
-        addSubview(item1)
-        addSubview(item2)
-        addSubview(item3)
-        
-        item1.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
-        item2.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
-        item3.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
+        for item in itemModelArr {
+            let itemView = MPFeedbackItem()
+            itemView.itemModel = item
+            itemView.addTarget(self, action: #selector(MPFeedbackView.itemClick(_:)), for: .touchUpInside)
+            addSubview(itemView)
+            itemViewArr.append(itemView)
+        }
     }
     
     @objc fileprivate func itemClick(_ item: MPFeedbackItem) {
@@ -48,21 +46,26 @@ class MPFeedbackView: UIView {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        let w = frame.width / 3
+        let w = frame.width / CGFloat(itemModelArr.count)
         let h: CGFloat = 135
         let y: CGFloat = 20
-        item1.frame = CGRect(x: 0, y: y, width: w, height: h)
-        item2.frame = CGRect(x: w, y: y, width: w, height: h)
-        item3.frame = CGRect(x: 2 * w, y: y, width: w, height: h)
+        for (index, view) in itemViewArr.enumerated() {
+            view.frame = CGRect(x: CGFloat(index) * w, y: y, width: w, height: h)
+        }
     }
-    
-    fileprivate var item1: MPFeedbackItem!
-    fileprivate var item2: MPFeedbackItem!
-    fileprivate var item3: MPFeedbackItem!
 }
 
 /// 维修反馈View的子Item
 class MPFeedbackItem: UIControl {
+    
+    var itemModel: MPComboItemModel? {
+        didSet {
+            nameButton.setTitle(itemModel?.name, for: .normal)
+            if let price = itemModel?.price {
+                priceLabel.text = String(format: "¥ %.02f", price)
+            }
+        }
+    }
     
     init() {
         super.init(frame: CGRect.zero)
