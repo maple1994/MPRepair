@@ -46,7 +46,7 @@ enum MPApiType {
     /// 年检已过
     case yearCheckSucc(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
     /// 年检未过
-    case yearCheckFail(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
+    case yearCheckFail(id: Int, number: Int, picArr: [UIImage]?, itemIdArr: [Int]?, note: [String]?)
     /// 到达还车
     case arriveHuanChe(id: Int)
     /// 确认还车
@@ -218,11 +218,27 @@ extension MPApiType: TargetType {
             param["number"] = number
             setup(param: &param, picArr: picArr, typeArr: typeArr, note: note)
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .yearCheckFail(id, number, picArr, typeArr, note):
+        case let .yearCheckFail(id, number, picArr, idArr, note):
             var param = defaultParam
             param["id"] = id
             param["number"] = number
-            setup(param: &param, picArr: picArr, typeArr: typeArr, note: note)
+            if let arr1 = picArr {
+                for (index, img) in arr1.enumerated() {
+                    if let base = img.base64 {
+                        param["pic\(index + 1)"] = base
+                    }
+                }
+            }
+            if let arr1 = idArr {
+                for (index, id1) in arr1.enumerated() {
+                    param["item_id\(index + 1)"] = id1
+                }
+            }
+            if let arr1 = note {
+                for (index, note1) in arr1.enumerated() {
+                    param["note\(index + 1)"] = note1
+                }
+            }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .arriveHuanChe(id):
             var param = defaultParam
@@ -274,7 +290,7 @@ extension MPApiType: TargetType {
     }
     
     /// 设置picArr，typeArr，note三件套
-    func setup(param: inout [String: Any], picArr: [UIImage]?, typeArr: [String]?, note: [String]?) {
+    func setup(param: inout [String: Any], picArr: [UIImage]?, typeArr: [Any]?, note: [String]?) {
         if let arr1 = picArr {
             for (index, img) in arr1.enumerated() {
                 if let base = img.base64 {

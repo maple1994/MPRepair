@@ -140,29 +140,30 @@ class MPStartYearCheckViewController: UIViewController {
                 MPTipsView.showMsg("上传失败，请重新再试")
             }
         }else {
+            var idArr = [Int]()
             for model in cheDengPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    typeArr.append("get_car")
+                    idArr.append(1)
                     noteArr.append("车灯")
                 }
             }
             for model in paiQiPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    typeArr.append("get_car")
+                    idArr.append(2)
                     noteArr.append("排气")
                 }
             }
             for model in waiQiPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
-                    typeArr.append("get_car")
+                    idArr.append(3)
                     noteArr.append("外观")
                 }
             }
             let hud = MPTipsView.showLoadingView("上传中...")
-            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (_) in
+            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, itemIdArr: idArr, note: noteArr), success: { (_) in
                 hud?.hide(animated: true)
                 self.jump()
             }) { (_) in
@@ -174,6 +175,9 @@ class MPStartYearCheckViewController: UIViewController {
     }
     
     fileprivate func jump() {
+        MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
+            self.orderModel = model
+        }, fail: nil)
         let vc = MPCheckOutFinishViewController2(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }

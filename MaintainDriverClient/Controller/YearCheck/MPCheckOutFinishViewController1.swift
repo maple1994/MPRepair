@@ -91,6 +91,9 @@ class MPCheckOutFinishViewController1: UIViewController {
         }
         let hud = MPTipsView.showLoadingView("上传中...")
         MPNetword.requestJson(target: .confirmReturn(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (json) in
+            MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
+                self.orderModel = model
+            }, fail: nil)
             hud?.hide(animated: true)
             self.navigationController?.popToRootViewController(animated: true)
         }) { (_) in

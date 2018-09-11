@@ -52,6 +52,9 @@ class MPOrderConfirmViewController: UIViewController {
     
     @objc fileprivate func cancelOrder() {
         MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+            MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
+               self.orderModel = model
+            }, fail: nil)
             MPTipsView.showMsg("取消成功")
             self.navigationController?.popToRootViewController(animated: true)
         }) { (_) in

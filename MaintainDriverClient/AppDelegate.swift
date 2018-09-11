@@ -26,6 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         MPUserModel.shared.refreshToken {
             NotificationCenter.default.post(name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
         }
+        // 现加载本地
+        MPNetwordTool.loadPicNameFromUserDefault()
+        // 再从网络拉取
+        MPNetwordTool.getPicName()
         return true
     }
     
