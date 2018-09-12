@@ -41,7 +41,7 @@ class MPYiJieDanViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
-        MPNetwordTool.getOrderList(type: "driver", finish: 0, succ: { (arr) in
+        MPNetwordTool.getOrderList(type: "driver", finish: 1, succ: { (arr) in
             self.modelArr = arr
             self.tableView.reloadData()
         }, fail: nil)
@@ -91,8 +91,6 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
             vc = MPStartYearCheckViewController(model: modelArr[indexPath.row])
         case .daoDaHuanChe, .yiHuanChe, .completed:
             vc = MPCheckOutFinishViewController1(model: modelArr[indexPath.row])
-//        default:
-//            vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
         }
         navigationController?.pushViewController(vc!, animated: true)
     }

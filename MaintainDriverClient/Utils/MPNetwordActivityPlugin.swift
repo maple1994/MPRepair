@@ -39,16 +39,16 @@ class MPNetwordActivityPlugin: PluginType {
             switch code {
             case 100:
                 if let msg = json["msg"] as? String {
-                    MPPrint("100-\(msg)")
+                    MPPrint("100-\(target)-\(msg)")
                 }
             case 200:
                 if let msg = json["msg"] as? String {
                     MPTipsView.showMsg(msg)
-                    MPPrint("200-\(msg)")
+                    MPPrint("200-\(target)-\(msg)")
                 }
             case 300:
                 if let msg = json["msg"] as? String {
-                    MPTipsView.showMsg("登录信息过期，请重新登录")
+                    MPTipsView.showMsg(msg)
                     MPPrint("300-\(target)-\(msg)")
                 }
                 if MPUserModel.shared.isLogin {                

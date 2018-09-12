@@ -130,15 +130,39 @@ extension MPOrderViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if tableView == uncompleteTableView {
-            let h = tableView.fd_heightForCell(withIdentifier: CellID1) { (cell) in
-                
+            let h = tableView.fd_heightForCell(withIdentifier: CellID1) { (cell1) in
+                let cell = cell1 as? MPOrderTableViewCell
+                cell?.orderModel = self.uncompleteModelArr[indexPath.row]
+                cell?.orderState = self.uncompleteModelArr[indexPath.row].state
             }
             return h
         }else {
-            let h = tableView.fd_heightForCell(withIdentifier: CellID2) { (cell) in
-                
+            let h = tableView.fd_heightForCell(withIdentifier: CellID2) { (cell1) in
+                let cell = cell1 as? MPOrderTableViewCell
+                cell?.orderModel = self.completeModelArr[indexPath.row]
+                cell?.orderState = self.completeModelArr[indexPath.row].state
             }
             return h
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == uncompleteTableView {
+            let model = uncompleteModelArr[indexPath.row]
+            var vc: UIViewController? = nil
+            switch model.state {
+            case .waitPay, .waitJieDan:
+                vc = MPOrderConfirmViewController(model: model)
+            case .waitQuChe:
+                vc = MPQuCheViewController2(model: model)
+            case .waitNianJian:
+                vc = MPStartYearCheckViewController2(model: model)
+            case .nianJianing, .nianJianSucc:
+                vc = MPStartYearCheckViewController(model: model)
+            case .daoDaHuanChe, .yiHuanChe, .completed:
+                vc = MPCheckOutFinishViewController1(model: model)
+            }
+            navigationController?.pushViewController(vc!, animated: true)
         }
     }
     

@@ -120,8 +120,7 @@ class MPUserModel: Codable {
                 NotificationCenter.default.post(name: MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION, object: nil)
             }
         }) { (err) in
-            // TODO: - 刷新Token失败
-            MPTipsView.showMsg("刷新Token失败")
+//            MPTipsView.showMsg("刷新Token失败")
         }
     }
     
