@@ -20,6 +20,12 @@ class MPYiJieDanViewController: UIViewController {
 //        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_STEAL_ORDER_SUCC_NOTIFICATION, object: nil)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     deinit {

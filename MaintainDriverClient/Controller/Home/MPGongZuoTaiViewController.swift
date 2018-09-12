@@ -124,6 +124,8 @@ class MPGongZuoTaiViewController: UIViewController {
         MPNetword.requestJson(target: .grab(id: order.id), success: { (json) in
             view.endTimeCount()
             self.selectedModel = order
+            NotificationCenter.default.post(name: MP_STEAL_ORDER_SUCC_NOTIFICATION, object: nil)
+            self.loadData()
         }) { (_) in
             self.selectedModel = nil
             view.endTimeCount()
