@@ -115,7 +115,7 @@ class MPCheckOutFinishViewController2: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }) { (_) in
             hud?.hide(animated: true)
-            MPTipsView.showMsg("上传失败，请重新再试")
+//            MPTipsView.showMsg("上传失败，请重新再试")
         }
         
     }
@@ -206,7 +206,7 @@ extension MPCheckOutFinishViewController2: UITableViewDelegate, UITableViewDataS
 extension MPCheckOutFinishViewController2: MPQuCheCCellDelegate {
     /// 联系
     func quCheCellDidSelectContact() {
-        guard let url = URL(string: "\(orderModel.phone)") else {
+        guard let url = URL(string: "tel:\(orderModel.phone)") else {
             return
         }
         if #available(iOS 10.0, *) {

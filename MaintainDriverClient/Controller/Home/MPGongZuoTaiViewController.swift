@@ -125,9 +125,9 @@ class MPGongZuoTaiViewController: UIViewController {
             view.endTimeCount()
             self.selectedModel = order
         }) { (_) in
-            MPTipsView.showMsg("抢单失败")
             self.selectedModel = nil
             view.endTimeCount()
+            view.set(title: "抢单失败!", subTitle: "请重新再试!")
         }
     }
     

@@ -90,10 +90,28 @@ class MPQuCheViewController1: UIViewController {
         }
     }
     
+    /// 检测imgArr图片是否为空，判断是否可以上传
+    fileprivate func isInvalid(_ imgArr: [MPPhotoModel]) -> Bool {
+        for model in imgArr {
+            if model.image == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
     @objc fileprivate func confirm() {
         var picArr = [UIImage]()
         var typeArr = [String]()
         var noteArr = [String]()
+        if !isInvalid(jianCheModelArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
+        if !isInvalid(cheShenModelArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
         for model in jianCheModelArr {
             if let img = model.image {
                 picArr.append(img)
@@ -114,7 +132,7 @@ class MPQuCheViewController1: UIViewController {
             let vc = MPStartYearCheckViewController2(model: self.orderModel)
             self.navigationController?.pushViewController(vc, animated: true)
         }) { (_) in
-            MPTipsView.showMsg("上传失败，请重新再试")
+//            MPTipsView.showMsg("上传失败，请重新再试")
             hud?.hide(animated: true)
         }
     }

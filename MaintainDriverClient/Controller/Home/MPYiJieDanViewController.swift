@@ -82,15 +82,17 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
         var vc: UIViewController? = nil
         switch model.state {
         case .waitPay, .waitJieDan:
-            vc = MPOrderConfirmViewController(model: modelArr[indexPath.row])
+            vc = MPOrderConfirmViewController(model: model)
         case .waitQuChe:
-            vc = MPQuCheViewController2(model: modelArr[indexPath.row])
+            vc = MPQuCheViewController2(model: model)
         case .waitNianJian:
-            vc = MPStartYearCheckViewController2(model: modelArr[indexPath.row])
-        case .nianJianing, .nianJianSucc:
-            vc = MPStartYearCheckViewController(model: modelArr[indexPath.row])
+            vc = MPStartYearCheckViewController2(model: model)
+        case .nianJianing:
+            vc = MPStartYearCheckViewController(model: model)
+        case .nianJianSucc:
+            vc = MPCheckOutFinishViewController2(model: model)
         case .daoDaHuanChe, .yiHuanChe, .completed:
-            vc = MPCheckOutFinishViewController1(model: modelArr[indexPath.row])
+            vc = MPCheckOutFinishViewController1(model: model)
         }
         navigationController?.pushViewController(vc!, animated: true)
     }

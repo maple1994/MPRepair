@@ -113,11 +113,25 @@ class MPStartYearCheckViewController: UIViewController {
         return tb
     }
     
+    /// 检测imgArr图片是否为空，判断是否可以上传
+    fileprivate func isInvalid(_ imgArr: [MPPhotoModel]) -> Bool {
+        for model in imgArr {
+            if model.image == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
     @objc fileprivate func confirm() {
         var picArr = [UIImage]()
         var typeArr = [String]()
         var noteArr = [String]()
         if titleView.selectedIndex == 0 {
+            if !isInvalid(confirmPhotoArr) {
+                MPTipsView.showMsg("请选择图片")
+                return
+            }
             for model in confirmPhotoArr {
                 if let img = model.image {
                     picArr.append(img)
@@ -131,7 +145,7 @@ class MPStartYearCheckViewController: UIViewController {
                 self.jump()
             }) { (_) in
                 hud?.hide(animated: true)
-                MPTipsView.showMsg("上传失败，请重新再试")
+//                MPTipsView.showMsg("上传失败，请重新再试")
             }
         }else {
             var idArr = [Int]()
@@ -153,7 +167,7 @@ class MPStartYearCheckViewController: UIViewController {
                 self.jump()
             }) { (_) in
                 hud?.hide(animated: true)
-                MPTipsView.showMsg("上传失败，请重新再试")
+//                MPTipsView.showMsg("上传失败，请重新再试")
             }
         }
 

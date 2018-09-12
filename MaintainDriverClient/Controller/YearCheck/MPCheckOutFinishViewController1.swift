@@ -71,10 +71,28 @@ class MPCheckOutFinishViewController1: UIViewController {
         navigationItem.title = "检完还车"
     }
     
+    /// 检测imgArr图片是否为空，判断是否可以上传
+    fileprivate func isInvalid(_ imgArr: [MPPhotoModel]) -> Bool {
+        for model in imgArr {
+            if model.image == nil {
+                return false
+            }
+        }
+        return true
+    }
+    
     @objc fileprivate func confirm() {
         var picArr = [UIImage]()
         var typeArr = [String]()
         var noteArr = [String]()
+        if !isInvalid(confirmModelArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
+        if !isInvalid(cheShenModelArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
         for model in confirmModelArr {
             if let img = model.image {
                 picArr.append(img)
@@ -97,7 +115,7 @@ class MPCheckOutFinishViewController1: UIViewController {
             hud?.hide(animated: true)
             self.navigationController?.popToRootViewController(animated: true)
         }) { (_) in
-            MPTipsView.showMsg("上传失败，请重新再试")
+//            MPTipsView.showMsg("上传失败，请重新再试")
             hud?.hide(animated: true)
         }
         

@@ -117,7 +117,7 @@ class MPStartYearCheckViewController2: UIViewController {
             self.navigationController?.pushViewController(vc, animated: true)
         }) { (_) in
             hud?.hide(animated: true)
-            MPTipsView.showMsg("上传失败，请重新再试")
+//            MPTipsView.showMsg("上传失败，请重新再试")
         }
     }
     
