@@ -62,8 +62,10 @@ class MPOrderTableViewCell: UITableViewCell {
         carNameLabel = UILabel(font: smallFont, text: "奔驰x123124", textColor: UIColor.mpDarkGray)
         let JJCDTitleLabel = UILabel(font: bigFont, text: "交接车点：", textColor: UIColor.fontBlack)
         JJCDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.fontBlack)
+        JJCDLabel.numberOfLines = 0
         let NJDDTitleLabel = UILabel(font: bigFont, text: "年检车点：", textColor: UIColor.fontBlack)
         NJDDLabel = UILabel(font: bigFont, text: "广州番禺桥兴商务大厦", textColor: UIColor.fontBlack)
+        NJDDLabel.numberOfLines = 0
         let line2 = MPUtils.createLine()
         let timeTitleLabel = UILabel(font: smallFont, text: "预约时间：", textColor: UIColor.mpDarkGray)
         timeLabel = UILabel(font: smallFont, text: "2018-07-29 下午", textColor: UIColor.mpDarkGray)
@@ -115,17 +117,21 @@ class MPOrderTableViewCell: UITableViewCell {
         JJCDTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(orderTitleLabel)
             make.top.equalTo(carTitleLabel.snp.bottom).offset(vMargin)
+            make.width.equalTo(83)
         }
         JJCDLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(JJCDTitleLabel.snp.trailing)
+            make.trailing.equalToSuperview().offset(-hMargin)
             make.top.equalTo(JJCDTitleLabel)
         }
         NJDDTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(orderTitleLabel)
-            make.top.equalTo(JJCDTitleLabel.snp.bottom).offset(vMargin)
+            make.top.equalTo(JJCDLabel.snp.bottom).offset(vMargin)
+            make.width.equalTo(83)
         }
         NJDDLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(NJDDTitleLabel.snp.trailing)
+            make.trailing.equalToSuperview().offset(-hMargin)
             make.top.equalTo(NJDDTitleLabel)
         }
         line2.snp.makeConstraints { (make) in
