@@ -55,10 +55,6 @@ class MPUserAgreementView: UIView {
         fatalError("")
     }
     
-    deinit {
-        MPPrint("协议View销毁了")
-    }
-    
     fileprivate func setupUI() {
         let titleLabel = UILabel(font: UIFont.mpNormalFont, text: "用户协议", textColor: UIColor.black)
         webView = WKWebView()

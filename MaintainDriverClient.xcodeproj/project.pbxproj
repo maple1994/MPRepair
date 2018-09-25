@@ -28,6 +28,7 @@
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
+		F587C54F215A3A6100238B0B /* MPAuthorityTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
 		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
@@ -131,6 +132,7 @@
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
+		F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAuthorityTipView.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
 		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
@@ -511,6 +513,7 @@
 		F5DF7384211A94E400B9F154 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -835,6 +838,7 @@
 				F5DF7390211A94E400B9F154 /* MPFeedbackView.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,
 				F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */,
+				F587C54F215A3A6100238B0B /* MPAuthorityTipView.swift in Sources */,
 				F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,

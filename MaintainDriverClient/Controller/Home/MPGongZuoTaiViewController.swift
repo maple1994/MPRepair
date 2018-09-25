@@ -108,10 +108,6 @@ class MPGongZuoTaiViewController: UIViewController {
     @objc fileprivate func loadData() {
         // 从网络拉取上传图片的picName
         MPNetwordTool.getPicName()
-        MPNetwordTool.getOrderList(type: "order", finish: 0, succ: { (arr) in
-            self.modelArr = arr
-            self.tableView.reloadData()
-        }, fail: nil)
     }
     
     // MARK: - Action
@@ -138,10 +134,13 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        delegate?.gongZuoTaiDidSelectChuChe()
-        listenButton.isHidden = false
-        stealButton.isHidden = false
-        chuCheButton.isHidden = true
+        let view = MPAuthorityTipView()
+        view.frame = UIScreen.main.bounds
+        UIApplication.shared.keyWindow?.addSubview(view)
+//        delegate?.gongZuoTaiDidSelectChuChe()
+//        listenButton.isHidden = false
+//        stealButton.isHidden = false
+//        chuCheButton.isHidden = true
     }
     
     // MARK: - View
