@@ -27,6 +27,7 @@
 		F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */; };
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
+		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
 		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
@@ -129,6 +130,7 @@
 		F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginNavViewController.swift; sourceTree = "<group>"; };
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
+		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
 		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
@@ -488,6 +490,7 @@
 				F5DF737B211A94E400B9F154 /* MPInputTextFiled.swift */,
 				F5DF737C211A94E400B9F154 /* MPLeftIconView.swift */,
 				F5DF737D211A94E400B9F154 /* MPSendCodeButton.swift */,
+				F587C54A215A066000238B0B /* MPUserAgreementView.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -808,6 +811,7 @@
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
+				F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
 				F5DF738B211A94E400B9F154 /* MPInputTextFiled.swift in Sources */,

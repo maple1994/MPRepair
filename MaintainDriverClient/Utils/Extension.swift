@@ -11,21 +11,21 @@ import Kingfisher
 
 /// 扩展
 extension UIColor {
-    /// 导航栏的蓝色
+    /// 导航栏的蓝色#3cadff
     static let navBlue: UIColor = UIColor.colorWithHexString("#3cadff")
-    /// view背景灰
+    /// view背景灰#f5f5f5
     static let viewBgColor: UIColor = UIColor.colorWithHexString("#f5f5f5")
-    /// 橙色
+    /// 橙色#FF8A4E
     static let mpOrange: UIColor = UIColor.colorWithHexString("#FF8A4E")
-    /// 绿色
+    /// 绿色#5FFF54
     static let mpGreen: UIColor = UIColor.colorWithHexString("#5FFF54")
-    /// 价格红
+    /// 价格红#FF3C3C
     static let priceRed: UIColor = UIColor.colorWithHexString("#FF3C3C")
-    /// 文字黑
+    /// 文字黑#333333
     static let fontBlack: UIColor = UIColor.colorWithHexString("#333333")
-    /// 浅灰
+    /// 浅灰#a3a3a3
     static let mpLightGary: UIColor = UIColor.colorWithHexString("#a3a3a3")
-    /// 深灰
+    /// 深灰#5B5B5B
     static let mpDarkGray: UIColor = UIColor.colorWithHexString("#5B5B5B")
     static var randomColor: UIColor {
         let r = CGFloat(arc4random() % 255)
@@ -73,13 +73,13 @@ extension UILabel {
 }
 
 extension UIFont {
-    /// 小小字体
+    /// 小小字体12
     static let mpXSmallFont = UIFont.systemFont(ofSize: 12)
-    /// 小字体
+    /// 小字体14
     static let mpSmallFont = UIFont.systemFont(ofSize: 14)
-    /// 普通大小字体
+    /// 普通大小字体16
     static let mpNormalFont = UIFont.systemFont(ofSize: 16)
-    /// 大字体
+    /// 大字体18
     static let mpBigFont = UIFont.systemFont(ofSize: 18)
 }
 
