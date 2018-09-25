@@ -11,8 +11,8 @@ import UIKit
 class MPHomeViewController: UIViewController {
     /// 标记用户是否已登录，未登录显示登录界面
     fileprivate var isLogin: Bool {
-        return MPUserModel.shared.isLogin
-//        return true
+//        return MPUserModel.shared.isLogin
+        return false
     }
     var isAnimationed: Bool = false
     override func viewDidLoad() {

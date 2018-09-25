@@ -11,6 +11,9 @@ import UIKit
 /// 注册
 class MPRegisterViewController: UIViewController {
 
+    fileprivate var isAgree: Bool = false
+    fileprivate var isFirstLoad: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -20,9 +23,27 @@ class MPRegisterViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if isFirstLoad {
+            isFirstLoad = false
+            showAgreementView()
+        }
+    }
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         view.endEditing(true)
+    }
+    
+    fileprivate func showAgreementView() {
+        agreementView = MPUserAgreementView()
+        agreementView.frame = self.view.bounds
+        agreementView.startLoadUrl()
+        agreementView.isAgreeBlock = { [weak self] (res) in
+            self?.isAgree = res
+        }
+        self.view.addSubview(agreementView)
     }
     
     fileprivate func setupUI() {
@@ -125,6 +146,10 @@ class MPRegisterViewController: UIViewController {
     }
     
     @objc fileprivate func register() {
+        if !isAgree {
+            self.agreementView.isHidden = false
+            return 
+        }
         if !isValid() {
             return
         }
@@ -160,6 +185,7 @@ class MPRegisterViewController: UIViewController {
     fileprivate var getCodeButton: MPSendCodeButton!
     fileprivate var logoView: UIImageView!
     fileprivate var registerButton: UIButton!
+    fileprivate var agreementView: MPUserAgreementView!
 }
 
 extension MPRegisterViewController: MPSendCodeButtonDelegate {

@@ -262,7 +262,7 @@ extension MPApiType: TargetType {
         case .getYearCheckItemInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         default:
-            return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
+            return .requestPlain
         }
     }
     

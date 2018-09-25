@@ -12,18 +12,39 @@ import WebKit
 /// 用户协议View
 class MPUserAgreementView: UIView {
     
-    class func show() {
-        let view = MPUserAgreementView()
-        view.frame = UIScreen.main.bounds
-        view.startLoadUrl()
-        UIApplication.shared.keyWindow?.addSubview(view)
-    }
-    
     func startLoadUrl() {
-        let url = URL(string: "http://www.nolasthope.cn/system/useragreement/")!
-        let req = URLRequest(url: url)
-        webView.load(req)
+        func loadWebViewUrl(_ urlString: String) {
+            guard let url = URL(string: urlString) else {
+                return
+            }
+            let req = URLRequest(url: url)
+            webView.load(req)
+        }
+        func handleFailedEvent() {
+            guard let str = UserDefaults.standard.object(forKey: "MP_GET_USER_AGREEMENT_URL_KEY") as? String else {
+                return
+            }
+            loadWebViewUrl(str)
+        }
+        MPNetword.requestJson(target: .getUserAgreement, success: { (json) in
+            guard let data = json["data"] as? [String: Any] else {
+                handleFailedEvent()
+                return
+            }
+            guard let url = data["url"] as? String else {
+                handleFailedEvent()
+                return
+            }
+            if !url.isEmpty {
+                UserDefaults.standard.set(url, forKey: "MP_GET_USER_AGREEMENT_URL_KEY")
+                loadWebViewUrl(url)
+            }
+        }) { (_) in
+            handleFailedEvent()
+        }
     }
+
+    var isAgreeBlock: ((Bool) -> Void)?
     
     init() {
         super.init(frame: CGRect.zero)
@@ -32,6 +53,10 @@ class MPUserAgreementView: UIView {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("")
+    }
+    
+    deinit {
+        MPPrint("协议View销毁了")
     }
     
     fileprivate func setupUI() {
@@ -100,13 +125,13 @@ class MPUserAgreementView: UIView {
     }
     
     @objc fileprivate func disagreeAction() {
-        print("不同意")
-        removeFromSuperview()
+        isHidden = true
+        isAgreeBlock?(false)
     }
     
     @objc fileprivate func agreeAction() {
-        print("同意")
-        removeFromSuperview()
+        isHidden = true
+        isAgreeBlock?(true)
     }
     
     fileprivate var webView: WKWebView!
