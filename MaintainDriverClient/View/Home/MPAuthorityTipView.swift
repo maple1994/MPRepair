@@ -10,6 +10,13 @@ import UIKit
 
 /// 权限提示View
 class MPAuthorityTipView: UIView {
+    
+    var showFailView: Bool = true {
+        didSet {
+            failView.isHidden = !showFailView
+            succView.isHidden = showFailView
+        }
+    }
 
     init() {
         super.init(frame: CGRect.zero)
@@ -50,8 +57,10 @@ class MPAuthorityTipView: UIView {
     }
     
     @objc fileprivate func peiXun() {
-        succView.isHidden = false
-        failView.isHidden = true
+        MPNetword.requestJson(target: .askOrderCertification, success: { (json) in
+            self.succView.isHidden = false
+            self.failView.isHidden = true
+        })
     }
     
     fileprivate func setupSuccView() {

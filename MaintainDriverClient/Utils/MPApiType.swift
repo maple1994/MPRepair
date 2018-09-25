@@ -59,6 +59,10 @@ enum MPApiType {
     case getYearCheckItemInfo
     /// 获取用户协议链接
     case getUserAgreement
+    /// 查询资格信息
+    case getOrderCertification
+    /// 进行资格认证
+    case askOrderCertification
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -111,6 +115,9 @@ extension MPApiType: TargetType {
             return "api/driver/surveyitem/"
         case .getUserAgreement:
             return "api/system/useragreement/"
+        case .getOrderCertification,
+             .askOrderCertification:
+            return "api/driver/order_certification/"
         }
     }
     
@@ -124,7 +131,9 @@ extension MPApiType: TargetType {
             .getOrderInfo,
             .getPicName,
             .getYearCheckItemInfo,
-            .getUserAgreement:
+            .getUserAgreement,
+            .getOrderCertification,
+            .askOrderCertification:
             return .get
         default:
             return .post
@@ -261,6 +270,11 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .getYearCheckItemInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
+        case .getOrderCertification,
+            .askOrderCertification:
+            var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
         default:
             return .requestPlain
         }
