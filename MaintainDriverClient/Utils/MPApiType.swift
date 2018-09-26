@@ -390,42 +390,6 @@ struct MPNetword {
         }
         request(target: target, success: success, failure: failure)
     }
-    
-    static func requestResponse(
-        target: MPApiType,
-        success: ((Response) -> Void)?,
-        failure: ((MoyaError) -> Void)? = nil
-        ) {
-        func request(target: MPApiType,
-                     success: ((Response) -> Void)?,
-                     failure: ((MoyaError) -> Void)? = nil) {
-            provider.request(target) { result in
-                switch result {
-                case let .success(moyaResponse):
-                    do {
-                        let json = try moyaResponse.mapJSON() as AnyObject
-                        if let code = json["code"] as? Int {
-                            if code == 100 {
-                                success?(moyaResponse)
-                            }
-                        }
-                    } catch {
-                        failure?(MoyaError.jsonMapping(moyaResponse))
-                    }
-                case let .failure(error):
-                    failure?(error)
-                }
-            }
-        }
-        if MPUserModel.shared.checkIsExpire(target: target) {
-            MPPrint("Token过期")
-            requestQueue.enqueue {
-                request(target: target, success: success, failure: failure)
-            }
-            return
-        }
-        request(target: target, success: success, failure: failure)
-    }
 }
 
 struct Queue<Element> {
