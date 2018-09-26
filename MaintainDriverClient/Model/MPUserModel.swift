@@ -84,12 +84,14 @@ class MPUserModel: Codable {
     }
     
     func checkIsExpire(target: MPApiType) -> Bool {
-        
+        // MARK: - 不需要判断token枚举在这里添加
         switch target {
-        case .login(phone: _, pwd: _),
-            .register(phone: _, pwd: _, code: _),
-            .sendCode(phone: _, type: _),
-            .resetPwd(phone: _, pwd: _, code: _),
+        case .login,
+            .register,
+            .sendCode,
+            .resetPwd,
+            .getUserAgreement,
+            .askOrderCertification,
             .refreshToken:
             return false
         default:

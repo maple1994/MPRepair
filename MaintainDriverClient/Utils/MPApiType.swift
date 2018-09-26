@@ -63,6 +63,12 @@ enum MPApiType {
     case getOrderCertification
     /// 进行资格认证
     case askOrderCertification
+    /// 查询绑定的支付宝账号
+    case getAlipayBindedAccount
+    /// 获取绑定的支付宝账号信息
+    case getAlipayBindedAccountInfo
+    /// 修改绑定的支付宝账号
+    case updateAlipayAccount(alipayID: String, authCode: String)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -118,6 +124,11 @@ extension MPApiType: TargetType {
         case .getOrderCertification,
              .askOrderCertification:
             return "api/driver/order_certification/"
+        case .getAlipayBindedAccount,
+             .updateAlipayAccount:
+            return "api/driver/account_alipay/"
+        case .getAlipayBindedAccountInfo:
+            return "api/driver/account_alipayinfo/"
         }
     }
     
@@ -133,7 +144,9 @@ extension MPApiType: TargetType {
             .getYearCheckItemInfo,
             .getUserAgreement,
             .getOrderCertification,
-            .askOrderCertification:
+            .askOrderCertification,
+            .getAlipayBindedAccount,
+            .getAlipayBindedAccountInfo:
             return .get
         default:
             return .post
@@ -174,10 +187,6 @@ extension MPApiType: TargetType {
                 "password": pwd,
                 "message": code
             ]
-            return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case .getUserInfo:
-            var param = defaultParam
-            param["id"] = MPUserModel.shared.userID
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .refreshToken:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
@@ -271,8 +280,16 @@ extension MPApiType: TargetType {
         case .getYearCheckItemInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case .getOrderCertification,
+             .getUserInfo,
             .askOrderCertification:
+            // 这里只传UserID
             var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .updateAlipayAccount(alipayID, authCode):
+            var param = defaultParam
+            param["auth_code"] = authCode
+            param["alipay_id"] = alipayID
             param["id"] = MPUserModel.shared.userID
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         default:
