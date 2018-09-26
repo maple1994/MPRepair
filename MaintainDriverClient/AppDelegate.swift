@@ -57,6 +57,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             UITableView.appearance().estimatedSectionFooterHeight = 0
         }
     }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
+        AlipaySDK.defaultService()?.processAuth_V2Result(url, standbyCallback: { (resultDic) in
+            if let dic = resultDic {
+                print(dic)
+            }
+        })
+        return true
+    }
 
     func applicationWillResignActive(_ application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

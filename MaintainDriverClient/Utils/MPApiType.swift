@@ -281,7 +281,9 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case .getOrderCertification,
              .getUserInfo,
-            .askOrderCertification:
+            .askOrderCertification,
+            .getAlipayBindedAccountInfo,
+            .getAlipayBindedAccount:
             // 这里只传UserID
             var param = defaultParam
             param["id"] = MPUserModel.shared.userID

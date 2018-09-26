@@ -10,7 +10,7 @@ import UIKit
 
 typealias MPCallback = (() -> Void)?
 typealias MPRequestType = () -> Void
-/// 阿里SDK pID
+/// 阿里SDK PID
 let aliPID = "2088131567240416"
 /// 阿里SDK AppID
 let aliAppID = "2018090661231519"
