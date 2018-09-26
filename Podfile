@@ -17,6 +17,7 @@ pod 'Kingfisher'
 pod 'MBProgressHUD'
 pod 'IQKeyboardManagerSwift'
 pod 'SwiftHash'
+pod 'AlipaySDK_MI'
 
 
   # Pods for MaintainDriverClient

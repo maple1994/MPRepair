@@ -10,12 +10,16 @@ import UIKit
 
 typealias MPCallback = (() -> Void)?
 typealias MPRequestType = () -> Void
-
+/// 阿里SDK pID
+let aliPID = "2088131567240416"
+/// 阿里SDK AppID
+let aliAppID = "2018090661231519"
 /// 版本号
 let mp_version: Double = 1.0
 /// 保存用户json的URL
 let mp_path_url: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/userInfo.json")
 
+// MARK: - 布局常量
 /// 垂直space
 let mp_vSpace: CGFloat = 10
 /// 水平space
