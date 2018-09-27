@@ -12,6 +12,8 @@ import IQKeyboardManagerSwift
 
 class MPLoginViewController: UIViewController {
     
+    fileprivate var isAgree: Bool = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -118,6 +120,8 @@ class MPLoginViewController: UIViewController {
             make.top.equalTo(resetPwdButton.snp.bottom).offset(37)
             make.height.equalTo(38)
         }
+        
+        setupAgreementView()
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLoginViewController.tap))
 //        view.addGestureRecognizer(tap)
     }
@@ -142,6 +146,10 @@ class MPLoginViewController: UIViewController {
         }
         if pwdTextField.mText.isEmpty {
             MPTipsView.showMsg("请输入密码")
+            return false
+        }
+        if !isAgree {
+            MPTipsView.showMsg("请同意用户协议")
             return false
         }
         return true
@@ -179,6 +187,52 @@ class MPLoginViewController: UIViewController {
         }
     }
     
+    /// 设置协议区域View
+    fileprivate func setupAgreementView() {
+        checkBoxImgView = UIImageView()
+        checkBoxImgView.image = UIImage(named: "box_selected")
+        let label1 = UILabel(font: UIFont.mpSmallFont, text: "阅读并同意", textColor: UIColor.colorWithHexString("#000000", alpha: 0.3))
+        let label2 = UILabel(font: UIFont.mpSmallFont, text: "《8号养车用户协议》", textColor: UIColor.navBlue)
+        let agreementView = UIView()
+        agreementView.addSubview(checkBoxImgView)
+        agreementView.addSubview(label1)
+        agreementView.addSubview(label2)
+        checkBoxImgView.snp.makeConstraints { (make) in
+            make.leading.centerY.equalToSuperview()
+            make.width.height.equalTo(14)
+        }
+        label1.snp.makeConstraints { (make) in
+            make.leading.equalTo(checkBoxImgView.snp.trailing).offset(5)
+            make.centerY.equalToSuperview()
+        }
+        label2.snp.makeConstraints { (make) in
+            make.leading.equalTo(label1.snp.trailing)
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview()
+        }
+        let control1 = UIControl()
+        let control2 = UIControl()
+        control1.addTarget(self, action: #selector(MPLoginViewController.checkBoxAction), for: .touchUpInside)
+        control2.addTarget(self, action: #selector(MPLoginViewController.agreementAction), for: .touchUpInside)
+        agreementView.addSubview(control1)
+        agreementView.addSubview(control2)
+        control1.snp.makeConstraints { (make) in
+            make.leading.equalTo(checkBoxImgView)
+            make.trailing.equalTo(label1)
+            make.top.bottom.equalToSuperview()
+        }
+        control2.snp.makeConstraints { (make) in
+            make.leading.trailing.equalTo(label2)
+            make.top.bottom.equalToSuperview()
+        }
+        view.addSubview(agreementView)
+        agreementView.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview().offset(-20)
+            make.centerX.equalToSuperview()
+            make.height.equalTo(35)
+        }
+    }
+    
     @objc fileprivate func resetPwd() {
         let vc = MPResetPwdViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -189,6 +243,31 @@ class MPLoginViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc fileprivate func checkBoxAction() {
+        isAgree = !isAgree
+        setupCheckBox()
+    }
+    
+    fileprivate func setupCheckBox() {
+        if isAgree {
+            checkBoxImgView.image = UIImage(named: "box_selected")
+        }else {
+            checkBoxImgView.image = UIImage(named: "box_unselected")
+        }
+    }
+    
+    @objc fileprivate func agreementAction() {
+        agreementView = MPUserAgreementView()
+        agreementView.frame = self.view.bounds
+        agreementView.startLoadUrl()
+        agreementView.isAgreeBlock = { [weak self] (res) in
+            self?.isAgree = res
+            self?.setupCheckBox()
+        }
+        self.view.addSubview(agreementView)
+    }
+    
+    
     // MARK: - View
     fileprivate var scrollView: UIScrollView!
     fileprivate var logoView: UIImageView!
@@ -197,6 +276,8 @@ class MPLoginViewController: UIViewController {
     fileprivate var loginButton: UIButton!
     fileprivate var resetPwdButton: UIButton!
     fileprivate var registerButton: UIButton!
+    fileprivate var checkBoxImgView: UIImageView!
+    fileprivate var agreementView: MPUserAgreementView!
 }
 
 extension MPLoginViewController: UIScrollViewDelegate {

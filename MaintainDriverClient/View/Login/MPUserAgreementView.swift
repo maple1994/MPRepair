@@ -56,6 +56,7 @@ class MPUserAgreementView: UIView {
     }
     
     fileprivate func setupUI() {
+        self.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.3)
         let titleLabel = UILabel(font: UIFont.mpNormalFont, text: "用户协议", textColor: UIColor.black)
         webView = WKWebView()
         webView.isOpaque = false
