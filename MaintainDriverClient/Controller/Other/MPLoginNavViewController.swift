@@ -38,7 +38,7 @@ class MPLoginNavViewController: UINavigationController {
         if self.viewControllers.count > 0 {
             viewController.hidesBottomBarWhenPushed = true
             let backButton = UIButton()
-            backButton.setImage(#imageLiteral(resourceName: "back"), for: .normal)
+            backButton.setImage(UIImage(named: "dark_back"), for: .normal)
             backButton.addTarget(self, action: #selector(MPLoginNavViewController.back), for: .touchUpInside)
             backButton.frame = CGRect(x: 0, y: 0, width: 44, height: 34)
             let inset = UIEdgeInsets(top: 0, left: -15, bottom: 0, right: 15)

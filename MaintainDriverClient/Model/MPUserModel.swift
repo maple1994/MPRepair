@@ -110,6 +110,9 @@ class MPUserModel: Codable {
     
     /// 刷新token
     func refreshToken(succ: MPCallback = nil) {
+        if !isLogin {
+            return 
+        }
         MPNetword.requestJson(target: .refreshToken, success: { (json) in
             let data = json["data"] as AnyObject
             if let token = data["token"] as? String,

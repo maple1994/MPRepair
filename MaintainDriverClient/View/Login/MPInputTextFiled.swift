@@ -53,7 +53,7 @@ class MPUnderLineTextField: UITextField {
     fileprivate func setupUI() {
         font = UIFont.mpNormalFont
         borderStyle = .none
-        tintColor = UIColor.white
+        tintColor = UIColor.colorWithHexString("#0093DD")
         line = UIView()
         line.backgroundColor = UIColor.colorWithHexString("#0093DD", alpha: 0.1)
         addSubview(line)
