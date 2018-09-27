@@ -11,8 +11,6 @@ import Moya
 import IQKeyboardManagerSwift
 
 class MPLoginViewController: UIViewController {
-
-    fileprivate let provide = MoyaProvider<MPApiType>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,10 +29,10 @@ class MPLoginViewController: UIViewController {
     }
     
     fileprivate func setupUI() {
+        view.backgroundColor = UIColor.white
         scrollView = UIScrollView()
         scrollView.delegate = self
-        let contentView = UIImageView()
-        contentView.image = #imageLiteral(resourceName: "background")
+        let contentView = UIView()
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in

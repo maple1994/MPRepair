@@ -16,6 +16,7 @@ class MPLoginNavViewController: UINavigationController {
         interactivePopGestureRecognizer?.delegate = self
         navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white,NSAttributedStringKey.font: UIFont.boldSystemFont(ofSize: 18)]
         navigationBar.shadowImage = UIImage()
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
         if let barImg = navigationBar.subviews.first {
             
             if #available(iOS 11, *) {
@@ -27,6 +28,10 @@ class MPLoginNavViewController: UINavigationController {
                 barImg.alpha = 0
             }
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
