@@ -167,7 +167,7 @@ class MPGongZuoTaiViewController: UIViewController {
                 return
             }
             if let param = dic["params"] as? String {
-                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "com_mayi_driver_client", callback: { (dic) in
+                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
                     print(dic)
                 })
             }
