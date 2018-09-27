@@ -46,7 +46,7 @@ class MPLoginViewController: UIViewController {
         }
         // 布局子内容
         let tfH: CGFloat = 44
-        let margin: CGFloat = 25
+        let margin: CGFloat = 35
         logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
         phoneTextField = MPInputTextFiled()
         phoneTextField.text = "18819457942"
@@ -65,16 +65,16 @@ class MPLoginViewController: UIViewController {
         loginButton.adjustsImageWhenHighlighted = false
         loginButton.addTarget(self, action: #selector(MPLoginViewController.login), for: .touchUpInside)
         loginButton.backgroundColor = UIColor.navBlue
-        loginButton.setupCorner(3)
+        loginButton.setupCorner(19)
         resetPwdButton = UIButton()
         resetPwdButton.setTitle("忘记密码？", for: .normal)
-        resetPwdButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
+        resetPwdButton.setTitleColor(UIColor.colorWithHexString("#0093DD"), for: .normal)
         resetPwdButton.titleLabel?.font = UIFont.mpSmallFont
         resetPwdButton.addTarget(self, action: #selector(MPLoginViewController.resetPwd), for: .touchUpInside)
         
         registerButton = UIButton()
         registerButton.setTitle("新用户注册", for: .normal)
-        registerButton.setTitleColor(UIColor.colorWithHexString("b7b7b7"), for: .normal)
+        registerButton.setTitleColor(UIColor.colorWithHexString("#0093DD"), for: .normal)
         registerButton.titleLabel?.font = UIFont.mpSmallFont
         registerButton.addTarget(self, action: #selector(MPLoginViewController.register), for: .touchUpInside)
         
@@ -103,7 +103,7 @@ class MPLoginViewController: UIViewController {
         }
         resetPwdButton.snp.makeConstraints { (make) in
             make.leading.equalTo(pwdTextField)
-            make.top.equalTo(pwdTextField.snp.bottom).offset(5)
+            make.top.equalTo(pwdTextField.snp.bottom).offset(10)
             make.height.equalTo(35)
         }
         registerButton.snp.makeConstraints { (make) in
@@ -115,8 +115,8 @@ class MPLoginViewController: UIViewController {
         loginButton.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
-            make.top.equalTo(resetPwdButton.snp.bottom).offset(20)
-            make.height.equalTo(36)
+            make.top.equalTo(resetPwdButton.snp.bottom).offset(37)
+            make.height.equalTo(38)
         }
 //        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLoginViewController.tap))
 //        view.addGestureRecognizer(tap)
@@ -128,8 +128,8 @@ class MPLoginViewController: UIViewController {
     
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
         let dic: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.foregroundColor: UIColor.colorWithHexString("#B2B2B3"),
-            NSAttributedStringKey.font: UIFont.mpSmallFont
+            NSAttributedStringKey.foregroundColor: UIColor.colorWithHexString("#A8D9F5"),
+            NSAttributedStringKey.font: UIFont.mpNormalFont
         ]
         return NSAttributedString(string: text, attributes: dic)
     }

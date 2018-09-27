@@ -28,7 +28,7 @@ class MPLeftIconView: UIView {
         iconImageView = UIImageView()
         addSubview(iconImageView)
         iconImageView.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview().offset(-5)
+            make.leading.equalToSuperview().offset(3)
             make.centerY.equalToSuperview()
         }
         let line = UIView()

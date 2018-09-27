@@ -19,9 +19,9 @@ class MPInputTextFiled: MPUnderLineTextField {
     
     override init() {
         super.init()
-        textColor = UIColor.white
+        textColor = UIColor.colorWithHexString("#0093DD")
         iconLeftView = MPLeftIconView()
-        iconLeftView.frame = CGRect(x: 0, y: 0, width: 60, height: 44)
+        iconLeftView.frame = CGRect(x: 0, y: 0, width: 48, height: 44)
         leftView = iconLeftView
         leftViewMode = .always
     }
@@ -55,7 +55,7 @@ class MPUnderLineTextField: UITextField {
         borderStyle = .none
         tintColor = UIColor.white
         line = UIView()
-        line.backgroundColor = UIColor.colorWithHexString("#B7B7B8")
+        line.backgroundColor = UIColor.colorWithHexString("#0093DD", alpha: 0.1)
         addSubview(line)
         line.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
