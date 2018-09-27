@@ -27,9 +27,9 @@ class MPResetPwdViewController: UIViewController {
     }
     
     fileprivate func setupUI() {
+        view.backgroundColor = UIColor.white
         scrollView = UIScrollView()
-        let contentView = UIImageView()
-        contentView.image = #imageLiteral(resourceName: "background")
+        let contentView = UIView()
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.snp.makeConstraints { (make) in
@@ -42,46 +42,47 @@ class MPResetPwdViewController: UIViewController {
             make.top.equalToSuperview()
         }
         let tfH: CGFloat = 44
-        let margin: CGFloat = 25
+        let margin: CGFloat = 35
+        let titleLabel = UILabel(font: UIFont.systemFont(ofSize: 28), text: "请重置您的密码", textColor: UIColor.black)
         phoneTextField = MPUnderLineTextField()
         phoneTextField.keyboardType = .numberPad
-        phoneTextField.textColor = UIColor.white
+        phoneTextField.textColor = UIColor.colorWithHexString("#0093DD")
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
         codeTextField = MPUnderLineTextField()
         codeTextField.keyboardType = .numberPad
-        codeTextField.textColor = UIColor.white
+        codeTextField.textColor = UIColor.colorWithHexString("#0093DD")
         codeTextField.attributedPlaceholder = getAttributeText("请输入验证码")
         pwdTextField = MPUnderLineTextField()
-        pwdTextField.textColor = UIColor.white
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入新密码")
         pwdTextField.isSecureTextEntry = true
-        pwdComfirmTextField = MPUnderLineTextField()
-        pwdComfirmTextField.textColor = UIColor.white
-        pwdComfirmTextField.keyboardType = .asciiCapable
-        pwdComfirmTextField.attributedPlaceholder = getAttributeText("请确认新密码")
-        pwdComfirmTextField.isSecureTextEntry = true
+        pwdTextField.textColor = UIColor.colorWithHexString("#0093DD")
+
         saveButton = UIButton()
         saveButton.setTitleColor(UIColor.white, for: .normal)
         saveButton.setTitle("保存", for: .normal)
         saveButton.adjustsImageWhenHighlighted = false
         saveButton.addTarget(self, action: #selector(MPResetPwdViewController.save), for: .touchUpInside)
         saveButton.backgroundColor = UIColor.navBlue
-        saveButton.setupCorner(3)
+        saveButton.setupCorner(19)
         getCodeButton = MPSendCodeButton(count: 60)
         getCodeButton.delegate = self
+        scrollView.addSubview(titleLabel)
         scrollView.addSubview(phoneTextField)
         scrollView.addSubview(codeTextField)
         scrollView.addSubview(pwdTextField)
-        scrollView.addSubview(pwdComfirmTextField)
         scrollView.addSubview(getCodeButton)
         scrollView.addSubview(saveButton)
         
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(margin)
+            make.top.equalToSuperview().offset(100)
+        }
         phoneTextField.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
             make.height.equalTo(tfH)
-            make.top.equalToSuperview().offset(70+64)
+            make.top.equalTo(titleLabel.snp.bottom).offset(90)
         }
         codeTextField.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(phoneTextField)
@@ -93,15 +94,10 @@ class MPResetPwdViewController: UIViewController {
             make.height.equalTo(tfH)
             make.top.equalTo(codeTextField.snp.bottom).offset(10)
         }
-        pwdComfirmTextField.snp.makeConstraints { (make) in
-            make.leading.trailing.equalTo(phoneTextField)
-            make.height.equalTo(tfH)
-            make.top.equalTo(pwdTextField.snp.bottom).offset(10)
-        }
         saveButton.snp.makeConstraints { (make) in
             make.leading.trailing.equalTo(phoneTextField)
-            make.top.equalTo(pwdComfirmTextField.snp.bottom).offset(60)
-            make.height.equalTo(36)
+            make.top.equalTo(pwdTextField.snp.bottom).offset(85)
+            make.height.equalTo(38)
         }
         getCodeButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(codeTextField)
@@ -113,7 +109,7 @@ class MPResetPwdViewController: UIViewController {
     
     fileprivate func getAttributeText(_ text: String) -> NSAttributedString {
         let dic: [NSAttributedStringKey: Any] = [
-            NSAttributedStringKey.foregroundColor: UIColor.colorWithHexString("#B2B2B3"),
+            NSAttributedStringKey.foregroundColor: UIColor.colorWithHexString("#000000", alpha: 0.3),
             NSAttributedStringKey.font: UIFont.mpSmallFont
         ]
         return NSAttributedString(string: text, attributes: dic)
@@ -139,8 +135,8 @@ class MPResetPwdViewController: UIViewController {
             MPTipsView.showMsg("请输入验证码")
             return false
         }
-        if pwdTextField.mText != pwdComfirmTextField.mText {
-            MPTipsView.showMsg("两次输入的密码不同")
+        if pwdTextField.trimText.isEmpty  {
+            MPTipsView.showMsg("请输入密码")
             return false
         }
         return true
@@ -151,7 +147,6 @@ class MPResetPwdViewController: UIViewController {
     fileprivate var phoneTextField: MPUnderLineTextField!
     fileprivate var codeTextField: MPUnderLineTextField!
     fileprivate var pwdTextField: MPUnderLineTextField!
-    fileprivate var pwdComfirmTextField: MPUnderLineTextField!
     fileprivate var getCodeButton: MPSendCodeButton!
     fileprivate var saveButton: UIButton!
 }
