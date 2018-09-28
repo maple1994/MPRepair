@@ -210,7 +210,7 @@ extension MPSettingViewController: UITableViewDelegate, UITableViewDataSource {
             vc.allowPickingVideo = false
             present(vc, animated: true, completion: nil)
         case 1:
-            editView.showKeyBoard(userName) { [weak self] (name) in
+            editView.showKeyBoard(userName, title: "昵称") { [weak self] (name) in
                 self?.userName = name!
                 self?.tableView.reloadData()
             }

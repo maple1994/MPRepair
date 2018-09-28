@@ -53,9 +53,9 @@ class MPSettingCell: UITableViewCell {
             make.leading.equalToSuperview().offset(margin)
             make.centerY.equalToSuperview()
         }
-        let line = MPUtils.createLine()
-        contentView.addSubview(line)
-        line.snp.makeConstraints { (make) in
+        line = MPUtils.createLine()
+        contentView.addSubview(line!)
+        line?.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(margin)
             make.trailing.equalToSuperview().offset(-margin)
             make.bottom.equalToSuperview()
@@ -63,6 +63,7 @@ class MPSettingCell: UITableViewCell {
         }
     }
     
+    var line: UIView?
     var leftTitleLabel: UILabel?
     var rightTitleLabel: UILabel?
     var iconView: UIImageView?

@@ -11,9 +11,10 @@ import UIKit
 /// 编辑界面
 class MPEditView: UIView {
     
-    func showKeyBoard(_ text: String?, callBack: ((String?) -> Void)?) {
+    func showKeyBoard(_ text: String?, title: String?, callBack: ((String?) -> Void)?) {
         editView.text = text
         self.callBack = callBack
+        titleLabel.text = title
         editView.becomeFirstResponder()
     }
     
@@ -58,7 +59,7 @@ extension MPEditView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             if textView.text.isEmpty {
-                MPTipsView.showMsg("昵称不能为空！")
+                MPTipsView.showMsg("内容不能为空！")
                 return false
             }
             textView.resignFirstResponder()

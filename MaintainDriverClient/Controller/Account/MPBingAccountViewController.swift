@@ -7,25 +7,163 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 /// 绑定支付宝账号
 class MPBingAccountViewController: UIViewController {
-
+    fileprivate let editViewH: CGFloat = 60
+    fileprivate var name: String = ""
+    fileprivate var account: String = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
-        navigationItem.title = "绑定账户"
+        setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        IQKeyboardManager.shared.enable = false
+        IQKeyboardManager.shared.enableAutoToolbar = false
     }
-    */
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+    
+    // MARK: -
+    @objc func keyboardShow(noti: Notification) {
+        guard let info = noti.userInfo else {
+            return
+        }
+        bgView.isHidden = false
+        if let duration = info["UIKeyboardAnimationDurationUserInfoKey"] as? Double,
+            let keyboardFrame = info["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let h = keyboardFrame.height + editViewH
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.init(translationX: 0, y: -h)
+            }
+        }
+    }
+    
+    @objc func keyboardHidden(noti: Notification) {
+        if let duration = noti.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double {
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.identity
+            }
+        }
+        bgView.isHidden = true
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
+    fileprivate func setupUI() {
+        view.backgroundColor = UIColor.white
+        navigationItem.title = "绑定账户"
+        tableView = UITableView()
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.rowHeight = 46
+        tableView.separatorStyle = .none
+        tableView.showsVerticalScrollIndicator = false
+        tableView.backgroundColor = UIColor.viewBgColor
+        view.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        bindButton = UIButton()
+        bindButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        bindButton.setTitle("确认绑定", for: .normal)
+        bindButton.setTitleColor(UIColor.white, for: .normal)
+        bindButton.backgroundColor = UIColor.navBlue
+        bindButton.addTarget(self, action: #selector(MPBingAccountViewController.save), for: .touchUpInside)
+        bindButton.setupCorner(5)
+        view.addSubview(bindButton)
+        bindButton.snp.makeConstraints { (make) in
+            make.centerX.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-30)
+            make.height.equalTo(40)
+            make.width.equalTo(160)
+        }
+        view.addSubview(bgView)
+        view.addSubview(editView)
+        editView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(editViewH)
+        }
+        bgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    @objc fileprivate func remove() {
+        editView.hideKeyBoard()
+        bgView.isHidden = true
+    }
+    
+    @objc fileprivate func save() {
+        
+    }
+    
+    // MARK: - View
+    fileprivate var tableView: UITableView!
+    fileprivate var bindButton: UIButton!
+    fileprivate lazy var bgView: UIControl = {
+        let view = UIControl()
+        view.isHidden = true
+        view.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.3)
+        view.addTarget(self, action: #selector(MPBingAccountViewController.remove), for: .touchDown)
+        return view
+    }()
+    fileprivate lazy var editView: MPEditView = {
+        let tv = MPEditView()
+        return tv
+    }()
+}
 
+extension MPBingAccountViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = MPSettingCell(style: .default, reuseIdentifier: "ID", isShowIcon: false)
+        switch indexPath.row {
+        case 0:
+            cell.leftTitleLabel?.text = "姓名"
+            let text = name.isEmpty ? "请输入真实姓名" : name
+            cell.rightTitleLabel?.text = text
+            cell.line?.backgroundColor = UIColor.colorWithHexString("#a3a3a3", alpha: 0.1)
+        case 1:
+            cell.leftTitleLabel?.text = "支付宝账号"
+            let text = account.isEmpty ? "请输入支付宝账号" : account
+            cell.rightTitleLabel?.text = text
+            cell.line?.isHidden = true
+        default:
+            break
+        }
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        switch indexPath.row {
+        case 0:
+            editView.showKeyBoard(name, title: "姓名") { [weak self] (name) in
+                self?.name = name!
+                self?.tableView.reloadData()
+            }
+        case 1:
+            editView.showKeyBoard(account, title: "支付宝账号") { [weak self] (name) in
+                self?.account = name!
+                self?.tableView.reloadData()
+            }
+        default:
+            break
+        }
+    }
 }
