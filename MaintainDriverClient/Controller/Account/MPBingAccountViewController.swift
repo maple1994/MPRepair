@@ -29,6 +29,7 @@ class MPBingAccountViewController: UIViewController {
         setupUI()
         NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.receiveAlipayResult(noti:)), name: MP_ALIPAY_RESULT_NOTIFICATION, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -124,7 +125,6 @@ class MPBingAccountViewController: UIViewController {
             MPTipsView.showMsg("请填写支付宝账号")
             return
         }
-        loadingView = MPTipsView.showLoadingView("正在绑定...")
         MPNetword.requestJson(target: .getAlipayBindedAccountInfo, success: { (json) in
             guard let dic = json["data"] as? [String: Any] else {
                 self.endRefresh(false)
@@ -132,15 +132,7 @@ class MPBingAccountViewController: UIViewController {
             }
             if let param = dic["params"] as? String {
                 AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
-                    let resultStatus = toInt(dic?["resultStatus"])
-                    let result = dic?["result"] as? [String: Any]
-                    let authCode = toString(result?["auth_code"])
-                    let appID = toString(result?["app_id"])
-                    if resultStatus != 9000 || authCode.isEmpty || appID.isEmpty {
-                        self.endRefresh(false)
-                        return
-                    }
-                    self.updateBindedAccount(authCode: authCode, appID: appID)
+                    self.handAlipayResult(dic)
                 })
             }else {
                 self.endRefresh(false)
@@ -148,6 +140,39 @@ class MPBingAccountViewController: UIViewController {
         }) { (_) in
             self.endRefresh(false)
         }
+    }
+    
+    @objc fileprivate func receiveAlipayResult(noti: Notification) {
+        handAlipayResult(noti.userInfo)
+    }
+    
+    fileprivate func handAlipayResult(_ result: Any?) {
+        let dic = result as? [String: Any]
+        let resultStatus = toInt(dic?["resultStatus"])
+        guard let result = dic?["result"] as? String else {
+            self.endRefresh(false)
+            return
+        }
+        let arr = result.components(separatedBy: "&")
+        var authCode = ""
+        var appID = ""
+        for str in arr {
+            if str.hasPrefix("app_id=") {
+                let startIndex = str.index(str.startIndex, offsetBy: "app_id=".count)
+                let endIndex = str.endIndex
+                appID = String(str[startIndex..<endIndex])
+            }else if str.hasPrefix("auth_code=") {
+                let startIndex = str.index(str.startIndex, offsetBy: "auth_code=".count)
+                let endIndex = str.endIndex
+                authCode = String(str[startIndex..<endIndex])
+            }
+        }
+        if resultStatus != 9000 || authCode.isEmpty || appID.isEmpty {
+            self.endRefresh(false)
+            return
+        }
+        loadingView = MPTipsView.showLoadingView("正在绑定...")
+        self.updateBindedAccount(authCode: authCode, appID: appID)
     }
     
     fileprivate func updateBindedAccount(authCode: String, appID: String) {

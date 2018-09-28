@@ -60,9 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
         AlipaySDK.defaultService()?.processAuth_V2Result(url, standbyCallback: { (resultDic) in
-            if let dic = resultDic {
-                print(dic)
-            }
+            NotificationCenter.default.post(name: MP_ALIPAY_RESULT_NOTIFICATION, object: nil, userInfo: resultDic)
         })
         return true
     }
