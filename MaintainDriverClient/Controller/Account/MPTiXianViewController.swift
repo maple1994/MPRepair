@@ -12,11 +12,13 @@ import UIKit
 class MPTiXianViewController: UIViewController {
     /// 是否选中支付宝
     fileprivate var isSelAplipay: Bool = true
+    fileprivate var account: String = ""
     
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
         setpuUI()
+        
     }
     
     fileprivate func setpuUI() {
@@ -187,8 +189,23 @@ class MPTiXianViewController: UIViewController {
     }
     
     @objc fileprivate func bindAccount() {
-        let vc = MPBingAccountViewController()
+        let vc = MPBingAccountViewController.init {
+            self.loadAccount()
+        }
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    fileprivate func loadAccount() {
+        MPNetword.requestJson(target: .getAlipayBindedAccount, success: { (json) in
+            if let dic = json["data"] as? [String: Any] {
+                let state = dic["state"] as? Bool ?? false
+                let name = toString(dic["name"])
+                if state && !name.isEmpty {
+                    self.account = name
+                    self.accountLabel.text = name
+                }
+            }
+        })
     }
     
     // MARK: - View

@@ -14,6 +14,15 @@ class MPBingAccountViewController: UIViewController {
     fileprivate let editViewH: CGFloat = 60
     fileprivate var name: String = ""
     fileprivate var account: String = ""
+    fileprivate var callback: (() -> Void)?
+    
+    init(callback: (() -> Void)?) {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,10 +116,61 @@ class MPBingAccountViewController: UIViewController {
     }
     
     @objc fileprivate func save() {
-        
+        if name.isEmpty {
+            MPTipsView.showMsg("请填写姓名")
+            return
+        }
+        if account.isEmpty {
+            MPTipsView.showMsg("请填写支付宝账号")
+            return
+        }
+        loadingView = MPTipsView.showLoadingView("正在绑定...")
+        MPNetword.requestJson(target: .getAlipayBindedAccountInfo, success: { (json) in
+            guard let dic = json["data"] as? [String: Any] else {
+                self.endRefresh(false)
+                return
+            }
+            if let param = dic["params"] as? String {
+                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
+                    let resultStatus = toInt(dic?["resultStatus"])
+                    let result = dic?["result"] as? [String: Any]
+                    let authCode = toString(result?["auth_code"])
+                    let appID = toString(result?["app_id"])
+                    if resultStatus != 9000 || authCode.isEmpty || appID.isEmpty {
+                        self.endRefresh(false)
+                        return
+                    }
+                    self.updateBindedAccount(authCode: authCode, appID: appID)
+                })
+            }else {
+                self.endRefresh(false)
+            }
+        }) { (_) in
+            self.endRefresh(false)
+        }
+    }
+    
+    fileprivate func updateBindedAccount(authCode: String, appID: String) {
+        MPNetword.requestJson(target: .updateAlipayAccount(alipayID: appID, authCode: authCode), success: { (_) in
+            self.endRefresh(true)
+            self.callback?()
+            self.navigationController?.popViewController(animated: true)
+        }, failure: { (_) in
+            self.endRefresh(false)
+        })
+    }
+    
+    fileprivate func endRefresh(_ isSucc: Bool) {
+        loadingView?.hide(animated: true)
+        if !isSucc {
+            MPTipsView.showMsg("绑定失败，请重新再试")
+        }else {
+            MPTipsView.showMsg("绑定成功")
+        }
     }
     
     // MARK: - View
+    fileprivate weak var loadingView: MBProgressHUD?
     fileprivate var tableView: UITableView!
     fileprivate var bindButton: UIButton!
     fileprivate lazy var bgView: UIControl = {
