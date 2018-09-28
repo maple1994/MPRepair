@@ -72,6 +72,7 @@
 		F5DF739F211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */; };
 		F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */; };
 		F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */; };
+		F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -187,6 +188,7 @@
 		F5DF739E211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCheckBoxOrderTableViewCell.swift; sourceTree = "<group>"; };
 		F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderModel.swift; sourceTree = "<group>"; };
 		F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheCCell.swift; sourceTree = "<group>"; };
+		F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPBingAccountViewController.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -403,6 +405,7 @@
 			children = (
 				F5DF735A211A93E300B9F154 /* MPAccountViewController.swift */,
 				F5DF735B211A93E300B9F154 /* MPTiXianViewController.swift */,
+				F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -819,6 +822,7 @@
 				F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
+				F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */,
 				F5DF738B211A94E400B9F154 /* MPInputTextFiled.swift in Sources */,
 				F5DF739A211A953A00B9F154 /* MPMunuViewCell.swift in Sources */,
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
