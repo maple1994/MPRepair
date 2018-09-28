@@ -73,6 +73,7 @@
 		F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */; };
 		F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */; };
 		F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */; };
+		F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC66215E1EF400617981 /* MPDialogView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,7 @@
 		F5DF73A0211AF15C00B9F154 /* MPOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderModel.swift; sourceTree = "<group>"; };
 		F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheCCell.swift; sourceTree = "<group>"; };
 		F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPBingAccountViewController.swift; sourceTree = "<group>"; };
+		F5E7FC66215E1EF400617981 /* MPDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDialogView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -538,6 +540,7 @@
 			children = (
 				F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */,
 				F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */,
+				F5E7FC66215E1EF400617981 /* MPDialogView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -831,6 +834,7 @@
 				F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */,
 				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
 				F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */,
+				F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,
