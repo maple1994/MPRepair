@@ -23,6 +23,7 @@ class MPGongZuoTaiViewController: UIViewController {
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
     fileprivate var socket: WebSocket?
+    fileprivate var socket2: WebSocket?
     
     /// 下车
     func xiaCheAction() {
@@ -48,6 +49,7 @@ class MPGongZuoTaiViewController: UIViewController {
     deinit {
         NotificationCenter.default.removeObserver(self)
         socket?.disconnect()
+        socket2?.disconnect()
     }
     
     @objc fileprivate func loginSucc() {
@@ -140,13 +142,24 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func listenAction() {
-        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!", delegate: self)
+        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
+        let sign: String = MD5(MPUserModel.shared.token + stamp)
+        let urlStr = "ws://www.nolasthope.cn/ws/driver/listen/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        print(urlStr)
+        guard let url = URL.init(string: urlStr) else {
+            return
+        }
+        socket2 = WebSocket(url: url)
+        socket2?.connect()
+        socket2?.delegate = self
+//        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!", delegate: self)
     }
     
     @objc fileprivate func chuCheAction() {
-        let stamp: String = "\(Date().timeIntervalSince1970)"
+        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
         let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        print(urlStr)
         guard let url = URL.init(string: urlStr) else {
             return
         }
@@ -171,13 +184,11 @@ class MPGongZuoTaiViewController: UIViewController {
 //                    showTipsView(false)
 //                }else {
 //                    // 审核成功
-//                    self.delegate?.gongZuoTaiDidSelectChuChe()
-//                    self.listenButton.isHidden = false
-//                    self.stealButton.isHidden = false
-//                    self.chuCheButton.isHidden = true
-//                }
-//            }
 //        })
+        delegate?.gongZuoTaiDidSelectChuChe()
+        listenButton.isHidden = false
+        stealButton.isHidden = false
+        chuCheButton.isHidden = true
     }
     
     // MARK: - View
