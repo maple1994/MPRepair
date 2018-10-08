@@ -153,26 +153,28 @@ class MPBingAccountViewController: UIViewController {
             self.endRefresh(false)
             return
         }
+        print(dic!)
+        print(result)
         let arr = result.components(separatedBy: "&")
         var authCode = ""
-        var appID = ""
+        var userID = ""
         for str in arr {
-            if str.hasPrefix("app_id=") {
-                let startIndex = str.index(str.startIndex, offsetBy: "app_id=".count)
+            if str.hasPrefix("user_id=") {
+                let startIndex = str.index(str.startIndex, offsetBy: "user_id=".count)
                 let endIndex = str.endIndex
-                appID = String(str[startIndex..<endIndex])
+                userID = String(str[startIndex..<endIndex])
             }else if str.hasPrefix("auth_code=") {
                 let startIndex = str.index(str.startIndex, offsetBy: "auth_code=".count)
                 let endIndex = str.endIndex
                 authCode = String(str[startIndex..<endIndex])
             }
         }
-        if resultStatus != 9000 || authCode.isEmpty || appID.isEmpty {
+        if resultStatus != 9000 || authCode.isEmpty || userID.isEmpty {
             self.endRefresh(false)
             return
         }
         loadingView = MPTipsView.showLoadingView("正在绑定...")
-        self.updateBindedAccount(authCode: authCode, appID: appID)
+        self.updateBindedAccount(authCode: authCode, appID: userID)
     }
     
     fileprivate func updateBindedAccount(authCode: String, appID: String) {

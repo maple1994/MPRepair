@@ -13,6 +13,7 @@ class MPAccountViewController: UIViewController {
 
     fileprivate let CellID = "MPMingXiTableViewCell"
     fileprivate var mingXiModelArr: [MPMingXiModel]?
+    fileprivate var balance: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -76,6 +77,13 @@ class MPAccountViewController: UIViewController {
             self.mingXiModelArr = arr
             self.tableView.reloadData()
         }, fail: nil)
+        MPNetword.requestJson(target: .getBalance, success: { json in
+            if let data = json["data"] as? [String: Any] {
+                let money = toDouble(data["balance"])
+                self.balance = money
+                self.moneyLabel.text = "\(money)"
+            }
+        })
     }
     
     @objc fileprivate func tiXian() {

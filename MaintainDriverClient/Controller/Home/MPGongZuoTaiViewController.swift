@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Starscream
+import SwiftHash
 
 protocol MPGongZuoTaiViewControllerDelegate: class {
     /// 点击了出车
@@ -20,6 +22,7 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
+    fileprivate var socket: WebSocket?
     
     /// 下车
     func xiaCheAction() {
@@ -34,10 +37,17 @@ class MPGongZuoTaiViewController: UIViewController {
 //        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPGongZuoTaiViewController.disconnect(noti:)), name: Notification.Name.init(WebsocketDidDisconnectNotification), object: nil)
+    }
+    
+    @objc fileprivate func disconnect(noti: Notification) {
+        let dic = noti.userInfo?[WebsocketDisconnectionErrorKeyName]
+        print(dic)
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+        socket?.disconnect()
     }
     
     @objc fileprivate func loginSucc() {
@@ -134,7 +144,16 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        bind()
+        let stamp: String = "\(Date().timeIntervalSince1970)"
+        let sign: String = MD5(MPUserModel.shared.token + stamp)
+        let urlStr = "ws://driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        guard let url = URL.init(string: urlStr) else {
+            return
+        }
+        socket = WebSocket(url: url)
+        socket?.connect()
+        socket?.delegate = self
+//        socket =
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
 //            view.showFailView = isShowFailed
@@ -159,19 +178,6 @@ class MPGongZuoTaiViewController: UIViewController {
 //                }
 //            }
 //        })
-    }
-    
-    fileprivate func bind() {
-        MPNetword.requestJson(target: .getAlipayBindedAccountInfo, success: { (json) in
-            guard let dic = json["data"] as? [String: Any] else {
-                return
-            }
-            if let param = dic["params"] as? String {
-                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
-                    print(dic)
-                })
-            }
-        })
     }
     
     // MARK: - View
@@ -219,5 +225,23 @@ extension MPGongZuoTaiViewController: MPNewOrderTipsViewDelegate {
         }
         let vc = MPOrderConfirmViewController(model: model)
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension MPGongZuoTaiViewController: WebSocketDelegate {
+    func websocketDidConnect(socket: WebSocketClient) {
+        print("websocket is connected")
+    }
+    
+    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
+        print("websocket is disconnected: \(error?.localizedDescription)")
+    }
+    
+    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
+        print("got some text: \(text)")
+    }
+    
+    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
+        print("got some data: \(data.count)")
     }
 }

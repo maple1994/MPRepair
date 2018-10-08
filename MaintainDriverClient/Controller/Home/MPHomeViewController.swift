@@ -14,6 +14,7 @@ class MPHomeViewController: UIViewController {
         return MPUserModel.shared.isLogin
     }
     var isAnimationed: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if !isLogin {

@@ -31,7 +31,7 @@ enum MPApiType {
     /// 获取账户明细信息
     case getAccountInfo
     /// 明细操作信息-提现 via- alipay, weixin
-    case tiXian(money: Double, via: String)
+    case tiXian(money: Double, via: String, aliAccunt: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
     /// finish: 0表示所有，1表示未完成，2表示已完成, 当type=driver的时候必填
     case getOrderList(type: String, finish: Int)
@@ -69,6 +69,8 @@ enum MPApiType {
     case getAlipayBindedAccountInfo
     /// 修改绑定的支付宝账号
     case updateAlipayAccount(alipayID: String, authCode: String)
+    /// 查询余额
+    case getBalance
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -129,6 +131,8 @@ extension MPApiType: TargetType {
             return "api/driver/account_alipay/"
         case .getAlipayBindedAccountInfo:
             return "api/driver/account_alipayinfo/"
+        case .getBalance:
+            return "api/driver/balance/"
         }
     }
     
@@ -146,6 +150,7 @@ extension MPApiType: TargetType {
             .getOrderCertification,
             .askOrderCertification,
             .getAlipayBindedAccount,
+            .getBalance,
             .getAlipayBindedAccountInfo:
             return .get
         default:
@@ -205,10 +210,12 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .getAccountInfo, .getPicName:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
-        case let .tiXian(money, via):
+        case let .tiXian(money, via, account):
             var param = defaultParam
             param["money"] = money
             param["via"] = via
+            param["alipay_account"] = account
+            param["name"] = "叶宏业"
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .getOrderList(type1, finish):
             var param = defaultParam
@@ -283,7 +290,8 @@ extension MPApiType: TargetType {
              .getUserInfo,
             .askOrderCertification,
             .getAlipayBindedAccountInfo,
-            .getAlipayBindedAccount:
+            .getAlipayBindedAccount,
+            .getBalance:
             // 这里只传UserID
             var param = defaultParam
             param["id"] = MPUserModel.shared.userID

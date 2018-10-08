@@ -168,7 +168,18 @@ class MPTiXianViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        MPDialogView.showDialog("提现成功！")
+        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
+            MPTipsView.showMsg("请收入合法的数字")
+        }
+        guard let money = textField.mText.toDouble() else {
+            MPTipsView.showMsg("请收入合法的数字")
+            return
+        }
+        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: "305554601@qq.com"), success: { (json) in
+            MPDialogView.showDialog("提现成功")
+        }) { (_) in
+            MPTipsView.showMsg("提现失败")
+        }
 //        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
 //            MPTipsView.showMsg("请收入合法的数字")
 //        }

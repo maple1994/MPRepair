@@ -23,6 +23,7 @@ PODS:
   - Result (3.2.4)
   - SlideMenuControllerSwift (4.0.0)
   - SnapKit (4.0.0)
+  - Starscream (3.0.5)
   - SwiftHash (2.0.1)
   - TZImagePickerController (2.2.4)
 
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - Moya
   - SlideMenuControllerSwift
   - SnapKit (~> 4.0.0)
+  - Starscream
   - SwiftHash
   - TZImagePickerController
 
@@ -59,6 +61,7 @@ SPEC REPOS:
     - Result
     - SlideMenuControllerSwift
     - SnapKit
+    - Starscream
     - SwiftHash
     - TZImagePickerController
 
@@ -78,9 +81,10 @@ SPEC CHECKSUMS:
   Result: d2d07204ce72856f1fd9130bbe42c35a7b0fea10
   SlideMenuControllerSwift: 021d6318201c53d4d4d3710517d43d6c556c7dd0
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
+  Starscream: faf918b2f2eff7d5dd21180646bf015a669673bd
   SwiftHash: c805de5a434eacfa0dac7210745a50c55d7fe33d
   TZImagePickerController: 93f62cc92a80b632b36facd51b55cd0206afed32
 
-PODFILE CHECKSUM: 210a3e656e26886eb61555f96d95c589dd78c764
+PODFILE CHECKSUM: 4d174c1d54c2b4d381283c00f1ea1e1f00fb00d2
 
 COCOAPODS: 1.5.3
