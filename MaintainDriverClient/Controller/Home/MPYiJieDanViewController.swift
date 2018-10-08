@@ -47,10 +47,6 @@ class MPYiJieDanViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
-//        MPNetwordTool.getOrderList(type: "driver", finish: 1, succ: { (arr) in
-//            self.modelArr = arr
-//            self.tableView.reloadData()
-//        }, fail: nil)
     }
     
     @objc fileprivate func loginSucc() {

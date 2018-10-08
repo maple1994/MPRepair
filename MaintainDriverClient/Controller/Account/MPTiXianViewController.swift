@@ -52,13 +52,13 @@ class MPTiXianViewController: UIViewController {
         }
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white
-        let label2 = UILabel(font: UIFont.mpSmallFont, text: "提现账户", textColor: UIColor.mpDarkGray)
-        accountLabel = UILabel(font: UIFont.mpSmallFont, text: "请添加提现账号", textColor: UIColor.mpLightGary)
+        let label2 = UILabel(font: UIFont.mpSmallFont, text: "支付宝账号", textColor: UIColor.mpDarkGray)
+//        accountLabel = UILabel(font: UIFont.mpSmallFont, text: "请添加提现账号", textColor: UIColor.mpLightGary)
 //        let arrowLabel = UILabel(font: UIFont.mpSmallFont, text: ">", textColor: UIColor.mpDarkGray)
-        let arrowLabel = UIImageView(image: UIImage(named: "right_arrow"))
+//        let arrowLabel = UIImageView(image: UIImage(named: "right_arrow"))
         let blockLine = MPUtils.createLine(UIColor.viewBgColor)
-        let control = UIControl()
-        control.addTarget(self, action: #selector(MPTiXianViewController.bindAccount), for: .touchUpInside)
+//        let control = UIControl()
+//        control.addTarget(self, action: #selector(MPTiXianViewController.bindAccount), for: .touchUpInside)
         
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "提现金额", textColor: UIColor.mpDarkGray)
         let moneyLabel = UILabel(font: UIFont.mpXSmallFont, text: nil, textColor: UIColor.mpLightGary)
@@ -77,37 +77,43 @@ class MPTiXianViewController: UIViewController {
         textField.leftViewMode = .always
         
         tbHeaderView.addSubview(label2)
-        tbHeaderView.addSubview(arrowLabel)
-        tbHeaderView.addSubview(accountLabel)
-        tbHeaderView.addSubview(control)
+        tbHeaderView.addSubview(accountTextField)
+//        tbHeaderView.addSubview(arrowLabel)
+//        tbHeaderView.addSubview(accountLabel)
+//        tbHeaderView.addSubview(control)
         tbHeaderView.addSubview(blockLine)
         tbHeaderView.addSubview(titleLabel)
         tbHeaderView.addSubview(textField)
         tbHeaderView.addSubview(moneyLabel)
         tbHeaderView.addSubview(allTiXianBtn)
-        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 175)
+        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 230)
         label2.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
-            make.top.equalToSuperview()
-            make.height.equalTo(44)
+            make.top.equalToSuperview().offset(15)
         }
-        control.snp.makeConstraints { (make) in
-            make.height.equalTo(44)
-            make.leading.equalTo(accountLabel)
-            make.top.trailing.equalToSuperview()
+        accountTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(label2.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(15)
+            make.width.equalTo(mp_screenW - 30)
+            make.height.equalTo(35)
         }
-        arrowLabel.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-15)
-            make.centerY.equalTo(label2)
-            make.width.equalTo(13)
-            make.height.equalTo(13)
-        }
-        accountLabel.snp.makeConstraints { (make) in
-            make.centerY.equalTo(label2)
-            make.trailing.equalTo(arrowLabel.snp.leading).offset(-3)
-        }
+//        control.snp.makeConstraints { (make) in
+//            make.height.equalTo(44)
+//            make.leading.equalTo(accountLabel)
+//            make.top.trailing.equalToSuperview()
+//        }
+//        arrowLabel.snp.makeConstraints { (make) in
+//            make.trailing.equalToSuperview().offset(-15)
+//            make.centerY.equalTo(label2)
+//            make.width.equalTo(13)
+//            make.height.equalTo(13)
+//        }
+//        accountLabel.snp.makeConstraints { (make) in
+//            make.centerY.equalTo(label2)
+//            make.trailing.equalTo(arrowLabel.snp.leading).offset(-3)
+//        }
         blockLine.snp.makeConstraints { (make) in
-            make.top.equalTo(label2.snp.bottom)
+            make.top.equalTo(accountTextField.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(6)
         }
@@ -175,7 +181,11 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("请收入合法的数字")
             return
         }
-        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: "305554601@qq.com"), success: { (json) in
+        if accountTextField.mText.isEmpty {
+            MPTipsView.showMsg("请收入支付宝账号")
+            return
+        }
+        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: accountTextField.mText), success: { (json) in
             MPDialogView.showDialog("提现成功")
         }) { (_) in
             MPTipsView.showMsg("提现失败")
@@ -220,6 +230,12 @@ class MPTiXianViewController: UIViewController {
     }
     
     // MARK: - View
+    fileprivate lazy var accountTextField: UITextField = {
+        let tf = MPUnderLineTextField()
+        tf.placeholder = "清输入支付宝账号"
+        tf.font = UIFont.mpNormalFont
+        return tf
+    }()
     fileprivate var accountLabel: UILabel!
     fileprivate var tableView: UITableView!
     fileprivate var tiXianBtn: UIButton!

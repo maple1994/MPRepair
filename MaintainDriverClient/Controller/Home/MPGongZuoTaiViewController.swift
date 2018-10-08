@@ -22,8 +22,22 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
-    fileprivate var socket: WebSocket?
-    fileprivate var socket2: WebSocket?
+    fileprivate lazy var socket1: WebSocket = {
+        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
+        let sign: String = MD5(MPUserModel.shared.token + stamp)
+        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        let tmp = WebSocket.init(url: URL(string: urlStr)!)
+        tmp.delegate = self
+        return tmp
+    }()
+    fileprivate lazy var socket2: WebSocket = {
+        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
+        let sign: String = MD5(MPUserModel.shared.token + stamp)
+        let urlStr = "ws://www.nolasthope.cn/ws/driver/listen/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        let tmp = WebSocket.init(url: URL(string: urlStr)!)
+        tmp.delegate = self
+        return tmp
+    }()
     
     /// 下车
     func xiaCheAction() {
@@ -48,8 +62,8 @@ class MPGongZuoTaiViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-        socket?.disconnect()
-        socket2?.disconnect()
+//        socket1.disconnect()
+//        socket2.disconnect()
     }
     
     @objc fileprivate func loginSucc() {
@@ -142,31 +156,11 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func listenAction() {
-        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
-        let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://www.nolasthope.cn/ws/driver/listen/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
-        print(urlStr)
-        guard let url = URL.init(string: urlStr) else {
-            return
-        }
-        socket2 = WebSocket(url: url)
-        socket2?.connect()
-        socket2?.delegate = self
-//        _ = MPNewOrderTipsView.show(title: "您有新的订单!", subTitle: "请及时处理!", delegate: self)
+        socket2.connect()
     }
     
     @objc fileprivate func chuCheAction() {
-        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
-        let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
-        print(urlStr)
-        guard let url = URL.init(string: urlStr) else {
-            return
-        }
-        socket = WebSocket(url: url)
-        socket?.connect()
-        socket?.delegate = self
-//        socket =
+        socket1.connect()
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
 //            view.showFailView = isShowFailed
