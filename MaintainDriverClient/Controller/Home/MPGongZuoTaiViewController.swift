@@ -167,26 +167,28 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        tipsView = MPTipsView.showLoadingView("获取订单列中...")
-        MPOrderSocketManager.shared.connect(socketDelegate: self)
-//        func showTipsView(_ isShowFailed: Bool) {
-//            let view = MPAuthorityTipView()
-//            view.showFailView = isShowFailed
-//            view.frame = UIScreen.main.bounds
-//            UIApplication.shared.keyWindow?.addSubview(view)
-//        }
-//        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
-//            if let data = json["data"] as? [String: Any] {
-//                let state = toInt(data["state"])
-//                if state == 0 {
-//                    // 未审核
-//                    showTipsView(true)
-//                }else if state == 1 {
-//                    // 正在审核
-//                    showTipsView(false)
-//                }else {
-//                    // 审核成功
-//        })
+        func showTipsView(_ isShowFailed: Bool) {
+            let view = MPAuthorityTipView()
+            view.showFailView = isShowFailed
+            view.frame = UIScreen.main.bounds
+            UIApplication.shared.keyWindow?.addSubview(view)
+        }
+        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
+            if let data = json["data"] as? [String: Any] {
+                let state = toInt(data["state"])
+                if state == 0 {
+                    // 未审核
+                    showTipsView(true)
+                }else if state == 1 {
+                    // 正在审核
+                    showTipsView(false)
+                }else {
+                    // 审核成功
+                    self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
+                    MPOrderSocketManager.shared.connect(socketDelegate: self)
+                }
+            }
+        })
     }
     
     // MARK: - View
