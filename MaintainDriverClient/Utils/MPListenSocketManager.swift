@@ -37,14 +37,17 @@ class MPListenSocketManager {
         let url: URL = URL(string: urlStr)!
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
-        let tmp = WebSocket.init(request: request)
+//        let tmp = WebSocket.init(request: request)
+        let tmp = WebSocket.init(url: url)
         tmp.delegate = self
         return tmp
     }
     
     /// 创建socket
     func connect(socketDelegate: MPListenSocketDelegate?) {
+        socket.disconnect()
         delegate = socketDelegate
+        socket = createSocket()
         socket.connect()
     }
     

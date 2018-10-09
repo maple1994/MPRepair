@@ -37,14 +37,17 @@ class MPOrderSocketManager {
         let url: URL = URL(string: urlStr)!
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
-        let tmp = WebSocket.init(request: request)
+        let tmp = WebSocket.init(url: url)
+//        let tmp = WebSocket.init(request: request)
         tmp.delegate = self
         return tmp
     }
     
     /// 连接socket
     func connect(socketDelegate: MPOrderSocketDelegate?) {
+        socket.disconnect()
         delegate = socketDelegate
+        socket = createSocket()
         socket.connect()
     }
     

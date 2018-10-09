@@ -22,12 +22,15 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
+    fileprivate var tipsView: MBProgressHUD?
     
     /// 下车
     func xiaCheAction() {
         listenButton.isHidden = true
         stealButton.isHidden = true
         chuCheButton.isHidden = false
+        MPOrderSocketManager.shared.disconnet()
+        MPListenSocketManager.shared.disconnet()
     }
     
     override func viewDidLoad() {
@@ -77,9 +80,9 @@ class MPGongZuoTaiViewController: UIViewController {
         stealButton.backgroundColor = UIColor.white
         listenButton = UIButton()
         listenButton.setTitle("听单", for: .normal)
-        listenButton.setTitleColor(UIColor.white, for: .normal)
+        listenButton.setTitleColor(UIColor.navBlue, for: .normal)
         listenButton.setupCorner(5)
-        listenButton.backgroundColor = UIColor.navBlue
+        listenButton.setupBorder(borderColor: UIColor.navBlue)
         listenButton.addTarget(self, action: #selector(MPGongZuoTaiViewController.listenAction), for: .touchUpInside)
         listenButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         chuCheButton = UIButton()
@@ -116,6 +119,17 @@ class MPGongZuoTaiViewController: UIViewController {
         chuCheButton.isHidden = false
     }
     
+    fileprivate func setupListenButton(isSelected: Bool) {
+        if isSelected {
+            listenButton.setTitle("取消听单", for: .normal)
+            listenButton.setTitleColor(UIColor.white, for: .normal)
+            listenButton.backgroundColor = UIColor.navBlue
+        }else {listenButton.setTitle("听单", for: .normal)
+            listenButton.setTitleColor(UIColor.navBlue, for: .normal)
+            listenButton.backgroundColor = UIColor.white
+        }
+    }
+    
     @objc fileprivate func loadData() {
         // 从网络拉取上传图片的picName
         MPNetwordTool.getPicName()
@@ -141,10 +155,19 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func listenAction() {
-        MPListenSocketManager.shared.connect(socketDelegate: self)
+        let isListen = !listenButton.isSelected
+        if isListen {
+           tipsView = MPTipsView.showLoadingView("请求听单...")
+            MPListenSocketManager.shared.connect(socketDelegate: self)
+        }else {
+            listenButton.isSelected = false
+            setupListenButton(isSelected: listenButton.isSelected)
+            MPListenSocketManager.shared.disconnet()
+        }
     }
     
     @objc fileprivate func chuCheAction() {
+        tipsView = MPTipsView.showLoadingView("获取订单列中...")
         MPOrderSocketManager.shared.connect(socketDelegate: self)
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
@@ -164,10 +187,6 @@ class MPGongZuoTaiViewController: UIViewController {
 //                }else {
 //                    // 审核成功
 //        })
-        delegate?.gongZuoTaiDidSelectChuChe()
-        listenButton.isHidden = false
-        stealButton.isHidden = false
-        chuCheButton.isHidden = true
     }
     
     // MARK: - View
@@ -223,10 +242,24 @@ extension MPGongZuoTaiViewController: MPNewOrderTipsViewDelegate {
 extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
     func websocketDidConnect() {
         MPPrint("抢单列表的Socket-连接成功")
+        tipsView?.hide(animated: true)
+        delegate?.gongZuoTaiDidSelectChuChe()
+        listenButton.isHidden = false
+        stealButton.isHidden = false
+        chuCheButton.isHidden = true
     }
     
     func websocketDidDisconnect(error: Error?) {
-        MPPrint("抢单列表的Socket-连接失败-\(error?.localizedDescription)")
+        if let wsError = error as? WSError {
+            // CloseCode.normal(1000)为正常断开
+            if wsError.code != Int(CloseCode.normal.rawValue) {
+                tipsView?.label.text = "获取失败，请重新再试"
+                tipsView?.hide(animated: true, afterDelay: 1)
+                MPPrint("抢单列表的Socket-连接失败-\(error?.localizedDescription)")
+            }else {
+                MPPrint("抢单列表的Socket-断开连接")
+            }
+        }
     }
     
     func websocketDidReceiveMessage(text: String) {
@@ -257,11 +290,25 @@ extension MPGongZuoTaiViewController: MPListenSocketDelegate {
     /// 连接成功
     func listenSocketDidConnect() {
         MPPrint("听单的Socket-连接成功")
+        tipsView?.hide(animated: true)
+        listenButton.isSelected = true
+        setupListenButton(isSelected: true)
     }
     
     /// 连接失败
     func listenSocketDidDisconnect(error: Error?) {
-        MPPrint("听单的Socket-连接失败-\(error?.localizedDescription)")
+        listenButton.isSelected = false
+        setupListenButton(isSelected: false)
+        // CloseCode.normal(1000)为正常断开
+        if let wsError = error as? WSError {
+            if wsError.code != Int(CloseCode.normal.rawValue) {
+                MPPrint("听单的Socket-连接失败-\(error?.localizedDescription)")
+                tipsView?.label.text = "听单失败，请重新再试"
+                tipsView?.hide(animated: true, afterDelay: 1)
+            }else {
+                MPPrint("听单的Socket-断开连接")
+            }
+        }
     }
     
     /// 收到socket msg
@@ -273,10 +320,25 @@ extension MPGongZuoTaiViewController: MPListenSocketDelegate {
         guard let data = json["data"] as? [String: Any] else {
             return
         }
-        guard let id = data["id"] else {
+        guard let id1 = data["id"] else {
             return
         }
+        let id = toInt(id1)
         _ = MPNewOrderTipsView.show(title: "您有新的订单！", subTitle: "请即时处理!", delegate: self)
+        MPNetword.requestJson(target: .getOrderInfo(id: id), success: { json in
+            guard let data = json["data"] as? [[String: Any]] else {
+                MPPrint(json["data"])
+                return
+            }
+            MPPrint(data)
+            var arr = [MPOrderModel]()
+            for dic in data {
+                if let model = MPOrderModel.toModel(dic) {
+                    arr.append(model)
+                }
+            }
+            self.selectedModel = arr.first
+        })
     }
     
     /// 收到socket data
