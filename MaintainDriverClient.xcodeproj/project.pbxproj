@@ -35,6 +35,8 @@
 		F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */; };
 		F5A6334B211728520075548A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6334A211728520075548A /* Extension.swift */; };
+		F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */; };
+		F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
 		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
 		F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2446921467C3500353C88 /* MPNetwordTool.swift */; };
@@ -146,6 +148,8 @@
 		F5A6333F211700BA0075548A /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		F5A63347211701030075548A /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		F5A6334A211728520075548A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderSocketManager.swift; sourceTree = "<group>"; };
+		F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPListenSocketManager.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
 		F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTipsView.swift; sourceTree = "<group>"; };
 		F5D2446921467C3500353C88 /* MPNetwordTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordTool.swift; sourceTree = "<group>"; };
@@ -277,6 +281,8 @@
 				F5031F96212126E500329BC0 /* MPConstant.swift */,
 				F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */,
 				F5D2446921467C3500353C88 /* MPNetwordTool.swift */,
+				F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */,
+				F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -824,6 +830,7 @@
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
+				F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */,
 				F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
@@ -860,6 +867,7 @@
 				F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */,
 				F5DF7372211A93E300B9F154 /* MPSettingViewController.swift in Sources */,
 				F5DF7371211A93E300B9F154 /* MPGongZuoTaiViewController.swift in Sources */,
+				F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */,
 				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5DF7373211A93E300B9F154 /* MPLoginViewController.swift in Sources */,

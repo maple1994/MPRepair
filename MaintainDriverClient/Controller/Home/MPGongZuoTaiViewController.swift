@@ -22,22 +22,6 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
-    fileprivate lazy var socket1: WebSocket = {
-        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
-        let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
-        let tmp = WebSocket.init(url: URL(string: urlStr)!)
-        tmp.delegate = self
-        return tmp
-    }()
-    fileprivate lazy var socket2: WebSocket = {
-        let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
-        let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://www.nolasthope.cn/ws/driver/listen/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
-        let tmp = WebSocket.init(url: URL(string: urlStr)!)
-        tmp.delegate = self
-        return tmp
-    }()
     
     /// 下车
     func xiaCheAction() {
@@ -56,14 +40,15 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func disconnect(noti: Notification) {
-        let dic = noti.userInfo?[WebsocketDisconnectionErrorKeyName]
-        print(dic)
+        if let dic = noti.userInfo?[WebsocketDisconnectionErrorKeyName] {
+            print(dic)
+        }
     }
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-//        socket1.disconnect()
-//        socket2.disconnect()
+        MPListenSocketManager.shared.disconnet()
+        MPOrderSocketManager.shared.disconnet()
     }
     
     @objc fileprivate func loginSucc() {
@@ -156,11 +141,11 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func listenAction() {
-        socket2.connect()
+        MPListenSocketManager.shared.connect(socketDelegate: self)
     }
     
     @objc fileprivate func chuCheAction() {
-        socket1.connect()
+        MPOrderSocketManager.shared.connect(socketDelegate: self)
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
 //            view.showFailView = isShowFailed
@@ -195,6 +180,7 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var chuCheButton: UIButton!
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPGongZuoTaiViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -233,20 +219,68 @@ extension MPGongZuoTaiViewController: MPNewOrderTipsViewDelegate {
     }
 }
 
-extension MPGongZuoTaiViewController: WebSocketDelegate {
-    func websocketDidConnect(socket: WebSocketClient) {
-        print("websocket is connected")
+// MARK: - MPOrderSocketDelegate 获取抢单列表的Socket
+extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
+    func websocketDidConnect() {
+        MPPrint("抢单列表的Socket-连接成功")
     }
     
-    func websocketDidDisconnect(socket: WebSocketClient, error: Error?) {
-        print("websocket is disconnected: \(error?.localizedDescription)")
+    func websocketDidDisconnect(error: Error?) {
+        MPPrint("抢单列表的Socket-连接失败-\(error?.localizedDescription)")
     }
     
-    func websocketDidReceiveMessage(socket: WebSocketClient, text: String) {
-        print("got some text: \(text)")
+    func websocketDidReceiveMessage(text: String) {
+        MPPrint("抢单列表的Socket-text-\(text)")
+        guard let json = text.toJson() else {
+            return
+        }
+        guard let data = json["data"] as? [[String: Any]] else {
+            return
+        }
+        var arr = [MPOrderModel]()
+        for dic in data {
+            if let model = MPOrderModel.toModel(dic) {
+                arr.append(model)
+            }
+        }
+        modelArr = arr
+        tableView.reloadData()
     }
     
-    func websocketDidReceiveData(socket: WebSocketClient, data: Data) {
-        print("got some data: \(data.count)")
+    func websocketDidReceiveData(data: Data) {
+        MPPrint("抢单列表的Socket-二进制文件-\(data.count)")
+    }
+}
+
+// MARK: - MPListenSocketDelegate 听单Socket回调
+extension MPGongZuoTaiViewController: MPListenSocketDelegate {
+    /// 连接成功
+    func listenSocketDidConnect() {
+        MPPrint("听单的Socket-连接成功")
+    }
+    
+    /// 连接失败
+    func listenSocketDidDisconnect(error: Error?) {
+        MPPrint("听单的Socket-连接失败-\(error?.localizedDescription)")
+    }
+    
+    /// 收到socket msg
+    func listenSocketDidReceiveMessage(text: String) {
+        MPPrint("听单的Socket-text-\(text)")
+        guard let json = text.toJson() else {
+            return
+        }
+        guard let data = json["data"] as? [String: Any] else {
+            return
+        }
+        guard let id = data["id"] else {
+            return
+        }
+        _ = MPNewOrderTipsView.show(title: "您有新的订单！", subTitle: "请即时处理!", delegate: self)
+    }
+    
+    /// 收到socket data
+    func listenSocketDidReceiveData(data: Data) {
+        MPPrint("听单的Socket-data-\(data.count)")
     }
 }

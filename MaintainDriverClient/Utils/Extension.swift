@@ -166,6 +166,16 @@ extension String {
         df.timeZone = TimeZone(identifier: "Asia/Shanghai") ?? TimeZone.current
         return df.date(from: self)
     }
+    
+    func toJson() -> [String: Any]? {
+        guard let data = self.data(using: .utf8) else {
+            return nil
+        }
+        guard let dic = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) else {
+            return nil
+        }
+        return dic as? [String: Any]
+    }
 }
 
 extension UITextField {

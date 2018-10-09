@@ -57,6 +57,8 @@ class MPUserModel: Codable {
     
     @objc fileprivate func refreshTokenSucc() {
         startTimer()
+        MPOrderSocketManager.shared.reconnect()
+        MPListenSocketManager.shared.reconnect()
         while !MPNetword.requestQueue.isEmpty {
             let block = MPNetword.requestQueue.dequeue()
             block?()
@@ -72,6 +74,9 @@ class MPUserModel: Codable {
     
     /// 退出登录
     func loginOut() {
+        // 断开链接
+        MPListenSocketManager.shared.disconnet()
+        MPOrderSocketManager.shared.disconnet()
         // 停止定时器
         stopTimer()
         // 清除数据
