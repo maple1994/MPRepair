@@ -66,7 +66,7 @@ class MPQuCheCCell: UITableViewCell {
         addressTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(carTitleLabel)
             make.width.equalTo(73)
-            make.top.equalTo(carTitleLabel.snp.bottom).offset(15)
+            make.top.equalTo(carNameLabel.snp.bottom).offset(15)
         }
         addressLabel.snp.makeConstraints { (make) in
             make.top.equalTo(addressTitleLabel)
