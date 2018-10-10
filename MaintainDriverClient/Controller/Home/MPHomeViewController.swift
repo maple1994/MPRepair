@@ -14,6 +14,7 @@ class MPHomeViewController: UIViewController {
         return MPUserModel.shared.isLogin
     }
     var isAnimationed: Bool = false
+    fileprivate var isFirstLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,11 +24,16 @@ class MPHomeViewController: UIViewController {
             present(nav, animated: isAnimationed, completion: nil)
         }
         setupUI()
+        updateIcon()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         slideMenuController()?.leftPanGesture?.isEnabled = true
+        if !isFirstLoad {
+            updateIcon()
+        }
+        isFirstLoad = false
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -83,18 +89,29 @@ class MPHomeViewController: UIViewController {
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
     }
     
+    fileprivate func updateIcon() {
+        iconImageView.mp_setImage(MPUserModel.shared.picUrl)
+    }
+    
     // MARK: - View
     fileprivate var scrollView: UIScrollView!
     fileprivate var gongZuoTaiVC: MPGongZuoTaiViewController!
     fileprivate var yiJieDanVC: MPYiJieDanViewController!
-    fileprivate lazy var userImageButton: MPImageButtonView = {
+    fileprivate lazy var userImageButton: UIControl = {
         let img = UIImage(named: "person")?.withRenderingMode(.alwaysOriginal)
-        let btn = MPImageButtonView(image: img, pos: .leftTop, imageW: 30, imageH: 30)
+        let btn = UIControl()
         btn.addTarget(self, action: #selector(MPHomeViewController.meAction), for: .touchUpInside)
-        btn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
-        btn.layer.cornerRadius = 15
+        btn.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
+        btn.layer.cornerRadius = 17.5
         btn.layer.masksToBounds = true
+        btn.addSubview(self.iconImageView)
+        self.iconImageView.image = img
+        self.iconImageView.frame = CGRect(x: 0, y: 0, width: 35, height: 35)
         return btn
+    }()
+    fileprivate lazy var iconImageView: UIImageView = {
+        let imgV = UIImageView()
+        return imgV
     }()
     fileprivate lazy var segCtr: UISegmentedControl = {
         let dic: [NSAttributedStringKey: Any] = [
