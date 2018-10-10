@@ -7,9 +7,10 @@
 //
 
 import UIKit
+import Kingfisher
 
 /// 专门为那些图片小，但是触摸区域要大的图片按钮设计的View
-class MPImageButtonView: UIControl {
+class MPImageButtonView: UIControl, KingfisherCompatible {
     var image: UIImage? {
         didSet {
             imageView.image = image

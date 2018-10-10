@@ -207,9 +207,10 @@ extension UIView {
 extension UIImageView {
     func mp_setImage(_ urlString: String) {
         let url = URL(string: urlString)
-        kf.setImage(with: url, placeholder: UIImage(named: "person"), options: nil, progressBlock: nil) { (img, _, _, _) in
+        let holder = UIImage(named: "person")?.withRenderingMode(.alwaysOriginal)
+        kf.setImage(with: url, placeholder: holder, options: nil, progressBlock: nil) { (img, _, _, _) in
             if img == nil {
-                self.image = UIImage(named: "person")
+                self.image = holder
             }
         }
     }

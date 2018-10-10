@@ -148,7 +148,6 @@ extension MPApiType: TargetType {
             .getYearCheckItemInfo,
             .getUserAgreement,
             .getOrderCertification,
-            .askOrderCertification,
             .getAlipayBindedAccount,
             .getBalance,
             .getAlipayBindedAccountInfo:
