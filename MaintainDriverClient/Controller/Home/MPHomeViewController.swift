@@ -37,7 +37,8 @@ class MPHomeViewController: UIViewController {
     
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.white
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "person"), style: .plain, target: self, action: #selector(MPHomeViewController.meAction))
+        navigationItem.leftBarButtonItem = UIBarButtonItem.init(customView: userImageButton)
+        
         navigationItem.titleView = segCtr
         segCtr.selectedSegmentIndex = 0
         
@@ -86,6 +87,15 @@ class MPHomeViewController: UIViewController {
     fileprivate var scrollView: UIScrollView!
     fileprivate var gongZuoTaiVC: MPGongZuoTaiViewController!
     fileprivate var yiJieDanVC: MPYiJieDanViewController!
+    fileprivate lazy var userImageButton: MPImageButtonView = {
+        let img = UIImage(named: "person")?.withRenderingMode(.alwaysOriginal)
+        let btn = MPImageButtonView(image: img, pos: .leftTop, imageW: 30, imageH: 30)
+        btn.addTarget(self, action: #selector(MPHomeViewController.meAction), for: .touchUpInside)
+        btn.frame = CGRect(x: 0, y: 0, width: 30, height: 30)
+        btn.layer.cornerRadius = 15
+        btn.layer.masksToBounds = true
+        return btn
+    }()
     fileprivate lazy var segCtr: UISegmentedControl = {
         let dic: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.systemFont(ofSize: 16)

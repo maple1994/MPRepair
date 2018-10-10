@@ -18,7 +18,9 @@ class MPTiXianViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setpuUI()
-        
+        if let account = UserDefaults.standard.object(forKey: MP_ALIPAY_ACCOUNT_KEY) as? String {
+            accountTextField.text = account
+        }
     }
     
     fileprivate func setpuUI() {
@@ -174,9 +176,6 @@ class MPTiXianViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
-            MPTipsView.showMsg("请收入合法的数字")
-        }
         guard let money = textField.mText.toDouble() else {
             MPTipsView.showMsg("请收入合法的数字")
             return
@@ -185,6 +184,7 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("请收入支付宝账号")
             return
         }
+        UserDefaults.standard.set(accountTextField.mText, forKey: MP_ALIPAY_ACCOUNT_KEY)
         MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: accountTextField.mText), success: { (json) in
             MPDialogView.showDialog("提现成功")
         }) { (_) in

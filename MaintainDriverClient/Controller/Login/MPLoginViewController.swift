@@ -23,11 +23,23 @@ class MPLoginViewController: UIViewController {
         }
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.enableAutoToolbar = true
+        readAccountInfo()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         view.endEditing(true)
+    }
+    
+    /// 读取用户账户信息
+    fileprivate func readAccountInfo() {
+        guard
+            let account = UserDefaults.standard.object(forKey: MP_USER_ACCOUNT_KEY) as? String,
+            let pwd = UserDefaults.standard.object(forKey: MP_USER_PWD_KEY) as? String else {
+                return
+        }
+        phoneTextField.text = account
+        pwdTextField.text = pwd
     }
     
     fileprivate func setupUI() {
@@ -57,10 +69,6 @@ class MPLoginViewController: UIViewController {
         pwdTextField = MPInputTextFiled()
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
-        #if DEBUG
-        phoneTextField.text = "18819457942"
-        pwdTextField.text = "123456"
-        #endif
         pwdTextField.isSecureTextEntry = true
         pwdTextField.leftIcon = UIImage(named: "pwd")
         loginButton = UIButton()
@@ -173,6 +181,9 @@ class MPLoginViewController: UIViewController {
             MPUserModel.shared.token = token
             MPUserModel.shared.expire = expire
             self.getUsetInfo()
+            UserDefaults.standard.set(self.phoneTextField.mText, forKey: MP_USER_ACCOUNT_KEY)
+            UserDefaults.standard.set(self.pwdTextField.mText, forKey: MP_USER_PWD_KEY)
+            UserDefaults.standard.synchronize()
         })
     }
     

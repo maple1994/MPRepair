@@ -52,6 +52,10 @@ class MPImageButtonView: UIControl {
             imageView.snp.makeConstraints { (make) in
                 make.top.trailing.equalToSuperview()
             }
+        case .leftTop:
+            imageView.snp.makeConstraints { (make) in
+                make.top.leading.equalToSuperview()
+            }
         }
     }
     
@@ -67,4 +71,6 @@ enum MPImageButtonPositionType {
     case center
     /// 右上
     case rightTop
+    /// 左上
+    case leftTop
 }
