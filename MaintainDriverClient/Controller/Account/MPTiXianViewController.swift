@@ -13,6 +13,11 @@ class MPTiXianViewController: UIViewController {
     /// 是否选中支付宝
     fileprivate var isSelAplipay: Bool = true
     fileprivate var account: String = ""
+    fileprivate var banlance: Double = MPUserModel.shared.balance ?? 0 {
+        didSet {
+            MPUserModel.shared.balance = banlance
+        }
+    }
     
     // MARK: -
     override func viewDidLoad() {
@@ -63,8 +68,8 @@ class MPTiXianViewController: UIViewController {
 //        control.addTarget(self, action: #selector(MPTiXianViewController.bindAccount), for: .touchUpInside)
         
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "提现金额", textColor: UIColor.mpDarkGray)
-        let moneyLabel = UILabel(font: UIFont.mpXSmallFont, text: nil, textColor: UIColor.mpLightGary)
-        moneyLabel.attributedText = getMoneyAttrStr(0.00)
+        moneyLabel = UILabel(font: UIFont.mpXSmallFont, text: nil, textColor: UIColor.mpLightGary)
+        moneyLabel.attributedText = getMoneyAttrStr(banlance)
         allTiXianBtn = UIButton()
         allTiXianBtn.setTitleColor(UIColor.navBlue, for: .normal)
         allTiXianBtn.setTitle("全部提现", for: .normal)
@@ -184,8 +189,14 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("请收入支付宝账号")
             return
         }
+        if banlance < money {
+            MPTipsView.showMsg("余额不足")
+            return
+        }
         UserDefaults.standard.set(accountTextField.mText, forKey: MP_ALIPAY_ACCOUNT_KEY)
         MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: accountTextField.mText), success: { (json) in
+            self.banlance -= money
+            self.moneyLabel.attributedText = self.getMoneyAttrStr(self.banlance)
             MPDialogView.showDialog("提现成功")
         }) { (_) in
 //            MPTipsView.showMsg("提现失败")
@@ -207,6 +218,7 @@ class MPTiXianViewController: UIViewController {
     @objc fileprivate func allTiXian() {
 //        MPApiType.tiXian(money: <#T##Double#>, via: <#T##String#>)
 //        MPNetword.requestJson(target: <#T##MPApiType#>, success: <#T##((AnyObject) -> Void)?##((AnyObject) -> Void)?##(AnyObject) -> Void#>, failure: <#T##((MoyaError) -> Void)?##((MoyaError) -> Void)?##(MoyaError) -> Void#>)
+        textField.text = "\(banlance)"
     }
     
     @objc fileprivate func bindAccount() {

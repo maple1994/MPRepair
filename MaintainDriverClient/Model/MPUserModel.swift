@@ -24,13 +24,19 @@ class MPUserModel: Codable {
     }
     // MARK: - Property
     static let shared = MPUserModel()
-    
+    /// 用户ID
     var userID: Int = 0
+    /// 用户名
     var userName: String = ""
+    /// 手机号码
     var phone: String = ""
+    /// token
     var token: String = "0"
+    /// 过期时间字符串
     var expire: String = ""
+    /// 头像url
     var picUrl: String = ""
+    /// 积分
     var point: Int = 0
     /// 是否过审
     var isPass: Bool = false
@@ -38,6 +44,8 @@ class MPUserModel: Codable {
     var isLogin: Bool {
         return token != "0"
     }
+    /// 账户余额
+    var balance: Double?
     fileprivate weak var timer: Timer?
     
     // MARK: - Method

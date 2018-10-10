@@ -13,11 +13,14 @@ class MPAccountViewController: UIViewController {
 
     fileprivate let CellID = "MPMingXiTableViewCell"
     fileprivate var mingXiModelArr: [MPMingXiModel]?
-    fileprivate var balance: Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         loadData()
     }
     
@@ -36,7 +39,7 @@ class MPAccountViewController: UIViewController {
         tbHeaderView.backgroundColor = UIColor.white
         
         let moneyTitleLabel = UILabel(font: UIFont.mpBigFont, text: "我的余额：", textColor: UIColor.fontBlack)
-        moneyLabel = UILabel(font: UIFont.mpBigFont, text: "¥10000.00", textColor: UIColor.priceRed)
+        moneyLabel = UILabel(font: UIFont.mpBigFont, text: "--", textColor: UIColor.priceRed)
         tiXianBtn = UIButton()
         tiXianBtn.setTitle("提现", for: .normal)
         tiXianBtn.titleLabel?.font = UIFont.mpNormalFont
@@ -79,9 +82,17 @@ class MPAccountViewController: UIViewController {
         }, fail: nil)
         MPNetword.requestJson(target: .getBalance, success: { json in
             if let data = json["data"] as? [String: Any] {
-                let money = toDouble(data["balance"])
-                self.balance = money
-                self.moneyLabel.text = "\(money)"
+                if let ban = data["balance"] {
+                    let money = toDouble(ban)
+                    self.moneyLabel.text = "￥\(money)"
+                    MPUserModel.shared.balance = money
+                }else {
+                    self.moneyLabel.text = "--"
+                    MPUserModel.shared.balance = nil
+                }
+            }else {
+                self.moneyLabel.text = "--"
+                MPUserModel.shared.balance = nil
             }
         })
     }
