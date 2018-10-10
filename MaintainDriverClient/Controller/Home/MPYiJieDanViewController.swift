@@ -20,7 +20,7 @@ class MPYiJieDanViewController: UIViewController {
 //        loadData()
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loginSucc), name: MP_LOGIN_NOTIFICATION, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_STEAL_ORDER_SUCC_NOTIFICATION, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPYiJieDanViewController.loadData), name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -47,6 +47,12 @@ class MPYiJieDanViewController: UIViewController {
     }
     
     @objc fileprivate func loadData() {
+        MPNetwordTool.getOrderList(type: "driver", finish: 1, succ: { (arr) in
+            self.modelArr = arr
+            self.tableView.reloadData()
+        }) {
+            
+        }
     }
     
     @objc fileprivate func loginSucc() {

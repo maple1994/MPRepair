@@ -115,9 +115,7 @@ class MPQuCheViewController2: UIViewController {
     
     @objc fileprivate func cancelOrder() {
         MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
-            MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
-                self.orderModel = model
-            }, fail: nil)
+            NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
             MPTipsView.showMsg("取消成功")
             self.navigationController?.popToRootViewController(animated: true)
         }) { (_) in

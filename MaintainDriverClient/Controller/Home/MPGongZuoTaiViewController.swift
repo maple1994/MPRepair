@@ -145,8 +145,7 @@ class MPGongZuoTaiViewController: UIViewController {
         MPNetword.requestJson(target: .grab(id: order.id), success: { (json) in
             view.endTimeCount()
             self.selectedModel = order
-            NotificationCenter.default.post(name: MP_STEAL_ORDER_SUCC_NOTIFICATION, object: nil)
-            self.loadData()
+            NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
         }) { (_) in
             self.selectedModel = nil
             view.endTimeCount()
@@ -325,21 +324,17 @@ extension MPGongZuoTaiViewController: MPListenSocketDelegate {
         guard let id1 = data["id"] else {
             return
         }
+        NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
         let id = toInt(id1)
         _ = MPNewOrderTipsView.show(title: "您有新的订单！", subTitle: "请即时处理!", delegate: self)
         MPNetword.requestJson(target: .getOrderInfo(id: id), success: { json in
-            guard let data = json["data"] as? [[String: Any]] else {
+            guard let data = json["data"] as? [String: Any] else {
                 MPPrint(json["data"])
                 return
             }
-            MPPrint(data)
-            var arr = [MPOrderModel]()
-            for dic in data {
-                if let model = MPOrderModel.toModel(dic) {
-                    arr.append(model)
-                }
+            if let model = MPOrderModel.toModel(data) {
+                self.selectedModel = model
             }
-            self.selectedModel = arr.first
         })
     }
     
