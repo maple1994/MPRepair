@@ -38,7 +38,7 @@ class MPCheckBoxOrderTableViewCell: UITableViewCell {
     
     fileprivate func setupUI() {
         checkBoxView = UIImageView()
-        checkBoxView.image = #imageLiteral(resourceName: "box_unselected")
+        checkBoxView.image = UIImage(named: "box_unselected")
         let orderTitleLabel = UILabel(font: smallFont, text: "订单编号：", textColor: UIColor.mpLightGary)
         orderIDLabel = UILabel(font: smallFont, text: "20180729123124", textColor: UIColor.mpLightGary)
         let line1 = MPUtils.createLine()

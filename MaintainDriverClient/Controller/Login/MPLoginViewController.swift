@@ -49,18 +49,20 @@ class MPLoginViewController: UIViewController {
         // 布局子内容
         let tfH: CGFloat = 44
         let margin: CGFloat = 35
-        logoView = UIImageView(image: #imageLiteral(resourceName: "logo"))
+        logoView = UIImageView(image: UIImage(named: "logo"))
         phoneTextField = MPInputTextFiled()
-        phoneTextField.text = "18819457942"
         phoneTextField.keyboardType = .numberPad
         phoneTextField.attributedPlaceholder = getAttributeText("请输入手机号")
-        phoneTextField.leftIcon = #imageLiteral(resourceName: "mobile")
+        phoneTextField.leftIcon = UIImage(named: "mobile")
         pwdTextField = MPInputTextFiled()
         pwdTextField.keyboardType = .asciiCapable
         pwdTextField.attributedPlaceholder = getAttributeText("请输入密码")
+        #if DEBUG
+        phoneTextField.text = "18819457942"
         pwdTextField.text = "123456"
+        #endif
         pwdTextField.isSecureTextEntry = true
-        pwdTextField.leftIcon = #imageLiteral(resourceName: "pwd")
+        pwdTextField.leftIcon = UIImage(named: "pwd")
         loginButton = UIButton()
         loginButton.setTitleColor(UIColor.white, for: .normal)
         loginButton.setTitle("登录", for: .normal)

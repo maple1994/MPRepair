@@ -89,7 +89,7 @@ class MPNewOrderTipsView: UIView {
         bgImageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        dismissButton = MPImageButtonView(image: #imageLiteral(resourceName: "close_dary"), pos: .rightTop, imageW: 16, imageH: 16)
+        dismissButton = MPImageButtonView(image: UIImage(named: "close_dary"), pos: .rightTop, imageW: 16, imageH: 16)
         dismissButton.addTarget(self, action: #selector(MPNewOrderTipsView.dismiss), for: .touchUpInside)
         let contentView = UIView()
         contentView.backgroundColor = UIColor.white

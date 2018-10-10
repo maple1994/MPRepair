@@ -70,7 +70,7 @@ class MPTiXianViewController: UIViewController {
         allTiXianBtn.addTarget(self, action: #selector(MPTiXianViewController.allTiXian), for: .touchUpInside)
         textField = MPUnderLineTextField()
         textField.lineColor = UIColor.colorWithHexString("#DCDCDC")
-        textField.keyboardType = .numberPad
+        textField.keyboardType = .decimalPad
         textField.placeholder = "请输入金额"
         textField.font = UIFont.mpBigFont
         textField.leftView = getLeftView()
@@ -188,7 +188,7 @@ class MPTiXianViewController: UIViewController {
         MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: accountTextField.mText), success: { (json) in
             MPDialogView.showDialog("提现成功")
         }) { (_) in
-            MPTipsView.showMsg("提现失败")
+//            MPTipsView.showMsg("提现失败")
         }
 //        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
 //            MPTipsView.showMsg("请收入合法的数字")
@@ -324,7 +324,7 @@ class MPTiXianToWeChatCell: UITableViewCell {
     
     fileprivate func setupUI() {
         iconImageView = UIImageView()
-        iconImageView.image = #imageLiteral(resourceName: "wechat")
+        iconImageView.image = UIImage(named: "wechat")
         tipLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: UIColor.fontBlack)
         let dic1: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font: UIFont.mpNormalFont,
@@ -341,7 +341,7 @@ class MPTiXianToWeChatCell: UITableViewCell {
         res.append(str2)
         tipLabel.attributedText = res
         checkBoxIconView = UIImageView()
-        checkBoxIconView.image = #imageLiteral(resourceName: "box_unselected")
+        checkBoxIconView.image = UIImage(named: "box_unselected")
         contentView.addSubview(iconImageView)
         contentView.addSubview(tipLabel)
         contentView.addSubview(checkBoxIconView)

@@ -57,7 +57,7 @@ class MPLeftMenuViewController: UIViewController {
         }
         
         userIconView = UIImageView()
-        userIconView.image = #imageLiteral(resourceName: "person")
+        userIconView.image = UIImage(named: "person")
         userIconView.isUserInteractionEnabled = true
         userIconView.setupCorner(35)
         userNameLabel = UILabel()
