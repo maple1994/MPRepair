@@ -14,10 +14,18 @@ class MPBingAccountViewController: UIViewController {
     fileprivate let editViewH: CGFloat = 60
     fileprivate var name: String = ""
     fileprivate var account: String = ""
-    fileprivate var callback: (() -> Void)?
+    /// 依次返回账号和真实姓名
+    fileprivate var callback: ((String, String) -> Void)?
     
-    init(callback: (() -> Void)?) {
+    init(account1: String?, name1: String?, callback: ((String, String) -> Void)?) {
         super.init(nibName: nil, bundle: nil)
+        self.callback = callback
+        if let a = account1 {
+            account = a
+        }
+        if let n = name1 {
+            name = n
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -125,21 +133,23 @@ class MPBingAccountViewController: UIViewController {
             MPTipsView.showMsg("请填写支付宝账号")
             return
         }
-        MPNetword.requestJson(target: .getAlipayBindedAccountInfo, success: { (json) in
-            guard let dic = json["data"] as? [String: Any] else {
-                self.endRefresh(false)
-                return
-            }
-            if let param = dic["params"] as? String {
-                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
-                    self.handAlipayResult(dic)
-                })
-            }else {
-                self.endRefresh(false)
-            }
-        }) { (_) in
-            self.endRefresh(false)
-        }
+        callback?(account, name)
+        navigationController?.popViewController(animated: true)
+//        MPNetword.requestJson(target: .getAlipayBindedAccountInfo, success: { (json) in
+//            guard let dic = json["data"] as? [String: Any] else {
+//                self.endRefresh(false)
+//                return
+//            }
+//            if let param = dic["params"] as? String {
+//                AlipaySDK.defaultService()?.auth_V2(withInfo: param, fromScheme: "commayidriverclient", callback: { (dic) in
+//                    self.handAlipayResult(dic)
+//                })
+//            }else {
+//                self.endRefresh(false)
+//            }
+//        }) { (_) in
+//            self.endRefresh(false)
+//        }
     }
     
     @objc fileprivate func receiveAlipayResult(noti: Notification) {
@@ -180,7 +190,6 @@ class MPBingAccountViewController: UIViewController {
     fileprivate func updateBindedAccount(authCode: String, appID: String) {
         MPNetword.requestJson(target: .updateAlipayAccount(alipayID: appID, authCode: authCode), success: { (_) in
             self.endRefresh(true)
-            self.callback?()
             self.navigationController?.popViewController(animated: true)
         }, failure: { (_) in
             self.endRefresh(false)

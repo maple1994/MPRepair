@@ -84,7 +84,7 @@ class MPAccountViewController: UIViewController {
             if let data = json["data"] as? [String: Any] {
                 if let ban = data["balance"] {
                     let money = toDouble(ban)
-                    self.moneyLabel.text = "￥\(money)"
+                    self.moneyLabel.text = String(format: "￥%.2f", money)
                     MPUserModel.shared.balance = money
                 }else {
                     self.moneyLabel.text = "--"

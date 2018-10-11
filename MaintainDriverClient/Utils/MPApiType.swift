@@ -31,7 +31,7 @@ enum MPApiType {
     /// 获取账户明细信息
     case getAccountInfo
     /// 明细操作信息-提现 via- alipay, weixin
-    case tiXian(money: Double, via: String, aliAccunt: String)
+    case tiXian(money: Double, via: String, aliAccunt: String, aliUserName: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
     /// finish: 0表示所有，1表示未完成，2表示已完成, 当type=driver的时候必填
     case getOrderList(type: String, finish: Int)
@@ -209,12 +209,12 @@ extension MPApiType: TargetType {
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .getAccountInfo, .getPicName:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
-        case let .tiXian(money, via, account):
+        case let .tiXian(money, via, account, user):
             var param = defaultParam
             param["money"] = money
             param["via"] = via
             param["alipay_account"] = account
-            param["name"] = "叶宏业"
+            param["name"] = user
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .getOrderList(type1, finish):
             var param = defaultParam

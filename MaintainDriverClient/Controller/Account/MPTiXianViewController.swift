@@ -13,6 +13,7 @@ class MPTiXianViewController: UIViewController {
     /// 是否选中支付宝
     fileprivate var isSelAplipay: Bool = true
     fileprivate var account: String = ""
+    fileprivate var acountUserName: String = ""
     fileprivate var banlance: Double = MPUserModel.shared.balance ?? 0 {
         didSet {
             MPUserModel.shared.balance = banlance
@@ -22,10 +23,13 @@ class MPTiXianViewController: UIViewController {
     // MARK: -
     override func viewDidLoad() {
         super.viewDidLoad()
-        setpuUI()
-        if let account = UserDefaults.standard.object(forKey: MP_ALIPAY_ACCOUNT_KEY) as? String {
-            accountTextField.text = account
+        if let account1 = UserDefaults.standard.object(forKey: MP_ALIPAY_ACCOUNT_KEY) as? String {
+            self.account = account1
         }
+        if let name = UserDefaults.standard.object(forKey: MP_ALIPAY_ACCOUNT_USER_KEY) as? String {
+            self.acountUserName = name
+        }
+        setpuUI()
     }
     
     fileprivate func setpuUI() {
@@ -59,13 +63,13 @@ class MPTiXianViewController: UIViewController {
         }
         let tbHeaderView = UIView()
         tbHeaderView.backgroundColor = UIColor.white
-        let label2 = UILabel(font: UIFont.mpSmallFont, text: "支付宝账号", textColor: UIColor.mpDarkGray)
-//        accountLabel = UILabel(font: UIFont.mpSmallFont, text: "请添加提现账号", textColor: UIColor.mpLightGary)
-//        let arrowLabel = UILabel(font: UIFont.mpSmallFont, text: ">", textColor: UIColor.mpDarkGray)
-//        let arrowLabel = UIImageView(image: UIImage(named: "right_arrow"))
+        let label2 = UILabel(font: UIFont.mpSmallFont, text: "提现账号", textColor: UIColor.mpDarkGray)
+        let text = account.isEmpty ? "请添加提现账号" : account
+        accountLabel = UILabel(font: UIFont.mpSmallFont, text: text, textColor: UIColor.mpLightGary)
+        let arrowLabel = UIImageView(image: UIImage(named: "right_arrow"))
         let blockLine = MPUtils.createLine(UIColor.viewBgColor)
-//        let control = UIControl()
-//        control.addTarget(self, action: #selector(MPTiXianViewController.bindAccount), for: .touchUpInside)
+        let control = UIControl()
+        control.addTarget(self, action: #selector(MPTiXianViewController.bindAccount), for: .touchUpInside)
         
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "提现金额", textColor: UIColor.mpDarkGray)
         moneyLabel = UILabel(font: UIFont.mpXSmallFont, text: nil, textColor: UIColor.mpLightGary)
@@ -84,43 +88,37 @@ class MPTiXianViewController: UIViewController {
         textField.leftViewMode = .always
         
         tbHeaderView.addSubview(label2)
-        tbHeaderView.addSubview(accountTextField)
-//        tbHeaderView.addSubview(arrowLabel)
-//        tbHeaderView.addSubview(accountLabel)
-//        tbHeaderView.addSubview(control)
+        tbHeaderView.addSubview(arrowLabel)
+        tbHeaderView.addSubview(accountLabel)
+        tbHeaderView.addSubview(control)
         tbHeaderView.addSubview(blockLine)
         tbHeaderView.addSubview(titleLabel)
         tbHeaderView.addSubview(textField)
         tbHeaderView.addSubview(moneyLabel)
         tbHeaderView.addSubview(allTiXianBtn)
-        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 230)
+        tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 175)
         label2.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
-            make.top.equalToSuperview().offset(15)
+            make.top.equalToSuperview()
+            make.height.equalTo(44)
         }
-        accountTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(label2.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(15)
-            make.width.equalTo(mp_screenW - 30)
-            make.height.equalTo(35)
+        control.snp.makeConstraints { (make) in
+            make.height.equalTo(44)
+            make.leading.equalTo(accountLabel)
+            make.top.trailing.equalToSuperview()
         }
-//        control.snp.makeConstraints { (make) in
-//            make.height.equalTo(44)
-//            make.leading.equalTo(accountLabel)
-//            make.top.trailing.equalToSuperview()
-//        }
-//        arrowLabel.snp.makeConstraints { (make) in
-//            make.trailing.equalToSuperview().offset(-15)
-//            make.centerY.equalTo(label2)
-//            make.width.equalTo(13)
-//            make.height.equalTo(13)
-//        }
-//        accountLabel.snp.makeConstraints { (make) in
-//            make.centerY.equalTo(label2)
-//            make.trailing.equalTo(arrowLabel.snp.leading).offset(-3)
-//        }
+        arrowLabel.snp.makeConstraints { (make) in
+            make.trailing.equalToSuperview().offset(-15)
+            make.centerY.equalTo(label2)
+            make.width.equalTo(13)
+            make.height.equalTo(13)
+        }
+        accountLabel.snp.makeConstraints { (make) in
+            make.centerY.equalTo(label2)
+            make.trailing.equalTo(arrowLabel.snp.leading).offset(-3)
+        }
         blockLine.snp.makeConstraints { (make) in
-            make.top.equalTo(accountTextField.snp.bottom).offset(10)
+            make.top.equalTo(label2.snp.bottom)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(6)
         }
@@ -185,7 +183,7 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("请收入合法的数字")
             return
         }
-        if accountTextField.mText.isEmpty {
+        if account.isEmpty {
             MPTipsView.showMsg("请收入支付宝账号")
             return
         }
@@ -193,37 +191,25 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("余额不足")
             return
         }
-        UserDefaults.standard.set(accountTextField.mText, forKey: MP_ALIPAY_ACCOUNT_KEY)
-        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: accountTextField.mText), success: { (json) in
+        UserDefaults.standard.set(account, forKey: MP_ALIPAY_ACCOUNT_KEY)
+        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: account, aliUserName: acountUserName), success: { (json) in
             self.banlance -= money
             self.moneyLabel.attributedText = self.getMoneyAttrStr(self.banlance)
             MPDialogView.showDialog("提现成功")
         }) { (_) in
 //            MPTipsView.showMsg("提现失败")
         }
-//        if !textField.mText.isMatchRegularExp("^[0-9]*$") {
-//            MPTipsView.showMsg("请收入合法的数字")
-//        }
-//        guard let money = textField.mText.toDouble() else {
-//            MPTipsView.showMsg("请收入合法的数字")
-//            return
-//        }
-//        MPNetword.requestJson(target: .tiXian(money: money, via: "alipay"), success: { (json) in
-//            MPTipsView.showMsg("提现成功")
-//        }) { (_) in
-//            MPTipsView.showMsg("提现失败")
-//        }
     }
     
     @objc fileprivate func allTiXian() {
-//        MPApiType.tiXian(money: <#T##Double#>, via: <#T##String#>)
-//        MPNetword.requestJson(target: <#T##MPApiType#>, success: <#T##((AnyObject) -> Void)?##((AnyObject) -> Void)?##(AnyObject) -> Void#>, failure: <#T##((MoyaError) -> Void)?##((MoyaError) -> Void)?##(MoyaError) -> Void#>)
-        textField.text = "\(banlance)"
+        textField.text = String(format: "%.2f", banlance)
     }
     
     @objc fileprivate func bindAccount() {
-        let vc = MPBingAccountViewController.init {
-            self.loadAccount()
+        let vc = MPBingAccountViewController.init(account1: account, name1: acountUserName) { (account1, accountUser) in
+            self.account = account1
+            self.acountUserName = accountUser
+            self.accountLabel.text = account1
         }
         navigationController?.pushViewController(vc, animated: true)
     }
@@ -242,12 +228,6 @@ class MPTiXianViewController: UIViewController {
     }
     
     // MARK: - View
-    fileprivate lazy var accountTextField: UITextField = {
-        let tf = MPUnderLineTextField()
-        tf.placeholder = "清输入支付宝账号"
-        tf.font = UIFont.mpNormalFont
-        return tf
-    }()
     fileprivate var accountLabel: UILabel!
     fileprivate var tableView: UITableView!
     fileprivate var tiXianBtn: UIButton!
