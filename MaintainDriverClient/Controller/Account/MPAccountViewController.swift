@@ -25,6 +25,7 @@ class MPAccountViewController: UIViewController {
     }
     
     fileprivate func setupUI() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem.init(title: "提现明细", style: .plain, target: self, action: #selector(MPAccountViewController.tiXianDetail))
         view.backgroundColor = UIColor.viewBgColor
         navigationItem.title = "我的账户"
         tableView = UITableView()
@@ -76,7 +77,7 @@ class MPAccountViewController: UIViewController {
     }
     
     fileprivate func loadData() {
-        MPNetwordTool.getAccountInfo(succ: { (arr) in
+        MPNetwordTool.getAccountInfo(method: 1, succ: { (arr) in
             self.mingXiModelArr = arr
             self.tableView.reloadData()
         }, fail: nil)
@@ -102,6 +103,11 @@ class MPAccountViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
+    @objc fileprivate func tiXianDetail() {
+        let vc = MPTiXianDetailViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - View
     fileprivate var tableView: UITableView!
     fileprivate var tiXianBtn: UIButton!
@@ -109,7 +115,7 @@ class MPAccountViewController: UIViewController {
     fileprivate lazy var mingXiView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.viewBgColor
-        let label = UILabel(font: UIFont.systemFont(ofSize: 16), text: "明细", textColor: UIColor.mpDarkGray)
+        let label = UILabel(font: UIFont.systemFont(ofSize: 16), text: "收入明细", textColor: UIColor.mpDarkGray)
         view.addSubview(label)
         label.snp.makeConstraints({ (make) in
             make.leading.equalToSuperview().offset(15)

@@ -13,8 +13,9 @@ struct MPNetwordTool {
     
     /// 获取账户明细信息
     ///
-    static func getAccountInfo(succ: @escaping ([MPMingXiModel]) -> Void, fail: (() -> Void)?) {
-        MPNetword.requestJson(target: .getAccountInfo, success: { (json) in
+    static func getAccountInfo(method: Int, succ: @escaping ([MPMingXiModel]) -> Void, fail: (() -> Void)?) {
+       
+        MPNetword.requestJson(target: .getAccountInfo(method: method), success: { (json) in
             guard let data = json["data"] as? [[String: Any]] else {
                 fail?()
                 return

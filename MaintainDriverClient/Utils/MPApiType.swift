@@ -28,8 +28,8 @@ enum MPApiType {
     case getUserInfo
     /// 修改用户信息
     case updateUserInfo(name: String?, pic: UIImage?)
-    /// 获取账户明细信息
-    case getAccountInfo
+    /// 获取账户明细信息 0-提现，1：收入
+    case getAccountInfo(method: Int)
     /// 明细操作信息-提现 via- alipay, weixin
     case tiXian(money: Double, via: String, aliAccunt: String, aliUserName: String)
     /// 查询订单列表信息，type-order：可以接的单，driver：已接订单
@@ -207,8 +207,12 @@ extension MPApiType: TargetType {
                 }
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case .getAccountInfo, .getPicName:
+        case .getPicName:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
+        case let .getAccountInfo(method):
+            var param = defaultParam
+            param["method"] = method
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .tiXian(money, via, account, user):
             var param = defaultParam
             param["money"] = money

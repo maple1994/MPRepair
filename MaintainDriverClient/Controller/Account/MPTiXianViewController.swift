@@ -259,10 +259,10 @@ extension MPTiXianViewController: UITableViewDelegate, UITableViewDataSource {
         return 6
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        isSelAplipay = !isSelAplipay
-        tableView.reloadData()
-    }
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        isSelAplipay = !isSelAplipay
+//        tableView.reloadData()
+//    }
 }
 
 class MPTiXianToWeChatCell: UITableViewCell {

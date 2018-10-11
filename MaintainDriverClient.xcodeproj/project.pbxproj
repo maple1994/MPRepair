@@ -29,6 +29,7 @@
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
 		F587C54F215A3A6100238B0B /* MPAuthorityTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */; };
+		F58A6772216EECFF00948A7A /* MPTiXianTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A6771216EECFF00948A7A /* MPTiXianTableViewCell.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
 		F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333A211700BA0075548A /* UITableView+FDTemplateLayoutCell.m */; };
 		F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333C211700BA0075548A /* UITableView+FDKeyedHeightCache.m */; };
@@ -76,6 +77,7 @@
 		F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */; };
 		F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */; };
 		F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC66215E1EF400617981 /* MPDialogView.swift */; };
+		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -137,6 +139,7 @@
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
 		F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAuthorityTipView.swift; sourceTree = "<group>"; };
+		F58A6771216EECFF00948A7A /* MPTiXianTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianTableViewCell.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
 		F5A63337211700BA0075548A /* UITableView+FDKeyedHeightCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDKeyedHeightCache.h"; sourceTree = "<group>"; };
 		F5A63338211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCellDebug.h"; sourceTree = "<group>"; };
@@ -195,6 +198,7 @@
 		F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheCCell.swift; sourceTree = "<group>"; };
 		F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPBingAccountViewController.swift; sourceTree = "<group>"; };
 		F5E7FC66215E1EF400617981 /* MPDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDialogView.swift; sourceTree = "<group>"; };
+		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -414,6 +418,7 @@
 				F5DF735A211A93E300B9F154 /* MPAccountViewController.swift */,
 				F5DF735B211A93E300B9F154 /* MPTiXianViewController.swift */,
 				F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */,
+				F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -485,6 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				F5DF7378211A94E400B9F154 /* MPMingXiTableViewCell.swift */,
+				F58A6771216EECFF00948A7A /* MPTiXianTableViewCell.swift */,
 			);
 			path = Account;
 			sourceTree = "<group>";
@@ -826,6 +832,7 @@
 				F5DF738E211A94E400B9F154 /* MPTitleView.swift in Sources */,
 				F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */,
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
+				F58A6772216EECFF00948A7A /* MPTiXianTableViewCell.swift in Sources */,
 				F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
@@ -843,6 +850,7 @@
 				F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */,
 				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
 				F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */,
+				F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */,
 				F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
