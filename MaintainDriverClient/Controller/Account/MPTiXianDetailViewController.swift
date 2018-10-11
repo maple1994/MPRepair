@@ -30,6 +30,9 @@ class MPTiXianDetailViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        if let ges = navigationController?.interactivePopGestureRecognizer {
+            tableView.panGestureRecognizer.require(toFail: ges)
+        }
     }
     
     fileprivate func loadData() {

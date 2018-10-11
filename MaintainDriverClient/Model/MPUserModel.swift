@@ -208,7 +208,7 @@ extension MPUserModel {
     }
     
     /// 清除数据
-    fileprivate func removeUserInfo() {
+    func removeUserInfo() {
         // 清空数据
         userID = 0
         userName = ""

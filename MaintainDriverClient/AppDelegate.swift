@@ -89,6 +89,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        // 杀死App时，移除用户信息，下次需要重新登录
+        MPUserModel.shared.removeUserInfo()
     }
 
 

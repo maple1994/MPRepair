@@ -411,13 +411,13 @@ struct MPNetword {
                 }
             }
         }
-        if MPUserModel.shared.checkIsExpire(target: target) {
-            MPPrint("\(target)-Token过期")
-            requestQueue.enqueue {
-                request(target: target, success: success, failure: failure)
-            }
-            return
-        }
+//        if MPUserModel.shared.checkIsExpire(target: target) {
+//            MPPrint("\(target)-Token过期")
+//            requestQueue.enqueue {
+//                request(target: target, success: success, failure: failure)
+//            }
+//            return
+//        }
         request(target: target, success: success, failure: failure)
     }
 }
