@@ -31,7 +31,7 @@ class MPQuCheViewController1: UIViewController {
         for i in 0...1 {
             let model = MPPhotoModel()
             if i == 0 {
-                model.title = "有效期内交的强险保单副本"
+                model.title = "证件信息"
             }else {
                 model.title = "车钥匙"
             }

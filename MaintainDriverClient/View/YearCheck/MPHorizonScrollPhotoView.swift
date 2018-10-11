@@ -98,7 +98,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
         photoView = MPImageButtonView(image: #imageLiteral(resourceName: "add_pic"), pos: .center, imageW: mp_picW, imageH: mp_noTitlePicH)
         photoView.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.pickPicture), for: .touchUpInside)
         photoView.mode = .scaleAspectFill
-        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "有效期内交的强险保单副本", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "证件信息", textColor: UIColor.mpDarkGray)
         contentView.addSubview(photoView)
         contentView.addSubview(removeButton)
         contentView.addSubview(titleLabel)
