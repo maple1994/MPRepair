@@ -13,7 +13,7 @@ class MPOrderTableViewCell: UITableViewCell {
     
     var orderModel: MPOrderModel = MPOrderModel() {
         didSet {
-            orderIDLabel.text = "\(orderModel.id)"
+            orderIDLabel.text = "\(orderModel.order_code)"
             carNameLabel.text = orderModel.car_brand
             JJCDLabel.text = orderModel.order_address
             NJDDLabel.text = orderModel.surveystation?.name

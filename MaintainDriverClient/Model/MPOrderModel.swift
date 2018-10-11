@@ -10,6 +10,8 @@ import UIKit
 
 /// 订单模型
 class MPOrderModel {
+    /// 订单编号
+    var order_code = ""
     /// 订单ID
     var id: Int = 0
     /// 创建时间
@@ -110,6 +112,7 @@ class MPOrderModel {
             return nil
         }
         let model = MPOrderModel()
+        model.order_code = toString(dic["order_code"])
         model.id = toInt(dic["id"])
         model.create_time = toString(dic["create_time"])
         model.update_time = toString(dic["update_time"])
