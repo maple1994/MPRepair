@@ -13,6 +13,7 @@ class MPYiJieDanViewController: UIViewController {
 
     fileprivate let CellID = "MPOrderTableViewCell_YiJieDan"
     fileprivate var modelArr: [MPOrderModel] = [MPOrderModel]()
+    fileprivate var isFirstLoad: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,7 +26,10 @@ class MPYiJieDanViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
+        if !isFirstLoad {
+            loadData()
+        }
+        isFirstLoad = false
     }
     
     deinit {
@@ -96,7 +100,7 @@ extension MPYiJieDanViewController: UITableViewDelegate, UITableViewDataSource {
         case .waitNianJian:
             vc = MPStartYearCheckViewController2(model: model)
         case .nianJianing:
-            vc = MPStartYearCheckViewController(model: model)
+            vc = MPOrderConfirmViewController(model: model)
         case .nianJianSucc:
             vc = MPCheckOutFinishViewController2(model: model)
         case .daoDaHuanChe, .yiHuanChe, .completed:

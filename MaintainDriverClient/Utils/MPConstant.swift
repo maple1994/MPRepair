@@ -58,6 +58,8 @@ let MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION = NSNotification.Name.init("MP_APP_RE
 let MP_refresh_ORDER_LIST_SUCC_NOTIFICATION = NSNotification.Name.init("MP_refresh_ORDER_LIST_SUCC_NOTIFICATION")
 /// 授权回调通知
 let MP_ALIPAY_RESULT_NOTIFICATION = NSNotification.Name.init("MP_ALIPAY_RESULT_NOTIFICATION")
+/// 首页滚动到已接单通知
+let MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION = NSNotification.Name.init("MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION")
 // MARK: - 提交图片的类别名称信息
 /// 取车图片-检车确认
 var get_confirm = "取车图片-检车确认"

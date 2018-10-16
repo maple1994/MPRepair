@@ -80,6 +80,7 @@ class MPStartYearCheckViewController: UIViewController {
         tableView2 = createTbView()
         tableView2.rowHeight = 135
         tableView3 = createTbView()
+        tableView3.tableFooterView = nil
         
         contentView.addSubview(tableView1)
         contentView.addSubview(tableView2)
@@ -164,10 +165,13 @@ class MPStartYearCheckViewController: UIViewController {
             let hud = MPTipsView.showLoadingView("上传中...")
             MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, itemIdArr: idArr, note: noteArr), success: { (_) in
                 hud?.hide(animated: true)
-                self.jump()
+                MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
+                    self.orderModel = model
+                }, fail: nil)
+                NotificationCenter.default.post(name: MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION, object: nil)
+                self.navigationController?.popToRootViewController(animated: true)
             }) { (_) in
                 hud?.hide(animated: true)
-//                MPTipsView.showMsg("上传失败，请重新再试")
             }
         }
 

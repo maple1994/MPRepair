@@ -25,6 +25,7 @@ class MPHomeViewController: UIViewController {
         }
         setupUI()
         updateIcon()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPHomeViewController.scrollToYiJieDan), name: MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -87,6 +88,13 @@ class MPHomeViewController: UIViewController {
     @objc fileprivate func segChange() {
         let offsetX: CGFloat = CGFloat(segCtr.selectedSegmentIndex) * mp_screenW
         scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: true)
+    }
+    
+    /// 滚动到已接单
+    @objc fileprivate func scrollToYiJieDan() {
+        segCtr.selectedSegmentIndex = 1
+        let offsetX: CGFloat = CGFloat(segCtr.selectedSegmentIndex) * mp_screenW
+        scrollView.setContentOffset(CGPoint(x: offsetX, y: 0), animated: false)
     }
     
     fileprivate func updateIcon() {

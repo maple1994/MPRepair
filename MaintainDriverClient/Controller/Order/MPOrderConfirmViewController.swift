@@ -30,7 +30,9 @@ class MPOrderConfirmViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.viewBgColor
         navigationItem.title = "确认信息"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPOrderConfirmViewController.cancelOrder))
+        if orderModel.state.rawValue <= 2 {
+            navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消订单", style: .plain, target: self, action: #selector(MPOrderConfirmViewController.cancelOrder))
+        }
         let dic: [NSAttributedStringKey: Any] = [
             NSAttributedStringKey.font : UIFont.mpSmallFont
         ]
@@ -61,6 +63,17 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
+        
+        if orderModel.state == .nianJianing {
+            if orderModel.survey_state == .failure {
+                MPTipsView.showMsg("客户尚未支付")
+                return
+            }else if orderModel.survey_state == .success || orderModel.survey_state == .recheck {
+                let vc = MPStartYearCheckViewController(model: orderModel)
+                navigationController?.pushViewController(vc, animated: true)
+                return
+            }
+        }
         let vc = MPQuCheViewController2(model: orderModel)
         navigationController?.pushViewController(vc, animated: true)
     }
