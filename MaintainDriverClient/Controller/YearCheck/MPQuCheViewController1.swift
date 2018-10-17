@@ -79,13 +79,11 @@ class MPQuCheViewController1: UIViewController {
     }
     
     @objc fileprivate func cancelOrder() {
-        MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
-            NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
+        MPNetwordTool.cancelOrder(orderModel, succ: {
             MPTipsView.showMsg("取消成功")
             self.navigationController?.popToRootViewController(animated: true)
-        }) { (_) in
-            MPTipsView.showMsg("取消失败")
-        }
+            NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
+        }, fail: nil)
     }
     
     /// 检测imgArr图片是否为空，判断是否可以上传

@@ -137,6 +137,17 @@ struct MPNetwordTool {
             }
         }
     }
+    
+    /// 去掉订单
+    static func cancelOrder(_ orderModel: MPOrderModel, succ: @escaping () -> Void, fail: (() -> Void)?) {
+        MPCancelTipsView.showTipsView {
+            MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+                succ()
+            }) { (_) in
+                fail?()
+            }
+        }
+    }
 }
 
 
