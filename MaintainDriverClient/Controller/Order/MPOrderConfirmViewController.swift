@@ -85,7 +85,7 @@ class MPOrderConfirmViewController: UIViewController {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 4
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,19 +96,18 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
             return 2
         case 2:
             return 3
+        case 3:
+            return 2
         default:
             return 0
         }
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: CellID) as? MPOrderConfrimTableViewCell
-        if cell == nil {
-            cell = MPOrderConfrimTableViewCell(style: .default, reuseIdentifier: CellID)
-        }
-        let isHiddenLine = (indexPath.section == 0 && indexPath.row == 4) ||
-        (indexPath.section == 1 && indexPath.row == 1) ||
-        (indexPath.section == 2 && indexPath.row == 2)
+    fileprivate func setupCell(_ indexPath: IndexPath, _ cell: MPOrderConfrimTableViewCell?) {
+        let isHiddenLine = (indexPath.section == 0 && indexPath.row == 3) ||
+            (indexPath.section == 1 && indexPath.row == 1) ||
+            (indexPath.section == 2 && indexPath.row == 2) ||
+            (indexPath.section == 3 && indexPath.row == 1)
         switch indexPath.section {
         case 0:
             switch indexPath.row {
@@ -143,15 +142,42 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
             default:
                 break
             }
+        case 3:
+            switch indexPath.row {
+            case 0:
+                cell?.set(title: "套餐类型", value: orderModel.combo?.name ?? "", isHiddenLine: isHiddenLine)
+            case 1:
+                cell?.set(title: "套餐明细", value: orderModel.combo?.detail ?? "", isHiddenLine: isHiddenLine)
+            default:
+                break
+            }
         default:
             break
         }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPOrderConfrimTableViewCell") as? MPOrderConfrimTableViewCell
+        if cell == nil {
+            cell = MPOrderConfrimTableViewCell(style: .default, reuseIdentifier: "MPOrderConfrimTableViewCell")
+        }
+        if indexPath.section == 3 && indexPath.row == 1 {
+            cell = MPOrderConfrimTableViewCell(style: .default, reuseIdentifier: "MP_COMBO")
+        }
+        setupCell(indexPath, cell)
         return cell!
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (_) in
+        let height = tableView.fd_heightForCell(withIdentifier: CellID, configuration: { (cell1) in
+            let cell = cell1 as? MPOrderConfrimTableViewCell
+            self.setupCell(indexPath, cell)
         })
+        if height < 45 {
+            return 49.5
+        }else {
+            return height
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -163,6 +189,8 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
             title = "联系方式"
         case 2:
             title = "取车信息"
+        case 3:
+            title = "套餐信息"
         default:
             break
         }

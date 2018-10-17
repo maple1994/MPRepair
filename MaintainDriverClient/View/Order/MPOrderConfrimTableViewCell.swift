@@ -17,18 +17,27 @@ class MPOrderConfrimTableViewCell: UITableViewCell {
         line.isHidden = isHiddenLine
     }
     
+    fileprivate var titleColor: UIColor = UIColor.mpDarkGray
+    fileprivate var titleFont: UIFont = UIFont.mpNormalFont
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        if let ID = reuseIdentifier {
+            if ID == "MP_COMBO" {
+                titleColor = UIColor.mpLightGary
+                titleFont = UIFont.mpSmallFont
+            }
+        }
         setupUI()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("")
     }
     
     fileprivate func setupUI() {
-        titleLabel = UILabel(font: UIFont.mpNormalFont, text: "车主姓名", textColor: UIColor.mpDarkGray)
-        valueLabel = UILabel(font: UIFont.mpNormalFont, text: "王思迪", textColor: UIColor.mpDarkGray)
+        titleLabel = UILabel(font: titleFont, text: "车主姓名", textColor: titleColor)
+        valueLabel = UILabel(font: titleFont, text: "王思迪", textColor: titleColor)
         valueLabel.numberOfLines = 0
         line = MPUtils.createLine()
         
@@ -42,7 +51,7 @@ class MPOrderConfrimTableViewCell: UITableViewCell {
         valueLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(120)
             make.trailing.equalToSuperview().offset(-15)
-            make.top.equalToSuperview().offset(15)
+            make.top.equalTo(titleLabel)
             make.bottom.equalToSuperview().offset(-15)
         }
         line.snp.makeConstraints { (make) in
@@ -73,15 +82,16 @@ class MPTitleSectionHeaderView: UITableViewHeaderFooterView {
         fatalError("")
     }
     fileprivate func setupUI() {
-        backgroundColor = UIColor.viewBgColor
+        contentView.backgroundColor = UIColor.viewBgColor
         titleLabel = UILabel(font: UIFont.mpSmallFont, text: "明细", textColor: UIColor.mpDarkGray)
-        addSubview(titleLabel)
+        contentView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints({ (make) in
             make.leading.equalToSuperview().offset(15)
             make.centerY.equalToSuperview().offset(5)
         })
     }
     fileprivate var titleLabel: UILabel!
+    
 }
 
 

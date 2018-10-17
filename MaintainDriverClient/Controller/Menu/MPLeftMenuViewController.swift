@@ -64,20 +64,27 @@ class MPLeftMenuViewController: UIViewController {
         userNameLabel.font = UIFont.mpBigFont
         userNameLabel.textColor = UIColor.white
         userNameLabel.text = "未登录"
+        startView = MPStartView()
+        startView.setSelectedCount(4)
         let tbHeaderView = UIView()
         tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 150)
         tbHeaderView.backgroundColor = UIColor.navBlue
         tbHeaderView.addSubview(userIconView)
         tbHeaderView.addSubview(userNameLabel)
+        tbHeaderView.addSubview(startView)
         
         userIconView.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalToSuperview().offset(35)
+            make.leading.equalToSuperview().offset(34)
+            make.top.equalToSuperview().offset(40)
             make.width.height.equalTo(70)
         }
         userNameLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(userIconView.snp.bottom).offset(5)
+            make.leading.equalTo(userIconView.snp.trailing).offset(12)
+            make.top.equalToSuperview().offset(50)
+        }
+        startView.snp.makeConstraints { (make) in
+            make.leading.equalTo(userNameLabel)
+            make.top.equalTo(userNameLabel.snp.bottom).offset(18)
         }
         tableView.tableHeaderView = tbHeaderView
         
@@ -115,6 +122,7 @@ class MPLeftMenuViewController: UIViewController {
     fileprivate var tableView: UITableView!
     fileprivate var userIconView: UIImageView!
     fileprivate var userNameLabel: UILabel!
+    fileprivate var startView: MPStartView!
 }
 
 extension MPLeftMenuViewController: TZImagePickerControllerDelegate {
@@ -162,8 +170,63 @@ extension MPLeftMenuViewController: UITableViewDelegate, UITableViewDataSource {
             break
         }
     }
-
 }
+
+/// 显示星星的View
+class MPStartView: UIView {
+    
+    /// 设置显示的星星
+    func setSelectedCount(_ count: Int) {
+        for (index, view) in imageArr.enumerated() {
+            if index < count {
+                view.image = UIImage(named: "start_sel")
+            }else {
+                view.image = UIImage(named: "start")
+            }
+        }
+    }
+    
+    fileprivate var imageArr: [UIImageView]
+    
+    init() {
+        imageArr = [UIImageView]()
+        super.init(frame: CGRect.zero)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    fileprivate func setupUI() {
+        for _ in 0..<5 {
+            let imgV = UIImageView()
+            imgV.image = UIImage(named: "start_sel")
+            imageArr.append(imgV)
+            addSubview(imgV)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        let margin: CGFloat = 7
+        let wh: CGFloat = 9
+        for (index, view) in imageArr.enumerated() {
+            let x: CGFloat = CGFloat(index) * (wh + margin)
+            view.frame = CGRect(x: x, y: 0, width: wh, height: wh)
+        }
+    }
+    
+}
+
+
+
+
+
+
+
+
+
 
 
 
