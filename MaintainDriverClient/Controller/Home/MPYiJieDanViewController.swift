@@ -44,6 +44,7 @@ class MPYiJieDanViewController: UIViewController {
         tableView.dataSource = self
         tableView.separatorStyle = .none
         tableView.backgroundColor = UIColor.viewBgColor
+        tableView.estimatedRowHeight = 0
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
