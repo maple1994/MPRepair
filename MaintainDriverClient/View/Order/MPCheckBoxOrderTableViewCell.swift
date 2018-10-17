@@ -14,7 +14,7 @@ class MPCheckBoxOrderTableViewCell: UITableViewCell {
     var orderModel: MPOrderModel? {
         didSet {
             let sel = orderModel?.isSelected ?? false
-            checkBoxView.image = sel ? #imageLiteral(resourceName: "box_selected") : #imageLiteral(resourceName: "box_unselected")
+            checkBoxView.image = sel ? UIImage(named: "box_selected") : UIImage(named: "box_unselected")
         }
     }
     

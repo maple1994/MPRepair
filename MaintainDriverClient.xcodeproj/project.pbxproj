@@ -78,6 +78,7 @@
 		F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */; };
 		F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC66215E1EF400617981 /* MPDialogView.swift */; };
 		F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */; };
+		F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */; };
 		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -200,6 +201,7 @@
 		F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPBingAccountViewController.swift; sourceTree = "<group>"; };
 		F5E7FC66215E1EF400617981 /* MPDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDialogView.swift; sourceTree = "<group>"; };
 		F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCancelTipsView.swift; sourceTree = "<group>"; };
+		F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSelectItemView.swift; sourceTree = "<group>"; };
 		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -525,6 +527,7 @@
 				F5DF7382211A94E400B9F154 /* MPYearCheckTitleView.swift */,
 				F5DF7383211A94E400B9F154 /* MPHorizonScrollPhotoView.swift */,
 				F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */,
+				F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */,
 			);
 			path = YearCheck;
 			sourceTree = "<group>";
@@ -857,6 +860,7 @@
 				F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
+				F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,
 				F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */,
 				F5DF7393211A94E400B9F154 /* MPFooterConfirmView.swift in Sources */,

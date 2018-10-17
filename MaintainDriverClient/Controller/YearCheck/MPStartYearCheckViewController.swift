@@ -10,13 +10,11 @@ import UIKit
 
 /// 开始年检
 class MPStartYearCheckViewController: UIViewController {
-
+    /// 年检已过图片数组
     fileprivate var confirmPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-//    fileprivate var cheDengPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-//    fileprivate var paiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
-//    fileprivate var waiQiPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
+    /// 年检未过图片数组
+    fileprivate var failedPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var orderModel: MPOrderModel
-    fileprivate var itemArr: [MPComboItemModel]?
     
     // MARK: - Method
     init(model: MPOrderModel) {
@@ -32,17 +30,17 @@ class MPStartYearCheckViewController: UIViewController {
         super.viewDidLoad()
         for i in 0...1 {
             let model = MPPhotoModel()
+            let model1 = MPPhotoModel()
             if i == 0 {
                 model.title = "证件信息"
+                model1.title = "证件信息"
             }else {
                 model.title = "车钥匙"
+                model1.title = "车钥匙"
             }
             confirmPhotoArr.append(model)
+            failedPhotoArr.append(model1)
         }
-        MPNetwordTool.getYearCheckInfo(succ: { (arr) in
-            self.itemArr = arr
-            self.tableView2.reloadData()
-        }, fail: nil)
         setupUI()
     }
     
@@ -92,6 +90,43 @@ class MPStartYearCheckViewController: UIViewController {
             make.height.equalTo(tableView1)
             make.width.equalTo(mp_screenW)
         }
+        let confrimButton = UIButton()
+        confrimButton.setTitle("确认提交", for: .normal)
+        confrimButton.backgroundColor = UIColor.navBlue
+        confrimButton.setTitleColor(UIColor.white, for: .normal)
+        confrimButton.addTarget(self, action: #selector(MPStartYearCheckViewController.confirm), for: .touchUpInside)
+        confrimButton.setupCorner(5)
+        contentView.addSubview(confrimButton)
+        confrimButton.snp.makeConstraints { (make) in
+            make.centerX.equalTo(tableView1)
+            make.bottom.equalToSuperview().offset(-50)
+            make.height.equalTo(40)
+            make.width.equalTo(160)
+        }
+        let btn1 = UIButton()
+        btn1.setTitle("选择项目", for: .normal)
+        btn1.setTitleColor(UIColor.navBlue, for: .normal)
+        btn1.setupBorder(width: 1, borderColor: UIColor.navBlue)
+        btn1.setupCorner(5)
+        btn1.addTarget(self, action: #selector(MPStartYearCheckViewController.selectItem), for: .touchUpInside)
+        let btn2 = UIButton()
+        btn2.setTitle("确认提交", for: .normal)
+        btn2.setTitleColor(UIColor.white, for: .normal)
+        btn2.backgroundColor = UIColor.navBlue
+        btn2.setupCorner(5)
+        btn2.addTarget(self, action: #selector(MPStartYearCheckViewController.failConfirm), for: .touchUpInside)
+        contentView.addSubview(btn1)
+        contentView.addSubview(btn2)
+        btn1.snp.makeConstraints { (make) in
+            make.leading.equalTo(tableView2).offset(18)
+            make.bottom.equalToSuperview().offset(-50)
+            make.height.equalTo(40)
+        }
+        btn2.snp.makeConstraints { (make) in
+            make.trailing.equalTo(tableView2).offset(-18)
+            make.bottom.width.height.equalTo(btn1)
+            make.leading.equalTo(btn1.snp.trailing).offset(15)
+        }
     }
     
     fileprivate func createTbView() -> UITableView {
@@ -100,7 +135,6 @@ class MPStartYearCheckViewController: UIViewController {
         tb.separatorStyle = .none
         tb.delegate = self
         tb.dataSource = self
-        tb.tableFooterView = MPFooterConfirmView(title: "确认提交", target: self, action: #selector(MPStartYearCheckViewController.confirm))
         return tb
     }
     
@@ -139,32 +173,41 @@ class MPStartYearCheckViewController: UIViewController {
 //                MPTipsView.showMsg("上传失败，请重新再试")
             }
         }else {
-            var idArr = [Int]()
-            guard let arr = itemArr else {
-                return
-            }
-            for item in arr {
-                for model in item.photoArr {
-                    if let img = model.image {
-                        picArr.append(img)
-                        idArr.append(item.id)
-                        noteArr.append(item.name)
-                    }
-                }
-            }
-            let hud = MPTipsView.showLoadingView("上传中...")
-            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, itemIdArr: idArr, note: noteArr), success: { (_) in
-                hud?.hide(animated: true)
-                MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
-                    self.orderModel = model
-                }, fail: nil)
-                NotificationCenter.default.post(name: MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION, object: nil)
-                self.navigationController?.popToRootViewController(animated: true)
-            }) { (_) in
-                hud?.hide(animated: true)
-            }
+//            var idArr = [Int]()
+//            guard let arr = itemArr else {
+//                return
+//            }
+//            for item in arr {
+//                for model in item.photoArr {
+//                    if let img = model.image {
+//                        picArr.append(img)
+//                        idArr.append(item.id)
+//                        noteArr.append(item.name)
+//                    }
+//                }
+//            }
+//            let hud = MPTipsView.showLoadingView("上传中...")
+//            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, itemIdArr: idArr, note: noteArr), success: { (_) in
+//                hud?.hide(animated: true)
+//                MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
+//                    self.orderModel = model
+//                }, fail: nil)
+//                NotificationCenter.default.post(name: MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION, object: nil)
+//                self.navigationController?.popToRootViewController(animated: true)
+//            }) { (_) in
+//                hud?.hide(animated: true)
+//            }
         }
-
+    }
+    
+    /// 选择项目
+    @objc fileprivate func selectItem() {
+        MPPrint("选择项目")
+    }
+    
+    /// 年检未过确认提交
+    @objc fileprivate func failConfirm() {
+        MPPrint("年检未过确认提交")
     }
     
     fileprivate func jump() {
@@ -182,6 +225,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var tableView1: UITableView!
     fileprivate var tableView2: UITableView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmPhotoArr, isShowTitle: true)
+    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: failedPhotoArr, isShowTitle: true)
     fileprivate var feekbackView: MPFeedbackView?
 }
 
@@ -190,7 +234,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return 1
         }else {
-            return itemArr?.count ?? 0
+            return 1
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -213,11 +257,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return MPTitleSectionHeaderView(title: survey_upload, reuseIdentifier: nil)
         }else {
-            if let name = itemArr?.get(section)?.name {
-                return MPTitleSectionHeaderView(title: name, reuseIdentifier: nil)
-            }else {
-                return nil
-            }
+            return MPTitleSectionHeaderView(title: "上传图片", reuseIdentifier: nil)
         }
     }
     
@@ -233,11 +273,7 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return horizontalPhotoView
         }else  {
-            if let arr = itemArr?.get(section)?.photoArr {
-                return MPHorizonScrollPhotoView(modelArr: arr, isShowTitle: true)
-            }else{
-                return nil
-            }
+            return horizontalPhotoView2
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
