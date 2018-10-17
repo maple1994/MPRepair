@@ -77,6 +77,7 @@
 		F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */; };
 		F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */; };
 		F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E7FC66215E1EF400617981 /* MPDialogView.swift */; };
+		F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */; };
 		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -198,6 +199,7 @@
 		F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheCCell.swift; sourceTree = "<group>"; };
 		F5E7FC64215DD95D00617981 /* MPBingAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPBingAccountViewController.swift; sourceTree = "<group>"; };
 		F5E7FC66215E1EF400617981 /* MPDialogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDialogView.swift; sourceTree = "<group>"; };
+		F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCancelTipsView.swift; sourceTree = "<group>"; };
 		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -553,6 +555,7 @@
 				F5DF739C211AE9F000B9F154 /* MPImageButtonView.swift */,
 				F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */,
 				F5E7FC66215E1EF400617981 /* MPDialogView.swift */,
+				F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */,
 			);
 			path = Other;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
+				F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F5DF7390211A94E400B9F154 /* MPFeedbackView.swift in Sources */,
 				F5A6331B2116DA530075548A /* MPUtils.swift in Sources */,

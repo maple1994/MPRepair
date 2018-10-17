@@ -26,7 +26,6 @@ class MPGongZuoTaiViewController: UIViewController {
     
     /// 下车
     func xiaCheAction() {
-        listenButton.isHidden = true
         stealButton.isHidden = true
         chuCheButton.isHidden = false
         MPOrderSocketManager.shared.disconnet()
@@ -78,13 +77,7 @@ class MPGongZuoTaiViewController: UIViewController {
         stealButton.addTarget(self, action: #selector(MPGongZuoTaiViewController.stealAction), for: .touchUpInside)
         stealButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         stealButton.backgroundColor = UIColor.white
-        listenButton = UIButton()
-        listenButton.setTitle("听单", for: .normal)
-        listenButton.setTitleColor(UIColor.navBlue, for: .normal)
-        listenButton.setupCorner(5)
-        listenButton.setupBorder(borderColor: UIColor.navBlue)
-        listenButton.addTarget(self, action: #selector(MPGongZuoTaiViewController.listenAction), for: .touchUpInside)
-        listenButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+
         chuCheButton = UIButton()
         chuCheButton.setTitle("出车", for: .normal)
         chuCheButton.setTitleColor(UIColor.white, for: .normal)
@@ -94,40 +87,21 @@ class MPGongZuoTaiViewController: UIViewController {
         chuCheButton.titleLabel?.font = UIFont.systemFont(ofSize: 18)
         
         view.addSubview(stealButton)
-        view.addSubview(listenButton)
         view.addSubview(chuCheButton)
         stealButton.snp.makeConstraints { (make) in
-            make.leading.equalToSuperview().offset(15)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(160)
             make.bottom.equalToSuperview().offset(-30)
-            make.height.equalTo(44)
-        }
-        listenButton.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview().offset(-15)
-            make.leading.equalTo(stealButton.snp.trailing).offset(15)
-            make.width.equalTo(stealButton)
-            make.bottom.equalTo(stealButton)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
         chuCheButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.width.equalTo(stealButton)
             make.bottom.equalTo(stealButton)
-            make.height.equalTo(44)
+            make.height.equalTo(40)
         }
-        listenButton.isHidden = true
         stealButton.isHidden = true
         chuCheButton.isHidden = false
-    }
-    
-    fileprivate func setupListenButton(isSelected: Bool) {
-        if isSelected {
-            listenButton.setTitle("取消听单", for: .normal)
-            listenButton.setTitleColor(UIColor.white, for: .normal)
-            listenButton.backgroundColor = UIColor.navBlue
-        }else {listenButton.setTitle("听单", for: .normal)
-            listenButton.setTitleColor(UIColor.navBlue, for: .normal)
-            listenButton.backgroundColor = UIColor.white
-        }
     }
     
     @objc fileprivate func loadData() {
@@ -150,18 +124,6 @@ class MPGongZuoTaiViewController: UIViewController {
             self.selectedModel = nil
             view.endTimeCount()
             view.set(title: "抢单失败!", subTitle: "请重新再试!")
-        }
-    }
-    
-    @objc fileprivate func listenAction() {
-        let isListen = !listenButton.isSelected
-        if isListen {
-           tipsView = MPTipsView.showLoadingView("请求听单...")
-            MPListenSocketManager.shared.connect(socketDelegate: self)
-        }else {
-            listenButton.isSelected = false
-            setupListenButton(isSelected: listenButton.isSelected)
-            MPListenSocketManager.shared.disconnet()
         }
     }
     
@@ -194,8 +156,6 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var tableView: UITableView!
     /// 抢单
     fileprivate var stealButton: UIButton!
-    /// 听单
-    fileprivate var listenButton: UIButton!
     /// 出车
     fileprivate var chuCheButton: UIButton!
 }
@@ -245,7 +205,6 @@ extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
         MPPrint("抢单列表的Socket-连接成功")
         tipsView?.hide(animated: true)
         delegate?.gongZuoTaiDidSelectChuChe()
-        listenButton.isHidden = false
         stealButton.isHidden = false
         chuCheButton.isHidden = true
     }
@@ -286,60 +245,3 @@ extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
     }
 }
 
-// MARK: - MPListenSocketDelegate 听单Socket回调
-extension MPGongZuoTaiViewController: MPListenSocketDelegate {
-    /// 连接成功
-    func listenSocketDidConnect() {
-        MPPrint("听单的Socket-连接成功")
-        tipsView?.hide(animated: true)
-        listenButton.isSelected = true
-        setupListenButton(isSelected: true)
-    }
-    
-    /// 连接失败
-    func listenSocketDidDisconnect(error: Error?) {
-        listenButton.isSelected = false
-        setupListenButton(isSelected: false)
-        // CloseCode.normal(1000)为正常断开
-        if let wsError = error as? WSError {
-            if wsError.code != Int(CloseCode.normal.rawValue) {
-                MPPrint("听单的Socket-连接失败-\(error?.localizedDescription)")
-                tipsView?.label.text = "听单失败，请重新再试"
-                tipsView?.hide(animated: true, afterDelay: 1)
-            }else {
-                MPPrint("听单的Socket-断开连接")
-            }
-        }
-    }
-    
-    /// 收到socket msg
-    func listenSocketDidReceiveMessage(text: String) {
-        MPPrint("听单的Socket-text-\(text)")
-        guard let json = text.toJson() else {
-            return
-        }
-        guard let data = json["data"] as? [String: Any] else {
-            return
-        }
-        guard let id1 = data["id"] else {
-            return
-        }
-        NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
-        let id = toInt(id1)
-        _ = MPNewOrderTipsView.show(title: "您有新的订单！", subTitle: "请即时处理!", delegate: self)
-        MPNetword.requestJson(target: .getOrderInfo(id: id), success: { json in
-            guard let data = json["data"] as? [String: Any] else {
-                MPPrint(json["data"])
-                return
-            }
-            if let model = MPOrderModel.toModel(data) {
-                self.selectedModel = model
-            }
-        })
-    }
-    
-    /// 收到socket data
-    func listenSocketDidReceiveData(data: Data) {
-        MPPrint("听单的Socket-data-\(data.count)")
-    }
-}
