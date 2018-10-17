@@ -182,6 +182,7 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         var title = ""
+        var header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "MPTitleSectionHeaderView") as? MPTitleSectionHeaderView
         switch section {
         case 0:
             title = "客户信息"
@@ -194,7 +195,11 @@ extension MPOrderConfirmViewController: UITableViewDelegate, UITableViewDataSour
         default:
             break
         }
-        return MPTitleSectionHeaderView(title: title, reuseIdentifier: nil)
+        if header == nil {
+            header = MPTitleSectionHeaderView(title: title, reuseIdentifier: "MPTitleSectionHeaderView")
+        }
+        header?.title = title
+        return header
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

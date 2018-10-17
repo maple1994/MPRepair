@@ -70,6 +70,12 @@ class MPOrderConfrimTableViewCell: UITableViewCell {
 
 /// 显示title，背景色为灰色的sectionHeader
 class MPTitleSectionHeaderView: UITableViewHeaderFooterView {
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
     convenience init(title: String?, reuseIdentifier: String?) {
         self.init(reuseIdentifier: reuseIdentifier)
         titleLabel.text = title

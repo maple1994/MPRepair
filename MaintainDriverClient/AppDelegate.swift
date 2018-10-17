@@ -51,10 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     fileprivate func setupNormalUIStyle() {
         UITableViewCell.appearance().selectionStyle = .none
         if #available(iOS 11, *) {
-//            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
-//            UITableView.appearance().estimatedRowHeight = 0
-//            UITableView.appearance().estimatedSectionHeaderHeight = 0
-//            UITableView.appearance().estimatedSectionFooterHeight = 0
+            UIScrollView.appearance().contentInsetAdjustmentBehavior = .never
+            UITableView.appearance().estimatedSectionHeaderHeight = 0
+            UITableView.appearance().estimatedSectionFooterHeight = 0
         }
     }
     
