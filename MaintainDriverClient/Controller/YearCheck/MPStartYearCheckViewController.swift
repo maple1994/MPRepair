@@ -42,7 +42,6 @@ class MPStartYearCheckViewController: UIViewController {
         MPNetwordTool.getYearCheckInfo(succ: { (arr) in
             self.itemArr = arr
             self.tableView2.reloadData()
-            self.tableView3.reloadData()
         }, fail: nil)
         setupUI()
     }
@@ -57,7 +56,7 @@ class MPStartYearCheckViewController: UIViewController {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(105)
         }
-        titleView = MPTitleView(titleArr: ["年检已过", "年检未过", "服务反馈"])
+        titleView = MPTitleView(titleArr: ["年检已过", "年检未过"])
         titleView.delegate = self
         view.addSubview(titleView)
         titleView.snp.makeConstraints { (make) in
@@ -79,27 +78,18 @@ class MPStartYearCheckViewController: UIViewController {
         tableView1 = createTbView()
         tableView2 = createTbView()
         tableView2.rowHeight = 135
-        tableView3 = createTbView()
-        tableView3.tableFooterView = nil
         
         contentView.addSubview(tableView1)
         contentView.addSubview(tableView2)
-        contentView.addSubview(tableView3)
         tableView1.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
             make.width.equalTo(mp_screenW)
         }
         tableView2.snp.makeConstraints { (make) in
-            make.top.bottom.equalToSuperview()
+            make.top.bottom.trailing.equalToSuperview()
             make.leading.equalTo(tableView1.snp.trailing)
-            make.trailing.equalTo(tableView3.snp.leading)
-            make.height.equalTo(view).offset(-160)
-            make.width.equalTo(mp_screenW)
-        }
-        tableView3.snp.makeConstraints { (make) in
-            make.trailing.top.bottom.equalToSuperview()
-            make.height.equalTo(view).offset(-160)
+            make.height.equalTo(tableView1)
             make.width.equalTo(mp_screenW)
         }
     }
@@ -191,7 +181,6 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var contentView: UIScrollView!
     fileprivate var tableView1: UITableView!
     fileprivate var tableView2: UITableView!
-    fileprivate var tableView3: UITableView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmPhotoArr, isShowTitle: true)
     fileprivate var feekbackView: MPFeedbackView?
 }
@@ -200,21 +189,12 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
     func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == tableView1 {
             return 1
-        }else if tableView == tableView2 {
-            return itemArr?.count ?? 0
         }else {
-            let count = itemArr?.count ?? 0
-            if count > 0 {
-                return 1
-            }else {
-                return 0
-            }
+            return itemArr?.count ?? 0
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableView1 {
-            return 0
-        }else if tableView == tableView2 {
             return 0
         }else {
             return 0
@@ -232,55 +212,39 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if tableView == tableView1 {
             return MPTitleSectionHeaderView(title: survey_upload, reuseIdentifier: nil)
-        }else if tableView == tableView2 {
+        }else {
             if let name = itemArr?.get(section)?.name {
                 return MPTitleSectionHeaderView(title: name, reuseIdentifier: nil)
             }else {
                 return nil
             }
-        }else {
-            if let arr = itemArr{
-                if feekbackView == nil {
-                    feekbackView = MPFeedbackView(itemArr: arr)
-                }
-                return feekbackView
-            }else {
-                return nil
-            }
         }
-        
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if tableView == tableView1 {
             return 50
-        }else if tableView == tableView2 {
+        }else  {
             return 50
-        }else {
-            return MPFeedbackView.getHeight(itemArr)
         }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if tableView == tableView1 {
             return horizontalPhotoView
-        }else if tableView == tableView2 {
+        }else  {
             if let arr = itemArr?.get(section)?.photoArr {
                 return MPHorizonScrollPhotoView(modelArr: arr, isShowTitle: true)
             }else{
                 return nil
             }
-        }else {
-            return nil
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if tableView == tableView1 {
             return mp_hasTitlePicH + mp_vSpace + 10
-        }else if tableView == tableView2 {
-            return mp_hasTitlePicH + mp_vSpace + 10
         }else {
-            return 0.01
+            return mp_hasTitlePicH + mp_vSpace + 10
         }
     }
 }

@@ -127,15 +127,13 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func pickPicture() {
-        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
-        vc.showSelectBtn = false
-        vc.allowPreview = false
-        vc.preferredLanguage = "zh-Hans"
-        vc.naviBgColor = UIColor.navBlue
-        vc.allowTakeVideo = false
-        vc.allowPickingVideo = false
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.modalPresentationStyle = .fullScreen
+        picker.cameraCaptureMode = .photo
+        picker.delegate = self
         let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)?.topViewController
-        nav?.present(vc, animated: true, completion: nil)
+        nav?.present(picker, animated: true, completion: nil)
     }
     
     var removeButton: MPImageButtonView!
@@ -143,14 +141,14 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     var titleLabel: UILabel!
 }
 
-extension MPHorizonScrollPhotoItemCell: TZImagePickerControllerDelegate {
-    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        guard let image = photos.first else {
-            return
+extension MPHorizonScrollPhotoItemCell: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            model?.image = image
+            photoView.image = image
+            removeButton.isHidden = false
         }
-        model?.image = image
-        photoView.image = image
-        removeButton.isHidden = false
     }
 }
 
