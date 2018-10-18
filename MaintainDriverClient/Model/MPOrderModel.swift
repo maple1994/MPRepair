@@ -268,7 +268,7 @@ class MPComboItemModel {
         model.update_time = toString(dic["update_time"])
         model.name = toString(dic["name"])
         model.detail = toString(dic["detail"])
-        model.price = toDouble(dic["price"])
+//        model.price = toDouble(dic["price"])
         return model
     }
 }

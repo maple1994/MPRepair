@@ -15,6 +15,10 @@ class MPStartYearCheckViewController: UIViewController {
     /// 年检未过图片数组
     fileprivate var failedPhotoArr: [MPPhotoModel] = [MPPhotoModel]()
     fileprivate var orderModel: MPOrderModel
+    /// 年检检查项
+    fileprivate var itemArr: [MPComboItemModel] = [MPComboItemModel]()
+    /// 选择的检查项
+    fileprivate var selectedItemArr: [MPComboItemModel]?
     
     // MARK: - Method
     init(model: MPOrderModel) {
@@ -42,6 +46,7 @@ class MPStartYearCheckViewController: UIViewController {
             failedPhotoArr.append(model1)
         }
         setupUI()
+        loadItemData()
     }
     
     fileprivate func setupUI() {
@@ -75,7 +80,7 @@ class MPStartYearCheckViewController: UIViewController {
 
         tableView1 = createTbView()
         tableView2 = createTbView()
-        tableView2.rowHeight = 135
+        tableView2.rowHeight = 44
         
         contentView.addSubview(tableView1)
         contentView.addSubview(tableView2)
@@ -148,6 +153,15 @@ class MPStartYearCheckViewController: UIViewController {
         return true
     }
     
+    /// 加载检查项
+    fileprivate func loadItemData() {
+        MPNetwordTool.getYearCheckInfo(succ: { (arr) in
+            self.itemArr = arr
+        }) {
+            
+        }
+    }
+    
     @objc fileprivate func confirm() {
         var picArr = [UIImage]()
         var typeArr = [String]()
@@ -202,7 +216,11 @@ class MPStartYearCheckViewController: UIViewController {
     
     /// 选择项目
     @objc fileprivate func selectItem() {
-        MPPrint("选择项目")
+        let selectItemView = MPSelectItemView.init(itemArr: itemArr) { [weak self] (selectedArr) in
+            self?.selectedItemArr = selectedArr
+            self?.tableView2.reloadData()
+        }
+        selectItemView.show()
     }
     
     /// 年检未过确认提交
@@ -234,22 +252,32 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return 1
         }else {
-            return 1
+            let count = selectedItemArr?.count ?? 0
+            if count == 0 {
+                return 1
+            }else {
+                return 2
+            }
         }
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == tableView1 {
             return 0
         }else {
-            return 0
+            if section == 0 {
+                return 0
+            }else {
+                return selectedItemArr?.count ?? 0
+            }
         }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "MPTwoPhotoTableViewCell") as? MPTwoPhotoTableViewCell
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPShowItemTableViewCell") as? MPShowItemTableViewCell
         if cell == nil {
-            cell = MPTwoPhotoTableViewCell(style: .default, reuseIdentifier: "MPTwoPhotoTableViewCell")
+            cell = MPShowItemTableViewCell(style: .default, reuseIdentifier: "MPShowItemTableViewCell")
         }
+        cell?.itemModel = selectedItemArr?[indexPath.row]
         return cell!
     }
     
@@ -257,7 +285,11 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return MPTitleSectionHeaderView(title: survey_upload, reuseIdentifier: nil)
         }else {
-            return MPTitleSectionHeaderView(title: "上传图片", reuseIdentifier: nil)
+            if section == 0 {
+                return MPTitleSectionHeaderView(title: "上传图片", reuseIdentifier: nil)
+            }else {
+                return MPTitleSectionHeaderView(title: "年检未过项", reuseIdentifier: nil)
+            }
         }
     }
     
@@ -273,14 +305,22 @@ extension MPStartYearCheckViewController: UITableViewDelegate, UITableViewDataSo
         if tableView == tableView1 {
             return horizontalPhotoView
         }else  {
-            return horizontalPhotoView2
+            if section == 0 {
+                return horizontalPhotoView2
+            }else {
+                return nil
+            }
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if tableView == tableView1 {
             return mp_hasTitlePicH + mp_vSpace + 10
         }else {
-            return mp_hasTitlePicH + mp_vSpace + 10
+            if section == 0 {
+                return mp_hasTitlePicH + mp_vSpace + 10
+            }else {
+                return 0.01
+            }
         }
     }
 }

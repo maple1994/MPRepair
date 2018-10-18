@@ -41,10 +41,12 @@ class MPSelectItemView: UIView {
     /// 否则用selectedItemList
     fileprivate var isEdting: Bool = true
     fileprivate var selectedItemList: [MPComboItemModel] = [MPComboItemModel]()
+    fileprivate var confirmBlock: (([MPComboItemModel]) -> Void)?
     
-    init(itemArr: [MPComboItemModel]) {
+    init(itemArr: [MPComboItemModel], callback: (([MPComboItemModel]) -> Void)?) {
         itemList = itemArr
         super.init(frame: CGRect.zero)
+        confirmBlock = callback
         setupUI()
         NotificationCenter.default.addObserver(self, selector: #selector(MPSelectItemView.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPSelectItemView.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -211,7 +213,8 @@ class MPSelectItemView: UIView {
         if isEdting {
             setupSelectedItem()
         }else {
-            
+            confirmBlock?(selectedItemList)
+            hide()
         }
     }
     

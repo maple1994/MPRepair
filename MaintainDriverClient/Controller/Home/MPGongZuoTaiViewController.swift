@@ -127,45 +127,29 @@ class MPGongZuoTaiViewController: UIViewController {
         }
     }
     
-    fileprivate func createItem(_ text: String) -> MPComboItemModel{
-        let item = MPComboItemModel()
-        item.name = text
-        return item
-    }
-    
     @objc fileprivate func chuCheAction() {
-        var itemArr = [MPComboItemModel]()
-        itemArr.append(createItem("排气"))
-        itemArr.append(createItem("外观"))
-        itemArr.append(createItem("车灯"))
-        itemArr.append(createItem("制动"))
-        itemArr.append(createItem("底盘"))
-        itemArr.append(createItem("侧滑"))
-        itemArr.append(createItem("喇叭"))
-        let selectItemView = MPSelectItemView.init(itemArr: itemArr)
-        selectItemView.show()
-//        func showTipsView(_ isShowFailed: Bool) {
-//            let view = MPAuthorityTipView()
-//            view.showFailView = isShowFailed
-//            view.frame = UIScreen.main.bounds
-//            UIApplication.shared.keyWindow?.addSubview(view)
-//        }
-//        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
-//            if let data = json["data"] as? [String: Any] {
-//                let state = toInt(data["state"])
-//                if state == 0 {
-//                    // 未审核
-//                    showTipsView(true)
-//                }else if state == 1 {
-//                    // 正在审核
-//                    showTipsView(false)
-//                }else {
-//                    // 审核成功
-//                    self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
-//                    MPOrderSocketManager.shared.connect(socketDelegate: self)
-//                }
-//            }
-//        })
+        func showTipsView(_ isShowFailed: Bool) {
+            let view = MPAuthorityTipView()
+            view.showFailView = isShowFailed
+            view.frame = UIScreen.main.bounds
+            UIApplication.shared.keyWindow?.addSubview(view)
+        }
+        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
+            if let data = json["data"] as? [String: Any] {
+                let state = toInt(data["state"])
+                if state == 0 {
+                    // 未审核
+                    showTipsView(true)
+                }else if state == 1 {
+                    // 正在审核
+                    showTipsView(false)
+                }else {
+                    // 审核成功
+                    self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
+                    MPOrderSocketManager.shared.connect(socketDelegate: self)
+                }
+            }
+        })
     }
     
     // MARK: - View
