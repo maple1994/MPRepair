@@ -37,6 +37,10 @@ class MPSelectItemView: UIView {
     
     fileprivate let editViewH: CGFloat = 60
     fileprivate var itemList: [MPComboItemModel]
+    /// 是否处于编辑中...，此时数据源用itemList
+    /// 否则用selectedItemList
+    fileprivate var isEdting: Bool = true
+    fileprivate var selectedItemList: [MPComboItemModel] = [MPComboItemModel]()
     
     init(itemArr: [MPComboItemModel]) {
         itemList = itemArr
@@ -123,7 +127,7 @@ class MPSelectItemView: UIView {
     
     fileprivate func setupContentView() {
         let titleLabel = UILabel(font: UIFont.mpNormalFont, text: "年检未过项", textColor: UIColor.black)
-        let editBtn = UIButton()
+        editBtn = UIButton()
         editBtn.setTitleColor(UIColor.navBlue, for: .normal)
         editBtn.setTitle("完成", for: .normal)
         editBtn.titleLabel?.font = UIFont.mpSmallFont
@@ -173,7 +177,13 @@ class MPSelectItemView: UIView {
     
     // MARK: - Action
     @objc fileprivate func updateOrComplete() {
-        
+        if isEdting {
+            setupSelectedItem()
+        }else {
+            editBtn.setTitle("完成", for: .normal)
+            isEdting = true
+            tableView.reloadData()
+        }
     }
     
     @objc fileprivate func dismissAction() {
@@ -181,7 +191,35 @@ class MPSelectItemView: UIView {
     }
     
     @objc fileprivate func confirmAction() {
-        
+        if isEdting {
+            setupSelectedItem()
+        }else {
+            
+        }
+    }
+    
+    fileprivate func setupSelectedItem() {
+        selectedItemList = [MPComboItemModel]()
+        for item in itemList {
+            if item.isSelected && item.price == 0 {
+                MPTipsView.showMsg("请输入金额")
+                return
+            }
+            if item.isSelected && item.price != 0 {
+                let model = MPComboItemModel()
+                model.name = item.name
+                model.price = item.price
+                model.isSelected = true
+                selectedItemList.append(model)
+            }
+        }
+        if selectedItemList.count == 0 {
+            MPTipsView.showMsg("请选择年检项")
+            return
+        }
+        editBtn.setTitle("编辑", for: .normal)
+        isEdting = false
+        tableView.reloadData()
     }
     
     @objc fileprivate func removeEditView() {
@@ -190,6 +228,7 @@ class MPSelectItemView: UIView {
     }
     
     // MARK: - View
+    fileprivate var editBtn: UIButton!
     fileprivate var contentView: UIView!
     fileprivate var bgView: UIControl!
     fileprivate var tableView: UITableView!
@@ -210,16 +249,31 @@ class MPSelectItemView: UIView {
 // MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPSelectItemView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemList.count
+        if isEdting {
+            return itemList.count
+        }else {
+            return selectedItemList.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "MPSelectCell") as? MPSelectCell
-        if cell == nil {
-            cell = MPSelectCell(reuseIdentifier: "MPSelectCell", isShowCheckBox: true)
+        var model: MPComboItemModel? = nil
+        var isShowCheckBox: Bool = true
+        if isEdting {
+            model = itemList[indexPath.row]
+            isShowCheckBox = true
+        }else {
+            model = selectedItemList[indexPath.row]
+            isShowCheckBox = false
         }
-        cell?.itemModel = itemList[indexPath.row]
-        cell?.delegate = self
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPSelectCell\(isShowCheckBox)") as? MPSelectCell
+        if cell == nil {
+            cell = MPSelectCell(reuseIdentifier: "MPSelectCell\(isShowCheckBox)", isShowCheckBox: isShowCheckBox)
+        }
+        cell?.itemModel = model
+        if isEdting {
+            cell?.delegate = self
+        }
         return cell!
     }
     
@@ -252,18 +306,24 @@ class MPSelectCell: UITableViewCell {
     var itemModel: MPComboItemModel? {
         didSet {
             nameLabel.text = itemModel?.name
-            let money = itemModel?.price ?? 0
-            if money == 0 {
-                moneyLabel.text = "请输入金额"
+            if isShowCheckBox {
+                let money = itemModel?.price ?? 0
+                if money == 0 {
+                    moneyLabel.text = "请输入金额"
+                }else {
+                    moneyLabel.text = String(format: "%.2f", money)
+                }
+                let isSelected = itemModel?.isSelected ?? false
+                if isSelected {
+                    checkBoxView?.image = UIImage(named: "box_selected")
+                }else {
+                    checkBoxView?.image = UIImage(named: "box_unselected")
+                }
             }else {
-                moneyLabel.text = String(format: "%.2f", money)
+                let money = itemModel?.price ?? 0
+                moneyLabel.text = "￥\(money)"
             }
-            let isSelected = itemModel?.isSelected ?? false
-            if isSelected {
-                checkBoxView?.image = UIImage(named: "box_selected")
-            }else {
-                checkBoxView?.image = UIImage(named: "box_unselected")
-            }
+            
         }
     }
     
@@ -280,31 +340,30 @@ class MPSelectCell: UITableViewCell {
     }
     
     fileprivate func setupUI() {
-        if isShowCheckBox {
-            checkBoxView = UIImageView()
-            checkBoxView?.image = UIImage(named: "box_unselected")
-        }
         nameLabel = UILabel(font: UIFont.mpSmallFont, text: "排气", textColor: UIColor.black)
+        if isShowCheckBox {
+            setupCheckBoxStyle()
+        }else {
+            setupNoCheckBoxStyle()
+        }
+    }
+    
+    fileprivate func setupCheckBoxStyle() {
+        checkBoxView = UIImageView()
+        checkBoxView?.image = UIImage(named: "box_unselected")
         moneyLabel = UILabel(font: UIFont.mpSmallFont, text: "请输入金额", textColor: UIColor.mpLightGary)
         contentView.addSubview(nameLabel)
-        if isShowCheckBox {
-            contentView.addSubview(checkBoxView!)
-            checkBoxView?.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview()
-                make.leading.equalToSuperview().offset(25)
-                make.width.height.equalTo(18)
-            }
-            nameLabel.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview()
-                make.leading.equalTo(checkBoxView!.snp.trailing).offset(10)
-            }
-        }else {
-            nameLabel.snp.makeConstraints { (make) in
-                make.centerY.equalToSuperview()
-                make.leading.equalToSuperview().offset(25)
-            }
-        }
+        contentView.addSubview(checkBoxView!)
         contentView.addSubview(moneyLabel)
+        checkBoxView?.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(25)
+            make.width.height.equalTo(18)
+        }
+        nameLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(checkBoxView!.snp.trailing).offset(10)
+        }
         moneyLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().offset(-10)
@@ -315,6 +374,21 @@ class MPSelectCell: UITableViewCell {
         control.snp.makeConstraints { (make) in
             make.top.trailing.bottom.equalToSuperview()
             make.width.equalTo(120)
+        }
+    }
+    
+    fileprivate func setupNoCheckBoxStyle() {
+        moneyLabel = UILabel(font: UIFont.mpSmallFont, text: "￥500", textColor: UIColor.red)
+        contentView.addSubview(nameLabel)
+        contentView.addSubview(moneyLabel)
+        nameLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(25)
+        }
+        
+        moneyLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().offset(-10)
         }
     }
     
