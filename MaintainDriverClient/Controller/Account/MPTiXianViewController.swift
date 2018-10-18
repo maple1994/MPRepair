@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 /// 提现界面
 class MPTiXianViewController: UIViewController {
@@ -30,6 +31,11 @@ class MPTiXianViewController: UIViewController {
             self.acountUserName = name
         }
         setpuUI()
+        IQKeyboardManager.shared.enableAutoToolbar = false
+    }
+    
+    deinit {
+        IQKeyboardManager.shared.enableAutoToolbar = true
     }
     
     fileprivate func setpuUI() {
@@ -81,7 +87,8 @@ class MPTiXianViewController: UIViewController {
         allTiXianBtn.addTarget(self, action: #selector(MPTiXianViewController.allTiXian), for: .touchUpInside)
         textField = MPUnderLineTextField()
         textField.lineColor = UIColor.colorWithHexString("#DCDCDC")
-        textField.keyboardType = .decimalPad
+//        textField.keyboardType = .decimalPad
+        textField.inputView = WLDecimalKeyboard()
         textField.placeholder = "请输入金额"
         textField.font = UIFont.mpBigFont
         textField.leftView = getLeftView()
