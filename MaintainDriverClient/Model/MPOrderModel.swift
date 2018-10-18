@@ -244,6 +244,8 @@ class MPComboItemModel {
     var name: String = ""
     var detail: String = ""
     var price: Double = 0
+    /// 是否选中
+    var isSelected: Bool = false
     lazy var photoArr: [MPPhotoModel] = {
         var arr = [MPPhotoModel]()
         let item1 = MPPhotoModel()

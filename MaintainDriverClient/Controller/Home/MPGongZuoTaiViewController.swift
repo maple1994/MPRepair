@@ -127,8 +127,22 @@ class MPGongZuoTaiViewController: UIViewController {
         }
     }
     
+    fileprivate func createItem(_ text: String) -> MPComboItemModel{
+        let item = MPComboItemModel()
+        item.name = text
+        return item
+    }
+    
     @objc fileprivate func chuCheAction() {
-        let selectItemView = MPSelectItemView()
+        var itemArr = [MPComboItemModel]()
+        itemArr.append(createItem("排气"))
+        itemArr.append(createItem("外观"))
+        itemArr.append(createItem("车灯"))
+        itemArr.append(createItem("制动"))
+        itemArr.append(createItem("底盘"))
+        itemArr.append(createItem("侧滑"))
+        itemArr.append(createItem("喇叭"))
+        let selectItemView = MPSelectItemView.init(itemArr: itemArr)
         selectItemView.show()
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()

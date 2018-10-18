@@ -22,6 +22,10 @@ class MPEditView: UIView {
         editView.resignFirstResponder()
     }
     
+    func setKeyBoardType(_ type: UIKeyboardType) {
+        editView.keyboardType = type
+    }
+    
     fileprivate var callBack: ((String) -> Void)?
     
     init() {

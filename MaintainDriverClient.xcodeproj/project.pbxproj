@@ -16,6 +16,10 @@
 		F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */; };
 		F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */; };
 		F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */; };
+		F515A0BE21789845004330C9 /* UITextField+RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F515A0B821789844004330C9 /* UITextField+RYNumberKeyboard.m */; };
+		F515A0BF21789845004330C9 /* RYNumbeKeyboard.bundle in Resources */ = {isa = PBXBuildFile; fileRef = F515A0BA21789844004330C9 /* RYNumbeKeyboard.bundle */; };
+		F515A0C021789845004330C9 /* RYNumberKeyboard.xib in Resources */ = {isa = PBXBuildFile; fileRef = F515A0BB21789844004330C9 /* RYNumberKeyboard.xib */; };
+		F515A0C121789845004330C9 /* RYNumberKeyboard.m in Sources */ = {isa = PBXBuildFile; fileRef = F515A0BD21789844004330C9 /* RYNumberKeyboard.m */; };
 		F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */; };
 		F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F51E90282136E9D700ED1B44 /* MPUserModel.swift */; };
 		F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */; };
@@ -128,6 +132,12 @@
 		F50D4DED21185668006C50C7 /* MPQuCheViewController1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController1.swift; sourceTree = "<group>"; };
 		F50D4DEF2118567D006C50C7 /* MPQuCheViewController2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPQuCheViewController2.swift; sourceTree = "<group>"; };
 		F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPMingXiModel.swift; sourceTree = "<group>"; };
+		F515A0B821789844004330C9 /* UITextField+RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UITextField+RYNumberKeyboard.m"; sourceTree = "<group>"; };
+		F515A0B921789844004330C9 /* RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RYNumberKeyboard.h; sourceTree = "<group>"; };
+		F515A0BA21789844004330C9 /* RYNumbeKeyboard.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = RYNumbeKeyboard.bundle; sourceTree = "<group>"; };
+		F515A0BB21789844004330C9 /* RYNumberKeyboard.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RYNumberKeyboard.xib; sourceTree = "<group>"; };
+		F515A0BC21789844004330C9 /* UITextField+RYNumberKeyboard.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITextField+RYNumberKeyboard.h"; sourceTree = "<group>"; };
+		F515A0BD21789844004330C9 /* RYNumberKeyboard.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RYNumberKeyboard.m; sourceTree = "<group>"; };
 		F51E9026213668F500ED1B44 /* MPNetwordActivityPlugin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordActivityPlugin.swift; sourceTree = "<group>"; };
 		F51E90282136E9D700ED1B44 /* MPUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserModel.swift; sourceTree = "<group>"; };
 		F52A5811211974520054B90D /* MPStartYearCheckViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPStartYearCheckViewController.swift; sourceTree = "<group>"; };
@@ -279,9 +289,23 @@
 			path = YearCheck;
 			sourceTree = "<group>";
 		};
+		F515A0B721789844004330C9 /* RYNumberkeyboard */ = {
+			isa = PBXGroup;
+			children = (
+				F515A0B821789844004330C9 /* UITextField+RYNumberKeyboard.m */,
+				F515A0B921789844004330C9 /* RYNumberKeyboard.h */,
+				F515A0BA21789844004330C9 /* RYNumbeKeyboard.bundle */,
+				F515A0BB21789844004330C9 /* RYNumberKeyboard.xib */,
+				F515A0BC21789844004330C9 /* UITextField+RYNumberKeyboard.h */,
+				F515A0BD21789844004330C9 /* RYNumberKeyboard.m */,
+			);
+			path = RYNumberkeyboard;
+			sourceTree = "<group>";
+		};
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				F515A0B721789844004330C9 /* RYNumberkeyboard */,
 				F5031F9821218EAD00329BC0 /* NetworkLoggerPlugin.swift */,
 				F5A6331A2116DA530075548A /* MPUtils.swift */,
 				F5A6334A211728520075548A /* Extension.swift */,
@@ -682,7 +706,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F515A0C021789845004330C9 /* RYNumberKeyboard.xib in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
+				F515A0BF21789845004330C9 /* RYNumbeKeyboard.bundle in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -858,6 +884,7 @@
 				F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */,
 				F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */,
 				F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */,
+				F515A0BE21789845004330C9 /* UITextField+RYNumberKeyboard.m in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */,
@@ -865,6 +892,7 @@
 				F52A581A211993700054B90D /* MPCheckOutFinishViewController1.swift in Sources */,
 				F5DF7393211A94E400B9F154 /* MPFooterConfirmView.swift in Sources */,
 				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
+				F515A0C121789845004330C9 /* RYNumberKeyboard.m in Sources */,
 				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,

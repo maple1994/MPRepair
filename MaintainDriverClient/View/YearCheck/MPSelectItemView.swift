@@ -35,9 +35,19 @@ class MPSelectItemView: UIView {
         }
     }
     
-    init() {
+    fileprivate let editViewH: CGFloat = 60
+    fileprivate var itemList: [MPComboItemModel]
+    
+    init(itemArr: [MPComboItemModel]) {
+        itemList = itemArr
         super.init(frame: CGRect.zero)
         setupUI()
+        NotificationCenter.default.addObserver(self, selector: #selector(MPSelectItemView.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MPSelectItemView.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -76,6 +86,39 @@ class MPSelectItemView: UIView {
             make.height.equalTo(10)
         }
         setupContentView()
+        addSubview(editBgView)
+        addSubview(editView)
+        editView.snp.makeConstraints { (make) in
+            make.top.equalTo(self.snp.bottom)
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(editViewH)
+        }
+        editBgView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    @objc func keyboardShow(noti: Notification) {
+        guard let info = noti.userInfo else {
+            return
+        }
+        editBgView.isHidden = false
+        if let duration = info["UIKeyboardAnimationDurationUserInfoKey"] as? Double,
+            let keyboardFrame = info["UIKeyboardFrameEndUserInfoKey"] as? CGRect {
+            let h = keyboardFrame.height + editViewH
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.init(translationX: 0, y: -h)
+            }
+        }
+    }
+    
+    @objc func keyboardHidden(noti: Notification) {
+        if let duration = noti.userInfo?["UIKeyboardAnimationDurationUserInfoKey"] as? Double {
+            UIView.animate(withDuration: duration) {
+                self.editView.transform = CGAffineTransform.identity
+            }
+        }
+        editBgView.isHidden = true
     }
     
     fileprivate func setupContentView() {
@@ -125,8 +168,10 @@ class MPSelectItemView: UIView {
             make.width.equalTo(160)
             make.height.equalTo(40)
         }
+        
     }
     
+    // MARK: - Action
     @objc fileprivate func updateOrComplete() {
         
     }
@@ -139,14 +184,33 @@ class MPSelectItemView: UIView {
         
     }
     
+    @objc fileprivate func removeEditView() {
+        editView.hideKeyBoard()
+        editBgView.isHidden = true
+    }
+    
+    // MARK: - View
     fileprivate var contentView: UIView!
     fileprivate var bgView: UIControl!
     fileprivate var tableView: UITableView!
+    fileprivate lazy var editView: MPEditView = {
+        let tv = MPEditView()
+        tv.setKeyBoardType(UIKeyboardType.decimalPad)
+        return tv
+    }()
+    fileprivate lazy var editBgView: UIControl = {
+        let view = UIControl()
+        view.isHidden = true
+        view.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.3)
+        view.addTarget(self, action: #selector(MPSelectItemView.removeEditView), for: .touchDown)
+        return view
+    }()
 }
 
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension MPSelectItemView: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 7
+        return itemList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -154,6 +218,7 @@ extension MPSelectItemView: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPSelectCell(reuseIdentifier: "MPSelectCell", isShowCheckBox: true)
         }
+        cell?.itemModel = itemList[indexPath.row]
         cell?.delegate = self
         return cell!
     }
@@ -163,24 +228,42 @@ extension MPSelectItemView: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MPSelectItemView: MPSelectCellDelegate {
-    func didShowKeyBoard(_ cell: MPSelectCell) {
-        let ip = tableView.indexPath(for: cell)
-        tableView.setContentOffset(CGPoint(x: 0, y: CGFloat(ip!.row) * 38), animated: true)
-    }
-    func didHiddenKeyBoady(_ cell: MPSelectCell) {
-        tableView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
+    func didShowKeyBoard(_ cell: MPSelectCell, moneyStr: String) {
+        guard let ip = tableView.indexPath(for: cell) else {
+            return
+        }
+        editView.showKeyBoard(moneyStr, title: "金额") { [weak self] (money) in
+            if let price = money?.toDouble() {
+                self?.itemList[ip.row].price = price
+            }else {
+                MPTipsView.showMsg("请输入合法数字")
+            }
+            self?.tableView.reloadData()
+        }
     }
 }
 
 protocol MPSelectCellDelegate: class {
-    func didShowKeyBoard(_ cell: MPSelectCell)
-    func didHiddenKeyBoady(_ cell: MPSelectCell)
+    func didShowKeyBoard(_ cell: MPSelectCell, moneyStr: String)
 }
 
 /// 年检未过Item选择View的Cell
 class MPSelectCell: UITableViewCell {
     weak var delegate: MPSelectCellDelegate?
+    var itemModel: MPComboItemModel? {
+        didSet {
+            nameLabel.text = itemModel?.name
+            let money = itemModel?.price ?? 0
+            if money == 0 {
+                moneyLabel.text = "请输入金额"
+            }else {
+                moneyLabel.text = String(format: "%.2f", money)
+            }
+        }
+    }
+    
     fileprivate var isShowCheckBox: Bool
+    
     init(reuseIdentifier: String?, isShowCheckBox: Bool) {
         self.isShowCheckBox = isShowCheckBox
         super.init(style: .default, reuseIdentifier: reuseIdentifier)
@@ -197,11 +280,7 @@ class MPSelectCell: UITableViewCell {
             checkBoxView?.image = UIImage(named: "box_unselected")
         }
         nameLabel = UILabel(font: UIFont.mpSmallFont, text: "排气", textColor: UIColor.black)
-        moneyInputView = UITextField()
-        moneyInputView.placeholder = "请输入金额"
-        moneyInputView.textColor = UIColor.mpLightGary
-        moneyInputView.font = UIFont.mpSmallFont
-        moneyInputView.delegate = self
+        moneyLabel = UILabel(font: UIFont.mpSmallFont, text: "请输入金额", textColor: UIColor.mpLightGary)
         contentView.addSubview(nameLabel)
         if isShowCheckBox {
             contentView.addSubview(checkBoxView!)
@@ -220,34 +299,32 @@ class MPSelectCell: UITableViewCell {
                 make.leading.equalToSuperview().offset(25)
             }
         }
-        contentView.addSubview(moneyInputView)
-        moneyInputView.snp.makeConstraints { (make) in
+        contentView.addSubview(moneyLabel)
+        moneyLabel.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.height.equalTo(20)
             make.trailing.equalToSuperview().offset(-10)
-            make.width.equalTo(80)
         }
+        let control = UIControl()
+        control.addTarget(self, action: #selector(MPSelectCell.showKeyBoard), for: .touchUpInside)
+        contentView.addSubview(control)
+        control.snp.makeConstraints { (make) in
+            make.top.trailing.bottom.equalToSuperview()
+            make.leading.equalTo(moneyLabel)
+        }
+    }
+    
+    @objc fileprivate func showKeyBoard() {
+        let price = itemModel?.price ?? 0
+        delegate?.didShowKeyBoard(self, moneyStr: "\(price)")
     }
     
     /// 选择按钮
     fileprivate var checkBoxView: UIImageView?
     /// 检查项
     fileprivate var nameLabel: UILabel!
-    /// 输入框
-    fileprivate var moneyInputView: UITextField!
+    /// moneyLabel
+    fileprivate var moneyLabel: UILabel!
 }
-
-// MARK: - UITextFieldDelegate
-extension MPSelectCell: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.didShowKeyBoard(self)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        delegate?.didHiddenKeyBoady(self)
-    }
-}
-
 
 
 
