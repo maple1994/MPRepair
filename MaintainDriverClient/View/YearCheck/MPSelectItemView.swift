@@ -144,13 +144,16 @@ class MPSelectItemView: UIView {
         tableView.rowHeight = 38
         tableView.delegate = self
         tableView.dataSource = self
-//        tableView.bounces = false
         tableView.showsVerticalScrollIndicator = false
         
+        let line1 = MPUtils.createLine()
+        let line2 = MPUtils.createLine()
         contentView.addSubview(titleLabel)
         contentView.addSubview(editBtn)
         contentView.addSubview(tableView)
         contentView.addSubview(confirmButton)
+        contentView.addSubview(line1)
+        contentView.addSubview(line2)
         
         titleLabel.snp.makeConstraints { (make) in
             make.leading.top.equalToSuperview().offset(15)
@@ -161,11 +164,25 @@ class MPSelectItemView: UIView {
             make.height.equalTo(35)
             make.width.equalTo(60)
         }
+        line1.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(14)
+            make.leading.equalTo(titleLabel)
+            make.trailing.equalToSuperview().offset(-15)
+            make.height.equalTo(1)
+        }
         tableView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.top.equalTo(titleLabel.snp.bottom).offset(25)
             make.bottom.equalTo(confirmButton.snp.top).offset(-35)
         }
+        
+        line2.snp.makeConstraints { (make) in
+            make.top.equalTo(confirmButton.snp.top).offset(-25)
+            make.leading.equalTo(titleLabel)
+            make.trailing.equalToSuperview().offset(-15)
+            make.height.equalTo(1)
+        }
+        
         confirmButton.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.bottom.equalToSuperview().offset(-30)
