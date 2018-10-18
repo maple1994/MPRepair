@@ -224,6 +224,8 @@ extension MPSelectItemView: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        itemList[indexPath.row].isSelected = !itemList[indexPath.row].isSelected
+        tableView.reloadData()
     }
 }
 
@@ -233,11 +235,8 @@ extension MPSelectItemView: MPSelectCellDelegate {
             return
         }
         editView.showKeyBoard(moneyStr, title: "金额") { [weak self] (money) in
-            if let price = money?.toDouble() {
-                self?.itemList[ip.row].price = price
-            }else {
-                MPTipsView.showMsg("请输入合法数字")
-            }
+            let price = money?.toDouble() ?? 0
+            self?.itemList[ip.row].price = price
             self?.tableView.reloadData()
         }
     }
@@ -258,6 +257,12 @@ class MPSelectCell: UITableViewCell {
                 moneyLabel.text = "请输入金额"
             }else {
                 moneyLabel.text = String(format: "%.2f", money)
+            }
+            let isSelected = itemModel?.isSelected ?? false
+            if isSelected {
+                checkBoxView?.image = UIImage(named: "box_selected")
+            }else {
+                checkBoxView?.image = UIImage(named: "box_unselected")
             }
         }
     }
@@ -309,13 +314,17 @@ class MPSelectCell: UITableViewCell {
         contentView.addSubview(control)
         control.snp.makeConstraints { (make) in
             make.top.trailing.bottom.equalToSuperview()
-            make.leading.equalTo(moneyLabel)
+            make.width.equalTo(120)
         }
     }
     
     @objc fileprivate func showKeyBoard() {
         let price = itemModel?.price ?? 0
-        delegate?.didShowKeyBoard(self, moneyStr: "\(price)")
+        var text = "\(price)"
+        if price == 0 {
+            text = ""
+        }
+        delegate?.didShowKeyBoard(self, moneyStr: text)
     }
     
     /// 选择按钮

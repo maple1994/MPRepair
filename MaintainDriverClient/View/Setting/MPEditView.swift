@@ -23,7 +23,13 @@ class MPEditView: UIView {
     }
     
     func setKeyBoardType(_ type: UIKeyboardType) {
-        editView.keyboardType = type
+        if type == .decimalPad {
+            let keyboard = WLDecimalKeyboard()
+            keyboard.done = {
+                self.callBack?(self.editView.text ?? "")
+            }
+            editView.inputView = keyboard
+        }
     }
     
     fileprivate var callBack: ((String) -> Void)?
