@@ -25,10 +25,19 @@ class MPEditView: UIView {
     func setKeyBoardType(_ type: UIKeyboardType) {
         if type == .decimalPad {
             let keyboard = WLDecimalKeyboard()
-            keyboard.done = {
-                self.callBack?(self.editView.text ?? "")
+            keyboard.done = { [weak self] in
+                self?.callBack?(self?.editView.text ?? "")
             }
             editView.inputView = keyboard
+        }else if type == .numberPad {
+            let keyboard = WLDecimalKeyboard()
+            keyboard.done = { [weak self] in
+                self?.callBack?(self?.editView.text ?? "")
+            }
+            editView.inputView = keyboard
+        }else {
+            editView.inputView = nil
+            editView.keyboardType = type
         }
     }
     
@@ -61,7 +70,7 @@ class MPEditView: UIView {
         fatalError("")
     }
     
-    fileprivate var editView: UITextView!
+    var editView: UITextView!
     fileprivate var titleLabel: UILabel!
 }
 

@@ -26,6 +26,7 @@
 		F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */; };
 		F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */; };
 		F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */; };
+		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
@@ -141,6 +142,7 @@
 		F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPRegisterViewController.swift; sourceTree = "<group>"; };
 		F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPResetPwdViewController.swift; sourceTree = "<group>"; };
 		F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginNavViewController.swift; sourceTree = "<group>"; };
+		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				F5DF7360211A93E300B9F154 /* MPYiJieDanViewController.swift */,
 				F5DF7361211A93E300B9F154 /* MPHomeViewController.swift */,
 				F5DF7362211A93E300B9F154 /* MPGongZuoTaiViewController.swift */,
+				F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -883,6 +886,7 @@
 				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
 				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
+				F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
 				F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
