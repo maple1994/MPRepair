@@ -13,6 +13,13 @@ import IQKeyboardManagerSwift
 class MPProfileViewController: UIViewController {
 
     fileprivate let editViewH: CGFloat = 60
+    fileprivate var margin: CGFloat {
+        var value: CGFloat = 15
+        if mp_screenW < 350 {
+            value = 10
+        }
+        return value
+    }
     
     // MARK: - Life Circle
     override func viewDidLoad() {
@@ -40,10 +47,12 @@ class MPProfileViewController: UIViewController {
             make.edges.equalToSuperview()
         }
         tableView.showsVerticalScrollIndicator = false
-        let headerView = setupTBheaderView()
+        let headerView = createTBheaderView()
         headerView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 93)
         tableView.tableHeaderView = headerView
-        
+        let footerView = createUploadView()
+        footerView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: calculateUploadViewHeight())
+        tableView.tableFooterView = footerView
         view.addSubview(bgView)
         view.addSubview(editView)
         editView.snp.makeConstraints { (make) in
@@ -56,7 +65,7 @@ class MPProfileViewController: UIViewController {
         }
     }
     
-    fileprivate func setupTBheaderView() -> UIView {
+    fileprivate func createTBheaderView() -> UIView {
         let tbView = UIView()
         nameTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "姓名", textColor: UIColor.mpDarkGray)
         idCardTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "身份证号", textColor: UIColor.mpDarkGray)
@@ -116,6 +125,92 @@ class MPProfileViewController: UIViewController {
         return tbView
     }
     
+    /// 计算上传区域的高度
+    fileprivate func calculateUploadViewHeight() -> CGFloat {
+        let imageW: CGFloat = (mp_screenW - margin * 3) * 0.5
+        let imageH: CGFloat = imageW * 0.65 + 25
+        var h: CGFloat = 20 + 10 + 10
+         h += imageH * 3 + 30 + 160
+        return h
+    }
+    
+    /// 创建上传照片的区域View
+    fileprivate func createUploadView() -> UIView {
+        let uploadView = UIView()
+        let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "上传图片", textColor: UIColor.mpDarkGray)
+        uploadView.addSubview(titleLabel)
+        let upload1 = MPUploadImageView()
+        let upload2 = MPUploadImageView()
+        let upload3 = MPUploadImageView()
+        let upload4 = MPUploadImageView()
+        let upload5 = MPUploadImageView()
+        let upload6 = MPUploadImageView()
+        let submitView = UIView()
+        submitView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
+        let submitButton = UIButton()
+        submitButton.backgroundColor = UIColor.navBlue
+        submitButton.setTitleColor(UIColor.white, for: .normal)
+        submitButton.addTarget(self, action: #selector(MPProfileViewController.submit), for: .touchUpInside)
+        submitButton.setTitle("提交", for: .normal)
+        submitButton.titleLabel?.font = UIFont.mpBigFont
+        submitButton.setupCorner(4)
+        submitView.addSubview(submitButton)
+        uploadView.addSubview(submitView)
+        uploadView.addSubview(upload1)
+        uploadView.addSubview(upload2)
+        uploadView.addSubview(upload3)
+        uploadView.addSubview(upload4)
+        uploadView.addSubview(upload5)
+        uploadView.addSubview(upload6)
+        let imageW: CGFloat = (mp_screenW - margin * 3) * 0.5
+        let imageH: CGFloat = imageW * 0.65 + 25
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(margin)
+            make.top.equalToSuperview().offset(10)
+        }
+        upload1.snp.makeConstraints { (make) in
+            make.top.equalTo(titleLabel.snp.bottom).offset(10)
+            make.leading.equalTo(titleLabel)
+            make.height.equalTo(imageH)
+            make.width.equalTo(imageW)
+        }
+        upload2.snp.makeConstraints { (make) in
+            make.leading.equalTo(upload1.snp.trailing).offset(margin)
+            make.top.equalTo(upload1)
+            make.height.width.equalTo(upload1)
+        }
+        upload3.snp.makeConstraints { (make) in
+            make.top.equalTo(upload1.snp.bottom).offset(10)
+            make.leading.equalTo(titleLabel)
+            make.height.width.equalTo(upload1)
+        }
+        upload4.snp.makeConstraints { (make) in
+            make.leading.equalTo(upload3.snp.trailing).offset(margin)
+            make.top.equalTo(upload3)
+            make.height.width.equalTo(upload1)
+        }
+        upload5.snp.makeConstraints { (make) in
+            make.top.equalTo(upload3.snp.bottom).offset(10)
+            make.leading.equalTo(titleLabel)
+            make.height.width.equalTo(upload1)
+        }
+        upload6.snp.makeConstraints { (make) in
+            make.leading.equalTo(upload3.snp.trailing).offset(margin)
+            make.top.equalTo(upload5)
+            make.height.width.equalTo(upload1)
+        }
+        submitView.snp.makeConstraints { (make) in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(160)
+        }
+        submitButton.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+            make.width.equalTo(160)
+            make.height.equalTo(40)
+        }
+        return uploadView
+    }
+    
     // MARK: - Action
     @objc func keyboardShow(noti: Notification) {
         guard let info = noti.userInfo else {
@@ -171,6 +266,10 @@ class MPProfileViewController: UIViewController {
         bgView.isHidden = true
     }
     
+    @objc fileprivate func submit() {
+        
+    }
+    
     // MARK: - View
     fileprivate var tableView: UITableView!
     fileprivate var nameTitleLabel: UILabel!
@@ -188,4 +287,42 @@ class MPProfileViewController: UIViewController {
         let tv = MPEditView()
         return tv
     }()
+}
+
+/// 上传图片的View
+class MPUploadImageView: UIControl {
+    var image: UIImage? {
+        didSet {
+            imageView.image = image
+        }
+    }
+    var title: String? {
+        didSet {
+            titleLabel.text = title
+        }
+    }
+    
+    init() {
+        super.init(frame: CGRect.zero)
+        imageView = UIImageView()
+        imageView.image = UIImage(named: "idcard_front")
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "身份证正面照", textColor: UIColor.mpDarkGray)
+        addSubview(imageView)
+        addSubview(titleLabel)
+        imageView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview().offset(-25)
+        }
+        titleLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(4)
+            make.top.equalTo(imageView.snp.bottom).offset(4)
+        }
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    fileprivate var imageView: UIImageView!
+    fileprivate var titleLabel: UILabel!
 }
