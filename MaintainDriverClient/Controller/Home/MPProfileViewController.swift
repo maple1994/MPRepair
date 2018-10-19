@@ -20,6 +20,9 @@ class MPProfileViewController: UIViewController {
         }
         return value
     }
+    /// 正在选择的Item
+    fileprivate var editingItem: MPUploadImageView?
+    fileprivate var uploadItemArr = [MPUploadImageView]()
     
     // MARK: - Life Circle
     override func viewDidLoad() {
@@ -139,12 +142,18 @@ class MPProfileViewController: UIViewController {
         let uploadView = UIView()
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "上传图片", textColor: UIColor.mpDarkGray)
         uploadView.addSubview(titleLabel)
-        let upload1 = MPUploadImageView()
-        let upload2 = MPUploadImageView()
-        let upload3 = MPUploadImageView()
-        let upload4 = MPUploadImageView()
-        let upload5 = MPUploadImageView()
-        let upload6 = MPUploadImageView()
+        let upload1 = createUploadItem(image: UIImage(named: "idcard_front"), title: "身份证正面照")
+        let upload2 = createUploadItem(image: UIImage(named: "idcard_contrary"), title: "身份证反面照")
+        let upload3 = createUploadItem(image: UIImage(named: "driver_pic"), title: "司机正面照")
+        let upload4 = createUploadItem(image: UIImage(named: "driver_card"), title: "人证合一照")
+        let upload5 = createUploadItem(image: UIImage(named: "driver_licence"), title: "驾驶证正面照")
+        let upload6 = createUploadItem(image: UIImage(named: "driver_licence_addtion"), title: "驾驶证副业照")
+        uploadItemArr.append(upload1)
+        uploadItemArr.append(upload2)
+        uploadItemArr.append(upload3)
+        uploadItemArr.append(upload4)
+        uploadItemArr.append(upload5)
+        uploadItemArr.append(upload6)
         let submitView = UIView()
         submitView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
         let submitButton = UIButton()
@@ -211,7 +220,25 @@ class MPProfileViewController: UIViewController {
         return uploadView
     }
     
+    fileprivate func createUploadItem(image: UIImage?, title: String) -> MPUploadImageView {
+        let item = MPUploadImageView(placeHolder: image!, title: title)
+        item.addTarget(self, action: #selector(MPProfileViewController.selectPic(item:)), for: .touchUpInside)
+        return item
+    }
+    
     // MARK: - Action
+    @objc fileprivate func selectPic(item: MPUploadImageView) {
+        editingItem = item
+        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
+        vc.showSelectBtn = false
+        vc.allowPreview = false
+        vc.preferredLanguage = "zh-Hans"
+        vc.naviBgColor = UIColor.navBlue
+        vc.allowTakeVideo = false
+        vc.allowPickingVideo = false
+        present(vc, animated: true, completion: nil)
+    }
+    
     @objc func keyboardShow(noti: Notification) {
         guard let info = noti.userInfo else {
             return
@@ -267,7 +294,21 @@ class MPProfileViewController: UIViewController {
     }
     
     @objc fileprivate func submit() {
-        
+        // TODO: - 接口待接入
+        if nameLabel.text == "请输入姓名" {
+            MPTipsView.showMsg("请输入姓名")
+            return
+        }
+        if idCardNumberLabel.text == "请输入身份证号" {
+            MPTipsView.showMsg("请输入身份证号")
+            return
+        }
+        for item in uploadItemArr {
+            if item.image == nil {
+                MPTipsView.showMsg("请选择对应的照片")
+                return
+            }
+        }
     }
     
     // MARK: - View
@@ -289,29 +330,47 @@ class MPProfileViewController: UIViewController {
     }()
 }
 
+extension MPProfileViewController: TZImagePickerControllerDelegate {
+    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
+        editingItem?.image = photos.first
+    }
+}
+
+
 /// 上传图片的View
 class MPUploadImageView: UIControl {
     var image: UIImage? {
         didSet {
+            hudView.isHidden = true
             imageView.image = image
         }
     }
-    var title: String? {
-        didSet {
-            titleLabel.text = title
-        }
-    }
+    /// 标题
+    fileprivate(set) var title: String
+    /// 占位图片
+    fileprivate var placeHolder: UIImage
     
-    init() {
+    init(placeHolder: UIImage, title: String) {
+        self.placeHolder = placeHolder
+        self.title = title
         super.init(frame: CGRect.zero)
         imageView = UIImageView()
-        imageView.image = UIImage(named: "idcard_front")
-        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "身份证正面照", textColor: UIColor.mpDarkGray)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.image = placeHolder
+        titleLabel = UILabel(font: UIFont.mpXSmallFont, text: title, textColor: UIColor.mpDarkGray)
+        hudView = UIView()
+        hudView.isUserInteractionEnabled = false
+        hudView.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.5)
         addSubview(imageView)
+        addSubview(hudView)
         addSubview(titleLabel)
         imageView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
             make.bottom.equalToSuperview().offset(-25)
+        }
+        hudView.snp.makeConstraints { (make) in
+            make.edges.equalTo(imageView)
         }
         titleLabel.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(4)
@@ -323,6 +382,7 @@ class MPUploadImageView: UIControl {
         fatalError("")
     }
     
+    fileprivate var hudView: UIView!
     fileprivate var imageView: UIImageView!
     fileprivate var titleLabel: UILabel!
 }
