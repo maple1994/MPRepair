@@ -277,6 +277,8 @@ static UIImage *wldk_keyboard_icon()
 }
 
 @property (weak, nonatomic) UIView<UIKeyInput> *firstResponder;
+@property (nonatomic, assign) Boolean isShowDot;
+@property (nonatomic, assign) WLKeyBoadyType keyboardType;
 
 @end
 
@@ -314,6 +316,16 @@ static UIImage *wldk_keyboard_icon()
     return self;
 }
 
+- (instancetype)initWithType: (WLKeyBoadyType)type {
+    CGRect rect = wldk_get_frame();
+    
+    if (self = [super initWithFrame:rect]) {
+        _keyboardType = type;
+        [self _initUI];
+    }
+    return self;
+}
+
 #pragma mark - Private
 
 - (void)_cleanTimer
@@ -340,8 +352,13 @@ static UIImage *wldk_keyboard_icon()
     for (int i = 0; i < 14; ++i) {
         WLDecimalKeyboardItem *item = [WLDecimalKeyboardItem buttonWithType:UIButtonTypeCustom];
         if (i == 10) {
-            item.tag = 46;
-            [item setTitle:@"." forState:UIControlStateNormal];
+            if (_keyboardType == WLKeyBoadyTypeNumberPad) {
+                item.backgroundColor = UIColor.lightGrayColor;
+                [item setUserInteractionEnabled: false];
+            }else {
+                item.tag = 46;
+                [item setTitle:@"." forState:UIControlStateNormal];
+            }
         }
         else if (i == 11) {
             item.tag = 127;

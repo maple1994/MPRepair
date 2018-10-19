@@ -30,7 +30,7 @@ class MPEditView: UIView {
             }
             editView.inputView = keyboard
         }else if type == .numberPad {
-            let keyboard = WLDecimalKeyboard()
+            let keyboard = WLDecimalKeyboard(type: WLKeyBoadyTypeNumberPad)
             keyboard.done = { [weak self] in
                 self?.callBack?(self?.editView.text ?? "")
             }

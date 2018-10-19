@@ -10,12 +10,19 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface WLDecimalKeyboard : UIView
+typedef enum : NSUInteger {
+    WLKeyBoadyTypeDecialPad,
+    WLKeyBoadyTypeNumberPad
+} WLKeyBoadyType;
 
-@property (copy, nonatomic, nullable) void (^done)();       /*< 点击确定执行的回调 */
-@property (nonatomic) UIColor *tintColor;                   /*< 主色调（针对确定按钮） */
+@interface WLDecimalKeyboard : UIView
+/// 主色调（针对确定按钮）
+@property (nonatomic) UIColor *tintColor;
+/// 点击确定执行的回调
+@property (copy, nonatomic, nullable) void (^done)();
 
 - (instancetype)initWithTintColor:(UIColor *)tintColor;
+- (instancetype)initWithType: (WLKeyBoadyType)type;
 
 @end
 
