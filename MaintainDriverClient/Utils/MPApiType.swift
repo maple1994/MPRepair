@@ -73,6 +73,8 @@ enum MPApiType {
     case getBalance
     /// 司机扣费标准
     case getDriverCancelRuler
+    /// 完善司机资料
+    case completeDriverInfo(name: String, idCard: String, pic_idcard_front: UIImage, pic_idcard_back: UIImage, pic_driver: UIImage, pic_user: UIImage, pic_drive_front: UIImage, pic_drive_back:  UIImage)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -137,6 +139,8 @@ extension MPApiType: TargetType {
             return "api/driver/balance/"
         case .getDriverCancelRuler:
             return "api/driver/order_cancelinfo/"
+        case .completeDriverInfo:
+            return "api/driver/driver_info/"
         }
     }
     
@@ -309,6 +313,18 @@ extension MPApiType: TargetType {
             param["auth_code"] = authCode
             param["alipay_id"] = alipayID
             param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .completeDriverInfo(name, idCard, pic_idcard_front, pic_idcard_back, pic_driver, pic_user, pic_drive_front, pic_drive_back):
+            var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            param["name"] = name
+            param["IDcard"] = idCard
+            param["pic_idcard_front"] = pic_idcard_front.base64 ?? ""
+            param["pic_idcard_back"] = pic_idcard_back.base64 ?? ""
+            param["pic_driver"] = pic_driver.base64 ?? ""
+            param["pic_user"] = pic_user.base64 ?? ""
+            param["pic_drive_front"] = pic_drive_front.base64 ?? ""
+            param["pic_drive_back"] = pic_drive_back.base64 ?? ""
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         default:
             return .requestPlain

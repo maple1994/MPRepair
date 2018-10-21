@@ -55,6 +55,10 @@ class MPGongZuoTaiViewController: UIViewController {
     
     @objc fileprivate func loginSucc() {
         loadData()
+        if !MPUserModel.shared.is_driverinfo {
+            let vc = MPProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     fileprivate func setupUI() {
@@ -140,7 +144,10 @@ class MPGongZuoTaiViewController: UIViewController {
             let vc = MPProfileViewController()
             navigationController?.pushViewController(vc, animated: true)
             return
-        }        
+        }
+        // 审核成功
+        self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
+        MPOrderSocketManager.shared.connect(socketDelegate: self)
 //        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
 //            if let data = json["data"] as? [String: Any] {
 //                let state = toInt(data["state"])
