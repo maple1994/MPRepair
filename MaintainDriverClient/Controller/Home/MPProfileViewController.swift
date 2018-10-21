@@ -314,7 +314,6 @@ class MPProfileViewController: UIViewController {
             self.navigationController?.popViewController(animated: true)
             MPUserModel.shared.is_driverinfo = true
         }) { (_) in
-            MPTipsView.showMsg("上传失败，请稍后再试")
             hud?.hide(animated: true)
         }
     }

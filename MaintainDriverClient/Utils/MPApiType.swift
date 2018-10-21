@@ -46,7 +46,7 @@ enum MPApiType {
     /// 年检已过
     case yearCheckSucc(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
     /// 年检未过
-    case yearCheckFail(id: Int, number: Int, picArr: [UIImage]?, itemIdArr: [Int]?, note: [String]?)
+    case yearCheckFail(id: Int, number: Int, image1: UIImage, note1: String, image2: UIImage, note2: String, number_item: Int, itemIDArr: [Int], priceArr: [Double])
     /// 到达还车
     case arriveHuanChe(id: Int)
     /// 确认还车
@@ -260,26 +260,18 @@ extension MPApiType: TargetType {
             param["number"] = number
             setup(param: &param, picArr: picArr, typeArr: typeArr, note: note)
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .yearCheckFail(id, number, picArr, idArr, note):
+        case let .yearCheckFail(id, number, image1, note1, image2, note2, number_item, itemIDArr, priceArr):
             var param = defaultParam
             param["id"] = id
             param["number"] = number
-            if let arr1 = picArr {
-                for (index, img) in arr1.enumerated() {
-                    if let base = img.base64 {
-                        param["pic\(index + 1)"] = base
-                    }
-                }
-            }
-            if let arr1 = idArr {
-                for (index, id1) in arr1.enumerated() {
-                    param["item_id\(index + 1)"] = id1
-                }
-            }
-            if let arr1 = note {
-                for (index, note1) in arr1.enumerated() {
-                    param["note\(index + 1)"] = note1
-                }
+            param["image1"] = image1.base64 ?? ""
+            param["note1"] = note1
+            param["image2"] = image2.base64 ?? ""
+            param["note2"] = note2
+            param["number_item"] = number_item
+            for (index, ID) in itemIDArr.enumerated() {
+                param["item_id\(index + 1)"] = ID
+                param["price\(index + 1)"] = priceArr[index]
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .arriveHuanChe(id):

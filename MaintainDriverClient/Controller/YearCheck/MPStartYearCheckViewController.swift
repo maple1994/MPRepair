@@ -166,51 +166,23 @@ class MPStartYearCheckViewController: UIViewController {
         var picArr = [UIImage]()
         var typeArr = [String]()
         var noteArr = [String]()
-        if titleView.selectedIndex == 0 {
-            if !isInvalid(confirmPhotoArr) {
-                MPTipsView.showMsg("请选择图片")
-                return
+        if !isInvalid(confirmPhotoArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
+        for model in confirmPhotoArr {
+            if let img = model.image {
+                picArr.append(img)
+                typeArr.append("survey_upload")
+                noteArr.append(model.title ?? "")
             }
-            for model in confirmPhotoArr {
-                if let img = model.image {
-                    picArr.append(img)
-                    typeArr.append("survey_upload")
-                    noteArr.append(model.title ?? "")
-                }
-            }
-            let hud = MPTipsView.showLoadingView("上传中...")
-            MPNetword.requestJson(target: .yearCheckSucc(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (_) in
-                hud?.hide(animated: true)
-                self.jump()
-            }) { (_) in
-                hud?.hide(animated: true)
-//                MPTipsView.showMsg("上传失败，请重新再试")
-            }
-        }else {
-//            var idArr = [Int]()
-//            guard let arr = itemArr else {
-//                return
-//            }
-//            for item in arr {
-//                for model in item.photoArr {
-//                    if let img = model.image {
-//                        picArr.append(img)
-//                        idArr.append(item.id)
-//                        noteArr.append(item.name)
-//                    }
-//                }
-//            }
-//            let hud = MPTipsView.showLoadingView("上传中...")
-//            MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: picArr.count, picArr: picArr, itemIdArr: idArr, note: noteArr), success: { (_) in
-//                hud?.hide(animated: true)
-//                MPNetwordTool.getOrderInfo(id: self.orderModel.id, succ: { (model) in
-//                    self.orderModel = model
-//                }, fail: nil)
-//                NotificationCenter.default.post(name: MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION, object: nil)
-//                self.navigationController?.popToRootViewController(animated: true)
-//            }) { (_) in
-//                hud?.hide(animated: true)
-//            }
+        }
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .yearCheckSucc(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (_) in
+            hud?.hide(animated: true)
+            self.jump()
+        }) { (_) in
+            hud?.hide(animated: true)
         }
     }
     
@@ -225,7 +197,24 @@ class MPStartYearCheckViewController: UIViewController {
     
     /// 年检未过确认提交
     @objc fileprivate func failConfirm() {
-        MPPrint("年检未过确认提交")
+        if !isInvalid(failedPhotoArr) {
+            MPTipsView.showMsg("请选择图片")
+            return
+        }
+        var itemIDArr = [Int]()
+        var priceArr = [Double]()
+        if let selectedArr = selectedItemArr {
+            for item in selectedArr {
+                itemIDArr.append(item.id)
+                priceArr.append(item.price)
+            }
+        }
+        let hud = MPTipsView.showLoadingView("上传中...")
+        MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: 2, image1: failedPhotoArr[0].image!, note1: "", image2: failedPhotoArr[1].image!, note2: "", number_item: itemIDArr.count, itemIDArr: itemIDArr, priceArr: priceArr), success: { (_) in
+            hud?.hide(animated: true)
+        }) { (_) in
+            hud?.hide(animated: true)
+        }
     }
     
     fileprivate func jump() {
