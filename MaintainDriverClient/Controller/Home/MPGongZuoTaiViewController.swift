@@ -107,6 +107,7 @@ class MPGongZuoTaiViewController: UIViewController {
     @objc fileprivate func loadData() {
         // 从网络拉取上传图片的picName
         MPNetwordTool.getPicName()
+        MPNetwordTool.getDriverRuler()
     }
     
     // MARK: - Action
@@ -128,14 +129,18 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPProfileViewController()
-        navigationController?.pushViewController(vc, animated: true)
-//        func showTipsView(_ isShowFailed: Bool) {
-//            let view = MPAuthorityTipView()
-//            view.showFailView = isShowFailed
-//            view.frame = UIScreen.main.bounds
-//            UIApplication.shared.keyWindow?.addSubview(view)
-//        }
+        func showTipsView(_ isShowFailed: Bool) {
+            let view = MPAuthorityTipView()
+            view.showFailView = isShowFailed
+            view.frame = UIScreen.main.bounds
+            UIApplication.shared.keyWindow?.addSubview(view)
+        }
+        
+        if !MPUserModel.shared.is_driverinfo {
+            let vc = MPProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            return
+        }        
 //        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
 //            if let data = json["data"] as? [String: Any] {
 //                let state = toInt(data["state"])

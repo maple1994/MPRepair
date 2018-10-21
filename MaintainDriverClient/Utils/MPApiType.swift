@@ -71,6 +71,8 @@ enum MPApiType {
     case updateAlipayAccount(alipayID: String, authCode: String)
     /// 查询余额
     case getBalance
+    /// 司机扣费标准
+    case getDriverCancelRuler
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -133,6 +135,8 @@ extension MPApiType: TargetType {
             return "api/driver/account_alipayinfo/"
         case .getBalance:
             return "api/driver/balance/"
+        case .getDriverCancelRuler:
+            return "api/driver/order_cancelinfo/"
         }
     }
     
@@ -150,6 +154,7 @@ extension MPApiType: TargetType {
             .getOrderCertification,
             .getAlipayBindedAccount,
             .getBalance,
+            .getDriverCancelRuler,
             .getAlipayBindedAccountInfo:
             return .get
         default:
@@ -207,7 +212,7 @@ extension MPApiType: TargetType {
                 }
             }
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case .getPicName:
+        case .getPicName, .getDriverCancelRuler:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case let .getAccountInfo(method):
             var param = defaultParam

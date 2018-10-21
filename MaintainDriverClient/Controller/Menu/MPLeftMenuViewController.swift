@@ -22,6 +22,9 @@ protocol MPLeftMenuViewControllerDelegate: class {
 
 class MPLeftMenuViewController: UIViewController {
     weak var delegate: MPLeftMenuViewControllerDelegate?
+    func setupStartView(_ count: Int) {
+        startView?.setSelectedCount(count)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,7 +68,7 @@ class MPLeftMenuViewController: UIViewController {
         userNameLabel.textColor = UIColor.white
         userNameLabel.text = "未登录"
         startView = MPStartView()
-        startView.setSelectedCount(4)
+        setupStartView(MPUserModel.shared.score)
         let tbHeaderView = UIView()
         tbHeaderView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: 150)
         tbHeaderView.backgroundColor = UIColor.navBlue
@@ -87,9 +90,6 @@ class MPLeftMenuViewController: UIViewController {
             make.top.equalTo(userNameLabel.snp.bottom).offset(18)
         }
         tableView.tableHeaderView = tbHeaderView
-        
-//        let tap = UITapGestureRecognizer(target: self, action: #selector(MPLeftMenuViewController.userIconClick))
-//        userIconView.addGestureRecognizer(tap)
     }
     
     @objc fileprivate func loginSucc() {
@@ -97,6 +97,7 @@ class MPLeftMenuViewController: UIViewController {
         if MPUserModel.shared.userName.isEmpty {
             name = "默认名"
         }
+        setupStartView(MPUserModel.shared.score)
         userNameLabel.text = name
         userIconView.mp_setImage(MPUserModel.shared.picUrl)
     }

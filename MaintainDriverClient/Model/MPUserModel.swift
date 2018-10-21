@@ -21,6 +21,8 @@ class MPUserModel: Codable {
         case picUrl
         case point
         case isPass
+        case score
+        case is_driverinfo
     }
     // MARK: - Property
     static let shared = MPUserModel()
@@ -40,6 +42,10 @@ class MPUserModel: Codable {
     var point: Int = 0
     /// 是否过审
     var isPass: Bool = false
+    /// 司机评分
+    var score: Int = 0
+    /// 是否填写了司机信息
+    var is_driverinfo: Bool = false
     /// 是否登录
     var isLogin: Bool {
         return token != "0"
@@ -151,7 +157,9 @@ class MPUserModel: Codable {
                 let name = dic["name"] as? String,
                 let picUrl = dic["pic_url"] as? String,
                 let point = dic["point"] as? Int,
-                let isPass = dic["is_pass"] as? Bool
+                let isPass = dic["is_pass"] as? Bool,
+                let score = dic["score"] as? Int,
+                let is_driverinfo = dic["is_driverinfo"] as? Bool
                 else {
                     fail?()
                     return
@@ -161,10 +169,23 @@ class MPUserModel: Codable {
             self.picUrl = picUrl
             self.point = point
             self.isPass = isPass
+            self.is_driverinfo = is_driverinfo
+            self.score = score
             succ?()
         }) { (err) in
             fail?()
         }
+    }
+    
+    /// 设置用户评分的显示
+    fileprivate func setupStartView() {
+        guard let leftVC = UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController else {
+            return
+        }
+        guard let menuVC = leftVC.leftViewController as? MPLeftMenuViewController else {
+            return
+        }
+        menuVC.setupStartView(score)
     }
 }
 

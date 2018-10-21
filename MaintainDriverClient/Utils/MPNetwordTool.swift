@@ -85,6 +85,20 @@ struct MPNetwordTool {
         })
     }
     
+    /// 查询司机扣费标准
+    static func getDriverRuler(succ: (() -> Void)? = nil) {
+        MPNetword.requestJson(target: .getDriverCancelRuler, success: { (json) in
+            if let dic = json["data"] as? [String: Any] {
+                if let url = dic["url"] as? String {
+                    // 存储到本地
+                    UserDefaults.standard.set(url, forKey: "MP_DRIVER_CANCEL_RULER")
+                    UserDefaults.standard.synchronize()
+                }
+            }
+            succ?()
+        })
+    }
+    
     /// 查询年检检查项信息
     static func getYearCheckInfo(succ: @escaping ([MPComboItemModel]) -> Void, fail: (() -> Void)?) {
         MPNetword.requestJson(target: .getYearCheckItemInfo, success: { (json) in
@@ -140,12 +154,21 @@ struct MPNetwordTool {
     
     /// 去掉订单
     static func cancelOrder(_ orderModel: MPOrderModel, succ: @escaping () -> Void, fail: (() -> Void)?) {
-        MPCancelTipsView.showTipsView {
-            MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
-                succ()
-            }) { (_) in
-                fail?()
+        func tmp() {
+            MPCancelTipsView.showTipsView {
+                MPNetword.requestJson(target: .cancelOrder(id: orderModel.id), success: { (_) in
+                    succ()
+                }) { (_) in
+                    fail?()
+                }
             }
+        }
+        if UserDefaults.standard.object(forKey: "MP_DRIVER_CANCEL_RULER") as? String == nil {
+            getDriverRuler {
+                tmp()
+            }
+        }else {
+            tmp()
         }
     }
 }
