@@ -274,7 +274,7 @@ class MPProfileViewController: UIViewController {
     }
     
     @objc fileprivate func editIDCard() {
-        editView.setKeyBoardType(.numberPad)
+        editView.setKeyBoardType(.asciiCapable)
         var text = idCardNumberLabel.text ?? ""
         if text == "请输入身份证号" {
             text = ""
@@ -300,6 +300,10 @@ class MPProfileViewController: UIViewController {
         }
         if idCardNumberLabel.text == "请输入身份证号" {
             MPTipsView.showMsg("请输入身份证号")
+            return
+        }
+        if !idCardNumberLabel.text!.isMatchRegularExp("^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$") {
+            MPTipsView.showMsg("请输入合法的身份证")
             return
         }
         for item in uploadItemArr {
