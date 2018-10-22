@@ -227,6 +227,7 @@ class MPSelectItemView: UIView {
             }
             if item.isSelected && item.price != 0 {
                 let model = MPComboItemModel()
+                model.id = item.id
                 model.name = item.name
                 model.price = item.price
                 model.isSelected = true

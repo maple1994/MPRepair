@@ -210,7 +210,8 @@ class MPStartYearCheckViewController: UIViewController {
             }
         }
         let hud = MPTipsView.showLoadingView("上传中...")
-        MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: 2, image1: failedPhotoArr[0].image!, note1: "", image2: failedPhotoArr[1].image!, note2: "", number_item: itemIDArr.count, itemIDArr: itemIDArr, priceArr: priceArr), success: { (_) in
+        MPNetword.requestJson(target: .yearCheckFail(id: orderModel.id, number: 2, image1: failedPhotoArr[0].image!, note1: "证件信息", image2: failedPhotoArr[1].image!, note2: "车钥匙", number_item: itemIDArr.count, itemIDArr: itemIDArr, priceArr: priceArr), success: { (_) in
+            self.navigationController?.popToRootViewController(animated: true)
             hud?.hide(animated: true)
         }) { (_) in
             hud?.hide(animated: true)

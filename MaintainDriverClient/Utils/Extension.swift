@@ -227,7 +227,7 @@ extension Array {
 
 extension UIImage {
     var base64: String? {
-        if let base = UIImageJPEGRepresentation(self, 0.4)?.base64EncodedString(){
+        if let base = UIImageJPEGRepresentation(self, 0.3)?.base64EncodedString(){
             return base
         }
         return nil

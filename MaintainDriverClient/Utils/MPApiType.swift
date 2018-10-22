@@ -264,9 +264,11 @@ extension MPApiType: TargetType {
             var param = defaultParam
             param["id"] = id
             param["number"] = number
-            param["image1"] = image1.base64 ?? ""
+            param["pic1"] = image1.base64 ?? ""
+            param["type1"] = "survey_fail_upload"
             param["note1"] = note1
-            param["image2"] = image2.base64 ?? ""
+            param["pic2"] = image2.base64 ?? ""
+            param["type2"] = "survey_fail_upload"
             param["note2"] = note2
             param["number_item"] = number_item
             for (index, ID) in itemIDArr.enumerated() {

@@ -66,7 +66,7 @@ class MPOrderConfirmViewController: UIViewController {
             if orderModel.survey_state == .failure {
                 MPTipsView.showMsg("客户尚未支付")
                 return
-            }else if orderModel.survey_state == .success || orderModel.survey_state == .recheck {
+            }else  {
                 let vc = MPStartYearCheckViewController(model: orderModel)
                 navigationController?.pushViewController(vc, animated: true)
                 return
