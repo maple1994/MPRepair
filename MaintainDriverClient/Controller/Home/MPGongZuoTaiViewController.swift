@@ -55,7 +55,7 @@ class MPGongZuoTaiViewController: UIViewController {
     
     @objc fileprivate func loginSucc() {
         loadData()
-        if !MPUserModel.shared.is_driverinfo {
+        if  MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
             let vc = MPProfileViewController()
             navigationController?.pushViewController(vc, animated: true)
         }
@@ -140,30 +140,23 @@ class MPGongZuoTaiViewController: UIViewController {
             UIApplication.shared.keyWindow?.addSubview(view)
         }
         
-        if !MPUserModel.shared.is_driverinfo {
+        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
             let vc = MPProfileViewController()
             navigationController?.pushViewController(vc, animated: true)
             return
         }
-        // 审核成功
-        self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
-        MPOrderSocketManager.shared.connect(socketDelegate: self)
-//        MPNetword.requestJson(target: .getOrderCertification, success: { (json) in
-//            if let data = json["data"] as? [String: Any] {
-//                let state = toInt(data["state"])
-//                if state == 0 {
-//                    // 未审核
-//                    showTipsView(true)
-//                }else if state == 1 {
-//                    // 正在审核
-//                    showTipsView(false)
-//                }else {
-//                    // 审核成功
-//                    self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
-//                    MPOrderSocketManager.shared.connect(socketDelegate: self)
-//                }
-//            }
-//        })
+        switch MPUserModel.shared.is_driverinfo {
+        case .unsubmit:
+            let vc = MPProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .checkFailed, .checking:
+            // 正在审核
+            showTipsView(false)
+        case .checkSucc:
+            // 审核成功
+            self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
+            MPOrderSocketManager.shared.connect(socketDelegate: self)
+        }
     }
     
     // MARK: - View

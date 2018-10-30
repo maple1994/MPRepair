@@ -9,6 +9,17 @@
 import UIKit
 import SlideMenuControllerSwift
 
+enum MPProfileState: Int, Codable {
+    /// 未提交
+    case unsubmit = 0
+    /// 正在审核
+    case checking = 1
+    /// 审核成功
+    case checkSucc = 2
+    /// 审核失败
+    case checkFailed = 3
+}
+
 /// 用户模型
 class MPUserModel: Codable {
     // 只对以下属性执行序列化
@@ -45,7 +56,7 @@ class MPUserModel: Codable {
     /// 司机评分
     var score: Int = 0
     /// 是否填写了司机信息
-    var is_driverinfo: Bool = false
+    var is_driverinfo: MPProfileState = MPProfileState.unsubmit
     /// 是否登录
     var isLogin: Bool {
         return token != "0"
@@ -151,15 +162,14 @@ class MPUserModel: Codable {
     /// 获取用户数据
     func getUserInfo(succ: (()->Void)?, fail: (()->Void)?) {
         MPNetword.requestJson(target: .getUserInfo, success: { (json) in
-            let dic = json["data"] as AnyObject
+            let dic = json["data"] as? [String: Any]
             guard
-                let phone = dic["phone"] as? String,
-                let name = dic["name"] as? String,
-                let picUrl = dic["pic_url"] as? String,
-                let point = dic["point"] as? Int,
-                let isPass = dic["is_pass"] as? Bool,
-                let score = dic["score"] as? Int,
-                let is_driverinfo = dic["is_driverinfo"] as? Bool
+                let phone = dic?["phone"] as? String,
+                let name = dic?["name"] as? String,
+                let picUrl = dic?["pic_url"] as? String,
+                let point = dic?["point"] as? Int,
+                let isPass = dic?["is_pass"] as? Bool,
+                let score = dic?["score"] as? Int
                 else {
                     fail?()
                     return
@@ -169,7 +179,8 @@ class MPUserModel: Codable {
             self.picUrl = picUrl
             self.point = point
             self.isPass = isPass
-            self.is_driverinfo = is_driverinfo
+            let rawValue = toInt(dic?["is_driverinfo"])
+            self.is_driverinfo = MPProfileState(rawValue: rawValue) ?? MPProfileState.unsubmit
             self.score = score
             succ?()
         }) { (err) in

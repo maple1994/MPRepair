@@ -23,6 +23,8 @@ class MPNetwordActivityPlugin: PluginType {
         switch target {
         case MPApiType.updateUserInfo(name: _, pic: _):
             loadingHud = MPTipsView.showLoadingView("上传中...")
+        case MPApiType.login:
+            loadingHud = MPTipsView.showLoadingView("登录中...")
         default:
             break
         }
@@ -63,6 +65,8 @@ class MPNetwordActivityPlugin: PluginType {
         switch target {
         case MPApiType.updateUserInfo(name: _, pic: _):
             loadingHud?.hide(animated: true)
+        case MPApiType.getUserInfo:
+            loadingHud?.hide(animated: true)
         default:
             break
         }
@@ -71,6 +75,7 @@ class MPNetwordActivityPlugin: PluginType {
     
     /// Called to modify a result before completion.
     func process(_ result: Result<Moya.Response, MoyaError>, target: TargetType) -> Result<Moya.Response, MoyaError> {
+        loadingHud?.hide(animated: true)
         return result
     }
 }

@@ -52,6 +52,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.viewBgColor
         navigationItem.title = "开始年检"
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "nav_mobile"), style: .plain, target: self, action: #selector(MPStartYearCheckViewController.contact))
         yearCheckTitileView = MPYearCheckTitleView()
         yearCheckTitileView.selectedIndex = 2
         view.addSubview(yearCheckTitileView)
@@ -159,6 +160,18 @@ class MPStartYearCheckViewController: UIViewController {
             self.itemArr = arr
         }) {
             
+        }
+    }
+    
+    // MARK: - Action
+    @objc fileprivate func contact() {
+        guard let url = URL(string: "tel:\(orderModel.phone)") else {
+            return
+        }
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }else {
+            UIApplication.shared.openURL(url)
         }
     }
     
