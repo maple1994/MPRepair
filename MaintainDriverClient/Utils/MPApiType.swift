@@ -345,6 +345,7 @@ extension MPApiType: TargetType {
                 "timestamp": stamp,
                 "sign": sign,
                 "system": "ios",
+                "app_type": "driver",
                 "version": mp_version
             ]
             return param

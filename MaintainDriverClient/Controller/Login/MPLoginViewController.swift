@@ -205,7 +205,7 @@ class MPLoginViewController: UIViewController {
         checkBoxImgView = UIImageView()
         checkBoxImgView.image = UIImage(named: "box_selected")
         let label1 = UILabel(font: UIFont.mpSmallFont, text: "阅读并同意", textColor: UIColor.colorWithHexString("#000000", alpha: 0.3))
-        let label2 = UILabel(font: UIFont.mpSmallFont, text: "《8号养车用户协议》", textColor: UIColor.navBlue)
+        let label2 = UILabel(font: UIFont.mpSmallFont, text: "《8号养车代驾司机协议》", textColor: UIColor.navBlue)
         let agreementView = UIView()
         agreementView.addSubview(checkBoxImgView)
         agreementView.addSubview(label1)
