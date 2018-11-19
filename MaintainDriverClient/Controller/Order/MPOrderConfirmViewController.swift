@@ -73,7 +73,8 @@ class MPOrderConfirmViewController: UIViewController {
             }
         }
         let vc = MPQuCheViewController2(model: orderModel)
-        navigationController?.pushViewController(vc, animated: true)
+        MPUtils.push(vc)
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!

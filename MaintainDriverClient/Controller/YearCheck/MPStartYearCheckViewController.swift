@@ -236,7 +236,7 @@ class MPStartYearCheckViewController: UIViewController {
             self.orderModel = model
         }, fail: nil)
         let vc = MPCheckOutFinishViewController2(model: orderModel)
-        navigationController?.pushViewController(vc, animated: true)
+        MPUtils.push(vc)
     }
 
     // MARK: - View

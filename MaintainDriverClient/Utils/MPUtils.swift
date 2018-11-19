@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 /// 工具类
 class MPUtils {
@@ -17,17 +18,21 @@ class MPUtils {
         return line
     }
     
-    class func toInt(_ value: Any?) -> Int? {
-        guard let value1 = value else {
-            return nil
+    /// 压入一个控制器的同时，把当前的控制器移除
+    class func push(_ vc: UIViewController) {
+        let slideVC = UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController
+        let navVC = slideVC?.mainViewController as? UINavigationController
+        if let navs : [UIViewController] = navVC?.viewControllers {
+            guard navs.count > 0 else{
+                return
+            }
+            let index : Int = navs.count - 2
+            guard index >= 0 else{
+                return
+            }
+            navs[index].navigationController?.pushViewController(vc, animated: true)
+            navVC?.viewControllers.remove(at: navs.count - 1)
         }
-        if let val = value1 as? Int {
-            return val
-        }
-        if let val = value1 as? String {
-            return val.toInt()
-        }
-        return nil
     }
 }
 

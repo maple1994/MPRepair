@@ -112,7 +112,7 @@ class MPCheckOutFinishViewController2: UIViewController {
             }, fail: nil)
             hud?.hide(animated: true)
             let vc = MPCheckOutFinishViewController1(model: self.orderModel)
-            self.navigationController?.pushViewController(vc, animated: true)
+            MPUtils.push(vc)
         }) { (_) in
             hud?.hide(animated: true)
 //            MPTipsView.showMsg("上传失败，请重新再试")

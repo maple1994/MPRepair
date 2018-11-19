@@ -126,7 +126,7 @@ class MPQuCheViewController1: UIViewController {
         MPNetword.requestJson(target: .quChe(id: orderModel.id, number: picArr.count, picArr: picArr, typeArr: typeArr, note: noteArr), success: { (json) in
             hud?.hide(animated: true)
             let vc = MPStartYearCheckViewController2(model: self.orderModel)
-            self.navigationController?.pushViewController(vc, animated: true)
+            MPUtils.push(vc)
         }) { (_) in
 //            MPTipsView.showMsg("上传失败，请重新再试")
             hud?.hide(animated: true)

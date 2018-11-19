@@ -123,7 +123,7 @@ class MPQuCheViewController2: UIViewController {
     
     @objc fileprivate func confirm() {
         let vc = MPQuCheViewController1(model: orderModel)
-        navigationController?.pushViewController(vc, animated: true)
+        MPUtils.push(vc)
     }
     
     // MARK: - View
