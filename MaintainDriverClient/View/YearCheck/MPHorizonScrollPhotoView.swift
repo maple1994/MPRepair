@@ -69,15 +69,24 @@ extension MPHorizonScrollPhotoView: UICollectionViewDelegate, UICollectionViewDa
     }
 }
 
+protocol MPHorizonScrollPhotoItemCellDelegate: class {
+    /// 点击了图片
+    func itemCellDidClickAddButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int)
+    /// 去除了图片
+    func itemCellDidClickRemoveButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int)
+}
+
 /// MPHorizonScrollPhotoView的cell
 class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
+    weak var delegate: MPHorizonScrollPhotoItemCellDelegate?
+    var index: Int = 0
     
     var model: MPPhotoModel? {
         didSet {
             if let img = model?.image {
                 photoView.image = img
             }else {
-                photoView.image = #imageLiteral(resourceName: "add_pic")
+                photoView.image = UIImage(named: "add_pic")
             }
             titleLabel.text = model?.title
         }
@@ -95,7 +104,7 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     fileprivate func setupUI() {
         removeButton = MPImageButtonView(image: #imageLiteral(resourceName: "delete"), pos: .rightTop)
         removeButton.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.remove), for: .touchUpInside)
-        photoView = MPImageButtonView(image: #imageLiteral(resourceName: "add_pic"), pos: .center, imageW: mp_picW, imageH: mp_noTitlePicH)
+        photoView = MPImageButtonView(image: UIImage(named: "add_pic"), pos: .center, imageW: mp_picW, imageH: mp_noTitlePicH)
         photoView.addTarget(self, action: #selector(MPHorizonScrollPhotoItemCell.pickPicture), for: .touchUpInside)
         photoView.mode = .scaleAspectFill
         titleLabel = UILabel(font: UIFont.mpXSmallFont, text: "证件信息", textColor: UIColor.mpDarkGray)
@@ -121,12 +130,25 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func remove() {
-        model?.image = nil
-        photoView.image = #imageLiteral(resourceName: "add_pic")
         removeButton.isHidden = true
+        // 交由代理处理
+        if delegate != nil {
+            delegate?.itemCellDidClickRemoveButton(self, index: index)
+            return
+        }
+        model?.image = nil
+        photoView.image = UIImage(named: "add_pic")
     }
     
     @objc func pickPicture() {
+        if !UIImagePickerController.isSourceTypeAvailable(.camera) {
+            return
+        }
+        // 交由代理处理点击事件
+        if delegate != nil {
+            delegate?.itemCellDidClickAddButton(self, index: index)
+            return
+        }
         let picker = UIImagePickerController()
         picker.sourceType = .camera
         picker.modalPresentationStyle = .fullScreen

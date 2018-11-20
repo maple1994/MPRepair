@@ -37,8 +37,20 @@ class MPQuCheViewController1: UIViewController {
             }
             jianCheModelArr.append(model)
         }
-        for _ in 0...5 {
+        for i in 0...3 {
             let model = MPPhotoModel()
+            switch i {
+            case 0:
+                model.title = "前45度角"
+            case 1:
+                model.title = "后45度角"
+            case 2:
+                model.title = "人车合照"
+            case 3:
+                model.title = "车内照"
+            default:
+                break
+            }
             cheShenModelArr.append(model)
         }
         setupUI()
@@ -154,19 +166,20 @@ class MPQuCheViewController1: UIViewController {
     
     fileprivate var yearCheckTitileView: MPYearCheckTitleView!
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: jianCheModelArr, isShowTitle: true)
-    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheShenModelArr, isShowTitle: false)
+    fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: cheShenModelArr, isShowTitle: true)
+    fileprivate lazy var addPhotoView: MPAddPhotoView = {
+        let view = MPAddPhotoView()
+        view.delegate = self
+        return view
+    }()
 }
 
 extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if section == 0 {
-            return 0
-        }else {
-            return 0
-        }
+        return 0
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCell(withIdentifier: "MPTwoPhotoTableViewCell") as? MPTwoPhotoTableViewCell
@@ -178,9 +191,11 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let ID = "MPTitleSectionHeaderView"
         if section == 0 {
-            return MPTitleSectionHeaderView(title: get_confirm, reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: "证件照片", reuseIdentifier: ID)
+        }else if section == 1 {
+            return MPTitleSectionHeaderView(title: "车身拍照", reuseIdentifier: ID)
         }else {
-            return MPTitleSectionHeaderView(title: get_car, reuseIdentifier: ID)
+            return MPTitleSectionHeaderView(title: "车损照片(最多可以上传6张图片)", reuseIdentifier: ID)
         }
     }
     
@@ -195,15 +210,30 @@ extension MPQuCheViewController1: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         if section == 0 {
             return horizontalPhotoView
-        }else {
+        }else if section == 1 {
             return horizontalPhotoView2
+        }else {
+            return addPhotoView
         }
     }
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         if section == 0 {
             return mp_hasTitlePicH + mp_vSpace + 10
-        } 
-        return (mp_noTitlePicH + mp_vSpace + 10) * 3
+        }else if section == 1 {
+            return (mp_hasTitlePicH + mp_vSpace + 10) * 2
+        }else {
+            let count = (addPhotoView.photoModelArr.count < 6) ? addPhotoView.photoModelArr.count + 1 : 6
+            // 计算行数
+            let row = (count + 2 - 1) / 2
+            let h: CGFloat = (mp_noTitlePicH + mp_vSpace + 10) * CGFloat(row)
+            return h
+        }
+    }
+}
+
+extension MPQuCheViewController1: MPAddPhotoViewDelegate {
+    func addPhotoViewNeedReload() {
+        tableView.reloadData()
     }
 }
 

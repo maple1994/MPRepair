@@ -26,6 +26,7 @@
 		F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */; };
 		F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */; };
 		F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */; };
+		F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5437B5F21A3FCDE000194CF /* MPAddPhotoView.swift */; };
 		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
@@ -142,6 +143,7 @@
 		F5379DC12125C8400044C8C1 /* MPRegisterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPRegisterViewController.swift; sourceTree = "<group>"; };
 		F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPResetPwdViewController.swift; sourceTree = "<group>"; };
 		F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginNavViewController.swift; sourceTree = "<group>"; };
+		F5437B5F21A3FCDE000194CF /* MPAddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAddPhotoView.swift; sourceTree = "<group>"; };
 		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
@@ -547,6 +549,7 @@
 				F5DF73A2211AF81F00B9F154 /* MPQuCheCCell.swift */,
 				F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */,
 				F59832C82178C9F60062AF29 /* MPShowItemTableViewCell.swift */,
+				F5437B5F21A3FCDE000194CF /* MPAddPhotoView.swift */,
 			);
 			path = YearCheck;
 			sourceTree = "<group>";
@@ -846,6 +849,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
+				F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */,
 				F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */,
 				F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */,
 				F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */,
