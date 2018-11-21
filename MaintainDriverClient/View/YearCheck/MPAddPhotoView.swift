@@ -8,6 +8,7 @@
 
 import UIKit
 import SlideMenuControllerSwift
+import JXPhotoBrowser
 
 protocol MPAddPhotoViewDelegate: class {
     func addPhotoViewNeedReload()
@@ -103,6 +104,33 @@ extension MPAddPhotoView: MPHorizonScrollPhotoItemCellDelegate {
         photoModelArr.remove(at: index)
         collectionView.reloadData()
         delegate?.addPhotoViewNeedReload()
+    }
+    
+    /// 显示图片浏览器
+    func showPhotoBrowser(index: Int) {
+        var showIndex = index
+        var photoArr = [MPPhotoModel]()
+        var count: Int = 0
+        for (index1, model) in photoModelArr.enumerated() {
+            if index1 == index {
+                showIndex = count
+            }
+            if model.image != nil {
+                photoArr.append(model)
+                count += 1;
+            }
+        }
+        let dataSource = JXLocalDataSource(numberOfItems: {
+            // 共有多少项
+            return photoArr.count
+        }, localImage: { index -> UIImage? in
+            // 每一项的图片对象
+            return photoArr[index].image
+        })
+        // 视图代理，实现了数字型页码指示器
+        let delegate = JXNumberPageControlDelegate()
+        // 打开浏览器
+        JXPhotoBrowser(dataSource: dataSource, delegate: delegate).show(pageIndex: showIndex)
     }
 }
 

@@ -8,12 +8,15 @@
 
 import UIKit
 import SlideMenuControllerSwift
+import JXPhotoBrowser
 
 /// 水平滚动的图片View
 class MPHorizonScrollPhotoView: UIView {
     fileprivate let CellID = "MPHorizonScrollPhotoItemCell"
     fileprivate var photoModelArr: [MPPhotoModel]
     fileprivate var isShowTitle: Bool
+    /// 记录对哪个Cell操作
+    fileprivate var selectedIndex: Int = 0
     
     init(modelArr: [MPPhotoModel], isShowTitle: Bool) {
         photoModelArr = modelArr
@@ -64,8 +67,79 @@ extension MPHorizonScrollPhotoView: UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellID, for: indexPath) as? MPHorizonScrollPhotoItemCell
         cell?.model = photoModelArr[indexPath.row]
+        if let _ = cell?.model?.image {
+            cell?.removeButton.isHidden = false
+        }else {
+            cell?.photoView.image = UIImage(named: "add_pic")
+            cell?.removeButton.isHidden = true
+        }
         cell?.titleLabel.isHidden = !isShowTitle
+        cell?.index = indexPath.row
+        cell?.delegate = self
         return cell!
+    }
+}
+
+// MARK: - MPHorizonScrollPhotoItemCellDelegate
+extension MPHorizonScrollPhotoView: MPHorizonScrollPhotoItemCellDelegate {
+    /// 显示图片浏览器
+    func showPhotoBrowser(index: Int) {
+        var showIndex = index
+        var photoArr = [MPPhotoModel]()
+        var count: Int = 0
+        for (index1, model) in photoModelArr.enumerated() {
+            if index1 == index {
+                showIndex = count
+            }
+            if model.image != nil {
+                photoArr.append(model)
+                count += 1;
+            }
+        }
+        let dataSource = JXLocalDataSource(numberOfItems: {
+            // 共有多少项
+            return photoArr.count
+        }, localImage: { index -> UIImage? in
+            // 每一项的图片对象
+            return photoArr[index].image
+        })
+        // 视图代理，实现了数字型页码指示器
+        let delegate = JXNumberPageControlDelegate()
+        // 打开浏览器
+        JXPhotoBrowser(dataSource: dataSource, delegate: delegate).show(pageIndex: showIndex)
+    }
+    
+    /// 点击了图片
+    func itemCellDidClickAddButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int) {
+        selectedIndex = index
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.modalPresentationStyle = .fullScreen
+        picker.cameraCaptureMode = .photo
+        picker.delegate = self
+        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)?.topViewController
+        nav?.present(picker, animated: true, completion: nil)
+    }
+    
+    /// 去除了图片
+    func itemCellDidClickRemoveButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int) {
+        if selectedIndex < photoModelArr.count {
+            photoModelArr[index].image = nil
+        }
+        collectionView.reloadData()
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension MPHorizonScrollPhotoView: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            if selectedIndex < photoModelArr.count {
+                photoModelArr[selectedIndex].image = image
+            }
+            collectionView.reloadData()
+        }
     }
 }
 
@@ -74,6 +148,8 @@ protocol MPHorizonScrollPhotoItemCellDelegate: class {
     func itemCellDidClickAddButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int)
     /// 去除了图片
     func itemCellDidClickRemoveButton(_ cell: MPHorizonScrollPhotoItemCell, index: Int)
+    /// 显示图片浏览器
+    func showPhotoBrowser(index: Int)
 }
 
 /// MPHorizonScrollPhotoView的cell
@@ -130,32 +206,26 @@ class MPHorizonScrollPhotoItemCell: UICollectionViewCell {
     }
     
     @objc func remove() {
+        delegate?.itemCellDidClickRemoveButton(self, index: index)
         removeButton.isHidden = true
-        // 交由代理处理
-        if delegate != nil {
-            delegate?.itemCellDidClickRemoveButton(self, index: index)
-            return
-        }
-        model?.image = nil
-        photoView.image = UIImage(named: "add_pic")
+//        // 交由代理处理
+//        if delegate != nil {
+//            return
+//        }
+//        model?.image = nil
+//        photoView.image = UIImage(named: "add_pic")
     }
     
     @objc func pickPicture() {
         if !UIImagePickerController.isSourceTypeAvailable(.camera) {
             return
         }
-        // 交由代理处理点击事件
-        if delegate != nil {
-            delegate?.itemCellDidClickAddButton(self, index: index)
+        if removeButton.isHidden == false {
+            delegate?.showPhotoBrowser(index: index)
             return
         }
-        let picker = UIImagePickerController()
-        picker.sourceType = .camera
-        picker.modalPresentationStyle = .fullScreen
-        picker.cameraCaptureMode = .photo
-        picker.delegate = self
-        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)?.topViewController
-        nav?.present(picker, animated: true, completion: nil)
+        // 交由代理处理点击事件
+        delegate?.itemCellDidClickAddButton(self, index: index)
     }
     
     var removeButton: MPImageButtonView!
