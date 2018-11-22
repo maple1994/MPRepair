@@ -120,17 +120,27 @@ class MPQuCheViewController1: UIViewController {
             MPTipsView.showMsg("请选择图片")
             return
         }
+        // 证件信息
         for model in jianCheModelArr {
             if let img = model.image {
                 picArr.append(img)
-                typeArr.append("get_confirm")
+                typeArr.append("get_info")
                 noteArr.append(model.title ?? "")
             }
         }
+        // 车身
         for model in cheShenModelArr {
             if let img = model.image {
                 picArr.append(img)
                 typeArr.append("get_car")
+                noteArr.append(model.title ?? "")
+            }
+        }
+        // 车损
+        for model in addPhotoView.photoModelArr {
+            if let img = model.image {
+                picArr.append(img)
+                typeArr.append("get_confirm")
                 noteArr.append(model.title ?? "")
             }
         }

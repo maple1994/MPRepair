@@ -27,6 +27,8 @@
 		F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */; };
 		F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */; };
 		F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5437B5F21A3FCDE000194CF /* MPAddPhotoView.swift */; };
+		F545759921A6F29C00482EC6 /* getOrderSucc.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F545759721A6F29C00482EC6 /* getOrderSucc.m4a */; };
+		F545759A21A6F29C00482EC6 /* newOrder.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F545759821A6F29C00482EC6 /* newOrder.m4a */; };
 		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
@@ -144,6 +146,8 @@
 		F5379DC32125C84C0044C8C1 /* MPResetPwdViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPResetPwdViewController.swift; sourceTree = "<group>"; };
 		F5379DC52125C8920044C8C1 /* MPLoginNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLoginNavViewController.swift; sourceTree = "<group>"; };
 		F5437B5F21A3FCDE000194CF /* MPAddPhotoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAddPhotoView.swift; sourceTree = "<group>"; };
+		F545759721A6F29C00482EC6 /* getOrderSucc.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = getOrderSucc.m4a; sourceTree = "<group>"; };
+		F545759821A6F29C00482EC6 /* newOrder.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = newOrder.m4a; sourceTree = "<group>"; };
 		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
@@ -297,6 +301,15 @@
 			path = KeyBoard;
 			sourceTree = "<group>";
 		};
+		F545759621A6F29C00482EC6 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				F545759721A6F29C00482EC6 /* getOrderSucc.m4a */,
+				F545759821A6F29C00482EC6 /* newOrder.m4a */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -405,6 +418,7 @@
 		F5D720572112AC5500585A19 /* MaintainDriverClient */ = {
 			isa = PBXGroup;
 			children = (
+				F545759621A6F29C00482EC6 /* Resource */,
 				F5A6331E2116DA650075548A /* Controller */,
 				F5A6331D2116DA5F0075548A /* Model */,
 				F5A6331C2116DA5A0075548A /* View */,
@@ -704,7 +718,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F545759921A6F29C00482EC6 /* getOrderSucc.m4a in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
+				F545759A21A6F29C00482EC6 /* newOrder.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

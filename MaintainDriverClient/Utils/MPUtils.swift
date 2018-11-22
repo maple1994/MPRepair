@@ -11,7 +11,6 @@ import SlideMenuControllerSwift
 
 /// 工具类
 class MPUtils {
-    
     class func createLine(_ lineColor: UIColor = UIColor.colorWithHexString("#E0E0E0")) -> UIView {
         let line = UIView()
         line.backgroundColor = lineColor
@@ -33,6 +32,27 @@ class MPUtils {
             navs[index].navigationController?.pushViewController(vc, animated: true)
             navVC?.viewControllers.remove(at: navs.count - 1)
         }
+    }
+    
+    /// 播放有新的订单的语音
+    class func playNewOrderSound() {
+        loadSounds("newOrder.m4a")
+    }
+    
+    /// 播放抢单成功的语音
+    class func playGetOrderSuccSound() {
+        loadSounds("getOrderSucc.m4a")
+    }
+    
+    /// 加载语音
+    class func loadSounds(_ name: String) {
+        guard let url = Bundle.main.url(forResource: name, withExtension: nil) else {
+            return
+        }
+        let url1: CFURL = url as CFURL
+        var soundID: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(url1, &soundID)
+        AudioServicesPlaySystemSound(soundID)
     }
 }
 
