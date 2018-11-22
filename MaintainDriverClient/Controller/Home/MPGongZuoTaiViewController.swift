@@ -123,6 +123,7 @@ class MPGongZuoTaiViewController: UIViewController {
         view.showTimeCount()
         MPNetword.requestJson(target: .grab(id: order.id), success: { (json) in
             view.endTimeCount()
+            MPUtils.playGetOrderSuccSound()
             self.selectedModel = order
             NotificationCenter.default.post(name: MP_refresh_ORDER_LIST_SUCC_NOTIFICATION, object: nil)
         }) { (_) in
@@ -133,32 +134,38 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPStartYearCheckViewController(model: MPOrderModel())
-        navigationController?.pushViewController(vc, animated: true)
-//        func showTipsView(_ isShowFailed: Bool) {
-//            let view = MPAuthorityTipView()
-//            view.showFailView = isShowFailed
-//            view.frame = UIScreen.main.bounds
-//            UIApplication.shared.keyWindow?.addSubview(view)
-//        }
-//
-//        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
-//            let vc = MPProfileViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-//            return
-//        }
-//        switch MPUserModel.shared.is_driverinfo {
-//        case .unsubmit:
-//            let vc = MPProfileViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-//        case .checkFailed, .checking:
-//            // 正在审核
-//            showTipsView(false)
-//        case .checkSucc:
-//            // 审核成功
-//            self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
-//            MPOrderSocketManager.shared.connect(socketDelegate: self)
-//        }
+        func showTipsView(_ isShowFailed: Bool) {
+            let view = MPAuthorityTipView()
+            view.showFailView = isShowFailed
+            view.frame = UIScreen.main.bounds
+            UIApplication.shared.keyWindow?.addSubview(view)
+        }
+
+        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
+            let vc = MPProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            return
+        }
+        switch MPUserModel.shared.is_driverinfo {
+        case .unsubmit:
+            let vc = MPProfileViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .checkFailed, .checking:
+            // 正在审核
+            showTipsView(false)
+        case .checkSucc:
+            // 审核成功
+            self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
+            let locationManager = AMapLocationManager()
+            locationManager.requestLocation(withReGeocode: true) { (location, regeocode, error) in
+                guard let coord = location?.coordinate else {
+                    self.tipsView?.label.text = "获取定位失败，请h重新再试"
+                    self.tipsView?.hide(animated: true, afterDelay: 1)
+                    return
+                }
+                MPOrderSocketManager.shared.connect(socketDelegate: self, longitude: coord.longitude, latitude: coord.latitude)
+            }
+        }
     }
     
     // MARK: - View
@@ -246,6 +253,9 @@ extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
             }
         }
         modelArr = arr
+        if arr.count != 0 {
+            MPUtils.playNewOrderSound()
+        }
         tableView.reloadData()
     }
     

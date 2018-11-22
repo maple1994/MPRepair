@@ -26,6 +26,8 @@ class MPOrderSocketManager {
     static let shared = MPOrderSocketManager()
     fileprivate lazy var socket: WebSocket = self.createSocket()
     weak var delegate: MPOrderSocketDelegate?
+    fileprivate var longitude: Double = 0
+    fileprivate var latitude: Double = 0
     
     private init() {
     }
@@ -33,7 +35,7 @@ class MPOrderSocketManager {
     func createSocket() -> WebSocket {
         let stamp: String = String(format: "%.0f", Date().timeIntervalSince1970)
         let sign: String = MD5(MPUserModel.shared.token + stamp)
-        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/"
+        let urlStr = "ws://www.nolasthope.cn/ws/driver/order/\(MPUserModel.shared.userID)/\(stamp)/\(sign)/\(longitude)/\(latitude)/"
         let url: URL = URL(string: urlStr)!
         var request = URLRequest(url: url)
         request.timeoutInterval = 5
@@ -43,10 +45,12 @@ class MPOrderSocketManager {
         return tmp
     }
     
-    /// 连接socket
-    func connect(socketDelegate: MPOrderSocketDelegate?) {
+    /// 连接socket，需要传递经纬度
+    func connect(socketDelegate: MPOrderSocketDelegate?, longitude: Double, latitude: Double) {
         socket.disconnect()
         delegate = socketDelegate
+        self.longitude = longitude
+        self.latitude = latitude
         socket = createSocket()
         socket.connect()
     }
