@@ -19,6 +19,10 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var itemArr: [MPComboItemModel] = [MPComboItemModel]()
     /// 选择的检查项
     fileprivate var selectedItemArr: [MPComboItemModel]?
+    /// 是否显示年检未过
+    fileprivate var isShowFailed: Bool {
+        return orderModel.combo?.is_failure ?? true
+    }
     
     // MARK: - Method
     init(model: MPOrderModel) {
@@ -60,7 +64,11 @@ class MPStartYearCheckViewController: UIViewController {
             make.leading.trailing.top.equalToSuperview()
             make.height.equalTo(105)
         }
-        titleView = MPTitleView(titleArr: ["年检已过", "年检未过"])
+        var titleArr: [String] = ["年检已过"]
+        if isShowFailed {
+            titleArr = ["年检已过", "年检未过"]
+        }
+        titleView = MPTitleView(titleArr: titleArr)
         titleView.delegate = self
         view.addSubview(titleView)
         titleView.snp.makeConstraints { (make) in
@@ -80,21 +88,16 @@ class MPStartYearCheckViewController: UIViewController {
         }
 
         tableView1 = createTbView()
-        tableView2 = createTbView()
-        tableView2.rowHeight = 44
-        
         contentView.addSubview(tableView1)
-        contentView.addSubview(tableView2)
         tableView1.snp.makeConstraints { (make) in
             make.leading.top.bottom.equalToSuperview()
             make.height.equalTo(view).offset(-160)
             make.width.equalTo(mp_screenW)
         }
-        tableView2.snp.makeConstraints { (make) in
-            make.top.bottom.trailing.equalToSuperview()
-            make.leading.equalTo(tableView1.snp.trailing)
-            make.height.equalTo(tableView1)
-            make.width.equalTo(mp_screenW)
+        if !isShowFailed {
+            tableView1.snp.makeConstraints { (make) in
+                make.trailing.equalToSuperview()
+            }
         }
         let confrimButton = UIButton()
         confrimButton.setTitle("确认提交", for: .normal)
@@ -109,29 +112,40 @@ class MPStartYearCheckViewController: UIViewController {
             make.height.equalTo(40)
             make.width.equalTo(160)
         }
-        let btn1 = UIButton()
-        btn1.setTitle("选择项目", for: .normal)
-        btn1.setTitleColor(UIColor.navBlue, for: .normal)
-        btn1.setupBorder(width: 1, borderColor: UIColor.navBlue)
-        btn1.setupCorner(5)
-        btn1.addTarget(self, action: #selector(MPStartYearCheckViewController.selectItem), for: .touchUpInside)
-        let btn2 = UIButton()
-        btn2.setTitle("确认提交", for: .normal)
-        btn2.setTitleColor(UIColor.white, for: .normal)
-        btn2.backgroundColor = UIColor.navBlue
-        btn2.setupCorner(5)
-        btn2.addTarget(self, action: #selector(MPStartYearCheckViewController.failConfirm), for: .touchUpInside)
-        contentView.addSubview(btn1)
-        contentView.addSubview(btn2)
-        btn1.snp.makeConstraints { (make) in
-            make.leading.equalTo(tableView2).offset(18)
-            make.bottom.equalToSuperview().offset(-50)
-            make.height.equalTo(40)
-        }
-        btn2.snp.makeConstraints { (make) in
-            make.trailing.equalTo(tableView2).offset(-18)
-            make.bottom.width.height.equalTo(btn1)
-            make.leading.equalTo(btn1.snp.trailing).offset(15)
+        if isShowFailed {
+            tableView2 = createTbView()
+            tableView2?.rowHeight = 44
+            contentView.addSubview(tableView2!)
+            tableView2?.snp.makeConstraints { (make) in
+                make.top.bottom.trailing.equalToSuperview()
+                make.leading.equalTo(tableView1.snp.trailing)
+                make.height.equalTo(tableView1)
+                make.width.equalTo(mp_screenW)
+            }
+            let btn1 = UIButton()
+            btn1.setTitle("选择项目", for: .normal)
+            btn1.setTitleColor(UIColor.navBlue, for: .normal)
+            btn1.setupBorder(width: 1, borderColor: UIColor.navBlue)
+            btn1.setupCorner(5)
+            btn1.addTarget(self, action: #selector(MPStartYearCheckViewController.selectItem), for: .touchUpInside)
+            let btn2 = UIButton()
+            btn2.setTitle("确认提交", for: .normal)
+            btn2.setTitleColor(UIColor.white, for: .normal)
+            btn2.backgroundColor = UIColor.navBlue
+            btn2.setupCorner(5)
+            btn2.addTarget(self, action: #selector(MPStartYearCheckViewController.failConfirm), for: .touchUpInside)
+            contentView.addSubview(btn1)
+            contentView.addSubview(btn2)
+            btn1.snp.makeConstraints { (make) in
+                make.leading.equalTo(tableView2!).offset(18)
+                make.bottom.equalToSuperview().offset(-50)
+                make.height.equalTo(40)
+            }
+            btn2.snp.makeConstraints { (make) in
+                make.trailing.equalTo(tableView2!).offset(-18)
+                make.bottom.width.height.equalTo(btn1)
+                make.leading.equalTo(btn1.snp.trailing).offset(15)
+            }
         }
     }
     
@@ -203,7 +217,7 @@ class MPStartYearCheckViewController: UIViewController {
     @objc fileprivate func selectItem() {
         let selectItemView = MPSelectItemView.init(itemArr: itemArr) { [weak self] (selectedArr) in
             self?.selectedItemArr = selectedArr
-            self?.tableView2.reloadData()
+            self?.tableView2?.reloadData()
         }
         selectItemView.show()
     }
@@ -244,7 +258,7 @@ class MPStartYearCheckViewController: UIViewController {
     fileprivate var titleView: MPTitleView!
     fileprivate var contentView: UIScrollView!
     fileprivate var tableView1: UITableView!
-    fileprivate var tableView2: UITableView!
+    fileprivate var tableView2: UITableView?
     fileprivate lazy var horizontalPhotoView: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: confirmPhotoArr, isShowTitle: true)
     fileprivate lazy var horizontalPhotoView2: MPHorizonScrollPhotoView = MPHorizonScrollPhotoView(modelArr: failedPhotoArr, isShowTitle: true)
     fileprivate var feekbackView: MPFeedbackView?

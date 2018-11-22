@@ -209,6 +209,9 @@ class MPComboModel {
     var name: String = ""
     var detail: String = ""
     var comboitem_set: [MPComboItemModel] = [MPComboItemModel]()
+    /// 该套餐是否可以年检失败
+    /// true显示年检未过，false不显示年检未过
+    var is_failure: Bool = true
     
     class func toModel(_ dic1: Any?) -> MPComboModel? {
         guard let dic = dic1 as? [String: Any] else {
@@ -223,6 +226,7 @@ class MPComboModel {
         model.update_time = toString(dic["update_time"])
         model.name = toString(dic["name"])
         model.detail = toString(dic["detail"])
+        model.is_failure = (dic["is_failure"] as? Bool) ?? true
         if let set = dic["comboitem_set"] as? [String: Any] {
             var arr = [MPComboItemModel]()
             for tmp in set {
