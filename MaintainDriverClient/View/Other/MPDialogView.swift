@@ -38,6 +38,7 @@ class MPDialogView: UIView {
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
         titleLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "提现成功！", textColor: UIColor.mpDarkGray)
+        titleLabel.numberOfLines = 0
         confirmButton = UIButton()
         confirmButton.setTitle("确认", for: .normal)
         confirmButton.setTitleColor(UIColor.white, for: .normal)

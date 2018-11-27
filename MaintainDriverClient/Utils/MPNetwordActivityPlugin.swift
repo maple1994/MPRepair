@@ -47,7 +47,10 @@ class MPNetwordActivityPlugin: PluginType {
                 if let msg = json["msg"] as? String {
                     switch target {
                     case MPApiType.tiXian:
-                        MPDialogView.showDialog(msg)
+                        let view = MPAuthorityTipView()
+                        view.setup(title: "提现失败", subTitle: msg)
+                        view.frame = UIScreen.main.bounds
+                        UIApplication.shared.keyWindow?.addSubview(view)
                     default:
                         MPTipsView.showMsg(msg)
                     }
@@ -55,7 +58,7 @@ class MPNetwordActivityPlugin: PluginType {
                 }
             case 300:
                 if let msg = json["msg"] as? String {
-                    MPTipsView.showMsg(msg)
+//                    MPTipsView.showMsg(msg)
                     MPPrint("300-\(target)-\(msg)")
                 }
                 if MPUserModel.shared.isLogin {                

@@ -18,6 +18,12 @@ class MPAuthorityTipView: UIView {
             succView.isHidden = showFailView
         }
     }
+    
+    func setup(title: String, subTitle: String) {
+        titleLabel?.text = title
+        subTitleLabel?.text = subTitle
+        showFailView = false
+    }
 
     init() {
         super.init(frame: CGRect.zero)
@@ -44,7 +50,6 @@ class MPAuthorityTipView: UIView {
         succView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
             make.width.equalTo(280)
-            make.height.equalTo(216)
         }
         failView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -76,6 +81,8 @@ class MPAuthorityTipView: UIView {
         iconImageView.image = UIImage(named: "authority_tip")
         let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "恭喜您，预约培训成功！", textColor: UIColor.mpDarkGray)
         let subTitleLabel = UILabel(font: UIFont.mpSmallFont, text: "我们将会在1-2个工作日内联系您", textColor: UIColor.mpLightGary)
+        subTitleLabel.textAlignment = .center
+        subTitleLabel.numberOfLines = 0
         let confirmButton = UIButton()
         confirmButton.setTitle("确认", for: .normal)
         confirmButton.setTitleColor(UIColor.white, for: .normal)
@@ -88,7 +95,8 @@ class MPAuthorityTipView: UIView {
         succView.addSubview(titleLabel)
         succView.addSubview(subTitleLabel)
         succView.addSubview(confirmButton)
-        
+        self.titleLabel = titleLabel
+        self.subTitleLabel = subTitleLabel
         iconImageView.snp.makeConstraints { (make) in
             make.centerX.equalToSuperview()
             make.top.equalToSuperview().offset(18)
@@ -100,7 +108,8 @@ class MPAuthorityTipView: UIView {
             make.top.equalTo(iconImageView.snp.bottom).offset(14)
         }
         subTitleLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
             make.top.equalTo(titleLabel.snp.bottom).offset(5)
         }
         confirmButton.snp.makeConstraints { (make) in
@@ -108,6 +117,7 @@ class MPAuthorityTipView: UIView {
             make.top.equalTo(subTitleLabel.snp.bottom).offset(18)
             make.width.equalTo(110)
             make.height.equalTo(30)
+            make.bottom.equalToSuperview().offset(-15)
         }
     }
     
@@ -171,6 +181,8 @@ class MPAuthorityTipView: UIView {
         }
     }
     
+    fileprivate var titleLabel: UILabel?
+    fileprivate var subTitleLabel: UILabel?
     fileprivate var succView: UIView!
     fileprivate var failView: UIView!
 }
