@@ -194,10 +194,10 @@ class MPTiXianViewController: UIViewController {
             MPTipsView.showMsg("请收入支付宝账号")
             return
         }
-        if banlance < money {
-            MPTipsView.showMsg("余额不足")
-            return
-        }
+//        if banlance < money {
+//            MPTipsView.showMsg("余额不足")
+//            return
+//        }
         UserDefaults.standard.set(account, forKey: MP_ALIPAY_ACCOUNT_KEY)
         MPNetword.requestJson(target: .tiXian(money: money, via: "alipay", aliAccunt: account, aliUserName: acountUserName), success: { (json) in
             self.banlance -= money

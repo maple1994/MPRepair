@@ -30,6 +30,33 @@
 		F545759921A6F29C00482EC6 /* getOrderSucc.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F545759721A6F29C00482EC6 /* getOrderSucc.m4a */; };
 		F545759A21A6F29C00482EC6 /* newOrder.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F545759821A6F29C00482EC6 /* newOrder.m4a */; };
 		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
+		F580064C21A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */; };
+		F580064D21A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */; };
+		F580064E21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062A21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift */; };
+		F580064F21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062B21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift */; };
+		F580065021A78C9100072F35 /* JXPhotoBrowserProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062D21A78C9100072F35 /* JXPhotoBrowserProgressView.swift */; };
+		F580065121A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062E21A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift */; };
+		F580065221A78C9100072F35 /* JXNetworkingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062F21A78C9100072F35 /* JXNetworkingDataSource.swift */; };
+		F580065321A78C9100072F35 /* JXRawImageDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063021A78C9100072F35 /* JXRawImageDataSource.swift */; };
+		F580065421A78C9100072F35 /* JXPhotoLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063121A78C9100072F35 /* JXPhotoLoader.swift */; };
+		F580065521A78C9100072F35 /* JXPhotoBrowserNetworkingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063221A78C9100072F35 /* JXPhotoBrowserNetworkingCell.swift */; };
+		F580065621A78C9100072F35 /* UICollectionView+JX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063421A78C9100072F35 /* UICollectionView+JX.swift */; };
+		F580065721A78C9100072F35 /* UIViewController+JX.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063521A78C9100072F35 /* UIViewController+JX.swift */; };
+		F580065821A78C9100072F35 /* JXNamespace.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063621A78C9100072F35 /* JXNamespace.swift */; };
+		F580065921A78C9100072F35 /* JXPhotoBrowserZoomAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063821A78C9100072F35 /* JXPhotoBrowserZoomAnimator.swift */; };
+		F580065A21A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063921A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift */; };
+		F580065B21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063A21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift */; };
+		F580065C21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063B21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift */; };
+		F580065D21A78C9100072F35 /* JXPhotoBrowserZoomDismissingAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063C21A78C9100072F35 /* JXPhotoBrowserZoomDismissingAnimator.swift */; };
+		F580065E21A78C9100072F35 /* JXPhotoBrowserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063E21A78C9100072F35 /* JXPhotoBrowserDelegate.swift */; };
+		F580065F21A78C9100072F35 /* JXPhotoBrowserTransitioningDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580063F21A78C9100072F35 /* JXPhotoBrowserTransitioningDelegate.swift */; };
+		F580066021A78C9100072F35 /* JXPhotoBrowserDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064021A78C9100072F35 /* JXPhotoBrowserDataSource.swift */; };
+		F580066121A78C9100072F35 /* JXLocalDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064121A78C9100072F35 /* JXLocalDataSource.swift */; };
+		F580066221A78C9100072F35 /* JXPhotoBrowserBaseDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064221A78C9100072F35 /* JXPhotoBrowserBaseDelegate.swift */; };
+		F580066321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift */; };
+		F580066421A78C9100072F35 /* JXNumberPageControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064521A78C9100072F35 /* JXNumberPageControlDelegate.swift */; };
+		F580066521A78C9100072F35 /* JXDefaultPageControlDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064621A78C9100072F35 /* JXDefaultPageControlDelegate.swift */; };
+		F580066621A78C9100072F35 /* JXPhotoBrowser.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580064721A78C9100072F35 /* JXPhotoBrowser.swift */; };
 		F583EA5221400E480071CE9B /* MPPhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F583EA5121400E480071CE9B /* MPPhotoModel.swift */; };
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
@@ -149,6 +176,33 @@
 		F545759721A6F29C00482EC6 /* getOrderSucc.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = getOrderSucc.m4a; sourceTree = "<group>"; };
 		F545759821A6F29C00482EC6 /* newOrder.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = newOrder.m4a; sourceTree = "<group>"; };
 		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
+		F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeTransitioning.swift; sourceTree = "<group>"; };
+		F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomTransitioning.swift; sourceTree = "<group>"; };
+		F580062A21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserPresentationController.swift; sourceTree = "<group>"; };
+		F580062B21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserTransitioning.swift; sourceTree = "<group>"; };
+		F580062D21A78C9100072F35 /* JXPhotoBrowserProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserProgressView.swift; sourceTree = "<group>"; };
+		F580062E21A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserRawButtonCell.swift; sourceTree = "<group>"; };
+		F580062F21A78C9100072F35 /* JXNetworkingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNetworkingDataSource.swift; sourceTree = "<group>"; };
+		F580063021A78C9100072F35 /* JXRawImageDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXRawImageDataSource.swift; sourceTree = "<group>"; };
+		F580063121A78C9100072F35 /* JXPhotoLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoLoader.swift; sourceTree = "<group>"; };
+		F580063221A78C9100072F35 /* JXPhotoBrowserNetworkingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserNetworkingCell.swift; sourceTree = "<group>"; };
+		F580063421A78C9100072F35 /* UICollectionView+JX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView+JX.swift"; sourceTree = "<group>"; };
+		F580063521A78C9100072F35 /* UIViewController+JX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+JX.swift"; sourceTree = "<group>"; };
+		F580063621A78C9100072F35 /* JXNamespace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNamespace.swift; sourceTree = "<group>"; };
+		F580063821A78C9100072F35 /* JXPhotoBrowserZoomAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomAnimator.swift; sourceTree = "<group>"; };
+		F580063921A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadePresentingAnimator.swift; sourceTree = "<group>"; };
+		F580063A21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeDismissingAnimator.swift; sourceTree = "<group>"; };
+		F580063B21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomPresentingAnimator.swift; sourceTree = "<group>"; };
+		F580063C21A78C9100072F35 /* JXPhotoBrowserZoomDismissingAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomDismissingAnimator.swift; sourceTree = "<group>"; };
+		F580063E21A78C9100072F35 /* JXPhotoBrowserDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserDelegate.swift; sourceTree = "<group>"; };
+		F580063F21A78C9100072F35 /* JXPhotoBrowserTransitioningDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserTransitioningDelegate.swift; sourceTree = "<group>"; };
+		F580064021A78C9100072F35 /* JXPhotoBrowserDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserDataSource.swift; sourceTree = "<group>"; };
+		F580064121A78C9100072F35 /* JXLocalDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXLocalDataSource.swift; sourceTree = "<group>"; };
+		F580064221A78C9100072F35 /* JXPhotoBrowserBaseDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserBaseDelegate.swift; sourceTree = "<group>"; };
+		F580064321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserBaseCell.swift; sourceTree = "<group>"; };
+		F580064521A78C9100072F35 /* JXNumberPageControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXNumberPageControlDelegate.swift; sourceTree = "<group>"; };
+		F580064621A78C9100072F35 /* JXDefaultPageControlDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXDefaultPageControlDelegate.swift; sourceTree = "<group>"; };
+		F580064721A78C9100072F35 /* JXPhotoBrowser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowser.swift; sourceTree = "<group>"; };
 		F583EA5121400E480071CE9B /* MPPhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPhotoModel.swift; sourceTree = "<group>"; };
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
@@ -310,6 +364,96 @@
 			path = Resource;
 			sourceTree = "<group>";
 		};
+		F580062521A78C9100072F35 /* JXPhotoBrowser */ = {
+			isa = PBXGroup;
+			children = (
+				F580062621A78C9100072F35 /* Core */,
+			);
+			path = JXPhotoBrowser;
+			sourceTree = "<group>";
+		};
+		F580062621A78C9100072F35 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				F580062721A78C9100072F35 /* Transition */,
+				F580062C21A78C9100072F35 /* Networking */,
+				F580063321A78C9100072F35 /* Utils */,
+				F580063721A78C9100072F35 /* Animator */,
+				F580063D21A78C9100072F35 /* Protocol */,
+				F580064121A78C9100072F35 /* JXLocalDataSource.swift */,
+				F580064221A78C9100072F35 /* JXPhotoBrowserBaseDelegate.swift */,
+				F580064321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift */,
+				F580064421A78C9100072F35 /* Enhance */,
+				F580064721A78C9100072F35 /* JXPhotoBrowser.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		F580062721A78C9100072F35 /* Transition */ = {
+			isa = PBXGroup;
+			children = (
+				F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */,
+				F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */,
+				F580062A21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift */,
+				F580062B21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift */,
+			);
+			path = Transition;
+			sourceTree = "<group>";
+		};
+		F580062C21A78C9100072F35 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				F580062D21A78C9100072F35 /* JXPhotoBrowserProgressView.swift */,
+				F580062E21A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift */,
+				F580062F21A78C9100072F35 /* JXNetworkingDataSource.swift */,
+				F580063021A78C9100072F35 /* JXRawImageDataSource.swift */,
+				F580063121A78C9100072F35 /* JXPhotoLoader.swift */,
+				F580063221A78C9100072F35 /* JXPhotoBrowserNetworkingCell.swift */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
+		F580063321A78C9100072F35 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				F580063421A78C9100072F35 /* UICollectionView+JX.swift */,
+				F580063521A78C9100072F35 /* UIViewController+JX.swift */,
+				F580063621A78C9100072F35 /* JXNamespace.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		F580063721A78C9100072F35 /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				F580063821A78C9100072F35 /* JXPhotoBrowserZoomAnimator.swift */,
+				F580063921A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift */,
+				F580063A21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift */,
+				F580063B21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift */,
+				F580063C21A78C9100072F35 /* JXPhotoBrowserZoomDismissingAnimator.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		F580063D21A78C9100072F35 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				F580063E21A78C9100072F35 /* JXPhotoBrowserDelegate.swift */,
+				F580063F21A78C9100072F35 /* JXPhotoBrowserTransitioningDelegate.swift */,
+				F580064021A78C9100072F35 /* JXPhotoBrowserDataSource.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		F580064421A78C9100072F35 /* Enhance */ = {
+			isa = PBXGroup;
+			children = (
+				F580064521A78C9100072F35 /* JXNumberPageControlDelegate.swift */,
+				F580064621A78C9100072F35 /* JXDefaultPageControlDelegate.swift */,
+			);
+			path = Enhance;
+			sourceTree = "<group>";
+		};
 		F5A633192116DA530075548A /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +515,7 @@
 		F5A633352116FD3B0075548A /* Frameword */ = {
 			isa = PBXGroup;
 			children = (
+				F580062521A78C9100072F35 /* JXPhotoBrowser */,
 				F50D4DDE211823F5006C50C7 /* LBBlurredImage */,
 				F5A63336211700BA0075548A /* FDTemplateLayoutcell */,
 			);
@@ -790,7 +935,6 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-MaintainDriverClient/Pods-MaintainDriverClient-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/JXPhotoBrowser/JXPhotoBrowser.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
@@ -806,7 +950,6 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManagerSwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JXPhotoBrowser.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
@@ -868,9 +1011,13 @@
 			files = (
 				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
 				F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */,
+				F580065021A78C9100072F35 /* JXPhotoBrowserProgressView.swift in Sources */,
 				F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */,
 				F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */,
 				F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */,
+				F580066521A78C9100072F35 /* JXDefaultPageControlDelegate.swift in Sources */,
+				F580065321A78C9100072F35 /* JXRawImageDataSource.swift in Sources */,
+				F580065821A78C9100072F35 /* JXNamespace.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				F5DF736D211A93E300B9F154 /* MPOrderConfirmViewController.swift in Sources */,
@@ -881,18 +1028,30 @@
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
 				F58A6772216EECFF00948A7A /* MPTiXianTableViewCell.swift in Sources */,
 				F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */,
+				F580065E21A78C9100072F35 /* JXPhotoBrowserDelegate.swift in Sources */,
+				F580065421A78C9100072F35 /* JXPhotoLoader.swift in Sources */,
+				F580064E21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift in Sources */,
+				F580065C21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
+				F580065A21A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
 				F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */,
+				F580065721A78C9100072F35 /* UIViewController+JX.swift in Sources */,
 				F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */,
+				F580065621A78C9100072F35 /* UICollectionView+JX.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
+				F580066421A78C9100072F35 /* JXNumberPageControlDelegate.swift in Sources */,
 				F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */,
+				F580065921A78C9100072F35 /* JXPhotoBrowserZoomAnimator.swift in Sources */,
+				F580065B21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift in Sources */,
 				F5DF738B211A94E400B9F154 /* MPInputTextFiled.swift in Sources */,
 				F5DF739A211A953A00B9F154 /* MPMunuViewCell.swift in Sources */,
+				F580066621A78C9100072F35 /* JXPhotoBrowser.swift in Sources */,
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
 				F5DF7395211A94E400B9F154 /* MPOrderTableViewCell.swift in Sources */,
+				F580065F21A78C9100072F35 /* JXPhotoBrowserTransitioningDelegate.swift in Sources */,
 				F5DF736F211A93E300B9F154 /* MPYiJieDanViewController.swift in Sources */,
 				F51508AE213BBF59006B49E2 /* MPMingXiModel.swift in Sources */,
 				F5031F97212126E500329BC0 /* MPConstant.swift in Sources */,
@@ -900,6 +1059,8 @@
 				F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */,
 				F5E7FC67215E1EF500617981 /* MPDialogView.swift in Sources */,
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
+				F580065121A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift in Sources */,
+				F580066021A78C9100072F35 /* JXPhotoBrowserDataSource.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,
@@ -908,6 +1069,7 @@
 				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
 				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
+				F580066121A78C9100072F35 /* JXLocalDataSource.swift in Sources */,
 				F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
 				F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */,
@@ -920,23 +1082,31 @@
 				F51E9027213668F500ED1B44 /* MPNetwordActivityPlugin.swift in Sources */,
 				F515A0C521789D64004330C9 /* WLDecimalKeyboard.m in Sources */,
 				F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */,
+				F580065D21A78C9100072F35 /* JXPhotoBrowserZoomDismissingAnimator.swift in Sources */,
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,
 				F5DF738A211A94E400B9F154 /* MPMingXiTableViewCell.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
 				F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */,
 				F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */,
 				F5DF7372211A93E300B9F154 /* MPSettingViewController.swift in Sources */,
+				F580065521A78C9100072F35 /* JXPhotoBrowserNetworkingCell.swift in Sources */,
+				F580066221A78C9100072F35 /* JXPhotoBrowserBaseDelegate.swift in Sources */,
 				F5DF7371211A93E300B9F154 /* MPGongZuoTaiViewController.swift in Sources */,
+				F580065221A78C9100072F35 /* JXNetworkingDataSource.swift in Sources */,
+				F580066321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift in Sources */,
+				F580064F21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift in Sources */,
 				F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */,
 				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5DF7373211A93E300B9F154 /* MPLoginViewController.swift in Sources */,
+				F580064C21A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift in Sources */,
 				F5DF738F211A94E400B9F154 /* MPTwoPhotoTableViewCell.swift in Sources */,
 				F5DF7391211A94E400B9F154 /* MPYearCheckTitleView.swift in Sources */,
 				F50D4DEE21185668006C50C7 /* MPQuCheViewController1.swift in Sources */,
 				F5DF7375211A93E300B9F154 /* MPNavigationController.swift in Sources */,
 				F5DF736B211A93E300B9F154 /* MPAccountViewController.swift in Sources */,
 				F5DF739F211AEF2200B9F154 /* MPCheckBoxOrderTableViewCell.swift in Sources */,
+				F580064D21A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

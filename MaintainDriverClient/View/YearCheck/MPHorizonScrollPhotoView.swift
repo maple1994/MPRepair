@@ -8,7 +8,6 @@
 
 import UIKit
 import SlideMenuControllerSwift
-import JXPhotoBrowser
 
 /// 水平滚动的图片View
 class MPHorizonScrollPhotoView: UIView {

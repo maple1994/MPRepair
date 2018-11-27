@@ -8,7 +8,6 @@
 
 import UIKit
 import SlideMenuControllerSwift
-import JXPhotoBrowser
 
 protocol MPAddPhotoViewDelegate: class {
     func addPhotoViewNeedReload()

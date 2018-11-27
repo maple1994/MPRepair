@@ -46,7 +46,7 @@ enum MPApiType {
     /// 年检已过
     case yearCheckSucc(id: Int, number: Int, picArr: [UIImage]?, typeArr: [String]?, note: [String]?)
     /// 年检未过
-    case yearCheckFail(id: Int, number: Int, image1: UIImage, note1: String, image2: UIImage, note2: String, number_item: Int, itemIDArr: [Int], priceArr: [Double])
+    case yearCheckFail(id: Int, number: Int, image1: UIImage, note1: String, number_item: Int, itemIDArr: [Int], priceArr: [Double])
     /// 到达还车
     case arriveHuanChe(id: Int)
     /// 确认还车
@@ -260,16 +260,13 @@ extension MPApiType: TargetType {
             param["number"] = number
             setup(param: &param, picArr: picArr, typeArr: typeArr, note: note)
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .yearCheckFail(id, number, image1, note1, image2, note2, number_item, itemIDArr, priceArr):
+        case let .yearCheckFail(id, number, image1, note1, number_item, itemIDArr, priceArr):
             var param = defaultParam
             param["id"] = id
             param["number"] = number
             param["pic1"] = image1.base64 ?? ""
             param["type1"] = "survey_fail_upload"
             param["note1"] = note1
-            param["pic2"] = image2.base64 ?? ""
-            param["type2"] = "survey_fail_upload"
-            param["note2"] = note2
             param["number_item"] = number_item
             for (index, ID) in itemIDArr.enumerated() {
                 param["item_id\(index + 1)"] = ID

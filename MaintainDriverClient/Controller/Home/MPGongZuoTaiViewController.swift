@@ -141,16 +141,17 @@ class MPGongZuoTaiViewController: UIViewController {
             UIApplication.shared.keyWindow?.addSubview(view)
         }
 
-        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
-            let vc = MPProfileViewController()
-            navigationController?.pushViewController(vc, animated: true)
-            return
-        }
+//        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
+//            let vc = MPProfileViewController()
+//            navigationController?.pushViewController(vc, animated: true)
+//            return
+//        }
         switch MPUserModel.shared.is_driverinfo {
-        case .unsubmit:
-            let vc = MPProfileViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        case .checkFailed, .checking:
+        case .unsubmit, .checkFailed:
+//            let vc = MPProfileViewController()
+//            navigationController?.pushViewController(vc, animated: true)
+            showTipsView(true)
+        case .checking:
             // 正在审核
             showTipsView(false)
         case .checkSucc:

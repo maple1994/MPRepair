@@ -19,7 +19,6 @@ pod 'IQKeyboardManagerSwift'
 pod 'SwiftHash'
 pod 'AlipaySDK_MI'
 pod 'Starscream'
-pod 'JXPhotoBrowser'
 
 
   # Pods for MaintainDriverClient

@@ -39,13 +39,18 @@ class MPNetwordActivityPlugin: PluginType {
                 return
             }
             switch code {
-            case 100:
-                if let msg = json["msg"] as? String {
-                    MPPrint("100-\(target)-\(msg)")
-                }
+//            case 100:
+//                if let msg = json["msg"] as? String {
+//                    MPPrint("100-\(target)-\(msg)")
+//                }
             case 200:
                 if let msg = json["msg"] as? String {
-                    MPTipsView.showMsg(msg)
+                    switch target {
+                    case MPApiType.tiXian:
+                        MPDialogView.showDialog(msg)
+                    default:
+                        MPTipsView.showMsg(msg)
+                    }
                     MPPrint("200-\(target)-\(msg)")
                 }
             case 300:

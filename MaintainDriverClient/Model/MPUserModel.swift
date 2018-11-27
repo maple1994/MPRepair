@@ -82,6 +82,7 @@ class MPUserModel: Codable {
     
     @objc fileprivate func refreshTokenSucc() {
         startTimer()
+//        getUserInfo(succ: nil, fail: nil)
         MPOrderSocketManager.shared.reconnect()
         MPListenSocketManager.shared.reconnect()
         while !MPNetword.requestQueue.isEmpty {

@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import SlideMenuControllerSwift
 
 /// 权限提示View
 class MPAuthorityTipView: UIView {
-    
+    /// 是否显示失败的提示框
     var showFailView: Bool = true {
         didSet {
             failView.isHidden = !showFailView
@@ -57,10 +58,10 @@ class MPAuthorityTipView: UIView {
     }
     
     @objc fileprivate func peiXun() {
-        MPNetword.requestJson(target: .askOrderCertification, success: { (json) in
-            self.succView.isHidden = false
-            self.failView.isHidden = true
-        })
+        let vc = MPProfileViewController()
+        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)
+        nav?.pushViewController(vc, animated: true)
+        dimiss()
     }
     
     fileprivate func setupSuccView() {

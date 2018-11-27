@@ -12,12 +12,6 @@ PODS:
   - AMapSearch (6.5.0):
     - AMapFoundation (~> 1.4)
   - IQKeyboardManagerSwift (6.2.0)
-  - JXPhotoBrowser (2.1.0):
-    - JXPhotoBrowser/Kingfisher (= 2.1.0)
-  - JXPhotoBrowser/Core (2.1.0)
-  - JXPhotoBrowser/Kingfisher (2.1.0):
-    - JXPhotoBrowser/Core
-    - Kingfisher
   - Kingfisher (4.10.1)
   - MBProgressHUD (1.1.0)
   - MJRefresh (3.1.15.7)
@@ -40,7 +34,6 @@ DEPENDENCIES:
   - AMapNavi
   - AMapSearch
   - IQKeyboardManagerSwift
-  - JXPhotoBrowser
   - Kingfisher
   - MBProgressHUD
   - MJRefresh
@@ -61,7 +54,6 @@ SPEC REPOS:
     - AMapNavi
     - AMapSearch
     - IQKeyboardManagerSwift
-    - JXPhotoBrowser
     - Kingfisher
     - MBProgressHUD
     - MJRefresh
@@ -82,7 +74,6 @@ SPEC CHECKSUMS:
   AMapNavi: 2bc469d0523c2f66a5fcacb6947c7eb745ce9e64
   AMapSearch: c22d8c98e04aad30615834e567781ec1367c4f36
   IQKeyboardManagerSwift: b07ccf9d8cafe993dcd6cb794eb4ba34611a0c4e
-  JXPhotoBrowser: 846536cb01b9fb5db4debb4bc7fa2be4e6e6d340
   Kingfisher: c148cd7b47ebde9989f6bc7c27dcaa79d81279a0
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MJRefresh: 697f8ec75ebdbe9207767bb682cf0f51b0d8a41f
@@ -94,6 +85,6 @@ SPEC CHECKSUMS:
   SwiftHash: 6d312abe61c8359bdef8d0093642f3a70b1c17ba
   TZImagePickerController: 29b279caee3309cbaa04ef1384b036ec90297f3f
 
-PODFILE CHECKSUM: 9b0972147e3eea32211ba1a2292f267a1301502e
+PODFILE CHECKSUM: 4d174c1d54c2b4d381283c00f1ea1e1f00fb00d2
 
 COCOAPODS: 1.5.3

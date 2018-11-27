@@ -45,7 +45,11 @@ class MPOrderConfirmViewController: UIViewController {
         tableView.dataSource = self
         tableView.backgroundColor = UIColor.viewBgColor
         view.addSubview(tableView)
-        tableView.tableFooterView = MPFooterConfirmView(title: "确认取车", target: self, action: #selector(MPOrderConfirmViewController.confirm))
+        var title = "确认取车"
+        if orderModel.state == .nianJianing {
+            title = "前往年检"
+        }
+        tableView.tableFooterView = MPFooterConfirmView(title: title, target: self, action: #selector(MPOrderConfirmViewController.confirm))
         
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -78,7 +82,6 @@ class MPOrderConfirmViewController: UIViewController {
     }
     
     fileprivate var tableView: UITableView!
-    fileprivate var confrimButton: UIButton!
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource

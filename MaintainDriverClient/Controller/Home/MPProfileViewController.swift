@@ -315,11 +315,19 @@ class MPProfileViewController: UIViewController {
         let hud = MPTipsView.showLoadingView("正在上传")
         MPNetword.requestJson(target: .completeDriverInfo(name: nameLabel.text!, idCard: idCardNumberLabel.text!, pic_idcard_front: uploadItemArr[0].image!, pic_idcard_back: uploadItemArr[1].image!, pic_driver: uploadItemArr[2].image!, pic_user: uploadItemArr[3].image!, pic_drive_front: uploadItemArr[4].image!, pic_drive_back: uploadItemArr[5].image!), success: { (_) in
             hud?.hide(animated: true)
-            self.navigationController?.popViewController(animated: true)
             MPUserModel.shared.is_driverinfo = MPProfileState.checking
+            self.showTipsView()
+            self.navigationController?.popViewController(animated: true)
         }) { (_) in
             hud?.hide(animated: true)
         }
+    }
+    
+    fileprivate func showTipsView() {
+        let view = MPAuthorityTipView()
+        view.showFailView = false
+        view.frame = UIScreen.main.bounds
+        UIApplication.shared.keyWindow?.addSubview(view)
     }
     
     // MARK: - View
