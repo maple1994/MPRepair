@@ -275,6 +275,8 @@ extension MPUserModel {
             picUrl = model.picUrl
             point = model.point
             isPass = model.isPass
+            is_driverinfo = model.is_driverinfo
+            score = model.score
             return true
         }
         return false

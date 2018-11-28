@@ -23,6 +23,11 @@ class MPGongZuoTaiViewController: UIViewController {
     weak var delegate: MPGongZuoTaiViewControllerDelegate?
     fileprivate var selectedModel: MPOrderModel?
     fileprivate var tipsView: MBProgressHUD?
+    fileprivate lazy var location: CLLocationManager = {
+        let loc = CLLocationManager()
+        loc.delegate = self
+        return loc
+    }()
     
     /// 下车
     func xiaCheAction() {
@@ -155,17 +160,30 @@ class MPGongZuoTaiViewController: UIViewController {
             // 正在审核
             showTipsView(false)
         case .checkSucc:
-            // 审核成功
-            self.tipsView = MPTipsView.showLoadingView("获取订单列中...")
-            let locationManager = AMapLocationManager()
-            locationManager.requestLocation(withReGeocode: true) { (location, regeocode, error) in
-                guard let coord = location?.coordinate else {
-                    self.tipsView?.label.text = "获取定位失败，请h重新再试"
-                    self.tipsView?.hide(animated: true, afterDelay: 1)
-                    return
-                }
-                MPOrderSocketManager.shared.connect(socketDelegate: self, longitude: coord.longitude, latitude: coord.latitude)
+            let status = CLLocationManager.authorizationStatus()
+            switch status {
+            case .notDetermined, .restricted:
+                location.requestWhenInUseAuthorization()
+            case .denied:
+                MPTipsView.showMsg("请去设置开启定位")
+            default:
+                // 审核成功
+                connctServer()
             }
+        }
+    }
+    
+    /// 建立长连接
+    fileprivate func connctServer() {
+        tipsView = MPTipsView.showLoadingView("获取订单列中...")
+        let locationManager = AMapLocationManager()
+        locationManager.requestLocation(withReGeocode: true) { (location, regeocode, error) in
+            guard let coord = location?.coordinate else {
+                self.tipsView?.label.text = "获取定位失败，请重新再试"
+                self.tipsView?.hide(animated: true, afterDelay: 1)
+                return
+            }
+            MPOrderSocketManager.shared.connect(socketDelegate: self, longitude: coord.longitude, latitude: coord.latitude)
         }
     }
     
@@ -175,6 +193,17 @@ class MPGongZuoTaiViewController: UIViewController {
     fileprivate var stealButton: UIButton!
     /// 出车
     fileprivate var chuCheButton: UIButton!
+}
+
+extension MPGongZuoTaiViewController: CLLocationManagerDelegate {
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedAlways, .authorizedWhenInUse:
+            connctServer()
+        default:
+            break
+        }
+    }
 }
 
 // MARK: - UITableViewDelegate, UITableViewDataSource
