@@ -60,10 +60,6 @@ class MPGongZuoTaiViewController: UIViewController {
     
     @objc fileprivate func loginSucc() {
         loadData()
-        if  MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
-            let vc = MPProfileViewController()
-            navigationController?.pushViewController(vc, animated: true)
-        }
     }
     
     fileprivate func setupUI() {
