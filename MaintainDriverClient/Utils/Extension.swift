@@ -178,6 +178,16 @@ extension String {
     }
 }
 
+extension UITextView {
+    /// 去掉左右空格的text
+    var trimText: String {
+        get {
+            let txt = text ?? ""
+            return txt.trimmingCharacters(in: CharacterSet.whitespaces)
+        }
+    }
+}
+
 extension UITextField {
     /// 去掉左右空格的text
     var trimText: String {

@@ -77,12 +77,12 @@ class MPEditView: UIView {
 extension MPEditView: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
-            if textView.text.isEmpty {
+            if textView.trimText.isEmpty {
                 MPTipsView.showMsg("内容不能为空！")
                 return false
             }
             textView.resignFirstResponder()
-            callBack?(textView.text)
+            callBack?(textView.trimText)
             return false
         }
         return true
