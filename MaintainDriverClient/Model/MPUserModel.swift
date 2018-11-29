@@ -63,7 +63,6 @@ class MPUserModel: Codable {
     }
     /// 账户余额
     var balance: Double?
-    fileprivate weak var timer: Timer?
     
     // MARK: - Method
     private init() {
@@ -73,7 +72,6 @@ class MPUserModel: Codable {
             userID = 0
             token = "0"
         }
-        NotificationCenter.default.addObserver(self, selector: #selector(MPUserModel.refreshTokenSucc), name: MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION, object: nil)
     }
     
     deinit {
@@ -81,20 +79,13 @@ class MPUserModel: Codable {
     }
     
     @objc fileprivate func refreshTokenSucc() {
-        startTimer()
-//        getUserInfo(succ: nil, fail: nil)
         MPOrderSocketManager.shared.reconnect()
         MPListenSocketManager.shared.reconnect()
-        while !MPNetword.requestQueue.isEmpty {
-            let block = MPNetword.requestQueue.dequeue()
-            block?()
-        }
     }
     
     /// 登录成功
     func loginSucc() {
         serilization()
-        startTimer()
         NotificationCenter.default.post(name: MP_LOGIN_NOTIFICATION, object: nil)
     }
     
@@ -103,8 +94,6 @@ class MPUserModel: Codable {
         // 断开链接
         MPListenSocketManager.shared.disconnet()
         MPOrderSocketManager.shared.disconnet()
-        // 停止定时器
-        stopTimer()
         // 清除数据
         removeUserInfo()
         if let slideVC = (UIApplication.shared.delegate as? AppDelegate)?.window?.rootViewController as? SlideMenuController {
@@ -112,31 +101,6 @@ class MPUserModel: Codable {
         }
         // 切换根控制器
         (UIApplication.shared.delegate as? AppDelegate)?.setHomeVCToRootVC(true)
-    }
-    
-    func checkIsExpire(target: MPApiType) -> Bool {
-        // MARK: - 不需要判断token枚举在这里添加
-        switch target {
-        case .login,
-            .register,
-            .sendCode,
-            .resetPwd,
-            .getUserAgreement,
-            .askOrderCertification,
-            .refreshToken:
-            return false
-        default:
-            break
-        }
-        guard let date = expire.toDate(format: "yyyy-MM-dd HH:mm:ss") else {
-            return true
-        }
-        let today = Date()
-        let delta = date.timeIntervalSince(today)
-        if delta <= 0 {
-            return true
-        }
-        return false
     }
     
     /// 刷新token
@@ -153,10 +117,8 @@ class MPUserModel: Codable {
                 // 序列化
                 self.serilization()
                 succ?()
-                NotificationCenter.default.post(name: MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION, object: nil)
             }
         }) { (err) in
-//            MPTipsView.showMsg("刷新Token失败")
         }
     }
     
@@ -198,32 +160,6 @@ class MPUserModel: Codable {
             return
         }
         menuVC.setupStartView(score)
-    }
-}
-
-// MARK: - Timer
-extension MPUserModel {
-    func startTimer() {
-        stopTimer()
-        let timer = Timer(timeInterval: 60, target: self, selector: #selector(MPUserModel.refreshAction), userInfo: nil, repeats: true)
-        self.timer = timer
-        RunLoop.current.add(timer, forMode: .commonModes)
-    }
-    
-    func stopTimer() {
-        timer?.invalidate()
-    }
-    /// 每分钟都去检测Token的有效期，当token小于10分钟就过期时
-    /// 刷新Token
-    @objc func refreshAction() {
-        guard let date = expire.toDate(format: "yyyy-MM-dd HH:mm:ss") else {
-            return
-        }
-        let today = Date()
-        let delta = date.timeIntervalSince(today)
-        if delta <= 600 {
-            refreshToken()
-        }
     }
 }
 

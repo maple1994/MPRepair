@@ -390,9 +390,6 @@ struct MPNetword {
     static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin()])
     #endif
     
-    /// 请求队列，当token过期时，请求入队
-    static var requestQueue: Queue<MPRequestType> = Queue<MPRequestType>()
-    
     /// 发送网络请求
     static func requestJson(
         target: MPApiType,
@@ -424,50 +421,7 @@ struct MPNetword {
                 }
             }
         }
-//        if MPUserModel.shared.checkIsExpire(target: target) {
-//            MPPrint("\(target)-Token过期")
-//            requestQueue.enqueue {
-//                request(target: target, success: success, failure: failure)
-//            }
-//            return
-//        }
         request(target: target, success: success, failure: failure)
-    }
-}
-
-struct Queue<Element> {
-    
-    private var elements: [Element] = []
-    
-    init() { }
-    
-    // MARK: - Getters
-    
-    var count: Int {
-        return elements.count
-    }
-    
-    var isEmpty: Bool {
-        return elements.isEmpty
-    }
-    
-    var peek: Element? {
-        return elements.first
-    }
-    
-    // MARK: - Enqueue & Dequeue
-    
-    mutating func enqueue(_ element: Element) {
-        elements.append(element)
-    }
-    
-    @discardableResult
-    mutating func dequeue() -> Element? {
-        return isEmpty ? nil : elements.removeFirst()
-    }
-    
-    mutating func removeAll() {
-        elements.removeAll()
     }
 }
 

@@ -50,10 +50,6 @@ let mp_screenW: CGFloat = UIScreen.main.bounds.width
 let MP_LOGIN_NOTIFICATION = NSNotification.Name.init("MP_LOGIN_NOTIFICATION")
 /// 用户信息修改通知
 let MP_USERINFO_UPDATE_NOTIFICATION = NSNotification.Name.init("MP_USERINFO_UPDATE_NOTIFICATION")
-/// 启动App刷新Token成功通知
-let MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION = NSNotification.Name.init("MP_APP_LAUNCH_REFRESH_TOKEN_NOTIFICATION")
-/// 刷新Token成功的通知
-let MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION = NSNotification.Name.init("MP_APP_REFRESH_TOKEN_SUCC_NOTIFICATION")
 /// 刷新订单列表的通知
 let MP_refresh_ORDER_LIST_SUCC_NOTIFICATION = NSNotification.Name.init("MP_refresh_ORDER_LIST_SUCC_NOTIFICATION")
 /// 授权回调通知

@@ -58,7 +58,7 @@ class MPNetwordActivityPlugin: PluginType {
                 }
             case 300:
                 if let msg = json["msg"] as? String {
-//                    MPTipsView.showMsg(msg)
+                    MPTipsView.showMsg("登录状态失效，请重新登录")
                     MPPrint("300-\(target)-\(msg)")
                 }
                 if MPUserModel.shared.isLogin {                
