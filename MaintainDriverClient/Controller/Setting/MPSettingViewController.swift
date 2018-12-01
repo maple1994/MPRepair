@@ -21,6 +21,10 @@ class MPSettingViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        MPUserModel.shared.getUserInfo(succ: {
+            MPUserModel.shared.serilization()
+            self.tableView.reloadData()
+        }, fail: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPSettingViewController.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPSettingViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }

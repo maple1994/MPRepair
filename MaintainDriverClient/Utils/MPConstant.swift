@@ -17,7 +17,9 @@ let aliAppID = "2018090661231519"
 /// 版本号
 let mp_version: Double = 1.0
 /// 保存用户json的URL
-let mp_path_url: URL = URL(fileURLWithPath: NSHomeDirectory() + "/Documents/userInfo.json")
+var mp_path_url: URL {
+    return URL(fileURLWithPath: NSHomeDirectory() + "/Documents/userInfo.json")
+}
 /// 存取用户账号的Key
 let MP_USER_ACCOUNT_KEY = "MP_USER_ACCOUNT_KEY"
 /// 存取用户密码的Key
