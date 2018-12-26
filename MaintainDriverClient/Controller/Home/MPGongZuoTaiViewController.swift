@@ -136,8 +136,10 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPLeagueViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        MPPickerView.show(["兄弟姐妹", "父母", "朋友"], delegate: self)
+//        picker.datePickerMode =
+//        let vc = MPLeagueViewController()
+//        navigationController?.pushViewController(vc, animated: true)
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
 //            view.showFailView = isShowFailed
@@ -283,6 +285,12 @@ extension MPGongZuoTaiViewController: MPOrderSocketDelegate {
     
     func websocketDidReceiveData(data: Data) {
         MPPrint("抢单列表的Socket-二进制文件-\(data.count)")
+    }
+}
+
+extension MPGongZuoTaiViewController: MPPickerViewDelegate {
+    func pickerView(didSelect text: String) {
+        MPPrint(text)
     }
 }
 

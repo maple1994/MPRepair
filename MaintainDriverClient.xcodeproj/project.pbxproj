@@ -118,6 +118,7 @@
 		F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */; };
 		F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */; };
 		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
+		F5F8559221D3BF1C0013A582 /* MPPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -280,6 +281,7 @@
 		F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCancelTipsView.swift; sourceTree = "<group>"; };
 		F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSelectItemView.swift; sourceTree = "<group>"; };
 		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
+		F5F8559121D3BF1C0013A582 /* MPPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPickerView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -732,6 +734,7 @@
 				F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */,
 				F5AF247E21D37C1E008A9ADD /* MPProcessView.swift */,
 				F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */,
+				F5F8559121D3BF1C0013A582 /* MPPickerView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1051,6 +1054,7 @@
 				F580064E21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift in Sources */,
 				F580065C21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
+				F5F8559221D3BF1C0013A582 /* MPPickerView.swift in Sources */,
 				F580065A21A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
