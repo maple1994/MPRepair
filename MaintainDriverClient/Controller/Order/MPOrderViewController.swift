@@ -33,6 +33,9 @@ class MPOrderViewController: UIViewController {
         contentView.isPagingEnabled = true
         contentView.delegate = self
         contentView.bounces = false
+        if let ges = navigationController?.interactivePopGestureRecognizer {
+            contentView.panGestureRecognizer.require(toFail: ges)
+        }
         view.addSubview(titleView)
         view.addSubview(contentView)
         

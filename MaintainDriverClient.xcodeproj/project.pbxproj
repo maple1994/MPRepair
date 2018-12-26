@@ -71,6 +71,9 @@
 		F5A6334B211728520075548A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6334A211728520075548A /* Extension.swift */; };
 		F5AF247921D36451008A9ADD /* MPLeagueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */; };
 		F5AF247B21D36612008A9ADD /* MPLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */; };
+		F5AF247D21D37479008A9ADD /* MPSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247C21D37479008A9ADD /* MPSignUpViewController.swift */; };
+		F5AF247F21D37C1E008A9ADD /* MPProcessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247E21D37C1E008A9ADD /* MPProcessView.swift */; };
+		F5AF248121D3841B008A9ADD /* MPSignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */; };
 		F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */; };
 		F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
@@ -224,6 +227,9 @@
 		F5A6334A211728520075548A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
 		F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeagueViewController.swift; sourceTree = "<group>"; };
 		F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeagueTableViewCell.swift; sourceTree = "<group>"; };
+		F5AF247C21D37479008A9ADD /* MPSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSignUpViewController.swift; sourceTree = "<group>"; };
+		F5AF247E21D37C1E008A9ADD /* MPProcessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProcessView.swift; sourceTree = "<group>"; };
+		F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSignUpTableViewCell.swift; sourceTree = "<group>"; };
 		F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderSocketManager.swift; sourceTree = "<group>"; };
 		F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPListenSocketManager.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
@@ -626,6 +632,7 @@
 				F5DF7362211A93E300B9F154 /* MPGongZuoTaiViewController.swift */,
 				F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */,
 				F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */,
+				F5AF247C21D37479008A9ADD /* MPSignUpViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -723,6 +730,8 @@
 			children = (
 				F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */,
 				F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */,
+				F5AF247E21D37C1E008A9ADD /* MPProcessView.swift */,
+				F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1018,6 +1027,7 @@
 				F52A5818211991160054B90D /* MPStartYearCheckViewController2.swift in Sources */,
 				F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */,
 				F580065021A78C9100072F35 /* JXPhotoBrowserProgressView.swift in Sources */,
+				F5AF247D21D37479008A9ADD /* MPSignUpViewController.swift in Sources */,
 				F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */,
 				F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */,
 				F5379DC22125C8400044C8C1 /* MPRegisterViewController.swift in Sources */,
@@ -1027,6 +1037,7 @@
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
 				F5DF736D211A93E300B9F154 /* MPOrderConfirmViewController.swift in Sources */,
+				F5AF247F21D37C1E008A9ADD /* MPProcessView.swift in Sources */,
 				F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */,
 				F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */,
 				F5AF247921D36451008A9ADD /* MPLeagueViewController.swift in Sources */,
@@ -1077,6 +1088,7 @@
 				F5DF73A1211AF15C00B9F154 /* MPOrderModel.swift in Sources */,
 				F5031F9921218EAD00329BC0 /* NetworkLoggerPlugin.swift in Sources */,
 				F52A581C2119938A0054B90D /* MPCheckOutFinishViewController2.swift in Sources */,
+				F5AF248121D3841B008A9ADD /* MPSignUpTableViewCell.swift in Sources */,
 				F580066121A78C9100072F35 /* JXLocalDataSource.swift in Sources */,
 				F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,

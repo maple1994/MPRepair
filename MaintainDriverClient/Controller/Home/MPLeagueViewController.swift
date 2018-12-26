@@ -74,7 +74,8 @@ class MPLeagueViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        
+        let vc = MPSignUpViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var tableView: UITableView!
