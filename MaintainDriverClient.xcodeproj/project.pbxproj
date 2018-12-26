@@ -69,6 +69,8 @@
 		F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333D211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m */; };
 		F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6333E211700BA0075548A /* UITableView+FDIndexPathHeightCache.m */; };
 		F5A6334B211728520075548A /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6334A211728520075548A /* Extension.swift */; };
+		F5AF247921D36451008A9ADD /* MPLeagueViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */; };
+		F5AF247B21D36612008A9ADD /* MPLeagueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */; };
 		F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */; };
 		F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
@@ -220,6 +222,8 @@
 		F5A6333F211700BA0075548A /* UITableView+FDTemplateLayoutCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UITableView+FDTemplateLayoutCell.h"; sourceTree = "<group>"; };
 		F5A63347211701030075548A /* Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Header.h; sourceTree = "<group>"; };
 		F5A6334A211728520075548A /* Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeagueViewController.swift; sourceTree = "<group>"; };
+		F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPLeagueTableViewCell.swift; sourceTree = "<group>"; };
 		F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderSocketManager.swift; sourceTree = "<group>"; };
 		F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPListenSocketManager.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
@@ -621,6 +625,7 @@
 				F5DF7361211A93E300B9F154 /* MPHomeViewController.swift */,
 				F5DF7362211A93E300B9F154 /* MPGongZuoTaiViewController.swift */,
 				F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */,
+				F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -717,6 +722,7 @@
 			isa = PBXGroup;
 			children = (
 				F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */,
+				F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1023,6 +1029,7 @@
 				F5DF736D211A93E300B9F154 /* MPOrderConfirmViewController.swift in Sources */,
 				F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */,
 				F5379DC42125C84C0044C8C1 /* MPResetPwdViewController.swift in Sources */,
+				F5AF247921D36451008A9ADD /* MPLeagueViewController.swift in Sources */,
 				F5DF738E211A94E400B9F154 /* MPTitleView.swift in Sources */,
 				F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */,
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
@@ -1061,6 +1068,7 @@
 				F5DF7374211A93E300B9F154 /* MPLeftMenuViewController.swift in Sources */,
 				F580065121A78C9100072F35 /* JXPhotoBrowserRawButtonCell.swift in Sources */,
 				F580066021A78C9100072F35 /* JXPhotoBrowserDataSource.swift in Sources */,
+				F5AF247B21D36612008A9ADD /* MPLeagueTableViewCell.swift in Sources */,
 				F50D4DF02118567D006C50C7 /* MPQuCheViewController2.swift in Sources */,
 				F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */,
 				F5DF736E211A93E300B9F154 /* MPOrderViewController.swift in Sources */,

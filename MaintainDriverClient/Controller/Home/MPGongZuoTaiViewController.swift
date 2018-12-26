@@ -136,38 +136,33 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        func showTipsView(_ isShowFailed: Bool) {
-            let view = MPAuthorityTipView()
-            view.showFailView = isShowFailed
-            view.frame = UIScreen.main.bounds
-            UIApplication.shared.keyWindow?.addSubview(view)
-        }
-
-//        if MPUserModel.shared.is_driverinfo == MPProfileState.unsubmit {
-//            let vc = MPProfileViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-//            return
+        let vc = MPLeagueViewController()
+        navigationController?.pushViewController(vc, animated: true)
+//        func showTipsView(_ isShowFailed: Bool) {
+//            let view = MPAuthorityTipView()
+//            view.showFailView = isShowFailed
+//            view.frame = UIScreen.main.bounds
+//            UIApplication.shared.keyWindow?.addSubview(view)
 //        }
-        switch MPUserModel.shared.is_driverinfo {
-        case .unsubmit, .checkFailed:
-//            let vc = MPProfileViewController()
-//            navigationController?.pushViewController(vc, animated: true)
-            showTipsView(true)
-        case .checking:
-            // 正在审核
-            showTipsView(false)
-        case .checkSucc:
-            let status = CLLocationManager.authorizationStatus()
-            switch status {
-            case .notDetermined, .restricted:
-                location.requestWhenInUseAuthorization()
-            case .denied:
-                MPTipsView.showMsg("请去设置开启定位")
-            default:
-                // 审核成功
-                connctServer()
-            }
-        }
+//
+//        switch MPUserModel.shared.is_driverinfo {
+//        case .unsubmit, .checkFailed:
+//            showTipsView(true)
+//        case .checking:
+//            // 正在审核
+//            showTipsView(false)
+//        case .checkSucc:
+//            let status = CLLocationManager.authorizationStatus()
+//            switch status {
+//            case .notDetermined, .restricted:
+//                location.requestWhenInUseAuthorization()
+//            case .denied:
+//                MPTipsView.showMsg("请去设置开启定位")
+//            default:
+//                // 审核成功
+//                connctServer()
+//            }
+//        }
     }
     
     /// 建立长连接
