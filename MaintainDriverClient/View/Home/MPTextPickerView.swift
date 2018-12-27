@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import PGPickerView
 
 protocol MPTextPickerViewDelegate: class {
     func pickerView(didSelect text: String)
@@ -47,16 +48,21 @@ class MPTextPickerView: UIView {
     }
     
     fileprivate func setupUI() {
-        backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.4)
         let tap = UITapGestureRecognizer(target: self, action: #selector(MPTextPickerView.dismiss))
-        addGestureRecognizer(tap)
+        let bgView = UIView()
+        bgView.addGestureRecognizer(tap)
+        bgView.backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.4)
+        addSubview(bgView)
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
-        let pickerView = UIPickerView()
+        let pickerView = PGPickerView()
         pickerView.delegate = self
         pickerView.dataSource = self
-        
         addSubview(contentView)
+        bgView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalToSuperview()
+            make.bottom.equalTo(contentView.snp.top)
+        }
         contentView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(contentH)
@@ -126,42 +132,24 @@ class MPTextPickerView: UIView {
     fileprivate var contentView: UIView!
 }
 
-extension MPTextPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+extension MPTextPickerView: PGPickerViewDataSource, PGPickerViewDelegate {
+    func numberOfComponents(in pickerView: PGPickerView!) -> Int {
         return 1
     }
-
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: PGPickerView!, numberOfRowsInComponent component: Int) -> Int {
         return titleArr.count
     }
-    
-    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
-        var label: UILabel? = nil
-        label = view as? UILabel
-        if label == nil {
-            label = UILabel(font: UIFont.mpNormalFont, text: "", textColor: UIColor.navBlue)
-            label?.textAlignment = .center
-        }
-        label?.text = titleArr[row]
-        return label!
+    func pickerView(_ pickerView: PGPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
+        return titleArr[row]
     }
-    
-    func pickerView(_ pickerView: UIPickerView, rowHeightForComponent component: Int) -> CGFloat {
-        return 50
+    func pickerView(_ pickerView: PGPickerView!, textColorOfOtherRowInComponent component: Int) -> UIColor! {
+        return UIColor.colorWithHexString("333333")
     }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        var title = ""
-        switch row {
-        case 0:
-            title = "兄弟姐妹"
-        case 1:
-            title = "父母"
-        case 2:
-            title = "朋友"
-        default:
-            break
-        }
-        selectedText = title
+    func pickerView(_ pickerView: PGPickerView!, textColorOfSelectedRowInComponent component: Int) -> UIColor! {
+        return UIColor.navBlue
+    }
+    func pickerView(_ pickerView: PGPickerView!, didSelectRow row: Int, inComponent component: Int) {
+        selectedText = titleArr[row]
     }
 }
+
