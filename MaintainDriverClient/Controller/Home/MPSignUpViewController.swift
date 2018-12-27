@@ -89,7 +89,7 @@ class MPSignUpViewController: UIViewController {
         
     }
     
-    // MARK: -
+    // MARK: - View
     fileprivate lazy var processView: MPProcessView = {
         let v = MPProcessView()
         return v

@@ -122,6 +122,8 @@
 		F5F2C49621D49C52005E47E4 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = F5F2C49521D49C52005E47E4 /* address.json */; };
 		F5F2C49821D49DC9005E47E4 /* MPAdderssPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */; };
 		F5F2C49A21D4D0AD005E47E4 /* MPUploadIDCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */; };
+		F5F2C49C21D4DED8005E47E4 /* MPWorkInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49B21D4DED8005E47E4 /* MPWorkInfoViewController.swift */; };
+		F5F2C49E21D514A5005E47E4 /* MPOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49D21D514A5005E47E4 /* MPOptionTableViewCell.swift */; };
 		F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -289,6 +291,8 @@
 		F5F2C49521D49C52005E47E4 /* address.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
 		F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAdderssPickerView.swift; sourceTree = "<group>"; };
 		F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUploadIDCartViewController.swift; sourceTree = "<group>"; };
+		F5F2C49B21D4DED8005E47E4 /* MPWorkInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPWorkInfoViewController.swift; sourceTree = "<group>"; };
+		F5F2C49D21D514A5005E47E4 /* MPOptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOptionTableViewCell.swift; sourceTree = "<group>"; };
 		F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextPickerView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -645,6 +649,8 @@
 				F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */,
 				F5AF247C21D37479008A9ADD /* MPSignUpViewController.swift */,
 				F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */,
+				F5F2C49B21D4DED8005E47E4 /* MPWorkInfoViewController.swift */,
+				F5F2C49D21D514A5005E47E4 /* MPOptionTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1056,6 +1062,7 @@
 				F580065821A78C9100072F35 /* JXNamespace.swift in Sources */,
 				F5A63342211700BA0075548A /* UITableView+FDTemplateLayoutCellDebug.m in Sources */,
 				F5A63343211700BA0075548A /* UITableView+FDIndexPathHeightCache.m in Sources */,
+				F5F2C49C21D4DED8005E47E4 /* MPWorkInfoViewController.swift in Sources */,
 				F5DF736D211A93E300B9F154 /* MPOrderConfirmViewController.swift in Sources */,
 				F5AF247F21D37C1E008A9ADD /* MPProcessView.swift in Sources */,
 				F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */,
@@ -1140,6 +1147,7 @@
 				F580066321A78C9100072F35 /* JXPhotoBrowserBaseCell.swift in Sources */,
 				F580064F21A78C9100072F35 /* JXPhotoBrowserTransitioning.swift in Sources */,
 				F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */,
+				F5F2C49E21D514A5005E47E4 /* MPOptionTableViewCell.swift in Sources */,
 				F50D4DE1211823F5006C50C7 /* UIImageView+LBBlurredImage.m in Sources */,
 				F5A63340211700BA0075548A /* UITableView+FDTemplateLayoutCell.m in Sources */,
 				F5DF7373211A93E300B9F154 /* MPLoginViewController.swift in Sources */,
