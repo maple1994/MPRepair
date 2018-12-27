@@ -119,6 +119,8 @@
 		F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */; };
 		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
 		F5F2C49421D46E81005E47E4 /* MPDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */; };
+		F5F2C49621D49C52005E47E4 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = F5F2C49521D49C52005E47E4 /* address.json */; };
+		F5F2C49821D49DC9005E47E4 /* MPAdderssPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */; };
 		F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -283,6 +285,8 @@
 		F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSelectItemView.swift; sourceTree = "<group>"; };
 		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
 		F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDatePickerView.swift; sourceTree = "<group>"; };
+		F5F2C49521D49C52005E47E4 /* address.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
+		F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAdderssPickerView.swift; sourceTree = "<group>"; };
 		F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextPickerView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -374,6 +378,7 @@
 			children = (
 				F545759721A6F29C00482EC6 /* getOrderSucc.m4a */,
 				F545759821A6F29C00482EC6 /* newOrder.m4a */,
+				F5F2C49521D49C52005E47E4 /* address.json */,
 			);
 			path = Resource;
 			sourceTree = "<group>";
@@ -738,6 +743,7 @@
 				F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */,
 				F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */,
 				F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */,
+				F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -886,6 +892,7 @@
 			files = (
 				F545759921A6F29C00482EC6 /* getOrderSucc.m4a in Resources */,
 				F5D720602112AC5800585A19 /* Assets.xcassets in Resources */,
+				F5F2C49621D49C52005E47E4 /* address.json in Resources */,
 				F545759A21A6F29C00482EC6 /* newOrder.m4a in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1118,6 +1125,7 @@
 				F5DF7392211A94E400B9F154 /* MPHorizonScrollPhotoView.swift in Sources */,
 				F5DF738A211A94E400B9F154 /* MPMingXiTableViewCell.swift in Sources */,
 				F5A63341211700BA0075548A /* UITableView+FDKeyedHeightCache.m in Sources */,
+				F5F2C49821D49DC9005E47E4 /* MPAdderssPickerView.swift in Sources */,
 				F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */,
 				F5DF73A3211AF81F00B9F154 /* MPQuCheCCell.swift in Sources */,
 				F5DF7372211A93E300B9F154 /* MPSettingViewController.swift in Sources */,

@@ -75,6 +75,8 @@ enum MPApiType {
     case getDriverCancelRuler
     /// 完善司机资料
     case completeDriverInfo(name: String, idCard: String, pic_idcard_front: UIImage, pic_idcard_back: UIImage, pic_driver: UIImage, pic_user: UIImage, pic_drive_front: UIImage, pic_drive_back:  UIImage)
+    /// 获取三级地址信息
+    case getAddressInfo
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -141,6 +143,8 @@ extension MPApiType: TargetType {
             return "api/driver/order_cancelinfo/"
         case .completeDriverInfo:
             return "api/driver/driver_info/"
+        case .getAddressInfo:
+            return "api/user/addressinfo/"
         }
     }
     
@@ -159,6 +163,7 @@ extension MPApiType: TargetType {
             .getAlipayBindedAccount,
             .getBalance,
             .getDriverCancelRuler,
+            .getAddressInfo,
             .getAlipayBindedAccountInfo:
             return .get
         default:
@@ -287,7 +292,8 @@ extension MPApiType: TargetType {
             var param = defaultParam
             param["id"] = id
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case .getYearCheckItemInfo:
+        case .getYearCheckItemInfo,
+             .getAddressInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case .getOrderCertification,
              .getUserInfo,

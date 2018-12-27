@@ -136,8 +136,9 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
+        MPAdderssPickerView.show()
 //        MPDatePickerView.show(delegate: self)
-        MPTextPickerView.show(["兄弟姐妹", "父母", "朋友"], delegate: self)
+//        MPTextPickerView.show(["兄弟姐妹", "父母", "朋友"], delegate: self)
 //        picker.datePickerMode =
 //        let vc = MPLeagueViewController()
 //        navigationController?.pushViewController(vc, animated: true)
