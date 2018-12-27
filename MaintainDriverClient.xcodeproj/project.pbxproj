@@ -118,7 +118,8 @@
 		F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */; };
 		F5E9816F21771C7E008A9FBB /* MPSelectItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */; };
 		F5EE1E78216EEA600086FBEE /* MPTiXianDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */; };
-		F5F8559221D3BF1C0013A582 /* MPPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPPickerView.swift */; };
+		F5F2C49421D46E81005E47E4 /* MPDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */; };
+		F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -281,7 +282,8 @@
 		F5E9816C2176D0DE008A9FBB /* MPCancelTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPCancelTipsView.swift; sourceTree = "<group>"; };
 		F5E9816E21771C7E008A9FBB /* MPSelectItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSelectItemView.swift; sourceTree = "<group>"; };
 		F5EE1E77216EEA600086FBEE /* MPTiXianDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianDetailViewController.swift; sourceTree = "<group>"; };
-		F5F8559121D3BF1C0013A582 /* MPPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPickerView.swift; sourceTree = "<group>"; };
+		F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDatePickerView.swift; sourceTree = "<group>"; };
+		F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextPickerView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -734,7 +736,8 @@
 				F5AF247A21D36612008A9ADD /* MPLeagueTableViewCell.swift */,
 				F5AF247E21D37C1E008A9ADD /* MPProcessView.swift */,
 				F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */,
-				F5F8559121D3BF1C0013A582 /* MPPickerView.swift */,
+				F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */,
+				F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -957,6 +960,8 @@
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/MJRefresh/MJRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Moya/Moya.framework",
+				"${BUILT_PRODUCTS_DIR}/PGDatePicker/PGDatePicker.framework",
+				"${BUILT_PRODUCTS_DIR}/PGPickerView/PGPickerView.framework",
 				"${BUILT_PRODUCTS_DIR}/Result/Result.framework",
 				"${BUILT_PRODUCTS_DIR}/SlideMenuControllerSwift/SlideMenuControllerSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -972,6 +977,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MJRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Moya.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PGDatePicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PGPickerView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Result.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlideMenuControllerSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -1054,7 +1061,7 @@
 				F580064E21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift in Sources */,
 				F580065C21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
-				F5F8559221D3BF1C0013A582 /* MPPickerView.swift in Sources */,
+				F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */,
 				F580065A21A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */,
 				F5DF7370211A93E300B9F154 /* MPHomeViewController.swift in Sources */,
 				F5DF736C211A93E300B9F154 /* MPTiXianViewController.swift in Sources */,
@@ -1063,6 +1070,7 @@
 				F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */,
 				F580065621A78C9100072F35 /* UICollectionView+JX.swift in Sources */,
 				F5DF7398211A950900B9F154 /* MPSettingCell.swift in Sources */,
+				F5F2C49421D46E81005E47E4 /* MPDatePickerView.swift in Sources */,
 				F5DF7394211A94E400B9F154 /* MPNewOrderTipsView.swift in Sources */,
 				F580066421A78C9100072F35 /* JXNumberPageControlDelegate.swift in Sources */,
 				F5E7FC65215DD95D00617981 /* MPBingAccountViewController.swift in Sources */,

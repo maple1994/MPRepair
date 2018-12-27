@@ -19,6 +19,7 @@ pod 'IQKeyboardManagerSwift'
 pod 'SwiftHash'
 pod 'AlipaySDK_MI'
 pod 'Starscream'
+pod 'PGDatePicker'
 
 
   # Pods for MaintainDriverClient

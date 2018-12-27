@@ -8,20 +8,21 @@
 
 import UIKit
 
-protocol MPPickerViewDelegate: class {
+protocol MPTextPickerViewDelegate: class {
     func pickerView(didSelect text: String)
 }
 
-class MPPickerView: UIView {
+/// 选择一维数组的Text选择器
+class MPTextPickerView: UIView {
     
-    class func show(_ titleArr: [String], delegate: MPPickerViewDelegate?) {
-        let pickerView = MPPickerView(titleArr: titleArr)
+    class func show(_ titleArr: [String], delegate: MPTextPickerViewDelegate?) {
+        let pickerView = MPTextPickerView(titleArr: titleArr)
         pickerView.delegate = delegate
         pickerView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: mp_screenH)
         UIApplication.shared.keyWindow?.addSubview(pickerView)
     }
     
-    weak var delegate: MPPickerViewDelegate?
+    weak var delegate: MPTextPickerViewDelegate?
     fileprivate var titleArr: [String]
     fileprivate let contentH: CGFloat = 265
     override func didMoveToSuperview() {
@@ -47,7 +48,7 @@ class MPPickerView: UIView {
     
     fileprivate func setupUI() {
         backgroundColor = UIColor.colorWithHexString("000000", alpha: 0.4)
-        let tap = UITapGestureRecognizer(target: self, action: #selector(MPPickerView.dismiss))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(MPTextPickerView.dismiss))
         addGestureRecognizer(tap)
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
@@ -74,13 +75,13 @@ class MPPickerView: UIView {
             make.bottom.equalTo(pickerView.snp.top)
         }
         let cancelButton = UIButton()
-        cancelButton.addTarget(self, action: #selector(MPPickerView.dismiss), for: .touchUpInside)
+        cancelButton.addTarget(self, action: #selector(MPTextPickerView.dismiss), for: .touchUpInside)
         cancelButton.setTitle("取消", for: .normal)
         cancelButton.setTitleColor(UIColor.mpDarkGray, for: .normal)
         cancelButton.titleLabel?.font = UIFont.mpNormalFont
         
         let confirmButton = UIButton()
-        confirmButton.addTarget(self, action: #selector(MPPickerView.confirm), for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(MPTextPickerView.confirm), for: .touchUpInside)
         confirmButton.setTitle("确认", for: .normal)
         confirmButton.setTitleColor(UIColor.navBlue, for: .normal)
         confirmButton.titleLabel?.font = UIFont.mpNormalFont
@@ -125,7 +126,7 @@ class MPPickerView: UIView {
     fileprivate var contentView: UIView!
 }
 
-extension MPPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
+extension MPTextPickerView: UIPickerViewDelegate, UIPickerViewDataSource {
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
