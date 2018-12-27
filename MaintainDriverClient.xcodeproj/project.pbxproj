@@ -121,6 +121,7 @@
 		F5F2C49421D46E81005E47E4 /* MPDatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */; };
 		F5F2C49621D49C52005E47E4 /* address.json in Resources */ = {isa = PBXBuildFile; fileRef = F5F2C49521D49C52005E47E4 /* address.json */; };
 		F5F2C49821D49DC9005E47E4 /* MPAdderssPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */; };
+		F5F2C49A21D4D0AD005E47E4 /* MPUploadIDCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */; };
 		F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */; };
 /* End PBXBuildFile section */
 
@@ -287,6 +288,7 @@
 		F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPDatePickerView.swift; sourceTree = "<group>"; };
 		F5F2C49521D49C52005E47E4 /* address.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = address.json; sourceTree = "<group>"; };
 		F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAdderssPickerView.swift; sourceTree = "<group>"; };
+		F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUploadIDCartViewController.swift; sourceTree = "<group>"; };
 		F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTextPickerView.swift; sourceTree = "<group>"; };
 		F9458DD492F1C2EBB7A4F0DC /* Pods_MaintainDriverClientUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MaintainDriverClientUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -642,6 +644,7 @@
 				F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */,
 				F5AF247821D36451008A9ADD /* MPLeagueViewController.swift */,
 				F5AF247C21D37479008A9ADD /* MPSignUpViewController.swift */,
+				F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1085,6 +1088,7 @@
 				F580065B21A78C9100072F35 /* JXPhotoBrowserFadeDismissingAnimator.swift in Sources */,
 				F5DF738B211A94E400B9F154 /* MPInputTextFiled.swift in Sources */,
 				F5DF739A211A953A00B9F154 /* MPMunuViewCell.swift in Sources */,
+				F5F2C49A21D4D0AD005E47E4 /* MPUploadIDCartViewController.swift in Sources */,
 				F580066621A78C9100072F35 /* JXPhotoBrowser.swift in Sources */,
 				F5DF738C211A94E400B9F154 /* MPLeftIconView.swift in Sources */,
 				F5DF7395211A94E400B9F154 /* MPOrderTableViewCell.swift in Sources */,

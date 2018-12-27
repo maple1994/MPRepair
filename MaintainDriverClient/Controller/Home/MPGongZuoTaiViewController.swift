@@ -136,12 +136,8 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        MPAdderssPickerView.show()
-//        MPDatePickerView.show(delegate: self)
-//        MPTextPickerView.show(["兄弟姐妹", "父母", "朋友"], delegate: self)
-//        picker.datePickerMode =
-//        let vc = MPLeagueViewController()
-//        navigationController?.pushViewController(vc, animated: true)
+        let vc = MPLeagueViewController()
+        navigationController?.pushViewController(vc, animated: true)
 //        func showTipsView(_ isShowFailed: Bool) {
 //            let view = MPAuthorityTipView()
 //            view.showFailView = isShowFailed
