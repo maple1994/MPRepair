@@ -32,7 +32,10 @@ class MPSignUpModel {
     var pickerType: MPPickerType = .none
     /// 当pickerType == .text时，显示的内容
     var pickerContent: [String] = [String]()
+    /// placeHoder
     var placeHolder: String?
+    /// 键盘类型
+    var keyboardType: UIKeyboardType = .default
     
     init(title: String?, content: String?, isShowDetailIcon: Bool, placeHolder: String?) {
         self.title = title
@@ -61,6 +64,7 @@ class MPSignUpTableViewCell: UITableViewCell {
             detailIcon.isHidden = !isShow
             pickerLabel.isHidden = detailIcon.isHidden
             textFiled.isHidden = isShow
+            textFiled.keyboardType = signUpModel?.keyboardType ?? .default
             if !content.isEmpty {
                 if type == .none {
                     textFiled.text = content

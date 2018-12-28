@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
 /// 工作相关信息
 class MPWorkInfoViewController: UIViewController {
@@ -61,6 +62,7 @@ class MPWorkInfoViewController: UIViewController {
             model3.pickerContent = ["滴滴出行", "神州专车和神州租车", "曹操专车"]
             itemModelArr.append(model3)
             let model4 = MPSignUpModel(title: "历史接单量", content: nil, isShowDetailIcon: false, placeHolder: "请输入接单量")
+            model4.keyboardType = .numberPad
             itemModelArr.append(model4)
         }
         let model5 = MPSignUpModel(title: "每天可接单时长", content: nil, isShowDetailIcon: true, placeHolder: nil)
@@ -68,6 +70,7 @@ class MPWorkInfoViewController: UIViewController {
         model5.pickerContent = ["1到3小时", "3到5小时"]
         itemModelArr.append(model5)
         let model6 = MPSignUpModel(title: "期待订单报酬", content: nil, isShowDetailIcon: false, placeHolder: "请输入期待报酬")
+        model6.keyboardType = .numberPad
         itemModelArr.append(model6)
     }
     

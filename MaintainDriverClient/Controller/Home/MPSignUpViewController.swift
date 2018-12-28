@@ -74,6 +74,7 @@ class MPSignUpViewController: UIViewController {
         
         let model6 = MPSignUpModel(title: "紧急联系人姓名", content: nil, isShowDetailIcon: false, placeHolder: "请输入姓名")
         let model7 = MPSignUpModel(title: "紧急联系人号码", content: nil, isShowDetailIcon: false, placeHolder: "请输入电话号码")
+        model7.keyboardType = .numberPad
         let model8 = MPSignUpModel(title: "紧急联系人关系", content: nil, isShowDetailIcon: true, placeHolder: nil)
         model8.pickerType = .text
         model8.pickerContent = ["兄弟姐妹", "父母", "朋友"]
