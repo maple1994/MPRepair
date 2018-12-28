@@ -30,6 +30,7 @@ class MPUploadIDCartViewController: UIViewController {
         tableView.showsVerticalScrollIndicator = false
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
         
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: 100, height: 0.1))
         let footerView = createUploadView()
@@ -155,7 +156,8 @@ class MPUploadIDCartViewController: UIViewController {
     }
     
     @objc fileprivate func submit() {
-        
+        let vc = MPWorkInfoViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - View

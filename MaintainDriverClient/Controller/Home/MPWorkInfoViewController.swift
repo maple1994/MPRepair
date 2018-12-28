@@ -23,6 +23,7 @@ class MPWorkInfoViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.separatorStyle = .none
+        tableView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -52,7 +53,7 @@ class MPWorkInfoViewController: UIViewController {
     
     
     @objc fileprivate func submit() {
-        MPPrint("提交")
+        navigationController?.popToRootViewController(animated: true)
     }
     
     // MARK: - View

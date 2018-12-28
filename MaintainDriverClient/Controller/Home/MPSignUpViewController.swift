@@ -20,10 +20,12 @@ class MPSignUpViewController: UIViewController {
         navigationItem.title = "报名页面"
         setupData()
         let footerView = MPFooterConfirmView(title: "下一步", target: self, action: #selector(MPSignUpViewController.confirm))
+        footerView.frame.size.height = 130
         footerView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
         tableView = UITableView(frame: CGRect.zero, style: .grouped)
         let tmp = UIView(frame: CGRect(x: 0, y: 0, width: mp_screenW, height: 0.01))
         tableView.tableHeaderView = tmp
+        tableView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
         tableView.tableFooterView = footerView
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
@@ -86,7 +88,8 @@ class MPSignUpViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        
+        let vc = MPUploadIDCartViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - View
