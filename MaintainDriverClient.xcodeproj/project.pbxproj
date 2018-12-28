@@ -33,6 +33,7 @@
 		F5480C8421D5C1E600358590 /* MPOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8321D5C1E600358590 /* MPOptionTableViewCell.swift */; };
 		F5480C8621D5C9E900358590 /* MPExaminationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8521D5C9E900358590 /* MPExaminationCellTableViewCell.swift */; };
 		F5480C8821D6060800358590 /* MPShowGradeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8721D6060800358590 /* MPShowGradeView.swift */; };
+		F5480C8A21D6183400358590 /* MPInsuranceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8921D6183400358590 /* MPInsuranceViewController.swift */; };
 		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
 		F580064C21A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */; };
 		F580064D21A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */; };
@@ -194,6 +195,7 @@
 		F5480C8321D5C1E600358590 /* MPOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPOptionTableViewCell.swift; sourceTree = "<group>"; };
 		F5480C8521D5C9E900358590 /* MPExaminationCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPExaminationCellTableViewCell.swift; sourceTree = "<group>"; };
 		F5480C8721D6060800358590 /* MPShowGradeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPShowGradeView.swift; sourceTree = "<group>"; };
+		F5480C8921D6183400358590 /* MPInsuranceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPInsuranceViewController.swift; sourceTree = "<group>"; };
 		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
 		F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeTransitioning.swift; sourceTree = "<group>"; };
 		F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomTransitioning.swift; sourceTree = "<group>"; };
@@ -657,6 +659,7 @@
 				F5F2C49921D4D0AD005E47E4 /* MPUploadIDCartViewController.swift */,
 				F5F2C49B21D4DED8005E47E4 /* MPWorkInfoViewController.swift */,
 				F5480C8121D5B30000358590 /* MPExaminationViewController.swift */,
+				F5480C8921D6183400358590 /* MPInsuranceViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1135,6 +1138,7 @@
 				F580066121A78C9100072F35 /* JXLocalDataSource.swift in Sources */,
 				F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
+				F5480C8A21D6183400358590 /* MPInsuranceViewController.swift in Sources */,
 				F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F5DF7390211A94E400B9F154 /* MPFeedbackView.swift in Sources */,

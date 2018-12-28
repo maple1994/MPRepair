@@ -136,7 +136,8 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        MPShowGradeView.show()
+        let vc = MPInsuranceViewController()
+        navigationController?.pushViewController(vc, animated: true)
 //        let vc = MPExaminationViewController()
 //        navigationController?.pushViewController(vc, animated: true)
 //        let view = MPAuthorityTipView()
