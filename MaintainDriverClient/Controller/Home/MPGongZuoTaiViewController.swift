@@ -136,7 +136,7 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPLeagueViewController()
+        let vc = MPExaminationViewController()
         navigationController?.pushViewController(vc, animated: true)
 //        let view = MPAuthorityTipView()
 //        view.setup(title: "提示", subTitle: "资料正在审核中，请耐心等候")

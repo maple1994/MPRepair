@@ -31,6 +31,7 @@
 		F545759A21A6F29C00482EC6 /* newOrder.m4a in Resources */ = {isa = PBXBuildFile; fileRef = F545759821A6F29C00482EC6 /* newOrder.m4a */; };
 		F5480C8221D5B30000358590 /* MPExaminationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8121D5B30000358590 /* MPExaminationViewController.swift */; };
 		F5480C8421D5C1E600358590 /* MPOptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8321D5C1E600358590 /* MPOptionTableViewCell.swift */; };
+		F5480C8621D5C9E900358590 /* MPExaminationCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5480C8521D5C9E900358590 /* MPExaminationCellTableViewCell.swift */; };
 		F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */; };
 		F580064C21A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */; };
 		F580064D21A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift in Sources */ = {isa = PBXBuildFile; fileRef = F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */; };
@@ -190,6 +191,7 @@
 		F545759821A6F29C00482EC6 /* newOrder.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = newOrder.m4a; sourceTree = "<group>"; };
 		F5480C8121D5B30000358590 /* MPExaminationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPExaminationViewController.swift; sourceTree = "<group>"; };
 		F5480C8321D5C1E600358590 /* MPOptionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPOptionTableViewCell.swift; sourceTree = "<group>"; };
+		F5480C8521D5C9E900358590 /* MPExaminationCellTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPExaminationCellTableViewCell.swift; sourceTree = "<group>"; };
 		F5503AC7217969F70086C0E3 /* MPProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPProfileViewController.swift; sourceTree = "<group>"; };
 		F580062821A78C9100072F35 /* JXPhotoBrowserFadeTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserFadeTransitioning.swift; sourceTree = "<group>"; };
 		F580062921A78C9100072F35 /* JXPhotoBrowserZoomTransitioning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JXPhotoBrowserZoomTransitioning.swift; sourceTree = "<group>"; };
@@ -756,6 +758,7 @@
 				F5F8559121D3BF1C0013A582 /* MPTextPickerView.swift */,
 				F5F2C49321D46E81005E47E4 /* MPDatePickerView.swift */,
 				F5F2C49721D49DC9005E47E4 /* MPAdderssPickerView.swift */,
+				F5480C8521D5C9E900358590 /* MPExaminationCellTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1057,6 +1060,7 @@
 				F5437B6021A3FCDE000194CF /* MPAddPhotoView.swift in Sources */,
 				F580065021A78C9100072F35 /* JXPhotoBrowserProgressView.swift in Sources */,
 				F5480C8221D5B30000358590 /* MPExaminationViewController.swift in Sources */,
+				F5480C8621D5C9E900358590 /* MPExaminationCellTableViewCell.swift in Sources */,
 				F5AF247D21D37479008A9ADD /* MPSignUpViewController.swift in Sources */,
 				F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */,
 				F5379DC62125C8920044C8C1 /* MPLoginNavViewController.swift in Sources */,

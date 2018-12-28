@@ -57,7 +57,7 @@ class MPOptionTableViewCell: UITableViewCell {
         }
         yesCheckBox.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(10)
+            make.leading.equalToSuperview().offset(15)
             make.height.equalTo(35)
             make.width.equalTo(50)
         }
@@ -125,14 +125,19 @@ class MPCheckBoxButton: UIControl {
     
     fileprivate func setupUI() {
         contentView = UIView()
+        contentView.isUserInteractionEnabled = false
         iconImageView = UIImageView()
         iconImageView.image = UIImage(named: "box_unselected")
         titleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "是", textColor: UIColor.colorWithHexString("4A4A4A"))
         addSubview(contentView)
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
+//        contentView.snp.makeConstraints { (make) in
+//            make.center.equalToSuperview()
+//        }
         contentView.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+            make.top.bottom.equalToSuperview()
+            make.leading.equalToSuperview()
         }
         iconImageView.snp.makeConstraints { (make) in
             make.leading.equalToSuperview()
