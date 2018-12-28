@@ -12,9 +12,12 @@ import UIKit
 class MPWorkInfoViewController: UIViewController {
 
     fileprivate var itemModelArr: [MPSignUpModel] = [MPSignUpModel]()
+    /// 记录正在编辑的ip
+    fileprivate var editingIP: IndexPath?
     /// 是否有代驾经历
     fileprivate var isHaveExp: Bool = true
     
+    // MARK: - Life Circle
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "报名页面"
@@ -33,19 +36,36 @@ class MPWorkInfoViewController: UIViewController {
         setupData()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        IQKeyboardManager.shared.enable = true
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        IQKeyboardManager.shared.enable = false
+    }
+    
+    // MARK: - Method
     fileprivate func setupData() {
         itemModelArr = [MPSignUpModel]()
         let model1 = MPSignUpModel(title: "本职工作", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model1.pickerType = .text
+        model1.pickerContent = ["个体工商户", "企事业单位全职员工", "其他兼职平台工作"]
         itemModelArr.append(model1)
         let model2 = MPSignUpModel(title: "", content: nil, isShowDetailIcon: false, placeHolder: nil)
         itemModelArr.append(model2)
         if isHaveExp {
             let model3 = MPSignUpModel(title: "曾就职的平台", content: nil, isShowDetailIcon: true, placeHolder: nil)
+            model3.pickerType = .text
+            model3.pickerContent = ["滴滴出行", "神州专车和神州租车", "曹操专车"]
             itemModelArr.append(model3)
             let model4 = MPSignUpModel(title: "历史接单量", content: nil, isShowDetailIcon: false, placeHolder: "请输入接单量")
             itemModelArr.append(model4)
         }
         let model5 = MPSignUpModel(title: "每天可接单时长", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model5.pickerType = .text
+        model5.pickerContent = ["1到3小时", "3到5小时"]
         itemModelArr.append(model5)
         let model6 = MPSignUpModel(title: "期待订单报酬", content: nil, isShowDetailIcon: false, placeHolder: "请输入期待报酬")
         itemModelArr.append(model6)
@@ -143,12 +163,38 @@ extension MPWorkInfoViewController: UITableViewDelegate, UITableViewDataSource {
             return 50
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = itemModelArr[indexPath.row]
+        switch model.pickerType {
+        case .text:
+            MPTextPickerView.show(model.pickerContent, delegate: self)
+        case .address:
+            MPAdderssPickerView.show(delegate: self)
+        case .date:
+            MPDatePickerView.show(delegate: self)
+        case .none:
+            break
+        }
+        editingIP = indexPath
+    }
 }
 
 extension MPWorkInfoViewController: MPOptionTableViewCellDelegate {
     func checkBox(didSelect isChecked: Bool) {
         isHaveExp = isChecked
         setupData()
+        tableView.reloadData()
+    }
+}
+
+extension MPWorkInfoViewController: MPTextPickerViewDelegate {
+    func pickerView(didSelect text: String) {
+        guard let ip = editingIP else {
+            return
+        }
+        let model = itemModelArr[ip.row]
+        model.content = text
         tableView.reloadData()
     }
 }
