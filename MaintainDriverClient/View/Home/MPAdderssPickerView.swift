@@ -12,8 +12,9 @@ import PGPickerView
 /// 地址选择器
 class MPAdderssPickerView: UIView {
 
-    class func show() {
+    class func show(delegate: MPTextPickerViewDelegate?) {
         let pickerView = MPAdderssPickerView()
+        pickerView.delegate = delegate
         pickerView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: mp_screenH)
         UIApplication.shared.keyWindow?.addSubview(pickerView)
     }
@@ -181,9 +182,9 @@ class MPAdderssPickerView: UIView {
         let xian = pickerView.textOfSelectedRow(inComponent: 2) else {
             return
         }
-        print(pro+shi+xian)
-        
-//        dismiss()
+        let content = pro + shi + xian
+        delegate?.pickerView(didSelect: content)
+        dismiss()
     }
     
     fileprivate var pickerView: PGPickerView!

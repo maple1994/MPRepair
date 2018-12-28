@@ -138,12 +138,10 @@ class MPGongZuoTaiViewController: UIViewController {
     @objc fileprivate func chuCheAction() {
         let vc = MPLeagueViewController()
         navigationController?.pushViewController(vc, animated: true)
-//        func showTipsView(_ isShowFailed: Bool) {
-//            let view = MPAuthorityTipView()
-//            view.showFailView = isShowFailed
-//            view.frame = UIScreen.main.bounds
-//            UIApplication.shared.keyWindow?.addSubview(view)
-//        }
+//        let view = MPAuthorityTipView()
+//        view.setup(title: "提示", subTitle: "资料正在审核中，请耐心等候")
+//        view.frame = UIScreen.main.bounds
+//        UIApplication.shared.keyWindow?.addSubview(view)
 //
 //        switch MPUserModel.shared.is_driverinfo {
 //        case .unsubmit, .checkFailed:

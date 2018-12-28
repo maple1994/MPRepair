@@ -13,6 +13,8 @@ import IQKeyboardManagerSwift
 class MPSignUpViewController: UIViewController {
 
     fileprivate var modelArr = [[MPSignUpModel]]()
+    /// 记录正在编辑的ip
+    fileprivate var editingIP: IndexPath?
     
     // MARK: - Life Circle
     override func viewDidLoad() {
@@ -58,25 +60,33 @@ class MPSignUpViewController: UIViewController {
         let model1 = MPSignUpModel(title: "姓名", content: nil, isShowDetailIcon: false, placeHolder: "请输入姓名")
         let model2 = MPSignUpModel(title: "身份证号", content: nil, isShowDetailIcon: false, placeHolder: "请输入身份证号")
         let model3 = MPSignUpModel(title: "籍贯", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model3.pickerType = .address
         sectionArr2.append(model1)
         sectionArr2.append(model2)
         sectionArr2.append(model3)
         
         let model4 = MPSignUpModel(title: "报名城市", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model4.pickerType = .address
         let model5 = MPSignUpModel(title: "居住地", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model5.pickerType = .address
         sectionArr3.append(model4)
         sectionArr3.append(model5)
         
         let model6 = MPSignUpModel(title: "紧急联系人姓名", content: nil, isShowDetailIcon: false, placeHolder: "请输入姓名")
         let model7 = MPSignUpModel(title: "紧急联系人号码", content: nil, isShowDetailIcon: false, placeHolder: "请输入电话号码")
         let model8 = MPSignUpModel(title: "紧急联系人关系", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model8.pickerType = .text
+        model8.pickerContent = ["兄弟姐妹", "父母", "朋友"]
         sectionArr4.append(model6)
         sectionArr4.append(model7)
         sectionArr4.append(model8)
         
         let model9 = MPSignUpModel(title: "驾驶人档案编号", content: nil, isShowDetailIcon: false, placeHolder: "请输入编号")
         let model10 = MPSignUpModel(title: "准驾车型", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model10.pickerType = .text
+        model10.pickerContent = ["小型蓝牌", "客车", "大货车"]
         let model11 = MPSignUpModel(title: "初领驾驶证日期", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model11.pickerType = .date
         sectionArr5.append(model9)
         sectionArr5.append(model10)
         sectionArr5.append(model11)
@@ -164,5 +174,30 @@ extension MPSignUpViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = modelArr[indexPath.section][indexPath.row]
+        switch model.pickerType {
+        case .text:
+            MPTextPickerView.show(model.pickerContent, delegate: self)
+        case .address:
+            MPAdderssPickerView.show(delegate: self)
+        case .date:
+            MPDatePickerView.show(delegate: self)
+        case .none:
+            break
+        }
+        editingIP = indexPath
+    }
+}
 
+extension MPSignUpViewController: MPTextPickerViewDelegate {
+    func pickerView(didSelect text: String) {
+        guard let ip = editingIP else {
+            return
+        }
+        let model = modelArr[ip.section][ip.row]
+        model.content = text
+        tableView.reloadData()
+    }
 }

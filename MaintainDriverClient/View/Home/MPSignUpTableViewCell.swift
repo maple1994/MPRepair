@@ -8,6 +8,18 @@
 
 import UIKit
 
+/// Pciker的类型
+enum MPPickerType {
+    /// 一维文本选择器
+    case text
+    /// 年月选择器
+    case date
+    /// 地址选择器
+    case address
+    /// 没有选择器
+    case none
+}
+
 /// 报名模型
 class MPSignUpModel {
     /// 显示的标题
@@ -16,6 +28,10 @@ class MPSignUpModel {
     var content: String?
     /// 是否显示小三角
     var isShowDetailIcon: Bool = false
+    /// picker类型
+    var pickerType: MPPickerType = .none
+    /// 当pickerType == .text时，显示的内容
+    var pickerContent: [String] = [String]()
     var placeHolder: String?
     
     init(title: String?, content: String?, isShowDetailIcon: Bool, placeHolder: String?) {
@@ -38,10 +54,23 @@ class MPSignUpTableViewCell: UITableViewCell {
     var signUpModel: MPSignUpModel? {
         didSet {
             titleLabel.text = signUpModel?.title
+            textFiled.placeholder = signUpModel?.placeHolder
+            let content = signUpModel?.content ?? ""
+            let type = signUpModel?.pickerType ?? .none
             let isShow = signUpModel?.isShowDetailIcon ?? false
             detailIcon.isHidden = !isShow
+            pickerLabel.isHidden = detailIcon.isHidden
             textFiled.isHidden = isShow
-            textFiled.placeholder = signUpModel?.placeHolder
+            if !content.isEmpty {
+                if type == .none {
+                    textFiled.text = content
+                }else {
+                    pickerLabel.text = content
+                }
+            }else {
+                pickerLabel.text = ""
+                textFiled.text = ""
+            }
         }
     }
     
@@ -56,7 +85,9 @@ class MPSignUpTableViewCell: UITableViewCell {
     
     fileprivate func setupUI() {
         titleLabel = UILabel(font: UIFont.mpSmallFont, text: "姓名", textColor: UIColor.colorWithHexString("#4A4A4A"))
+        pickerLabel = UILabel(font: UIFont.mpSmallFont, text: "", textColor: UIColor.colorWithHexString("#9B9B9B"))
         textFiled = UITextField()
+        textFiled.delegate = self
         textFiled.font = UIFont.mpSmallFont
         textFiled.textColor = UIColor.colorWithHexString("#9B9B9B")
         textFiled.placeholder = "请输入姓名"
@@ -66,6 +97,7 @@ class MPSignUpTableViewCell: UITableViewCell {
         contentView.addSubview(titleLabel)
         contentView.addSubview(textFiled)
         contentView.addSubview(detailIcon)
+        contentView.addSubview(pickerLabel)
         let line = MPUtils.createLine()
         contentView.addSubview(line)
         titleLabel.snp.makeConstraints { (make) in
@@ -81,6 +113,10 @@ class MPSignUpTableViewCell: UITableViewCell {
             make.trailing.equalToSuperview().offset(-15)
             make.centerY.equalToSuperview()
         }
+        pickerLabel.snp.makeConstraints { (make) in
+            make.trailing.equalTo(detailIcon.snp.leading).offset(-5)
+            make.centerY.equalToSuperview()
+        }
         line.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(15)
             make.trailing.equalToSuperview().offset(-15)
@@ -94,4 +130,11 @@ class MPSignUpTableViewCell: UITableViewCell {
     fileprivate var textFiled: UITextField!
     fileprivate var detailIcon: UIImageView!
     fileprivate weak var line: UIView?
+    fileprivate var pickerLabel: UILabel!
+}
+
+extension MPSignUpTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        signUpModel?.content = textField.trimText
+    }
 }
