@@ -30,5 +30,5 @@ class MPFooterConfirmView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("")
     }
-    fileprivate var confrimButton: UIButton!
+    var confrimButton: UIButton!
 }

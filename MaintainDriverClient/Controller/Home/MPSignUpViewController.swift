@@ -15,6 +15,7 @@ class MPSignUpViewController: UIViewController {
     fileprivate var modelArr = [[MPSignUpModel]]()
     /// 记录正在编辑的ip
     fileprivate var editingIP: IndexPath?
+    fileprivate var uploadInfoModel: MPSignUpUploadModel = MPSignUpUploadModel()
     
     // MARK: - Life Circle
     override func viewDidLoad() {
@@ -38,6 +39,10 @@ class MPSignUpViewController: UIViewController {
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
+        self.footerView = footerView
+        footerView.confrimButton.isUserInteractionEnabled = false;
+        
+        footerView.confrimButton.backgroundColor = UIColor.lightGray
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -109,7 +114,7 @@ class MPSignUpViewController: UIViewController {
         return v
     }()
     fileprivate var tableView: UITableView!
-
+    fileprivate var footerView: MPFooterConfirmView?
 }
 // MARK: - Table view data source
 extension MPSignUpViewController: UITableViewDelegate, UITableViewDataSource {
@@ -127,6 +132,7 @@ extension MPSignUpViewController: UITableViewDelegate, UITableViewDataSource {
         if cell == nil {
             cell = MPSignUpTableViewCell(style: .default, reuseIdentifier: "MPSignUpTableViewCell")
         }
+        cell?.delegate = self
         cell?.signUpModel = modelArr[indexPath.section][indexPath.row]
         cell?.isShowLine = (indexPath.row != modelArr[indexPath.section].count - 1)
         return cell!
@@ -193,12 +199,145 @@ extension MPSignUpViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MPSignUpViewController: MPTextPickerViewDelegate {
-    func pickerView(didSelect text: String) {
+    func pickerView(didSelect row: Int, text: String) {
         guard let ip = editingIP else {
             return
         }
+        switch ip.section {
+        case 3:
+            // 联系人关系
+            uploadInfoModel.exigency_relation = row
+        case 4:
+            if ip.row == 1 {
+                // 车型
+                uploadInfoModel.driving_type = row
+            }
+        default:
+            break
+        }
         let model = modelArr[ip.section][ip.row]
         model.content = text
+        signUpCellDidFilled()
         tableView.reloadData()
     }
+}
+
+extension MPSignUpViewController: MPSignUpTableViewCellDelegate {
+    /// 填充了内容
+    func signUpCellDidFilled() {
+        var isValid: Bool = true
+        for (section, arr) in modelArr.enumerated() {
+            for (row, model) in arr.enumerated() {
+                if let content = model.content {
+                    setupData(section, row, content)
+                }else {
+                    isValid = false
+                    break
+                }
+            }
+        }
+        if isValid {
+            MPTipsView.showMsg("Succ!!")
+            footerView?.confrimButton.isUserInteractionEnabled = true;
+            footerView?.confrimButton.backgroundColor = UIColor.navBlue
+        }else {
+            footerView?.confrimButton.isUserInteractionEnabled = false;
+            
+            footerView?.confrimButton.backgroundColor = UIColor.lightGray
+        }
+    }
+    
+    /// 设置上传模型的数据
+    fileprivate func setupData(_ section: Int, _ row: Int, _ content: String) {
+        switch section {
+        case 1:
+            switch row {
+            case 0:
+                uploadInfoModel.name = content
+            case 1:
+                uploadInfoModel.IDcard = content
+            case 2:
+                uploadInfoModel.native_place = content
+            default:
+                break
+            }
+        case 2:
+            switch row {
+            case 0:
+                uploadInfoModel.city = content
+            case 1:
+                uploadInfoModel.place = content
+            default:
+                break
+            }
+        case 3:
+            switch row {
+            case 0:
+                uploadInfoModel.exigency_name = content
+            case 1:
+                uploadInfoModel.exigency_phone = content
+            default:
+                break
+            }
+        case 4:
+            switch row {
+            case 0:
+                uploadInfoModel.exigency_number = content
+            case 2:
+                uploadInfoModel.driving_date = content
+            default:
+                break
+            }
+        default:
+            break
+        }
+    }
+}
+
+/// 报名上传模型
+struct MPSignUpUploadModel {
+    var id: Int {
+        return MPUserModel.shared.userID
+    }
+    var name: String = ""
+    var IDcard: String = ""
+    /// 籍贯
+    var native_place: String = ""
+    /// 报名城市
+    var city: String = ""
+    /// 居住地
+    var place: String = ""
+    /// 紧急联系人姓名
+    var exigency_name: String = ""
+    /// 紧急联系人号码
+    var exigency_phone: String = ""
+    /// 紧急联系人关系 0:兄弟姐妹,1:父母,2:朋友
+    var exigency_relation: Int = 0
+    /// 驾驶人档案编号
+    var exigency_number: String = ""
+    /// 准驾车型 0:小型蓝牌,1:客车,2:大货车
+    var driving_type: Int = 0
+    /// 初领驾驶证日期
+    var driving_date: String = ""
+    /// 本职工作 0:个体工商户,1:企事业单位全职员工,2:其他兼职平台工作
+    var work: Int = 0
+    /// 有无代驾经历
+    var driving_experience: Bool = false
+    /// 曾就职的平台
+    var work_platform: String = ""
+    /// 历史接单量
+    var historical_order: Int = 0
+    
+    /// 身份证正面
+    var pic_idcard_front: UIImage?
+    /// 身份证反面
+    var pic_idcard_back: UIImage?
+    /// 司机正面照
+    var pic_driver: UIImage?
+    /// 人证合一照
+    var pic_user: UIImage?
+    /// 驾驶证正面照
+    var pic_drive_front: UIImage?
+    /// 驾驶证副页照
+    var pic_drive_back: UIImage?
 }

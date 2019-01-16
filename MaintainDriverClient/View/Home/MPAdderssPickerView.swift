@@ -183,7 +183,7 @@ class MPAdderssPickerView: UIView {
             return
         }
         let content = pro + shi + xian
-        delegate?.pickerView(didSelect: content)
+        delegate?.pickerView(didSelect: 0, text: content)
         dismiss()
     }
     

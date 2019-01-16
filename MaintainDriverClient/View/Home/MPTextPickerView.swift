@@ -10,7 +10,7 @@ import UIKit
 import PGPickerView
 
 protocol MPTextPickerViewDelegate: class {
-    func pickerView(didSelect text: String)
+    func pickerView(didSelect row: Int, text: String)
 }
 
 /// 选择一维数组的Text选择器
@@ -120,15 +120,12 @@ class MPTextPickerView: UIView {
     }
     
     @objc fileprivate func confirm() {
-        if let text = selectedText {
-            delegate?.pickerView(didSelect: text)
-        }else {
-            delegate?.pickerView(didSelect: titleArr[0])
-        }
+        let row = selectedRow ?? 0
+        delegate?.pickerView(didSelect: row, text: titleArr[row])
         dismiss()
     }
     
-    fileprivate var selectedText: String?
+    fileprivate var selectedRow: Int?
     fileprivate var contentView: UIView!
 }
 
@@ -149,7 +146,7 @@ extension MPTextPickerView: PGPickerViewDataSource, PGPickerViewDelegate {
         return UIColor.navBlue
     }
     func pickerView(_ pickerView: PGPickerView!, didSelectRow row: Int, inComponent component: Int) {
-        selectedText = titleArr[row]
+        selectedRow = row
     }
 }
 

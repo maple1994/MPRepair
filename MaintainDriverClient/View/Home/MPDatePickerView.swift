@@ -143,6 +143,6 @@ extension MPDatePickerView: PGDatePickerDelegate {
         let format = DateFormatter()
         format.dateFormat = "yyyy-MM"
         let dateStr = format.string(from: date)
-        delegate?.pickerView(didSelect: dateStr)
+        delegate?.pickerView(didSelect: 0, text: dateStr)
     }
 }

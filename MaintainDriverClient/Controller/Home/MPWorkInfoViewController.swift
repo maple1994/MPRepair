@@ -192,7 +192,7 @@ extension MPWorkInfoViewController: MPOptionTableViewCellDelegate {
 }
 
 extension MPWorkInfoViewController: MPTextPickerViewDelegate {
-    func pickerView(didSelect text: String) {
+    func pickerView(didSelect row: Int, text: String) {
         guard let ip = editingIP else {
             return
         }

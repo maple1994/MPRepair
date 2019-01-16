@@ -45,9 +45,15 @@ class MPSignUpModel {
     }
 }
 
+protocol MPSignUpTableViewCellDelegate: class {
+    /// 填充了内容
+    func signUpCellDidFilled()
+}
+
 /// 报名页面Cell
 class MPSignUpTableViewCell: UITableViewCell {
     
+    weak var delegate: MPSignUpTableViewCellDelegate?
     var isShowLine: Bool = true {
         didSet {
             line?.isHidden = !isShowLine
@@ -140,5 +146,6 @@ class MPSignUpTableViewCell: UITableViewCell {
 extension MPSignUpTableViewCell: UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         signUpModel?.content = textField.trimText
+        delegate?.signUpCellDidFilled()
     }
 }
