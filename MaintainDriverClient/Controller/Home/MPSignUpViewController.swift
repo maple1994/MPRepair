@@ -41,7 +41,7 @@ class MPSignUpViewController: UIViewController {
         }
         self.footerView = footerView
         footerView.confrimButton.isUserInteractionEnabled = false;
-        
+
         footerView.confrimButton.backgroundColor = UIColor.lightGray
     }
     
@@ -104,7 +104,15 @@ class MPSignUpViewController: UIViewController {
     }
     
     @objc fileprivate func confirm() {
-        let vc = MPUploadIDCartViewController()
+        if !uploadInfoModel.IDcard.isMatchRegularExp("^(^[1-9]\\d{7}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])\\d{3}$)|(^[1-9]\\d{5}[1-9]\\d{3}((0\\d)|(1[0-2]))(([0|1|2]\\d)|3[0-1])((\\d{4})|\\d{3}[Xx])$)$") {
+            MPTipsView.showMsg("请输入合法的身份证")
+            return
+        }
+        if !uploadInfoModel.exigency_phone.isMatchRegularExp("1[0-9]{10}$") {
+            MPTipsView.showMsg("请输入合法的手机号码")
+            return
+        }
+        let vc = MPUploadIDCartViewController(model: uploadInfoModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -228,7 +236,8 @@ extension MPSignUpViewController: MPSignUpTableViewCellDelegate {
         var isValid: Bool = true
         for (section, arr) in modelArr.enumerated() {
             for (row, model) in arr.enumerated() {
-                if let content = model.content {
+                let content = model.content ?? ""
+                if !content.isEmpty {
                     setupData(section, row, content)
                 }else {
                     isValid = false
@@ -340,4 +349,8 @@ struct MPSignUpUploadModel {
     var pic_drive_front: UIImage?
     /// 驾驶证副页照
     var pic_drive_back: UIImage?
+    /// 每天可接单时长
+    var time_day: String = ""
+    /// 预期订单报酬
+    var order_reward: Int = 0
 }

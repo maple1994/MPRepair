@@ -75,6 +75,8 @@ enum MPApiType {
     case getDriverCancelRuler
     /// 完善司机资料
     case completeDriverInfo(name: String, idCard: String, pic_idcard_front: UIImage, pic_idcard_back: UIImage, pic_driver: UIImage, pic_user: UIImage, pic_drive_front: UIImage, pic_drive_back:  UIImage)
+    /// 司机加盟
+    case driverSignUp(model: MPSignUpUploadModel)
     /// 获取三级地址信息
     case getAddressInfo
 }
@@ -145,6 +147,8 @@ extension MPApiType: TargetType {
             return "api/driver/driver_info/"
         case .getAddressInfo:
             return "api/user/addressinfo/"
+        case .driverSignUp:
+            return "api/driver/driver_info/"
         }
     }
     
@@ -310,6 +314,35 @@ extension MPApiType: TargetType {
             param["auth_code"] = authCode
             param["alipay_id"] = alipayID
             param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .driverSignUp(model):
+            var param = defaultParam
+            param["id"] = model.id
+            param["name"] = model.name
+            param["IDcard"] = model.IDcard
+            param["native_place"] = model.native_place
+            param["city"] = model.city
+            param["place"] = model.place
+            param["exigency_name"] = model.exigency_name
+            param["exigency_phone"] = model.exigency_phone
+            param["exigency_relation"] = model.exigency_relation
+            param["exigency_number"] = model.exigency_number
+            param["driving_type"] = model.driving_type
+            param["driving_date"] = model.driving_date
+            param["work"] = model.work
+            param["driving_experience"] = model.driving_experience
+            if model.driving_experience {
+                param["work_platform"] = model.work_platform
+                param["historical_order"] = model.historical_order
+            }
+            param["time_day"] = model.time_day
+            param["order_reward"] = model.order_reward
+            param["pic_idcard_front"] = model.pic_idcard_front?.base64 ?? ""
+            param["pic_idcard_back"] = model.pic_idcard_back?.base64 ?? ""
+            param["pic_driver"] = model.pic_driver?.base64 ?? ""
+            param["pic_user"] = model.pic_user?.base64 ?? ""
+            param["pic_drive_front"] = model.pic_drive_front?.base64 ?? ""
+            param["pic_drive_back"] = model.pic_drive_back?.base64 ?? ""
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .completeDriverInfo(name, idCard, pic_idcard_front, pic_idcard_back, pic_driver, pic_user, pic_drive_front, pic_drive_back):
             var param = defaultParam

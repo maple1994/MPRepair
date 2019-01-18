@@ -11,12 +11,26 @@ import IQKeyboardManagerSwift
 
 /// 工作相关信息
 class MPWorkInfoViewController: UIViewController {
+    init(model: MPSignUpUploadModel) {
+        uploadInfoModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    var uploadInfoModel: MPSignUpUploadModel
 
     fileprivate var itemModelArr: [MPSignUpModel] = [MPSignUpModel]()
     /// 记录正在编辑的ip
     fileprivate var editingIP: IndexPath?
     /// 是否有代驾经历
-    fileprivate var isHaveExp: Bool = true
+    fileprivate var isHaveExp: Bool = false {
+        didSet {
+            uploadInfoModel.driving_experience = isHaveExp
+        }
+    }
     
     // MARK: - Life Circle
     override func viewDidLoad() {
@@ -34,6 +48,9 @@ class MPWorkInfoViewController: UIViewController {
         }
         let footerView = MPFooterConfirmView(title: "提交", target: self, action: #selector(MPWorkInfoViewController.submit))
         tableView.tableFooterView = footerView
+        self.footerView = footerView
+        footerView.confrimButton.isUserInteractionEnabled = false
+        footerView.confrimButton.backgroundColor = UIColor.lightGray
         setupData()
     }
     
@@ -49,44 +66,77 @@ class MPWorkInfoViewController: UIViewController {
     
     // MARK: - Method
     fileprivate func setupData() {
-        itemModelArr = [MPSignUpModel]()
-        let model1 = MPSignUpModel(title: "本职工作", content: nil, isShowDetailIcon: true, placeHolder: nil)
-        model1.pickerType = .text
-        model1.pickerContent = ["个体工商户", "企事业单位全职员工", "其他兼职平台工作"]
-        itemModelArr.append(model1)
-        let model2 = MPSignUpModel(title: "", content: nil, isShowDetailIcon: false, placeHolder: nil)
-        itemModelArr.append(model2)
         if isHaveExp {
-            let model3 = MPSignUpModel(title: "曾就职的平台", content: nil, isShowDetailIcon: true, placeHolder: nil)
-            model3.pickerType = .text
-            model3.pickerContent = ["滴滴出行", "神州专车和神州租车", "曹操专车"]
-            itemModelArr.append(model3)
-            let model4 = MPSignUpModel(title: "历史接单量", content: nil, isShowDetailIcon: false, placeHolder: "请输入接单量")
-            model4.keyboardType = .numberPad
-            itemModelArr.append(model4)
+            itemModelArr = [
+                model1, model2, model3,
+                model4, model5, model6
+            ]
+        }else {
+            itemModelArr = [
+                model1, model2, model5, model6
+            ]
         }
-        let model5 = MPSignUpModel(title: "每天可接单时长", content: nil, isShowDetailIcon: true, placeHolder: nil)
-        model5.pickerType = .text
-        model5.pickerContent = ["1到3小时", "3到5小时"]
-        itemModelArr.append(model5)
-        let model6 = MPSignUpModel(title: "期待订单报酬", content: nil, isShowDetailIcon: false, placeHolder: "请输入期待报酬")
-        model6.keyboardType = .numberPad
-        itemModelArr.append(model6)
     }
     
     
     @objc fileprivate func submit() {
-        navigationController?.popToRootViewController(animated: true)
+        for (i, model) in itemModelArr.enumerated() {
+            if i == 0 || i == 1 {
+                continue
+            }
+            if let content = model.content {
+                setupInfoModel(i, content)
+            }
+        }
+        let loadingView = MPTipsView.showLoadingView("正在上传...")
+        MPNetword.requestJson(target: .driverSignUp(model: uploadInfoModel), success: { (_) in
+            loadingView?.hide(animated: true)
+            self.navigationController?.popToRootViewController(animated: true)
+        }, failure: { (error) in
+            loadingView?.hide(animated: true)
+            })
     }
     
     // MARK: - View
+    fileprivate lazy var model1: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "本职工作", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model.pickerType = .text
+        model.pickerContent = ["个体工商户", "企事业单位全职员工", "其他兼职平台工作"]
+        return model
+    }()
+    fileprivate lazy var model2: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "", content: nil, isShowDetailIcon: false, placeHolder: nil)
+        return model
+    }()
+    fileprivate lazy var model3: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "曾就职的平台", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model.pickerType = .text
+        model.pickerContent = ["滴滴出行", "神州专车和神州租车", "曹操专车"]
+        return model
+    }()
+    fileprivate lazy var model4: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "历史接单量", content: nil, isShowDetailIcon: false, placeHolder: "请输入接单量")
+        model.keyboardType = .numberPad
+        return model
+    }()
+    fileprivate lazy var model5: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "每天可接单时长", content: nil, isShowDetailIcon: true, placeHolder: nil)
+        model.pickerType = .text
+        model.pickerContent = ["1到3小时", "3到5小时"]
+        return model
+    }()
+    fileprivate lazy var model6: MPSignUpModel =  {
+        let model = MPSignUpModel(title: "期待订单报酬", content: nil, isShowDetailIcon: false, placeHolder: "请输入期待报酬")
+        model.keyboardType = .numberPad
+        return model
+    }()
     fileprivate lazy var processView: MPProcessView = {
         let v = MPProcessView()
         v.setupSelectIndex(2)
         return v
     }()
     fileprivate var tableView: UITableView!
-
+    fileprivate var footerView: MPFooterConfirmView?
 }
 
 extension MPWorkInfoViewController: UITableViewDelegate, UITableViewDataSource {
@@ -118,6 +168,7 @@ extension MPWorkInfoViewController: UITableViewDelegate, UITableViewDataSource {
             }
             cell?.signUpModel = itemModelArr[indexPath.row]
             cell?.isShowLine = (indexPath.row != itemModelArr.count - 1)
+            cell?.delegate = self
             return cell!
         }
     }
@@ -187,6 +238,7 @@ extension MPWorkInfoViewController: MPOptionTableViewCellDelegate {
     func checkBox(didSelect isChecked: Bool) {
         isHaveExp = isChecked
         setupData()
+        setupConfirmButton()
         tableView.reloadData()
     }
 }
@@ -199,5 +251,61 @@ extension MPWorkInfoViewController: MPTextPickerViewDelegate {
         let model = itemModelArr[ip.row]
         model.content = text
         tableView.reloadData()
+        if ip.row == 0 {
+            uploadInfoModel.work = row
+        }
+        setupConfirmButton()
+    }
+}
+
+extension MPWorkInfoViewController: MPSignUpTableViewCellDelegate {
+    func signUpCellDidFilled() {
+        setupConfirmButton()
+    }
+    
+    fileprivate func setupInfoModel(_ i: Int, _ content: String) {
+        if isHaveExp {
+            switch i {
+            case 2:
+                uploadInfoModel.work_platform = content
+            case 3:
+                uploadInfoModel.historical_order = content.toInt() ?? 0
+            case 4:
+                // 接单时长
+                uploadInfoModel.time_day = content
+            case 5:
+                // 期待报酬
+                uploadInfoModel.order_reward = content.toInt() ?? 0
+            default:
+                break
+            }
+        }else {
+            switch i {
+            case 2:
+                uploadInfoModel.time_day = content
+            case 3:
+                uploadInfoModel.order_reward = content.toInt() ?? 0
+            default:
+                break
+            }
+        }
+    }
+    
+    fileprivate func setupConfirmButton() {
+        var isValid = true
+        for (i, model) in itemModelArr.enumerated() {
+            let content = model.content ?? ""
+            if i != 1 && content.isEmpty {
+                isValid = false
+                break
+            }
+        }
+        if isValid {
+            footerView?.confrimButton.isUserInteractionEnabled = true
+            footerView?.confrimButton.backgroundColor = UIColor.navBlue
+        }else {
+            footerView?.confrimButton.isUserInteractionEnabled = false
+            footerView?.confrimButton.backgroundColor = UIColor.lightGray
+        }
     }
 }

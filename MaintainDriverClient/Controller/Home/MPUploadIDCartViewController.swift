@@ -10,6 +10,16 @@ import UIKit
 
 class MPUploadIDCartViewController: UIViewController {
 
+    init(model: MPSignUpUploadModel) {
+        uploadInfoModel = model
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    var uploadInfoModel: MPSignUpUploadModel
     fileprivate var margin: CGFloat {
         var value: CGFloat = 15
         if mp_screenW < 350 {
@@ -79,6 +89,9 @@ class MPUploadIDCartViewController: UIViewController {
         submitButton.setTitle("下一步", for: .normal)
         submitButton.titleLabel?.font = UIFont.mpBigFont
         submitButton.setupCorner(4)
+        submitButton.isUserInteractionEnabled = false
+        submitButton.backgroundColor = UIColor.lightGray
+        self.submitButton = submitButton
         submitView.addSubview(submitButton)
         uploadView.addSubview(submitView)
         uploadView.addSubview(upload1)
@@ -156,12 +169,31 @@ class MPUploadIDCartViewController: UIViewController {
     }
     
     @objc fileprivate func submit() {
-        let vc = MPWorkInfoViewController()
+        for (index, model) in uploadItemArr.enumerated() {
+            switch index {
+            case 0:
+                uploadInfoModel.pic_idcard_front = model.image
+            case 1:
+                uploadInfoModel.pic_idcard_back = model.image
+            case 2:
+                uploadInfoModel.pic_driver = model.image
+            case 3:
+                uploadInfoModel.pic_user = model.image
+            case 4:
+                uploadInfoModel.pic_drive_front = model.image
+            case 5:
+                uploadInfoModel.pic_drive_back = model.image
+            default:
+                break
+            }
+        }
+        let vc = MPWorkInfoViewController(model: uploadInfoModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - View
     fileprivate var tableView: UITableView!
+    fileprivate var submitButton: UIButton?
     fileprivate lazy var processView: MPProcessView = {
         let v = MPProcessView()
         v.setupSelectIndex(1)
@@ -223,6 +255,20 @@ extension MPUploadIDCartViewController: UITableViewDelegate, UITableViewDataSour
 extension MPUploadIDCartViewController: TZImagePickerControllerDelegate {
     func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
         editingItem?.image = photos.first
+        var isValid = true
+        for model in uploadItemArr {
+            if model.image == nil {
+                isValid = false
+                break
+            }
+        }
+        if isValid {
+            submitButton?.isUserInteractionEnabled = true
+            submitButton?.backgroundColor = UIColor.navBlue
+        }else {
+            submitButton?.isUserInteractionEnabled = false
+            submitButton?.backgroundColor = UIColor.lightGray
+        }
     }
 }
 
