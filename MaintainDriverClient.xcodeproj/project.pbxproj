@@ -66,6 +66,7 @@
 		F5867E60211D7F4600F8A07D /* MPApiType.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5867E5F211D7F4600F8A07D /* MPApiType.swift */; };
 		F587C54B215A066000238B0B /* MPUserAgreementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54A215A066000238B0B /* MPUserAgreementView.swift */; };
 		F587C54F215A3A6100238B0B /* MPAuthorityTipView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */; };
+		F588E19821F2166500B80AC4 /* MPExaminationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F588E19721F2166500B80AC4 /* MPExaminationModel.swift */; };
 		F58A6772216EECFF00948A7A /* MPTiXianTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58A6771216EECFF00948A7A /* MPTiXianTableViewCell.swift */; };
 		F59832C92178C9F60062AF29 /* MPShowItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59832C82178C9F60062AF29 /* MPShowItemTableViewCell.swift */; };
 		F5A6331B2116DA530075548A /* MPUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5A6331A2116DA530075548A /* MPUtils.swift */; };
@@ -228,6 +229,7 @@
 		F5867E5F211D7F4600F8A07D /* MPApiType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPApiType.swift; sourceTree = "<group>"; };
 		F587C54A215A066000238B0B /* MPUserAgreementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPUserAgreementView.swift; sourceTree = "<group>"; };
 		F587C54E215A3A6100238B0B /* MPAuthorityTipView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPAuthorityTipView.swift; sourceTree = "<group>"; };
+		F588E19721F2166500B80AC4 /* MPExaminationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPExaminationModel.swift; sourceTree = "<group>"; };
 		F58A6771216EECFF00948A7A /* MPTiXianTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTiXianTableViewCell.swift; sourceTree = "<group>"; };
 		F59832C82178C9F60062AF29 /* MPShowItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPShowItemTableViewCell.swift; sourceTree = "<group>"; };
 		F5A6331A2116DA530075548A /* MPUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MPUtils.swift; sourceTree = "<group>"; };
@@ -526,6 +528,7 @@
 				F51E90282136E9D700ED1B44 /* MPUserModel.swift */,
 				F51508AD213BBF59006B49E2 /* MPMingXiModel.swift */,
 				F583EA5121400E480071CE9B /* MPPhotoModel.swift */,
+				F588E19721F2166500B80AC4 /* MPExaminationModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1092,6 +1095,7 @@
 				F580064E21A78C9100072F35 /* JXPhotoBrowserPresentationController.swift in Sources */,
 				F5480C8821D6060800358590 /* MPShowGradeView.swift in Sources */,
 				F580065C21A78C9100072F35 /* JXPhotoBrowserZoomPresentingAnimator.swift in Sources */,
+				F588E19821F2166500B80AC4 /* MPExaminationModel.swift in Sources */,
 				F5DF739D211AE9F000B9F154 /* MPImageButtonView.swift in Sources */,
 				F5F8559221D3BF1C0013A582 /* MPTextPickerView.swift in Sources */,
 				F580065A21A78C9100072F35 /* JXPhotoBrowserFadePresentingAnimator.swift in Sources */,

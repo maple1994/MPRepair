@@ -10,10 +10,32 @@ import UIKit
 
 class MPExaminationViewController: UIViewController {
 
+    fileprivate var modelArr: [MPExaminationModel]?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "开始答题"
         setupUI()
+        loadData()
+    }
+    
+    fileprivate func loadData() {
+        MPNetword.requestJson(target: .getQuestions, success: { json in
+            guard let dic = json["data"] as? [String: Any] else {
+                return
+            }
+            guard let que_list = dic["question_list"] as? [[String: Any]] else {
+                return
+            }
+            var arr = [MPExaminationModel]()
+            for data in que_list {
+                if let model = MPExaminationModel.toModel(data) {
+                    arr.append(model)
+                }
+            }
+            self.modelArr = arr
+            self.tableView.reloadData()
+        })
     }
     
     fileprivate func setupUI() {
@@ -54,7 +76,7 @@ class MPExaminationViewController: UIViewController {
 
 extension MPExaminationViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return modelArr?.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -62,6 +84,7 @@ extension MPExaminationViewController: UITableViewDelegate, UITableViewDataSourc
         if cell == nil {
             cell = MPExaminationCellTableViewCell(style: .default, reuseIdentifier: "MPExaminationCellTableViewCell")
         }
+        cell?.model = modelArr?[indexPath.row]
         return cell!
     }
     

@@ -10,6 +10,13 @@ import UIKit
 
 /// 试卷Cell
 class MPExaminationCellTableViewCell: UITableViewCell {
+    
+    var model: MPExaminationModel? {
+        didSet {
+            questionLabel.text = model?.content
+        }
+    }
+    
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setupUI()

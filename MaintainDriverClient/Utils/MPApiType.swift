@@ -79,6 +79,14 @@ enum MPApiType {
     case driverSignUp(model: MPSignUpUploadModel)
     /// 获取三级地址信息
     case getAddressInfo
+    /// 获取试题
+    case getQuestions
+    /// 获取保险页面
+    case getInsurance
+    /// 交保险 alipay：支付宝，weixin：微信
+    case payInsurance(method: String)
+    /// 提交答案
+    case submitAnswer(ans: String)
 }
 
 // https://www.jianshu.com/p/38fbc22a1e2b
@@ -149,6 +157,14 @@ extension MPApiType: TargetType {
             return "api/user/addressinfo/"
         case .driverSignUp:
             return "api/driver/driver_info/"
+        case .getQuestions:
+            return "api/driver/question/"
+        case .getInsurance:
+            return "api/driver/insurance_page/"
+        case .payInsurance:
+            return "api/driver/insurance/"
+        case .submitAnswer:
+            return "api/driver/question/"
         }
     }
     
@@ -168,6 +184,8 @@ extension MPApiType: TargetType {
             .getBalance,
             .getDriverCancelRuler,
             .getAddressInfo,
+            .getQuestions,
+            .getInsurance,
             .getAlipayBindedAccountInfo:
             return .get
         default:
@@ -238,6 +256,10 @@ extension MPApiType: TargetType {
             param["alipay_account"] = account
             param["name"] = user
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .submitAnswer(ans):
+            var param = defaultParam
+            param["answer"] = ans
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .getOrderList(type1, finish):
             var param = defaultParam
             param["type"] = type1
@@ -297,6 +319,7 @@ extension MPApiType: TargetType {
             param["id"] = id
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case .getYearCheckItemInfo,
+             .getInsurance,
              .getAddressInfo:
             return .requestParameters(parameters: defaultParam, encoding: URLEncoding.default)
         case .getOrderCertification,
@@ -304,6 +327,7 @@ extension MPApiType: TargetType {
             .askOrderCertification,
             .getAlipayBindedAccountInfo,
             .getAlipayBindedAccount,
+            .getQuestions,
             .getBalance:
             // 这里只传UserID
             var param = defaultParam
@@ -314,6 +338,11 @@ extension MPApiType: TargetType {
             param["auth_code"] = authCode
             param["alipay_id"] = alipayID
             param["id"] = MPUserModel.shared.userID
+            return .requestParameters(parameters: param, encoding: URLEncoding.default)
+        case let .payInsurance(method):
+            var param = defaultParam
+            param["id"] = MPUserModel.shared.userID
+            param["order_method"] = method
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .driverSignUp(model):
             var param = defaultParam
