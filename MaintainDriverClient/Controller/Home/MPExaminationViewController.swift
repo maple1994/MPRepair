@@ -89,8 +89,6 @@ extension MPExaminationViewController: UITableViewDelegate, UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return tableView.fd_heightForCell(withIdentifier: "MPExaminationCellTableViewCell", configuration: { (cell) in
-
-        })
+        return modelArr?[indexPath.row].rowHeight ?? 0.01
     }
 }

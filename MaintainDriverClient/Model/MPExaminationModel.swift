@@ -28,6 +28,24 @@ class MPExaminationModel {
     var is_multiple: Bool = false
     /// 选项列表
     var item_list: [MPExaminationItemModel] = [MPExaminationItemModel]()
+    /// 行高
+    var rowHeight: CGFloat {
+        if _rowHeight == 0 || itemListHeight == 0 {
+            let wid = mp_screenW - 30
+            let txtH = content.size(UIFont.mpSmallFont, width: wid).height
+            _rowHeight += txtH + 10 + 10
+            _rowHeight += itemListHeight
+        }
+        return _rowHeight
+    }
+    var itemListHeight: CGFloat {
+        if _itemListHeight == 0 {
+            _itemListHeight = (CGFloat)(item_list.count) * 35
+        }
+        return _itemListHeight
+    }
+    fileprivate var _itemListHeight: CGFloat = 0
+    fileprivate var _rowHeight: CGFloat = 0
     
     class func toModel(_ dic1: Any?) -> MPExaminationModel? {
         guard let dic = dic1 as? [String: Any] else {
@@ -52,6 +70,7 @@ class MPExaminationModel {
 class MPExaminationItemModel {
     var id: Int = 0
     var content: String = ""
+    var isChecked: Bool = false
     class func toModel(_ dic1: Any?) -> MPExaminationItemModel? {
         guard let dic = dic1 as? [String: Any] else {
             return nil
@@ -59,6 +78,9 @@ class MPExaminationItemModel {
         let model = MPExaminationItemModel()
         model.id = toInt(dic["id"])
         model.content = toString(dic["content"])
+        if model.content.isEmpty || model.id == 0 {
+            return nil
+        }
         return model
     }
 }
