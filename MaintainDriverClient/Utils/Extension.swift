@@ -233,6 +233,25 @@ extension Array {
         }
         return self[index]
     }
+    
+    /// 将数组以ch(默认是‘,’)作为间隔，连接成字符串
+    func connect(with ch: String = ",") -> String {
+        var res = ""
+        guard let strArr = self as? [String] else {
+            return res
+        }
+        if strArr.count == 0 {
+            return res
+        }
+        for (index, val) in strArr.enumerated() {
+            if index != strArr.count - 1 {
+                res += val + ch
+            }else {
+                res += val
+            }
+        }
+        return res
+    }
 }
 
 extension UIImage {

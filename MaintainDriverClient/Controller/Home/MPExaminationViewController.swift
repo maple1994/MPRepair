@@ -33,6 +33,7 @@ class MPExaminationViewController: UIViewController {
                     arr.append(model)
                 }
             }
+            self.numLabel.text = "共\(arr.count)题"
             self.modelArr = arr
             self.tableView.reloadData()
         })
@@ -41,10 +42,10 @@ class MPExaminationViewController: UIViewController {
     fileprivate func setupUI() {
         view.backgroundColor = UIColor.white
         let headerView = UIView()
-        numLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "共30题", textColor: UIColor.white)
+        numLabel = UILabel(font: UIFont.systemFont(ofSize: 20), text: "共--题", textColor: UIColor.white)
         bgImageView = UIImageView(image: UIImage(named: "count_down_bg"))
-        headerView.addSubview(numLabel)
         headerView.addSubview(bgImageView)
+        headerView.addSubview(numLabel)
         
         tableView = UITableView()
         tableView.separatorStyle = .none
@@ -56,6 +57,13 @@ class MPExaminationViewController: UIViewController {
             make.top.leading.trailing.equalToSuperview()
             make.height.equalTo(110)
         }
+        bgImageView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        numLabel.snp.makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(30)
+            make.top.equalToSuperview().offset(30)
+        }
         tableView.snp.makeConstraints { (make) in
             make.top.equalTo(headerView.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
@@ -66,9 +74,35 @@ class MPExaminationViewController: UIViewController {
     }
     
     @objc fileprivate func submit() {
-        MPPrint("提交")
+        guard let arr = modelArr else {
+            return
+        }
+        var res = [String]()
+        for model in arr {
+            var anwArr = [String]()
+            for item in model.item_list {
+                if item.isChecked {
+                    anwArr.append("\(item.id)")
+                }
+            }
+            anwArr.sort()
+            let str = anwArr.connect(with: "#")
+            res.append(str)
+        }
+        let res1 = res.connect(with: ",")
+        MPNetword.requestJson(target: .submitAnswer(ans: res1), success: { json in
+            guard let data = json["data"] as? [String: Any] else {
+                return
+            }
+            let right = toInt(data["right_amount"])
+            let wrong = toInt(data["worry_amount"])
+            let score = toInt(data["score"])
+            let isPass = toBool(data["is_pass"])
+            MPShowGradeView.show(correctNum: right, wrongNum: wrong, score: score, isPass: isPass)
+        })
     }
     
+    // MARK : - View
     fileprivate var numLabel: UILabel!
     fileprivate var bgImageView: UIImageView!
     fileprivate var tableView: UITableView!

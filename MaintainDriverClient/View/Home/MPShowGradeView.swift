@@ -11,9 +11,13 @@ import UIKit
 /// 显示考试成绩的View
 class MPShowGradeView: UIView {
     
-    class func show() {
+    class func show(correctNum: Int, wrongNum: Int, score: Int, isPass: Bool) {
+        var tips = "很抱歉，请再接再厉！"
+        if isPass {
+            tips = "恭喜你，成为八号养车代驾司机！"
+        }
         let view = MPShowGradeView()
-        view.setup(tips: "很抱歉，请再接再厉！", correctNum: 25, wrongNum: 5, isPass: false)
+        view.setup(tips: tips, correctNum: correctNum, wrongNum: wrongNum, score: score, isPass: isPass)
         view.frame = UIScreen.main.bounds
         UIApplication.shared.keyWindow?.addSubview(view)
     }
@@ -25,15 +29,18 @@ class MPShowGradeView: UIView {
     ///   - correctNum: 回答正确的数量
     ///   - wrongNum: 回答错误的数量
     ///   - isPass: 是否通过考试
-    func setup(tips: String, correctNum: Int, wrongNum: Int, isPass: Bool) {
+    func setup(tips: String, correctNum: Int, wrongNum: Int, score: Int, isPass: Bool) {
         tipsLabel.text = tips
         correctLabel.text = "\(correctNum)题"
         wrongLabel.text = "\(wrongNum)题"
+        gradeLabel.text = "\(score)"
         if isPass {
+            confirmButton.setTitle("确认加盟", for: .normal)
             gradeBgView.image = UIImage(named: "star_yellow")
             gradeLabel.textColor = UIColor.colorWithHexString("FF3C3C")
             fenLabel.textColor = UIColor.colorWithHexString("FF3C3C")
         }else {
+            confirmButton.setTitle("重新答题", for: .normal)
             gradeBgView.image = UIImage(named: "star_gray")
             gradeLabel.textColor = UIColor.colorWithHexString("777777")
             fenLabel.textColor = UIColor.colorWithHexString("777777")
