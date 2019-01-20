@@ -14,6 +14,7 @@ import IQKeyboardManagerSwift
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    fileprivate var isFirstLoad: Bool  = true
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -76,7 +77,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        if isFirstLoad {
+            isFirstLoad = false
+            MPUserModel.shared.refreshUserInfo()
+            return
+        }
+        let old = UserDefaults.standard.integer(forKey: "MP_USER_REFRESH_TIME")
+        let now: Int = (Int)(Date().timeIntervalSinceReferenceDate)
+        /// App相隔半个小时就自动刷新用户数据
+        if now - old >= 1800 {
+            MPUserModel.shared.refreshUserInfo()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {

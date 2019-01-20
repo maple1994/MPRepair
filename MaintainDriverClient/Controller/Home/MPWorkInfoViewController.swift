@@ -92,6 +92,7 @@ class MPWorkInfoViewController: UIViewController {
         MPNetword.requestJson(target: .driverSignUp(model: uploadInfoModel), success: { (_) in
             loadingView?.hide(animated: true)
             self.showTipsView()
+            MPUserModel.shared.refreshUserInfo()
             self.navigationController?.popToRootViewController(animated: true)
         }, failure: { (error) in
             loadingView?.hide(animated: true)

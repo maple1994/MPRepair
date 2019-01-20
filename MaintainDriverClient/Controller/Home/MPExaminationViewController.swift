@@ -77,6 +77,29 @@ class MPExaminationViewController: UIViewController {
         guard let arr = modelArr else {
             return
         }
+        // 判断有没完成所有题目
+        var row: Int = 0
+        var isComplete: Bool = true
+        for (index, ans) in arr.enumerated() {
+            var itemCompleteCount: Int = 0
+            for item in ans.item_list {
+                if item.isChecked {
+                    itemCompleteCount += 1
+                }
+            }
+            // 这道题未完成
+            if itemCompleteCount == 0 {
+                row = index
+                isComplete = false
+                break
+            }
+        }
+        if !isComplete {
+            _ = MPTipsView.showMsg("请完成所有题目")
+            let ip = IndexPath(row: row, section: 0)
+            tableView.scrollToRow(at: ip, at: .top, animated: true)
+            return
+        }
         var res = [String]()
         for model in arr {
             var anwArr = [String]()
@@ -98,7 +121,7 @@ class MPExaminationViewController: UIViewController {
             let wrong = toInt(data["worry_amount"])
             let score = toInt(data["score"])
             let isPass = toBool(data["is_pass"])
-            MPShowGradeView.show(correctNum: right, wrongNum: wrong, score: score, isPass: isPass)
+            MPShowGradeView.show(correctNum: right, wrongNum: wrong, score: score, isPass: isPass, delegate: self)
         })
     }
     
@@ -106,6 +129,32 @@ class MPExaminationViewController: UIViewController {
     fileprivate var numLabel: UILabel!
     fileprivate var bgImageView: UIImageView!
     fileprivate var tableView: UITableView!
+}
+
+extension MPExaminationViewController: MPShowGradeViewDelegate {
+    /// 重考
+    func reexamine() {
+        // 清除答案，并滚到顶部
+        guard let arr = modelArr else {
+            return
+        }
+        for ans in arr {
+            for item in ans.item_list {
+                item.isChecked = false
+            }
+        }
+        if arr.count == 0 {
+            return
+        }
+        let ip = IndexPath(row: 0, section: 0)
+        tableView.scrollToRow(at: ip, at: .top, animated: true)
+        tableView.reloadData()
+    }
+    /// 购买保险
+    func buyInsurance() {
+        let vc = MPInsuranceViewController()
+        MPUtils.push(vc)
+    }
 }
 
 extension MPExaminationViewController: UITableViewDelegate, UITableViewDataSource {

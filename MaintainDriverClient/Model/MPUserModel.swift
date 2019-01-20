@@ -20,6 +20,27 @@ enum MPProfileState: Int, Codable {
     case checkFailed = 3
 }
 
+enum MPQuestionnaireState: Int, Codable {
+    /// 未考试
+    case unsubmit = 0
+    /// 考试通过
+    case pass = 1
+    /// 考试不通过
+    case failed = 2
+}
+
+enum MPInsuranceState: Int, Codable {
+    /// 未购买
+    case unpay = 0
+    /// 处理中
+    case handling = 1
+    /// 已购买
+    case payed = 2
+    /// 快过期
+    case willExpire = 3
+}
+
+
 /// 用户模型
 class MPUserModel: Codable {
     // 只对以下属性执行序列化
@@ -34,6 +55,9 @@ class MPUserModel: Codable {
         case isPass
         case score
         case is_driverinfo
+        case is_question
+        case is_insurance
+        case insurance_time
     }
     // MARK: - Property
     static let shared = MPUserModel()
@@ -55,8 +79,14 @@ class MPUserModel: Codable {
     var isPass: Bool = false
     /// 司机评分
     var score: Int = 0
-    /// 是否填写了司机信息
+    /// 是否填写了司机信息 0：未提交，1：正在审核，2：审核成功，3：审核失败
     var is_driverinfo: MPProfileState = MPProfileState.unsubmit
+    /// 0：未考试，1：考试通过，2：考试不通过
+    var is_question: MPQuestionnaireState = MPQuestionnaireState.unsubmit
+    /// 0：未购买，1：处理中，2：已购买，3：快过期
+    var is_insurance: MPInsuranceState = MPInsuranceState.unpay
+    /// 保险到期时间
+    var insurance_time: String = ""
     /// 是否登录
     var isLogin: Bool {
         return token != "0"
@@ -81,6 +111,16 @@ class MPUserModel: Codable {
     @objc fileprivate func refreshTokenSucc() {
         MPOrderSocketManager.shared.reconnect()
         MPListenSocketManager.shared.reconnect()
+    }
+    
+    /// 刷新用户信息
+    func refreshUserInfo() {
+        getUserInfo(succ: {
+            /// 序列化
+            self.serilization()
+        }) {
+            
+        }
     }
     
     /// 登录成功
@@ -137,6 +177,9 @@ class MPUserModel: Codable {
                     fail?()
                     return
             }
+            // 保存刷新时间
+            let now: Int = (Int)(Date().timeIntervalSinceReferenceDate)
+            UserDefaults.standard.set(now, forKey: "MP_USER_REFRESH_TIME")
             self.phone = phone
             self.userName = name
             self.picUrl = picUrl
@@ -144,6 +187,11 @@ class MPUserModel: Codable {
             self.isPass = isPass
             let rawValue = toInt(dic?["is_driverinfo"])
             self.is_driverinfo = MPProfileState(rawValue: rawValue) ?? MPProfileState.unsubmit
+            let rawValue2 = toInt(dic?["is_question"])
+            let rawValue3 = toInt(dic?["is_insurance"])
+            self.is_question = MPQuestionnaireState(rawValue: rawValue2) ?? MPQuestionnaireState.unsubmit
+            self.is_insurance = MPInsuranceState(rawValue: rawValue3) ?? MPInsuranceState.unpay
+            self.insurance_time = toString(dic?["insurance_time"])
             self.score = score
             succ?()
         }) { (err) in
@@ -187,6 +235,11 @@ extension MPUserModel {
         picUrl = ""
         point = 0
         isPass = false
+        score = 0
+        is_driverinfo = .unsubmit
+        is_question = .unsubmit
+        is_insurance = .unpay
+        insurance_time = ""
         do {
             try FileManager.default.removeItem(at: mp_path_url)
         }catch {
@@ -213,6 +266,9 @@ extension MPUserModel {
             isPass = model.isPass
             is_driverinfo = model.is_driverinfo
             score = model.score
+            is_question = model.is_question
+            is_insurance = model.is_insurance
+            insurance_time = model.insurance_time
             return true
         }
         return false

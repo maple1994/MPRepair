@@ -8,16 +8,24 @@
 
 import UIKit
 
+protocol MPShowGradeViewDelegate: class {
+    /// 重考
+    func reexamine()
+    /// 购买保险
+    func buyInsurance()
+}
+
 /// 显示考试成绩的View
 class MPShowGradeView: UIView {
     
-    class func show(correctNum: Int, wrongNum: Int, score: Int, isPass: Bool) {
+    class func show(correctNum: Int, wrongNum: Int, score: Int, isPass: Bool, delegate: MPShowGradeViewDelegate?) {
         var tips = "很抱歉，请再接再厉！"
         if isPass {
             tips = "恭喜你，成为八号养车代驾司机！"
         }
         let view = MPShowGradeView()
         view.setup(tips: tips, correctNum: correctNum, wrongNum: wrongNum, score: score, isPass: isPass)
+        view.delegate = delegate
         view.frame = UIScreen.main.bounds
         UIApplication.shared.keyWindow?.addSubview(view)
     }
@@ -34,6 +42,7 @@ class MPShowGradeView: UIView {
         correctLabel.text = "\(correctNum)题"
         wrongLabel.text = "\(wrongNum)题"
         gradeLabel.text = "\(score)"
+        self.isPass = isPass
         if isPass {
             confirmButton.setTitle("确认加盟", for: .normal)
             gradeBgView.image = UIImage(named: "star_yellow")
@@ -46,6 +55,9 @@ class MPShowGradeView: UIView {
             fenLabel.textColor = UIColor.colorWithHexString("777777")
         }
     }
+    
+    weak var delegate: MPShowGradeViewDelegate?
+    fileprivate var isPass: Bool = false
     
     init() {
         super.init(frame: CGRect.zero)
@@ -166,7 +178,12 @@ class MPShowGradeView: UIView {
     }
     
     @objc fileprivate func confirm() {
-        
+        if isPass {
+            delegate?.buyInsurance()
+        }else {
+            delegate?.reexamine()
+        }
+        dismiss()
     }
     
     // MARK: - View
