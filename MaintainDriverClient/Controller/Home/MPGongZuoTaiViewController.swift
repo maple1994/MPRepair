@@ -136,10 +136,10 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-//        let vc = MPLeagueViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-        let vc = MPInsuranceViewController()
+        let vc = MPLeagueViewController()
         navigationController?.pushViewController(vc, animated: true)
+//        let vc = MPInsuranceViewController()
+//        navigationController?.pushViewController(vc, animated: true)
 //
 //        switch MPUserModel.shared.is_driverinfo {
 //        case .unsubmit, .checkFailed:

@@ -453,7 +453,7 @@ struct MPMsgCodeKey {
 /// 网络请求工具
 struct MPNetword {
     #if DEBUG
-    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
+    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: false)])
     #else
     static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin()])
     #endif

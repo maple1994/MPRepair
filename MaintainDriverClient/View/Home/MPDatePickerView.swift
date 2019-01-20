@@ -60,7 +60,7 @@ class MPDatePickerView: UIView {
         pickerView.textFontOfSelectedRow = UIFont.mpNormalFont
         pickerView.datePickerType = .type1
         pickerView.isHiddenMiddleText = true
-        pickerView.datePickerMode = .yearAndMonth
+        pickerView.datePickerMode = .date
         pickerView.delegate = self
         addSubview(contentView)
         self.pickerView = pickerView
@@ -141,7 +141,7 @@ extension MPDatePickerView: PGDatePickerDelegate {
             return
         }
         let format = DateFormatter()
-        format.dateFormat = "yyyy-MM"
+        format.dateFormat = "yyyy-MM-dd"
         let dateStr = format.string(from: date)
         delegate?.pickerView(didSelect: 0, text: dateStr)
     }

@@ -91,10 +91,19 @@ class MPWorkInfoViewController: UIViewController {
         let loadingView = MPTipsView.showLoadingView("正在上传...")
         MPNetword.requestJson(target: .driverSignUp(model: uploadInfoModel), success: { (_) in
             loadingView?.hide(animated: true)
+            self.showTipsView()
             self.navigationController?.popToRootViewController(animated: true)
         }, failure: { (error) in
             loadingView?.hide(animated: true)
             })
+    }
+    
+    fileprivate func showTipsView() {
+        let tipsView = MPAuthorityTipView()
+        tipsView.frame = UIScreen.main.bounds
+        tipsView.showFailView = false
+        tipsView.setup(title: "提示", subTitle: "资料正在审核中，请耐心等候")
+        UIApplication.shared.keyWindow?.addSubview(tipsView)
     }
     
     // MARK: - View

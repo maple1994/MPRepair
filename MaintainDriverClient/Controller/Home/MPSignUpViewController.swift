@@ -246,7 +246,6 @@ extension MPSignUpViewController: MPSignUpTableViewCellDelegate {
             }
         }
         if isValid {
-            MPTipsView.showMsg("Succ!!")
             footerView?.confrimButton.isUserInteractionEnabled = true;
             footerView?.confrimButton.backgroundColor = UIColor.navBlue
         }else {
