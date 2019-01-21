@@ -82,6 +82,7 @@
 		F5AF248121D3841B008A9ADD /* MPSignUpTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */; };
 		F5AFF6F6216C35AE0073ED2C /* MPOrderSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */; };
 		F5AFF6F8216C35C60073ED2C /* MPListenSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */; };
+		F5B050B021F5671F00B6A690 /* MPPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B050AF21F5671F00B6A690 /* MPPaymentViewController.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
 		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
 		F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2446921467C3500353C88 /* MPNetwordTool.swift */; };
@@ -250,6 +251,7 @@
 		F5AF248021D3841B008A9ADD /* MPSignUpTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPSignUpTableViewCell.swift; sourceTree = "<group>"; };
 		F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPOrderSocketManager.swift; sourceTree = "<group>"; };
 		F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPListenSocketManager.swift; sourceTree = "<group>"; };
+		F5B050AF21F5671F00B6A690 /* MPPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPaymentViewController.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
 		F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTipsView.swift; sourceTree = "<group>"; };
 		F5D2446921467C3500353C88 /* MPNetwordTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordTool.swift; sourceTree = "<group>"; };
@@ -663,6 +665,7 @@
 				F5F2C49B21D4DED8005E47E4 /* MPWorkInfoViewController.swift */,
 				F5480C8121D5B30000358590 /* MPExaminationViewController.swift */,
 				F5480C8921D6183400358590 /* MPInsuranceViewController.swift */,
+				F5B050AF21F5671F00B6A690 /* MPPaymentViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1087,6 +1090,7 @@
 				F5AF247921D36451008A9ADD /* MPLeagueViewController.swift in Sources */,
 				F5DF738E211A94E400B9F154 /* MPTitleView.swift in Sources */,
 				F52A5812211974520054B90D /* MPStartYearCheckViewController.swift in Sources */,
+				F5B050B021F5671F00B6A690 /* MPPaymentViewController.swift in Sources */,
 				F5DF738D211A94E400B9F154 /* MPSendCodeButton.swift in Sources */,
 				F58A6772216EECFF00948A7A /* MPTiXianTableViewCell.swift in Sources */,
 				F51E90292136E9D800ED1B44 /* MPUserModel.swift in Sources */,

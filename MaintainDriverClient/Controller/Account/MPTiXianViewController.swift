@@ -291,6 +291,12 @@ class MPTiXianToWeChatCell: UITableViewCell {
         }
     }
     
+    var normalTitle: String? {
+        didSet {
+            tipLabel.text = normalTitle
+        }
+    }
+    
     var tips: String? {
         didSet {
             if let txt = tips {
