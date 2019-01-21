@@ -136,29 +136,70 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPExaminationViewController()
-        navigationController?.pushViewController(vc, animated: true)
-//        let vc = MPInsuranceViewController()
-//        navigationController?.pushViewController(vc, animated: true)
-//
-//        switch MPUserModel.shared.is_driverinfo {
-//        case .unsubmit, .checkFailed:
-//            showTipsView(true)
-//        case .checking:
-//            // 正在审核
-//            showTipsView(false)
-//        case .checkSucc:
-//            let status = CLLocationManager.authorizationStatus()
-//            switch status {
-//            case .notDetermined, .restricted:
-//                location.requestWhenInUseAuthorization()
-//            case .denied:
-//                MPTipsView.showMsg("请去设置开启定位")
-//            default:
-//                // 审核成功
-//                connctServer()
-//            }
-//        }
+        switch MPUserModel.shared.is_driverinfo {
+        case .unsubmit, .checkFailed:
+            // 填写加盟资料
+            let vc = MPLeagueViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            return
+        case .checking:
+            // 正在审核
+            showTipsView("资料正在审核中，请耐心等候")
+        case .checkSucc:
+            // 检查有没通过考试，没有就去考试
+            if !isPassQuestion() {
+                return
+            }
+            // 检查有没买保险，没有就去买保险
+            if !isPassInsurance() {
+                return
+            }
+            let status = CLLocationManager.authorizationStatus()
+            switch status {
+            case .notDetermined, .restricted:
+                location.requestWhenInUseAuthorization()
+            case .denied:
+                MPTipsView.showMsg("请去设置开启定位")
+            default:
+                // 审核成功
+                connctServer()
+            }
+        }
+    }
+    
+    fileprivate func isPassQuestion() -> Bool {
+        switch MPUserModel.shared.is_question {
+        // 未考试先去考试
+        case .unsubmit, .failed:
+            let vc = MPExaminationViewController()
+            navigationController?.pushViewController(vc, animated: true)
+            return false
+        case .pass:
+            return true
+        }
+    }
+    
+    fileprivate func isPassInsurance() -> Bool {
+        switch MPUserModel.shared.is_insurance {
+        case .unpay:
+            let vc = MPInsuranceViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        case .handling:
+            showTipsView("保险未生效，请耐心等候")
+        case .payed:
+            return true
+        case .willExpire:
+            return true
+        }
+        return false
+    }
+    
+    fileprivate func showTipsView(_ tips: String) {
+        let tipsView = MPAuthorityTipView()
+        tipsView.frame = UIScreen.main.bounds
+        tipsView.showFailView = false
+        tipsView.setup(title: "提示", subTitle: tips)
+        UIApplication.shared.keyWindow?.addSubview(tipsView)
     }
     
     /// 建立长连接

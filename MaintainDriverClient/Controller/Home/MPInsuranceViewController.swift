@@ -75,17 +75,8 @@ class MPInsuranceViewController: UIViewController {
     }
     
     @objc fileprivate func buy() {
-        MPNetword.requestJson(target: .payInsurance(method: "alipay"), success: {json in
-            guard let data = json["data"] as? [String: Any] else {
-                return
-            }
-            let param = toString(data["params"])
-            AlipaySDK.defaultService()?.payOrder(param, fromScheme: "commayidriverclient", callback: { (dic) in
-                if let dic1 = dic {
-                    print(dic1)
-                }
-            })
-        })
+        let vc = MPPaymentViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     fileprivate var webView: WKWebView!

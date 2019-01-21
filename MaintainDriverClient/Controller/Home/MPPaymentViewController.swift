@@ -12,11 +12,77 @@ import UIKit
 class MPPaymentViewController: UITableViewController {
     
     fileprivate var isCheckAlipay: Bool = false
+    fileprivate weak var timer: Timer?
+    fileprivate var time: Int = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "支付订单"
         setupTbHeader()
+        loadData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        startTimer()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        timer?.invalidate()
+    }
+    
+    deinit {
+        timer?.invalidate()
+    }
+    
+    fileprivate func loadData() {
+        MPNetword.requestJson(target: .payInsurance(method: "create", order_method: ""), success: {json in
+            guard let data = json["data"] as? [String: Any] else {
+                return
+            }
+            let time = toInt(data["time"])
+            self.time = time
+            self.startTimer()
+            let orderCode = toString(data["order_code"])
+            let price = toDouble(data["price"])
+            self.priceLabel.text = String(format: "￥%.02f", price)
+            self.orderLabel.text = "订单编号：\(orderCode)"
+        })
+    }
+    
+    fileprivate func startTimer() {
+        if time == 0 {
+            return
+        }
+        self.timer?.invalidate()
+        timeLabel.text = getDateStr(time)
+        let timer = Timer(timeInterval: 1, target: self, selector: #selector(MPPaymentViewController.countDown), userInfo: nil, repeats: true)
+        RunLoop.current.add(timer, forMode: .commonModes)
+        self.timer = timer
+    }
+    
+    fileprivate func getDateStr(_ time: Int) -> String? {
+        let df = DateFormatter()
+        df.dateFormat = "mm:ss"
+        guard let date = df.date(from: "00:00") else {
+            return nil
+        }
+        let calendar = Calendar.current
+        guard let newDate = calendar.date(byAdding: Calendar.Component.second, value: time, to: date) else {
+            return nil
+        }
+        return df.string(from: newDate)
+    }
+    
+    @objc fileprivate func countDown() {
+        time -= 1
+        if time <= 0 {
+            timer?.invalidate()
+            timeLabel.text = "00:00"
+        }else {
+            timeLabel.text = getDateStr(time)
+        }
     }
     
     fileprivate func setupTbHeader() {
@@ -66,9 +132,33 @@ class MPPaymentViewController: UITableViewController {
     }
     
     @objc fileprivate func confirm() {
+        let order = isCheckAlipay ? "alipay" : "weixin"
+        MPNetword.requestJson(target: .payInsurance(method: "pay", order_method: order), success: {json in
+            guard let data = json["data"] as? [String: Any] else {
+                return
+            }
+            let param = toString(data["params"])
+            if self.isCheckAlipay {
+                self.alipy(param)
+            }else {
+                self.wechat(param)
+            }
+        })
+    }
+    
+    fileprivate func alipy(_ param: String) {
+        AlipaySDK.defaultService()?.payOrder(param, fromScheme: "commayidriverclient", callback: { (dic) in
+            if let dic1 = dic {
+                print(dic1)
+            }
+        })
+    }
+    
+    fileprivate func wechat(_ param: String) {
         
     }
     
+    // MARK: - View
     fileprivate var timeLabel: UILabel!
     fileprivate var orderLabel: UILabel!
     fileprivate var priceLabel: UILabel!

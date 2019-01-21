@@ -83,8 +83,10 @@ enum MPApiType {
     case getQuestions
     /// 获取保险页面
     case getInsurance
-    /// 交保险 alipay：支付宝，weixin：微信
-    case payInsurance(method: String)
+    /// 交保险
+    /// method：create:查询交易状态，pay：支付
+    /// order_method:alipay：支付宝，weixin：微信
+    case payInsurance(method: String, order_method: String)
     /// 提交答案
     case submitAnswer(ans: String)
 }
@@ -339,10 +341,11 @@ extension MPApiType: TargetType {
             param["alipay_id"] = alipayID
             param["id"] = MPUserModel.shared.userID
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
-        case let .payInsurance(method):
+        case let .payInsurance(method, orderMethod):
             var param = defaultParam
             param["id"] = MPUserModel.shared.userID
-            param["order_method"] = method
+            param["method"] = method
+            param["order_method"] = orderMethod
             return .requestParameters(parameters: param, encoding: URLEncoding.default)
         case let .driverSignUp(model):
             var param = defaultParam
@@ -453,7 +456,7 @@ struct MPMsgCodeKey {
 /// 网络请求工具
 struct MPNetword {
     #if DEBUG
-    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: false)])
+    static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin(), NetworkLoggerPlugin(verbose: true)])
     #else
     static let provider = MoyaProvider<MPApiType>(plugins: [MPNetwordActivityPlugin()])
     #endif
