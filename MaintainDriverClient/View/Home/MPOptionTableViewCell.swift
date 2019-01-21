@@ -114,6 +114,29 @@ class MPCheckBoxButton: UIControl {
         }
     }
     
+    var alignTop: Bool = false {
+        didSet {
+            if alignTop {
+                contentView.snp.remakeConstraints { (make) in
+                    make.top.equalToSuperview()
+                    make.leading.trailing.equalToSuperview()
+                }
+                iconImageView.snp.remakeConstraints { (make) in
+                    make.leading.equalToSuperview()
+                    make.top.equalToSuperview()
+                    make.width.height.equalTo(18)
+                }
+                let w = mp_screenW - 35 - 23
+                titleLabel.snp.remakeConstraints { (make) in
+                    make.width.equalTo(w)
+                    make.top.equalTo(iconImageView)
+                    make.leading.equalTo(iconImageView.snp.trailing).offset(5)
+                    make.bottom.equalToSuperview()
+                }
+            }
+        }
+    }
+    
     init() {
         super.init(frame: CGRect.zero)
         setupUI()
@@ -129,12 +152,11 @@ class MPCheckBoxButton: UIControl {
         iconImageView = UIImageView()
         iconImageView.image = UIImage(named: "box_unselected")
         titleLabel = UILabel(font: UIFont.systemFont(ofSize: 14), text: "是", textColor: UIColor.colorWithHexString("4A4A4A"))
+        titleLabel.numberOfLines = 0
         addSubview(contentView)
         contentView.addSubview(iconImageView)
         contentView.addSubview(titleLabel)
-//        contentView.snp.makeConstraints { (make) in
-//            make.center.equalToSuperview()
-//        }
+
         contentView.snp.makeConstraints { (make) in
             make.top.bottom.equalToSuperview()
             make.leading.equalToSuperview()
@@ -144,9 +166,10 @@ class MPCheckBoxButton: UIControl {
             make.centerY.equalToSuperview()
             make.width.height.equalTo(18)
         }
+        let w = mp_screenW - 35 - 23
         titleLabel.snp.makeConstraints { (make) in
-            make.trailing.equalToSuperview()
-            make.centerY.equalToSuperview()
+            make.width.equalTo(w)
+            make.top.equalTo(iconImageView)
             make.leading.equalTo(iconImageView.snp.trailing).offset(5)
         }
     }

@@ -35,12 +35,17 @@ class MPExaminationModel {
             let txtH = content.size(UIFont.mpSmallFont, width: wid).height
             _rowHeight += txtH + 10 + 10
             _rowHeight += itemListHeight
+            // 线高
+            _rowHeight += 1
         }
         return _rowHeight
     }
     var itemListHeight: CGFloat {
         if _itemListHeight == 0 {
-            _itemListHeight = (CGFloat)(item_list.count) * 35
+            _itemListHeight = 0
+            for item in item_list {
+                _itemListHeight += item.itemH
+            }
         }
         return _itemListHeight
     }
@@ -71,6 +76,17 @@ class MPExaminationItemModel {
     var id: Int = 0
     var content: String = ""
     var isChecked: Bool = false
+    var itemH: CGFloat {
+        if _itemH == 0 {
+            let wid: CGFloat = mp_screenW - 30 - 23
+            _itemH = content.size(UIFont.mpSmallFont, width: wid).height + 10
+            if _itemH < 35 {
+                _itemH = 35
+            }
+        }
+        return _itemH
+    }
+    fileprivate var _itemH: CGFloat = 0
     class func toModel(_ dic1: Any?) -> MPExaminationItemModel? {
         guard let dic = dic1 as? [String: Any] else {
             return nil

@@ -54,7 +54,7 @@ class MPExaminationCellTableViewCell: UITableViewCell {
         }
         line.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(0.4)
+            make.height.equalTo(1)
         }
     }
     
@@ -80,7 +80,6 @@ class MPAnswerView: UIView {
         tableView = UITableView()
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.rowHeight = 35
         tableView.separatorStyle = .none
         tableView.isScrollEnabled = false
         addSubview(tableView)
@@ -130,6 +129,10 @@ extension MPAnswerView: UITableViewDelegate, UITableViewDataSource {
         }
         tableView.reloadData()
     }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return itemList?[indexPath.row].itemH ?? 0
+    }
 }
 
 class MPAnswerCell: UITableViewCell {
@@ -144,6 +147,7 @@ class MPAnswerCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         optionButton = MPCheckBoxButton()
+        optionButton.alignTop = true
         optionButton.isUserInteractionEnabled = false
         optionButton.title = "A: 违章行为"
         contentView.addSubview(optionButton)
