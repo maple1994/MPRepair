@@ -138,13 +138,18 @@ class MPGongZuoTaiViewController: UIViewController {
     @objc fileprivate func chuCheAction() {
         switch MPUserModel.shared.is_driverinfo {
         case .unsubmit, .checkFailed:
-            // 填写加盟资料
-            let vc = MPLeagueViewController()
-            navigationController?.pushViewController(vc, animated: true)
+            let tipsView = MPAuthorityTipView()
+            tipsView.frame = UIScreen.main.bounds
+            tipsView.setupFail(tips: "很抱歉，您需要培训后才能使用软件", cancelTitle: "暂不需要", confirmTitle: "去培训")
+            tipsView.confirmBlock = { [weak self] in
+                let vc = MPLeagueViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            UIApplication.shared.keyWindow?.addSubview(tipsView)
             return
         case .checking:
             // 正在审核
-            showTipsView("资料正在审核中，请耐心等候")
+            showTipsView("资料正在审核中，请耐心等候", block: nil)
         case .checkSucc:
             // 检查有没通过考试，没有就去考试
             if !isPassQuestion() {
@@ -154,16 +159,20 @@ class MPGongZuoTaiViewController: UIViewController {
             if !isPassInsurance() {
                 return
             }
-            let status = CLLocationManager.authorizationStatus()
-            switch status {
-            case .notDetermined, .restricted:
-                location.requestWhenInUseAuthorization()
-            case .denied:
-                MPTipsView.showMsg("请去设置开启定位")
-            default:
-                // 审核成功
-                connctServer()
-            }
+            didChuChe()
+        }
+    }
+    
+    fileprivate func didChuChe() {
+        let status = CLLocationManager.authorizationStatus()
+        switch status {
+        case .notDetermined, .restricted:
+            location.requestWhenInUseAuthorization()
+        case .denied:
+            MPTipsView.showMsg("请去设置开启定位")
+        default:
+            // 审核成功
+            connctServer()
         }
     }
     
@@ -181,23 +190,33 @@ class MPGongZuoTaiViewController: UIViewController {
     
     fileprivate func isPassInsurance() -> Bool {
         switch MPUserModel.shared.is_insurance {
-        case .unpay:
+        case .unpay, .expired:
             let vc = MPInsuranceViewController()
             navigationController?.pushViewController(vc, animated: true)
         case .handling:
-            showTipsView("保险未生效，请耐心等候")
+            showTipsView("您好！保险隔天生效，保险生效后才能进行抢单", block: nil)
         case .payed:
             return true
         case .willExpire:
-            return true
+            let tipsView = MPAuthorityTipView()
+            tipsView.frame = UIScreen.main.bounds
+            tipsView.setupFail(tips: "您好，您购买的保险快到期了，为了不影响你的代价，请及时购买", cancelTitle: "出车", confirmTitle: "购买")
+            tipsView.confirmBlock = { [weak self] in
+                let vc = MPInsuranceViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            tipsView.cancelBlock = { [weak self] in
+                self?.didChuChe()
+            }
+            UIApplication.shared.keyWindow?.addSubview(tipsView)
         }
         return false
     }
     
-    fileprivate func showTipsView(_ tips: String) {
+    fileprivate func showTipsView(_ tips: String, block: (() -> Void)?) {
         let tipsView = MPAuthorityTipView()
         tipsView.frame = UIScreen.main.bounds
-        tipsView.showFailView = false
+        tipsView.confirmBlock = block
         tipsView.setup(title: "提示", subTitle: tips)
         UIApplication.shared.keyWindow?.addSubview(tipsView)
     }

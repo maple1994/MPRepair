@@ -38,6 +38,8 @@ enum MPInsuranceState: Int, Codable {
     case payed = 2
     /// 快过期
     case willExpire = 3
+    /// 过期
+    case expired = 4
 }
 
 

@@ -19,10 +19,22 @@ class MPAuthorityTipView: UIView {
         }
     }
     
+    var confirmBlock: (() -> Void)?
+    var cancelBlock: (() -> Void)?
+    
+    /// 设置succ
     func setup(title: String, subTitle: String) {
         titleLabel?.text = title
         subTitleLabel?.text = subTitle
         showFailView = false
+    }
+    
+    /// 设置fail
+    func setupFail(tips: String, cancelTitle: String, confirmTitle: String) {
+        showFailView = true
+        fail_titleLabel.text = tips
+        fail_cancelButton.setTitle(cancelTitle, for: .normal)
+        fail_confirmButton.setTitle(confirmTitle, for: .normal)
     }
 
     init() {
@@ -59,14 +71,13 @@ class MPAuthorityTipView: UIView {
     }
     
     @objc fileprivate func dimiss() {
+        cancelBlock?()
         removeFromSuperview()
     }
     
     @objc fileprivate func peiXun() {
-        let vc = MPProfileViewController()
-        let nav = ((UIApplication.shared.keyWindow?.rootViewController as? SlideMenuController)?.mainViewController as? UINavigationController)
-        nav?.pushViewController(vc, animated: true)
-        dimiss()
+        confirmBlock?()
+        removeFromSuperview()
     }
     
     fileprivate func setupSuccView() {
@@ -89,7 +100,7 @@ class MPAuthorityTipView: UIView {
         confirmButton.backgroundColor = UIColor.navBlue
         confirmButton.titleLabel?.font = UIFont.mpNormalFont
         confirmButton.layer.cornerRadius = 4
-        confirmButton.addTarget(self, action: #selector(MPAuthorityTipView.dimiss), for: .touchUpInside)
+        confirmButton.addTarget(self, action: #selector(MPAuthorityTipView.peiXun), for: .touchUpInside)
         
         succView.addSubview(iconImageView)
         succView.addSubview(titleLabel)
@@ -129,6 +140,8 @@ class MPAuthorityTipView: UIView {
          let iconImageView = UIImageView()
          iconImageView.image = UIImage(named: "authority_tip")
          let titleLabel = UILabel(font: UIFont.mpSmallFont, text: "很抱歉，您需要培训后才能使用软件", textColor: UIColor.mpDarkGray)
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
          let cancelButton = UIButton()
          cancelButton.setTitle("暂不需要", for: .normal)
          cancelButton.setTitleColor(UIColor.colorWithHexString("9b9b9b"), for: .normal)
@@ -141,6 +154,9 @@ class MPAuthorityTipView: UIView {
          cancelButton.addTarget(self, action: #selector(MPAuthorityTipView.dimiss), for: .touchUpInside)
         let line1 = MPUtils.createLine()
         let line2 = MPUtils.createLine()
+        fail_cancelButton = cancelButton
+        fail_confirmButton = peiXunButton
+        fail_titleLabel = titleLabel
         
         failView.addSubview(iconImageView)
         failView.addSubview(titleLabel)
@@ -156,7 +172,8 @@ class MPAuthorityTipView: UIView {
             make.height.equalTo(79)
         }
         titleLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
+            make.leading.equalToSuperview().offset(15)
+            make.trailing.equalToSuperview().offset(-15)
             make.top.equalTo(iconImageView.snp.bottom).offset(19)
         }
         cancelButton.snp.makeConstraints { (make) in
@@ -181,6 +198,10 @@ class MPAuthorityTipView: UIView {
         }
     }
     
+    // MARK: - View
+    fileprivate var fail_titleLabel: UILabel!
+    fileprivate var fail_cancelButton: UIButton!
+    fileprivate var fail_confirmButton: UIButton!
     fileprivate var titleLabel: UILabel?
     fileprivate var subTitleLabel: UILabel?
     fileprivate var succView: UIView!
