@@ -122,6 +122,7 @@ class MPExaminationViewController: UIViewController {
             let score = toInt(data["score"])
             let isPass = toBool(data["is_pass"])
             MPShowGradeView.show(correctNum: right, wrongNum: wrong, score: score, isPass: isPass, delegate: self)
+            MPUserModel.shared.refreshUserInfo()
         })
     }
     

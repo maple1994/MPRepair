@@ -151,11 +151,13 @@ class MPPaymentViewController: UITableViewController {
             if let dic1 = dic {
                 print(dic1)
             }
+            MPUserModel.shared.refreshUserInfo()
         })
     }
     
+    // TODO: - 微信SDK接入
     fileprivate func wechat(_ param: String) {
-        
+        MPUserModel.shared.refreshUserInfo()
     }
     
     // MARK: - View
