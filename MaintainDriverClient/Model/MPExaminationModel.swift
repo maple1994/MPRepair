@@ -61,14 +61,26 @@ class MPExaminationModel {
         model.is_multiple = toBool(dic["is_multiple"])
         var list = [MPExaminationItemModel]()
         if let arr = dic["item_list"] as? [[String: Any]] {
-            for data in arr {
+            for (index, data) in arr.enumerated() {
                 if let item = MPExaminationItemModel.toModel(data) {
+                    let num = getNum(index) + " "
+                    item.content = num + item.content
                     list.append(item)
                 }
             }
         }
         model.item_list = list
         return model
+    }
+    
+    fileprivate class func getNum(_ index: Int) -> String {
+        let arr: [String] = [
+            "A","B","C","D","E","F","G","H",
+            "I","J","K","L","M","N","O","P",
+            "Q","R","S","T","U","V","W","X",
+            "Y","Z"
+        ]
+        return arr[index]
     }
 }
 

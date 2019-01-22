@@ -28,8 +28,10 @@ class MPExaminationViewController: UIViewController {
                 return
             }
             var arr = [MPExaminationModel]()
-            for data in que_list {
+            for (index, data) in que_list.enumerated() {
                 if let model = MPExaminationModel.toModel(data) {
+                    let num = index + 1
+                    model.content = "\(num)、\(model.content)"
                     arr.append(model)
                 }
             }
