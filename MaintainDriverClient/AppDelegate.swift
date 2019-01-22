@@ -26,6 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
         // 现加载本地
         MPNetwordTool.loadPicNameFromUserDefault()
+        WXApi.registerApp(wechatAppID)
         return true
     }
     

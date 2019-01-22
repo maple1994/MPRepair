@@ -148,17 +148,29 @@ class MPPaymentViewController: UITableViewController {
     
     fileprivate func alipy(_ param: String) {
         AlipaySDK.defaultService()?.payOrder(param, fromScheme: "commayidriverclient", callback: { (dic) in
-            if let dic1 = dic {
-                print(dic1)
+            let status = toInt(dic?["resultStatus"])
+            if status == 9000 {
+                // 支付成功
+                MPUserModel.shared.refreshUserInfo()
+                self.navigationController?.popToRootViewController(animated: true)
+            }else {
+                // 支付失败
+                MPTipsView.showMsg("支付失败")
             }
-            MPUserModel.shared.refreshUserInfo()
-            self.navigationController?.popToRootViewController(animated: true)
         })
     }
     
     // TODO: - 微信SDK接入
     fileprivate func wechat(_ param: String) {
-        MPUserModel.shared.refreshUserInfo()
+        let req = PayReq()
+        req.openID = wechatAppID
+        req.partnerId = ""
+        req.prepayId = ""
+        req.package = ""
+        req.nonceStr = ""
+        req.timeStamp = 2345
+        req.sign = ""
+        WXApi.send(req)
     }
     
     // MARK: - View
@@ -166,6 +178,36 @@ class MPPaymentViewController: UITableViewController {
     fileprivate var orderLabel: UILabel!
     fileprivate var priceLabel: UILabel!
     fileprivate var confirmButton: UIButton!
+}
+
+extension MPPaymentViewController: WXApiDelegate {
+    /*! @brief 发送一个sendReq后，收到微信的回应
+     *
+     * 收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。
+     * 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
+     * @param resp具体的回应内容，是自动释放的
+     */
+    func onReq(_ req: BaseReq!) {
+        
+    }
+    
+    /*! @brief 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
+     *
+     * 收到一个来自微信的请求，异步处理完成后必须调用sendResp发送处理结果给微信。
+     * 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
+     * @param req 具体请求内容，是自动释放的
+     */
+    func onResp(_ resp: BaseResp!) {
+        if resp.errCode == 0 {
+            // 支付成功
+            MPUserModel.shared.refreshUserInfo()
+            navigationController?.popToRootViewController(animated: true)
+        }else if resp.errCode == -1 {
+            MPTipsView.showMsg(resp.errStr)
+        }else {
+            MPTipsView.showMsg("支付失败")
+        }
+    }
 }
 
 extension MPPaymentViewController {

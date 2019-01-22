@@ -16,3 +16,4 @@
 #import <MBProgressHUD/MBProgressHUD.h>
 #import <AlipaySDK/AlipaySDK.h>
 #import "WLDecimalKeyboard.h"
+#import <WXApi.h>

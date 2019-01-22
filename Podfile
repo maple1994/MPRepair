@@ -20,6 +20,7 @@ pod 'SwiftHash'
 pod 'AlipaySDK_MI'
 pod 'Starscream'
 pod 'PGDatePicker'
+pod 'WechatOpenSDK'
 
 
   # Pods for MaintainDriverClient

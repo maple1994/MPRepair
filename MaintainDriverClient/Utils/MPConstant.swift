@@ -14,6 +14,8 @@ typealias MPRequestType = () -> Void
 let aliPID = "2088131567240416"
 /// 阿里SDK AppID
 let aliAppID = "2018090661231519"
+/// 微信APPID
+let wechatAppID = "wx311f61d6d60476e2"
 /// 版本号
 let mp_version: Double = 1.0
 /// 保存用户json的URL
