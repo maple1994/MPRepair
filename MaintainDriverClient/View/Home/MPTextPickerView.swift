@@ -169,16 +169,19 @@ class MPTextPickerCell: UITableViewCell {
     
     fileprivate func setupUI() {
         centerLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: normalColor)
+        centerLabel.textAlignment = .center
+        centerLabel.adjustsFontSizeToFitWidth = true
         line = MPUtils.createLine()
         contentView.addSubview(centerLabel)
         contentView.addSubview(line)
         centerLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         line.snp.makeConstraints { (make) in
             make.bottom.leading.trailing.equalToSuperview()
             make.height.equalTo(1)
         }
+        line.isHidden = true
     }
     
     var centerLabel: UILabel!

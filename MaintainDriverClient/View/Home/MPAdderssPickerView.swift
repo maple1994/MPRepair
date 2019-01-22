@@ -108,13 +108,9 @@ class MPAdderssPickerView: UIView {
         addSubview(bgView)
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
-        pickerView = PGPickerView()
-        pickerView.textColorOfSelectedRow = UIColor.navBlue
-        pickerView.textColorOfOtherRow = UIColor.colorWithHexString("333333")
-        pickerView.textFontOfSelectedRow = UIFont.mpXSmallFont
-        pickerView.textFontOfOtherRow = UIFont.mpXSmallFont
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        tableView1 = createTb()
+        tableView2 = createTb()
+        tableView3 = createTb()
         addSubview(contentView)
         bgView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
@@ -125,9 +121,23 @@ class MPAdderssPickerView: UIView {
             make.height.equalTo(contentH)
             make.bottom.equalToSuperview().offset(contentH)
         }
-        contentView.addSubview(pickerView)
-        pickerView.snp.makeConstraints { (make) in
-            make.leading.trailing.bottom.equalToSuperview()
+        contentView.addSubview(tableView1)
+        contentView.addSubview(tableView2)
+        contentView.addSubview(tableView3)
+        tableView1.snp.makeConstraints { (make) in
+            make.leading.bottom.equalToSuperview()
+            make.height.equalTo(220)
+            make.width.equalTo(tableView2)
+            make.width.equalTo(tableView3)
+        }
+        tableView2.snp.makeConstraints { (make) in
+            make.leading.equalTo(tableView1.snp.trailing)
+            make.trailing.equalTo(tableView3.snp.leading)
+            make.bottom.equalToSuperview()
+            make.height.equalTo(220)
+        }
+        tableView3.snp.makeConstraints { (make) in
+            make.trailing.bottom.equalToSuperview()
             make.height.equalTo(220)
         }
         let toolView = UIView()
@@ -135,7 +145,7 @@ class MPAdderssPickerView: UIView {
         contentView.addSubview(toolView)
         toolView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(pickerView.snp.top)
+            make.bottom.equalTo(tableView1.snp.top)
         }
         let cancelButton = UIButton()
         cancelButton.addTarget(self, action: #selector(MPAdderssPickerView.dismiss), for: .touchUpInside)
@@ -165,6 +175,15 @@ class MPAdderssPickerView: UIView {
         }
     }
     
+    fileprivate func createTb() -> UITableView {
+        let tb = UITableView()
+        tb.separatorStyle = .none
+        tb.showsVerticalScrollIndicator = false
+        tb.delegate = self
+        tb.dataSource = self
+        return tb
+    }
+    
     @objc fileprivate func dismiss() {
         contentView.snp.updateConstraints { (make) in
             make.bottom.equalToSuperview().offset(contentH)
@@ -177,75 +196,114 @@ class MPAdderssPickerView: UIView {
     }
     
     @objc fileprivate func confirm() {
-        guard let pro = pickerView.textOfSelectedRow(inComponent: 0),
-        let shi = pickerView.textOfSelectedRow(inComponent: 1),
-        let xian = pickerView.textOfSelectedRow(inComponent: 2) else {
-            return
-        }
+        let pro = addressModelArr[firstRow].name
+        let shi = addressModelArr[firstRow].children[secondRow].name
+        let xian = addressModelArr[firstRow].children[secondRow].children[thridRow].name
         let content = pro + shi + xian
         delegate?.pickerView(didSelect: 0, text: content)
         dismiss()
     }
     
-    fileprivate var pickerView: PGPickerView!
+    // MARK: - View
+    fileprivate var tableView1: UITableView!
+    fileprivate var tableView2: UITableView!
+    fileprivate var tableView3: UITableView!
     fileprivate var selectedText: String?
     fileprivate var contentView: UIView!
 }
 
-extension MPAdderssPickerView: PGPickerViewDataSource, PGPickerViewDelegate {
-    func numberOfComponents(in pickerView: PGPickerView!) -> Int {
-        return 3
-    }
-    func pickerView(_ pickerView: PGPickerView!, numberOfRowsInComponent component: Int) -> Int {
-        switch component {
-        case 0:
+extension MPAdderssPickerView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == tableView1
+        {
             return addressModelArr.count
-        case 1:
+        }
+        else if tableView == tableView2 {
             return addressModelArr[firstRow].children.count
-        case 2:
-            secondRow = pickerView.selectedRow(inComponent: 1)
-            if secondRow < 0 || secondRow >= addressModelArr[firstRow].children.count {
+        }
+        else
+        {
+            if secondRow < 0 || secondRow >= addressModelArr[firstRow].children.count
+            {
                 secondRow = 0
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                    self.pickerView.selectRow(0, inComponent: 1, animated: false)
-                }
             }
             return addressModelArr[firstRow].children[secondRow].children.count
-        default:
-            return 0
         }
     }
-    func pickerView(_ pickerView: PGPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
-        switch component {
-        case 0:
-            return addressModelArr[row].name
-        case 1:
-            return addressModelArr[firstRow].children[row].name
-        case 2:
-            return addressModelArr[firstRow].children[secondRow].children[row].name
-        default:
-            return ""
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPTextPickerCell") as? MPTextPickerCell
+        if cell == nil {
+            cell = MPTextPickerCell(style: .default, reuseIdentifier: "MPTextPickerCell")
+        }
+        if tableView == tableView1 {
+            cell?.centerLabel.text = addressModelArr[indexPath.row].name
+            cell?.isChecked = indexPath.row == firstRow
+        }else if tableView == tableView2 {
+            cell?.centerLabel.text = addressModelArr[firstRow].children[indexPath.row].name
+            cell?.isChecked = indexPath.row == secondRow
+        }else {
+            cell?.centerLabel.text = addressModelArr[firstRow].children[secondRow].children[indexPath.row].name
+            cell?.isChecked = indexPath.row == thridRow
+        }
+        return cell!
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == tableView1 {
+            firstRow = indexPath.row
+            secondRow = 0
+            thridRow = 0
+            tableView1.reloadData()
+            tableView2.reloadData()
+            tableView3.reloadData()
+            scrollToTop(tableView2)
+            scrollToTop(tableView3)
+        }else if tableView == tableView2 {
+            secondRow = indexPath.row
+            thridRow = 0
+            tableView2.reloadData()
+            tableView3.reloadData()
+            scrollToTop(tableView3)
+        }else {
+            thridRow = indexPath.row
+            tableView3.reloadData()
         }
     }
-    func pickerView(_ pickerView: PGPickerView!, textColorOfOtherRowInComponent component: Int) -> UIColor! {
-        return UIColor.colorWithHexString("333333")
-    }
-    func pickerView(_ pickerView: PGPickerView!, textColorOfSelectedRowInComponent component: Int) -> UIColor! {
-        return UIColor.navBlue
-    }
-    func pickerView(_ pickerView: PGPickerView!, didSelectRow row: Int, inComponent component: Int) {
-        switch component {
-        case 0:
-            firstRow = row
-            pickerView.reloadComponent(1)
-            pickerView.reloadComponent(2)
-        case 1:
-            pickerView.reloadComponent(2)
-        case 2:
-            thridRow = row
-        default:
-            break
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        if scrollView == tableView1 {
+            adjust(tableView: tableView1, offsetY: scrollView.contentOffset.y)
+        }else if scrollView == tableView2 {
+            adjust(tableView: tableView2, offsetY: scrollView.contentOffset.y)
+        }else {
+            adjust(tableView: tableView3, offsetY: scrollView.contentOffset.y)
         }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        if decelerate {
+            return
+        }
+        if scrollView == tableView1 {
+            adjust(tableView: tableView1, offsetY: scrollView.contentOffset.y)
+        }else if scrollView == tableView2 {
+            adjust(tableView: tableView2, offsetY: scrollView.contentOffset.y)
+        }else {
+            adjust(tableView: tableView3, offsetY: scrollView.contentOffset.y)
+        }
+    }
+    
+    fileprivate func adjust(tableView: UITableView, offsetY: CGFloat) {
+        let rowH: CGFloat = 44
+        let row = (Int)(offsetY / rowH)
+        let ip = IndexPath(row: row, section: 0)
+        tableView.scrollToRow(at: ip, at: .top, animated: true)
+    }
+    
+    fileprivate func scrollToTop(_ tb: UITableView) {
+        let ip = IndexPath(row: 0, section: 0)
+        tb.scrollToRow(at: ip, at: .top, animated: true)
     }
 }
 
