@@ -158,14 +158,12 @@ class MPUploadIDCartViewController: UIViewController {
     // MARK: - Action
     @objc fileprivate func selectPic(item: MPUploadImageView) {
         editingItem = item
-        let vc = TZImagePickerController(maxImagesCount: 1, columnNumber: 3, delegate: self)!
-        vc.showSelectBtn = false
-        vc.allowPreview = false
-        vc.preferredLanguage = "zh-Hans"
-        vc.naviBgColor = UIColor.navBlue
-        vc.allowTakeVideo = false
-        vc.allowPickingVideo = false
-        present(vc, animated: true, completion: nil)
+        let picker = UIImagePickerController()
+        picker.sourceType = .camera
+        picker.modalPresentationStyle = .fullScreen
+        picker.cameraCaptureMode = .photo
+        picker.delegate = self
+        present(picker, animated: true, completion: nil)
     }
     
     @objc fileprivate func submit() {
@@ -252,22 +250,25 @@ extension MPUploadIDCartViewController: UITableViewDelegate, UITableViewDataSour
     }
 }
 
-extension MPUploadIDCartViewController: TZImagePickerControllerDelegate {
-    func imagePickerController(_ picker: TZImagePickerController!, didFinishPickingPhotos photos: [UIImage]!, sourceAssets assets: [Any]!, isSelectOriginalPhoto: Bool) {
-        editingItem?.image = photos.first
-        var isValid = true
-        for model in uploadItemArr {
-            if model.image == nil {
-                isValid = false
-                break
+extension MPUploadIDCartViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        picker.dismiss(animated: true, completion: nil)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            editingItem?.image = image
+            var isValid = true
+            for model in uploadItemArr {
+                if model.image == nil {
+                    isValid = false
+                    break
+                }
             }
-        }
-        if isValid {
-            submitButton?.isUserInteractionEnabled = true
-            submitButton?.backgroundColor = UIColor.navBlue
-        }else {
-            submitButton?.isUserInteractionEnabled = false
-            submitButton?.backgroundColor = UIColor.lightGray
+            if isValid {
+                submitButton?.isUserInteractionEnabled = true
+                submitButton?.backgroundColor = UIColor.navBlue
+            }else {
+                submitButton?.isUserInteractionEnabled = false
+                submitButton?.backgroundColor = UIColor.lightGray
+            }
         }
     }
 }

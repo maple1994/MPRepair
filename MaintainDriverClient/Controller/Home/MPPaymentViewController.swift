@@ -152,6 +152,7 @@ class MPPaymentViewController: UITableViewController {
                 print(dic1)
             }
             MPUserModel.shared.refreshUserInfo()
+            self.navigationController?.popToRootViewController(animated: true)
         })
     }
     

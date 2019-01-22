@@ -85,7 +85,7 @@ class MPUserModel: Codable {
     var is_driverinfo: MPProfileState = MPProfileState.unsubmit
     /// 0：未考试，1：考试通过，2：考试不通过
     var is_question: MPQuestionnaireState = MPQuestionnaireState.unsubmit
-    /// 0：未购买，1：处理中，2：已购买，3：快过期
+    /// 0：未购买，1：处理中，2：已购买，3：快过期 4：过期
     var is_insurance: MPInsuranceState = MPInsuranceState.unpay
     /// 保险到期时间
     var insurance_time: String = ""
