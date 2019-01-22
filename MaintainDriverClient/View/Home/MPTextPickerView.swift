@@ -55,9 +55,12 @@ class MPTextPickerView: UIView {
         addSubview(bgView)
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
-        let pickerView = PGPickerView()
-        pickerView.delegate = self
-        pickerView.dataSource = self
+        tableView = UITableView()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
+        tableView.rowHeight = 44
+        tableView.delegate = self
+        tableView.dataSource = self
         addSubview(contentView)
         bgView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
@@ -68,8 +71,8 @@ class MPTextPickerView: UIView {
             make.height.equalTo(contentH)
             make.bottom.equalToSuperview().offset(contentH)
         }
-        contentView.addSubview(pickerView)
-        pickerView.snp.makeConstraints { (make) in
+        contentView.addSubview(tableView)
+        tableView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalToSuperview()
             make.height.equalTo(220)
         }
@@ -78,7 +81,7 @@ class MPTextPickerView: UIView {
         contentView.addSubview(toolView)
         toolView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
-            make.bottom.equalTo(pickerView.snp.top)
+            make.bottom.equalTo(tableView.snp.top)
         }
         let cancelButton = UIButton()
         cancelButton.addTarget(self, action: #selector(MPTextPickerView.dismiss), for: .touchUpInside)
@@ -120,33 +123,75 @@ class MPTextPickerView: UIView {
     }
     
     @objc fileprivate func confirm() {
-        let row = selectedRow ?? 0
-        delegate?.pickerView(didSelect: row, text: titleArr[row])
+        delegate?.pickerView(didSelect: selectedRow, text: titleArr[selectedRow])
         dismiss()
     }
     
-    fileprivate var selectedRow: Int?
+    fileprivate var selectedRow: Int = 0
     fileprivate var contentView: UIView!
+    fileprivate var tableView: UITableView!
 }
 
-extension MPTextPickerView: PGPickerViewDataSource, PGPickerViewDelegate {
-    func numberOfComponents(in pickerView: PGPickerView!) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: PGPickerView!, numberOfRowsInComponent component: Int) -> Int {
+extension MPTextPickerView: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return titleArr.count
     }
-    func pickerView(_ pickerView: PGPickerView!, titleForRow row: Int, forComponent component: Int) -> String! {
-        return titleArr[row]
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "MPTextPickerCell") as? MPTextPickerCell
+        if cell == nil {
+            cell = MPTextPickerCell(style: .default, reuseIdentifier: "ID")
+        }
+        cell?.centerLabel?.text = titleArr[indexPath.row]
+        cell?.isChecked = indexPath.row == selectedRow
+        cell?.isHiddenLine = indexPath.row == titleArr.count - 1
+        return cell!
     }
-    func pickerView(_ pickerView: PGPickerView!, textColorOfOtherRowInComponent component: Int) -> UIColor! {
-        return UIColor.colorWithHexString("333333")
-    }
-    func pickerView(_ pickerView: PGPickerView!, textColorOfSelectedRowInComponent component: Int) -> UIColor! {
-        return UIColor.navBlue
-    }
-    func pickerView(_ pickerView: PGPickerView!, didSelectRow row: Int, inComponent component: Int) {
-        selectedRow = row
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        selectedRow = indexPath.row
+        tableView.reloadData()
     }
 }
 
+
+class MPTextPickerCell: UITableViewCell {
+    fileprivate let normalColor = UIColor.colorWithHexString("333333")
+    
+    override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("")
+    }
+    
+    fileprivate func setupUI() {
+        centerLabel = UILabel(font: UIFont.mpNormalFont, text: nil, textColor: normalColor)
+        line = MPUtils.createLine()
+        contentView.addSubview(centerLabel)
+        contentView.addSubview(line)
+        centerLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        line.snp.makeConstraints { (make) in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.height.equalTo(1)
+        }
+    }
+    
+    var centerLabel: UILabel!
+    var line: UIView!
+    var isChecked: Bool = false {
+        didSet {
+            let color = isChecked ? UIColor.navBlue : normalColor
+            centerLabel.textColor = color
+        }
+    }
+    var isHiddenLine: Bool = false {
+        didSet {
+            line.isHidden = isHiddenLine
+        }
+    }
+}
