@@ -70,7 +70,7 @@ class MPInsuranceViewController: UIViewController {
                 let request = URLRequest(url: url)
                 self.webView.load(request)
             }
-            self.priceLabel.text = String(format: "￥%.02f/年", price)
+            self.priceLabel.text = String(format: "￥%.02f/月", price)
         })
     }
     

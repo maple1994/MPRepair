@@ -90,8 +90,8 @@ class MPPaymentViewController: UITableViewController {
         tbHeader.backgroundColor = UIColor.white
         let label1 = UILabel(font: UIFont.systemFont(ofSize: 16), text: "支付剩余时间：", textColor: UIColor.mpLightGary)
         timeLabel = UILabel(font: UIFont.mpNormalFont, text: "00:00", textColor: UIColor.mpLightGary)
-        priceLabel = UILabel(font: UIFont.systemFont(ofSize: 26), text: "￥200", textColor: UIColor.red)
-        orderLabel = UILabel(font: UIFont.mpNormalFont, text: "订单编号：XXXXXXXX", textColor: UIColor.mpLightGary)
+        priceLabel = UILabel(font: UIFont.systemFont(ofSize: 26), text: "--", textColor: UIColor.red)
+        orderLabel = UILabel(font: UIFont.mpNormalFont, text: "订单编号：---------", textColor: UIColor.mpLightGary)
         orderLabel.textAlignment = .center
         let block = MPUtils.createLine(UIColor.viewBgColor)
         tbHeader.addSubview(label1)
