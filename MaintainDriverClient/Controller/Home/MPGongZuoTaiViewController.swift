@@ -136,33 +136,31 @@ class MPGongZuoTaiViewController: UIViewController {
     }
     
     @objc fileprivate func chuCheAction() {
-        let vc = MPExaminationViewController()
-        navigationController?.pushViewController(vc, animated: true)
-//        switch MPUserModel.shared.is_driverinfo {
-//        case .unsubmit, .checkFailed:
-//            let tipsView = MPAuthorityTipView()
-//            tipsView.frame = UIScreen.main.bounds
-//            tipsView.setupFail(tips: "很抱歉，您需要培训后才能使用软件", cancelTitle: "暂不需要", confirmTitle: "去培训")
-//            tipsView.confirmBlock = { [weak self] in
-//                let vc = MPLeagueViewController()
-//                self?.navigationController?.pushViewController(vc, animated: true)
-//            }
-//            UIApplication.shared.keyWindow?.addSubview(tipsView)
-//            return
-//        case .checking:
-//            // 正在审核
-//            showTipsView("资料正在审核中，请耐心等候", block: nil)
-//        case .checkSucc:
-//            // 检查有没通过考试，没有就去考试
-//            if !isPassQuestion() {
-//                return
-//            }
-//            // 检查有没买保险，没有就去买保险
-//            if !isPassInsurance() {
-//                return
-//            }
-//            didChuChe()
-//        }
+        switch MPUserModel.shared.is_driverinfo {
+        case .unsubmit, .checkFailed:
+            let tipsView = MPAuthorityTipView()
+            tipsView.frame = UIScreen.main.bounds
+            tipsView.setupFail(tips: "很抱歉，您需要培训后才能使用软件", cancelTitle: "暂不需要", confirmTitle: "去培训")
+            tipsView.confirmBlock = { [weak self] in
+                let vc = MPLeagueViewController()
+                self?.navigationController?.pushViewController(vc, animated: true)
+            }
+            UIApplication.shared.keyWindow?.addSubview(tipsView)
+            return
+        case .checking:
+            // 正在审核
+            showTipsView("资料正在审核中，请耐心等候", block: nil)
+        case .checkSucc:
+            // 检查有没通过考试，没有就去考试
+            if !isPassQuestion() {
+                return
+            }
+            // 检查有没买保险，没有就去买保险
+            if !isPassInsurance() {
+                return
+            }
+            didChuChe()
+        }
     }
     
     fileprivate func didChuChe() {

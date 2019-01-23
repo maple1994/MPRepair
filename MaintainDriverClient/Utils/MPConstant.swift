@@ -56,8 +56,6 @@ let MP_LOGIN_NOTIFICATION = NSNotification.Name.init("MP_LOGIN_NOTIFICATION")
 let MP_USERINFO_UPDATE_NOTIFICATION = NSNotification.Name.init("MP_USERINFO_UPDATE_NOTIFICATION")
 /// 刷新订单列表的通知
 let MP_refresh_ORDER_LIST_SUCC_NOTIFICATION = NSNotification.Name.init("MP_refresh_ORDER_LIST_SUCC_NOTIFICATION")
-/// 授权回调通知
-let MP_ALIPAY_RESULT_NOTIFICATION = NSNotification.Name.init("MP_ALIPAY_RESULT_NOTIFICATION")
 /// 首页滚动到已接单通知
 let MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION = NSNotification.Name.init("MP_SCROLL_TO_YI_JIE_DAN_NOTIFICATION")
 // MARK: - 提交图片的类别名称信息

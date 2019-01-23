@@ -37,7 +37,6 @@ class MPBingAccountViewController: UIViewController {
         setupUI()
         NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardShow(noti:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.keyboardHidden(noti:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(MPBingAccountViewController.receiveAlipayResult(noti:)), name: MP_ALIPAY_RESULT_NOTIFICATION, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

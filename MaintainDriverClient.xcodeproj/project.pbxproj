@@ -85,6 +85,7 @@
 		F5B050B021F5671F00B6A690 /* MPPaymentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B050AF21F5671F00B6A690 /* MPPaymentViewController.swift */; };
 		F5BE5F8A211E916700D331C8 /* MPEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F89211E916700D331C8 /* MPEditView.swift */; };
 		F5BE5F8C211EB74900D331C8 /* MPTipsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */; };
+		F5C84B9721F863F500BBBD06 /* MPPaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C84B9621F863F500BBBD06 /* MPPaymentManager.swift */; };
 		F5D2446A21467C3500353C88 /* MPNetwordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D2446921467C3500353C88 /* MPNetwordTool.swift */; };
 		F5D720592112AC5500585A19 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5D720582112AC5500585A19 /* AppDelegate.swift */; };
 		F5D720602112AC5800585A19 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5D7205F2112AC5800585A19 /* Assets.xcassets */; };
@@ -254,6 +255,7 @@
 		F5B050AF21F5671F00B6A690 /* MPPaymentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPaymentViewController.swift; sourceTree = "<group>"; };
 		F5BE5F89211E916700D331C8 /* MPEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPEditView.swift; sourceTree = "<group>"; };
 		F5BE5F8B211EB74900D331C8 /* MPTipsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPTipsView.swift; sourceTree = "<group>"; };
+		F5C84B9621F863F500BBBD06 /* MPPaymentManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPPaymentManager.swift; sourceTree = "<group>"; };
 		F5D2446921467C3500353C88 /* MPNetwordTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPNetwordTool.swift; sourceTree = "<group>"; };
 		F5D720552112AC5500585A19 /* MaintainDriverClient.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MaintainDriverClient.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F5D720582112AC5500585A19 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -504,6 +506,7 @@
 				F5D2446921467C3500353C88 /* MPNetwordTool.swift */,
 				F5AFF6F5216C35AE0073ED2C /* MPOrderSocketManager.swift */,
 				F5AFF6F7216C35C60073ED2C /* MPListenSocketManager.swift */,
+				F5C84B9621F863F500BBBD06 /* MPPaymentManager.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1147,6 +1150,7 @@
 				F5503AC8217969F70086C0E3 /* MPProfileViewController.swift in Sources */,
 				F5A6334B211728520075548A /* Extension.swift in Sources */,
 				F5480C8A21D6183400358590 /* MPInsuranceViewController.swift in Sources */,
+				F5C84B9721F863F500BBBD06 /* MPPaymentManager.swift in Sources */,
 				F5E9816D2176D0DE008A9FBB /* MPCancelTipsView.swift in Sources */,
 				F5DF7396211A94E400B9F154 /* MPOrderConfrimTableViewCell.swift in Sources */,
 				F5DF7390211A94E400B9F154 /* MPFeedbackView.swift in Sources */,

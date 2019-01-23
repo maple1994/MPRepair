@@ -57,9 +57,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        AlipaySDK.defaultService()?.processAuth_V2Result(url, standbyCallback: { (resultDic) in
-            NotificationCenter.default.post(name: MP_ALIPAY_RESULT_NOTIFICATION, object: nil, userInfo: resultDic)
-        })
+        if url.absoluteString.hasPrefix(wechatAppID) {
+            WXApi.handleOpen(url, delegate: MPPaymentManager.shared)
+        }else if url.host == "safepay"{
+            AlipaySDK.defaultService()?.processOrder(withPaymentResult: url, standbyCallback: { (result) in
+                MPPaymentManager.shared.alipayHandle(openUrl: result)
+            })
+        }
         return true
     }
 
