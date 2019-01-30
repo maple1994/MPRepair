@@ -234,7 +234,7 @@ extension MPWorkInfoViewController: UITableViewDelegate, UITableViewDataSource {
         case .text:
             MPTextPickerView.show(model.pickerContent, delegate: self)
         case .address:
-            MPAdderssPickerView.show(delegate: self)
+            MPAdderssPickerView.show(delegate: self, type: .third)
         case .date:
             MPDatePickerView.show(delegate: self)
         case .none:

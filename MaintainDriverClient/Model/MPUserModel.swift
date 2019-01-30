@@ -117,6 +117,9 @@ class MPUserModel: Codable {
     
     /// 刷新用户信息
     func refreshUserInfo() {
+        if !isLogin {
+            return
+        }
         getUserInfo(succ: {
             /// 序列化
             self.serilization()

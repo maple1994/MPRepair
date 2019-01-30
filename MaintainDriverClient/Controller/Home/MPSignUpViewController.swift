@@ -196,7 +196,13 @@ extension MPSignUpViewController: UITableViewDelegate, UITableViewDataSource {
         case .text:
             MPTextPickerView.show(model.pickerContent, delegate: self)
         case .address:
-            MPAdderssPickerView.show(delegate: self)
+            if indexPath.section == 2 &&
+                indexPath.row == 0 {
+                MPAdderssPickerView.show(delegate: self, type: .second)
+            }else {
+               MPAdderssPickerView.show(delegate: self, type: .third)
+            }
+
         case .date:
             MPDatePickerView.show(delegate: self)
         case .none:

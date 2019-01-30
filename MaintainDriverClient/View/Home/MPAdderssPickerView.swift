@@ -9,16 +9,25 @@
 import UIKit
 import PGPickerView
 
+enum MPAddressType {
+    /// 二级地址
+    case second
+    /// 三级地址
+    case third
+}
+
 /// 地址选择器
 class MPAdderssPickerView: UIView {
 
-    class func show(delegate: MPTextPickerViewDelegate?) {
-        let pickerView = MPAdderssPickerView()
+    class func show(delegate: MPTextPickerViewDelegate?, type: MPAddressType) {
+        let pickerView = MPAdderssPickerView(type: type)
         pickerView.delegate = delegate
         pickerView.frame = CGRect(x: 0, y: 0, width: mp_screenW, height: mp_screenH)
         UIApplication.shared.keyWindow?.addSubview(pickerView)
     }
     
+    /// 显示二级，三级地址
+    var addressType: MPAddressType
     weak var delegate: MPTextPickerViewDelegate?
     fileprivate let contentH: CGFloat = 265
     /// 地址第一级
@@ -40,7 +49,8 @@ class MPAdderssPickerView: UIView {
         }
     }
     
-    init() {
+    init(type: MPAddressType) {
+        addressType = type
         super.init(frame: CGRect.zero)
         setupUI()
     }
@@ -108,9 +118,7 @@ class MPAdderssPickerView: UIView {
         addSubview(bgView)
         contentView = UIView()
         contentView.backgroundColor = UIColor.white
-        tableView1 = createTb()
-        tableView2 = createTb()
-        tableView3 = createTb()
+
         addSubview(contentView)
         bgView.snp.makeConstraints { (make) in
             make.top.leading.trailing.equalToSuperview()
@@ -121,24 +129,39 @@ class MPAdderssPickerView: UIView {
             make.height.equalTo(contentH)
             make.bottom.equalToSuperview().offset(contentH)
         }
-        contentView.addSubview(tableView1)
-        contentView.addSubview(tableView2)
-        contentView.addSubview(tableView3)
-        tableView1.snp.makeConstraints { (make) in
-            make.leading.bottom.equalToSuperview()
-            make.height.equalTo(220)
-            make.width.equalTo(tableView2)
-            make.width.equalTo(tableView3)
-        }
-        tableView2.snp.makeConstraints { (make) in
-            make.leading.equalTo(tableView1.snp.trailing)
-            make.trailing.equalTo(tableView3.snp.leading)
-            make.bottom.equalToSuperview()
-            make.height.equalTo(220)
-        }
-        tableView3.snp.makeConstraints { (make) in
-            make.trailing.bottom.equalToSuperview()
-            make.height.equalTo(220)
+        if addressType == .second {
+            contentView.addSubview(tableView1)
+            contentView.addSubview(tableView2)
+            tableView1.snp.makeConstraints { (make) in
+                make.leading.bottom.equalToSuperview()
+                make.height.equalTo(220)
+                make.width.equalTo(tableView2)
+            }
+            tableView2.snp.makeConstraints { (make) in
+                make.leading.equalTo(tableView1.snp.trailing)
+                make.bottom.trailing.equalToSuperview()
+                make.height.equalTo(220)
+            }
+        }else {
+            contentView.addSubview(tableView1)
+            contentView.addSubview(tableView2)
+            contentView.addSubview(tableView3)
+            tableView1.snp.makeConstraints { (make) in
+                make.leading.bottom.equalToSuperview()
+                make.height.equalTo(220)
+                make.width.equalTo(tableView2)
+                make.width.equalTo(tableView3)
+            }
+            tableView2.snp.makeConstraints { (make) in
+                make.leading.equalTo(tableView1.snp.trailing)
+                make.trailing.equalTo(tableView3.snp.leading)
+                make.bottom.equalToSuperview()
+                make.height.equalTo(220)
+            }
+            tableView3.snp.makeConstraints { (make) in
+                make.trailing.bottom.equalToSuperview()
+                make.height.equalTo(220)
+            }
         }
         let toolView = UIView()
         toolView.backgroundColor = UIColor.colorWithHexString("f5f5f5")
@@ -177,6 +200,7 @@ class MPAdderssPickerView: UIView {
     
     fileprivate func createTb() -> UITableView {
         let tb = UITableView()
+        tb.rowHeight = 50
         tb.separatorStyle = .none
         tb.showsVerticalScrollIndicator = false
         tb.delegate = self
@@ -205,9 +229,9 @@ class MPAdderssPickerView: UIView {
     }
     
     // MARK: - View
-    fileprivate var tableView1: UITableView!
-    fileprivate var tableView2: UITableView!
-    fileprivate var tableView3: UITableView!
+    fileprivate lazy var tableView1: UITableView = self.createTb()
+    fileprivate lazy var tableView2: UITableView = self.createTb()
+    fileprivate lazy var tableView3: UITableView = self.createTb()
     fileprivate var selectedText: String?
     fileprivate var contentView: UIView!
 }
@@ -256,18 +280,24 @@ extension MPAdderssPickerView: UITableViewDelegate, UITableViewDataSource {
             thridRow = 0
             tableView1.reloadData()
             tableView2.reloadData()
-            tableView3.reloadData()
             scrollToTop(tableView2)
-            scrollToTop(tableView3)
+            if addressType == .third {
+                tableView3.reloadData()
+                scrollToTop(tableView3)
+            }
         }else if tableView == tableView2 {
             secondRow = indexPath.row
             thridRow = 0
             tableView2.reloadData()
-            tableView3.reloadData()
-            scrollToTop(tableView3)
+            if addressType == .third {
+                tableView3.reloadData()
+                scrollToTop(tableView3)
+            }
         }else {
             thridRow = indexPath.row
-            tableView3.reloadData()
+            if addressType == .third {
+                tableView3.reloadData()
+            }
         }
     }
     
@@ -295,7 +325,7 @@ extension MPAdderssPickerView: UITableViewDelegate, UITableViewDataSource {
     }
     
     fileprivate func adjust(tableView: UITableView, offsetY: CGFloat) {
-        let rowH: CGFloat = 44
+        let rowH: CGFloat = 50
         let row = (Int)(offsetY / rowH)
         let ip = IndexPath(row: row, section: 0)
         tableView.scrollToRow(at: ip, at: .top, animated: true)
